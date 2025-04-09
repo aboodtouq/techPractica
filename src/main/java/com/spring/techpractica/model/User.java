@@ -1,16 +1,37 @@
 package com.spring.techpractica.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int userId;
 
+    @Column(name = "user_name")
     private String userName;
 
-    private String password;
+    @Column(name = "user_password")
+    private String userPassword;
 
-    private String firstName;
+    @Column(name = "first_name")
+    private String userFirstName;
 
-    private String lastName;
+    @Column(name = "last_name")
+    private String userLastName;
 
-    private String email;
+    @Column(name = "user_email")
+    private String userEmail;
+
+
 }
