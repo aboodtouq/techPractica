@@ -1,4 +1,4 @@
-package com.spring.techpractica.model;
+package com.spring.techpractica.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

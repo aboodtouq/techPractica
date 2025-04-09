@@ -1,4 +1,4 @@
-package com.spring.techpractica.model;
+package com.spring.techpractica.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,16 +6,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "Notfications")
+@Entity(name = "Notifications")
 @Getter
 @Setter
-public class Notfications {
+public class Notifications {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "notfication_id")
-    private int notficationId;
+    @Column(name = "Notification_id")
+    private int notificationsId;
+
     @Column(name = "notfication_content")
-    private String notficationContent;
+    private String NotificationsContent;
+
     @Column(name = "user_id")
     private int userId;
 
