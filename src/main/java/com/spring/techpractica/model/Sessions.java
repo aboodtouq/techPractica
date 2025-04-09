@@ -9,5 +9,4 @@ public class Sessions {
     private String sessionDescription;
 
     private boolean isPrivate;
-
 }
