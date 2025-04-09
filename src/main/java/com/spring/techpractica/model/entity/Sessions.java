@@ -1,20 +1,19 @@
 package com.spring.techpractica.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity(name = "Sessions")
-@Getter
-@Setter
+@Builder
 public class Sessions {
 
 
-    //create
-    //end
-    //delete
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "session_id")

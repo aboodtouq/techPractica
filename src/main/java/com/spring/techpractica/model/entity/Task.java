@@ -7,8 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @Entity(name = "Task")
-@Getter
-@Setter
+@Builder
 public class Task {
 
     @Id
