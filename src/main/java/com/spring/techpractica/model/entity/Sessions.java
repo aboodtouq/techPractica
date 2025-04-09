@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "Sessions")
+@Entity
 @Builder
+@Table(name = "SESSIONS")
 public class Sessions {
 
 

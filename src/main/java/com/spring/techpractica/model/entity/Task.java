@@ -6,8 +6,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "Task")
+@Entity
 @Builder
+@Table(name = "TASKS")
 public class Task {
 
     @Id
