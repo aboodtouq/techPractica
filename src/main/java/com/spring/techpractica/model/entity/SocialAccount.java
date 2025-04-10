@@ -28,4 +28,6 @@ public class SocialAccount {
 
     @Column(name = "profile_url")
     private String profileUrl;
+
+
 }
