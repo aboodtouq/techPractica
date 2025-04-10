@@ -22,6 +22,4 @@ public class Skill {
     @Enumerated(EnumType.STRING)
     private SkillType skillName;
 
-    @ManyToMany(mappedBy = "userSkills")
-    private List<User> users;
 }
