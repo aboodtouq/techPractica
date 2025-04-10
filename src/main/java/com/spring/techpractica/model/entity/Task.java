@@ -27,23 +27,15 @@ public class Task {
     @Column(name = "task_description")
     private String taskDescription;
 
-
-    @Column(name = "session_id")
-    private int sessionId;
-
     @Column(name = "user_owner_id")
     private String userOwnerId;
 
     @ManyToOne
-    @JoinColumn(name = "session_id", referencedColumnName = "session_id",insertable=false, updatable=false)
+    @JoinColumn(name = "session_id")
     private Session session;
 
-
     @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "timestamp_id")
-    )
+    @JoinTable(joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "timestamp_id"))
     private List<Timestamp> timestampList;
 
 }
