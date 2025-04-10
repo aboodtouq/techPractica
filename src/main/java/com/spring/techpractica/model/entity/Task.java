@@ -38,4 +38,11 @@ public class Task {
     @JoinTable(joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "timestamp_id"))
     private List<Timestamp> timestampList;
 
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "task_id")
+            ,inverseJoinColumns = @JoinColumn(name = "user_assign_id",referencedColumnName = "user_id")
+
+    )
+    private List<User> usersAssigned;
+
 }
