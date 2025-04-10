@@ -49,4 +49,14 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<SocialAccount> userSocialAccounts;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Request> requests;
+
+
+    @ManyToMany(mappedBy = "usersAssigned")
+    private List<Task> tasksAssigned;
+
+
 }

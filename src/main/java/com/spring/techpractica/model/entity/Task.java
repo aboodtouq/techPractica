@@ -3,6 +3,8 @@ package com.spring.techpractica.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -30,7 +32,14 @@ public class Task {
     private String userOwnerId;
 
     @ManyToOne
-    @JoinColumn(name = "session_id", referencedColumnName = "session_id",insertable=false, updatable=false)
+    @JoinColumn(name = "session_id", referencedColumnName = "session_id", insertable=false , updatable=false)
     private Session session;
+
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "task_id")
+            ,inverseJoinColumns = @JoinColumn(name = "user_assign_id",referencedColumnName = "user_id")
+
+    )
+    private List<User> usersAssigned;
 
 }

@@ -36,4 +36,11 @@ public class Session {
 
     @OneToMany(mappedBy = "session")
     private List <UsersOfSession> sessionMembers;
+
+    @OneToMany(mappedBy = "session")
+    private List<Task> tasks;
+
+
+    @OneToMany(mappedBy = "session")
+    private List <Request> requests;
 }
