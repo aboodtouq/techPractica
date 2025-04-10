@@ -30,5 +30,7 @@ public class SocialAccount {
     @Column(name = "profile_url")
     private String profileUrl;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

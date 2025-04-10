@@ -34,10 +34,16 @@ public class Task {
     @Column(name = "user_owner_id")
     private String userOwnerId;
 
+    @ManyToOne
+    @JoinColumn(name = "session_id", referencedColumnName = "session_id",insertable=false, updatable=false)
+    private Session session;
+
+
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "timestamp_id")
     )
     private List<Timestamp> timestampList;
+
 }
