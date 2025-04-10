@@ -9,12 +9,12 @@ import lombok.*;
 @Entity
 @Builder
 @Table(name = "Notifications")
-public class Notifications {
+public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Notification_id")
-    private int notificationsId;
+    private long notificationsId;
 
     @Column(name = "notfication_content")
     private String NotificationsContent;

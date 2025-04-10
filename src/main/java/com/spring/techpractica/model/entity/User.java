@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,5 +36,12 @@ public class User {
     @Column(name = "user_email")
     private String userEmail;
 
+    @OneToMany(mappedBy = "user")
+    private List<UsersOfSession> usersOfSessions;
 
+    @ManyToMany
+    @JoinTable(name ="USERS_SKILLS",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_type"))
+    private List<Skill> userSkills;
 }

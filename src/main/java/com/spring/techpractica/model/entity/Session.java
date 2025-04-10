@@ -6,19 +6,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Builder
 @Table(name = "SESSIONS")
-public class Sessions {
+public class Session {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "session_id")
-    private int sessionId;
+    private long sessionId;
 
     @Column(name = "session_name")
     private String sessionName;
@@ -32,5 +34,6 @@ public class Sessions {
     @Column(name = "required_users")
     private int requiredUsers;
 
-
+    @OneToMany(mappedBy = "session")
+    private List <UsersOfSession> sessionMembers;
 }
