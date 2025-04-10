@@ -40,7 +40,7 @@ public class User {
     private List<UsersOfSession> usersOfSessions;
 
     @ManyToMany
-    @JoinTable(name ="USERS_SKILLS",
+    @JoinTable(name = "USERS_SKILLS",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_type"))
     private List<Skill> userSkills;
