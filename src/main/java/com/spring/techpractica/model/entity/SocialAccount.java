@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @IdClass(SocialAccountId.class)
 public class SocialAccount {
 
+
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "platform_name")

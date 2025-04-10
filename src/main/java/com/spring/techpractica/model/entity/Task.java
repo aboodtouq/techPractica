@@ -1,7 +1,12 @@
 package com.spring.techpractica.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +34,10 @@ public class Task {
     @Column(name = "user_owner_id")
     private String userOwnerId;
 
-
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "timestamp_id")
+    )
+    private List<Timestamp> timestampList;
 }
