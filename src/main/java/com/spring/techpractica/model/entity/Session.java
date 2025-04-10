@@ -40,10 +40,6 @@ public class Session {
 
 
 
-
-
-
-
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
@@ -52,5 +48,10 @@ public class Session {
     private List<Timestamp> timestampList;
 
     @OneToMany(mappedBy = "session")
-    List<Task> tasks;
+    private List<Task> tasks;
+
+
+    @OneToMany(mappedBy = "session")
+    private List <Request> requests;
+
 }
