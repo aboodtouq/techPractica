@@ -44,4 +44,6 @@ public class Session {
     )
     private List<Timestamp> timestampList;
 
+    @OneToMany(mappedBy = "session")
+    private List<Requirement> sessionRequirements;
 }
