@@ -30,7 +30,7 @@ public class Task {
     private String userOwnerId;
 
     @ManyToOne
-    @JoinColumn(name = "session_id", referencedColumnName = "session_id")
-    private Sessions session;
+    @JoinColumn(name = "session_id", referencedColumnName = "session_id",insertable=false, updatable=false)
+    private Session session;
 
 }
