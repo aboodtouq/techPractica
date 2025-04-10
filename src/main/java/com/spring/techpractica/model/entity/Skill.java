@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.List;
 @Entity
 @Table(name = "SKILLS")
 @Data
@@ -20,4 +20,6 @@ public class Skill {
     @Enumerated(EnumType.STRING)
     private SkillType skillName;
 
+    @ManyToMany(mappedBy = "skills")
+    private List<User> users;
 }

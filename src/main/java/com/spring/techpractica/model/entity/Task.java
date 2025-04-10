@@ -29,5 +29,8 @@ public class Task {
     @Column(name = "user_owner_id")
     private String userOwnerId;
 
+    @ManyToOne
+    @JoinColumn(name = "session_id", referencedColumnName = "session_id")
+    private Sessions session;
 
 }

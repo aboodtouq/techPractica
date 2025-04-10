@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -32,5 +34,9 @@ public class Sessions {
     @Column(name = "required_users")
     private int requiredUsers;
 
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
+    @ManyToMany(mappedBy = "sessions")
+    private List<User> users;
 }
