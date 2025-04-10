@@ -58,5 +58,6 @@ public class User {
     @ManyToMany(mappedBy = "usersAssigned")
     private List<Task> tasksAssigned;
 
-
+    @OneToMany(mappedBy = "user")
+    private List <Notification> notifications;
 }

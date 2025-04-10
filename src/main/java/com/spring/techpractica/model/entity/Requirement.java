@@ -19,10 +19,11 @@ public class Requirement {
     @Column(name = "requirement_id")
     private long requirementId;
 
-    @Column(name = "requirement_name")
-    private String requirementName;
-
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
+
+    @ManyToOne
+    @JoinColumn(name = "skill_name")
+    private Skill skillType;
 }
