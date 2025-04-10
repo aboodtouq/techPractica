@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "REQUEST")
 public class Request {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "request_id")
@@ -22,6 +24,20 @@ public class Request {
     @Column(name = "request_status")
     private String requestStatus;
 
+
     @Column(name = "brief")
     private String brief;
+
+
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private Session session;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+
 }
