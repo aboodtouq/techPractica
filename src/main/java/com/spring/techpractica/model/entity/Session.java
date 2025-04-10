@@ -37,6 +37,13 @@ public class Session {
     @OneToMany(mappedBy = "session")
     private List<UsersOfSession> sessionMembers;
 
+
+
+
+
+
+
+
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
@@ -44,6 +51,9 @@ public class Session {
     )
     private List<Timestamp> timestampList;
 
-    @OneToMany(mappedBy = "session")
-    private List<Requirement> sessionRequirements;
+@OneToMany(mappedBy = "session")
+private List<Requirement> sessionRequirements;
+
+@OneToMany(mappedBy = "session")
+private List<Task> tasks;
 }

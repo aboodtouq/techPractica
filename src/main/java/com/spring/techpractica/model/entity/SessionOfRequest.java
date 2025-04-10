@@ -1,12 +1,12 @@
 package com.spring.techpractica.model.entity;
 
 import com.spring.techpractica.model.SessionRequestUserId;
-import com.spring.techpractica.model.UserSessionId;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "SESSION_REQUEST")
 public class SessionOfRequest {
+
     @EmbeddedId
     private SessionRequestUserId sessionRequestUserId;
 
