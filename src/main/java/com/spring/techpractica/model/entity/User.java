@@ -59,9 +59,12 @@ public class User {
     private List<Request> requests;
 
 
-    @ManyToMany(mappedBy = "usersAssigned"
-            , fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "usersAssigned",
+            fetch = FetchType.LAZY)
     private List<Task> tasksAssigned;
 
-
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY
+            , cascade = CascadeType.REMOVE)
+    private List<Notification> notifications;
 }
