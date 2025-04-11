@@ -7,6 +7,7 @@ import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -24,6 +25,7 @@ public class UserService {
     //check email is exist
     //check username is exist
     //save User
+    @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
 
         userRepository.findUserByUserEmail(userCreateAccount.getUserEmail())
@@ -52,6 +54,7 @@ public class UserService {
 
     //LOGIN
     public void userLogin(UserLogin userLogin) {
+    //getOrElse
 
     }
 }
