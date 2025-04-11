@@ -20,6 +20,7 @@ public class Skill {
 
     @Id
     @Enumerated(EnumType.STRING)
+    @Column(name = "skill_name")
     private SkillType skillName;
 
 }

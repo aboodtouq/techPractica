@@ -39,6 +39,7 @@ public class Session {
     private List<UsersOfSession> sessionMembers;
 
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
