@@ -67,4 +67,8 @@ public class User {
             fetch = FetchType.LAZY
             , cascade = CascadeType.REMOVE)
     private List<Notification> notifications;
+
+
+
+
 }
