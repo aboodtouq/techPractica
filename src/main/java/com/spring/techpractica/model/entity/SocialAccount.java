@@ -30,7 +30,7 @@ public class SocialAccount {
     @Column(name = "profile_url")
     private String profileUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }
