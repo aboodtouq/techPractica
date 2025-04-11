@@ -31,5 +31,5 @@ public class ResetPassword {
 
     @Column(name = "is_used")
     private boolean isUsed;
-
+    
 }

@@ -22,7 +22,7 @@ public class Requirement {
     @Column(name = "requirement_name")
     private String requirementName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "session_id")
     private Session session;
 }

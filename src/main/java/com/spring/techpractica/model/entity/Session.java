@@ -34,13 +34,12 @@ public class Session {
     @Column(name = "required_users")
     private int requiredUsers;
 
-    @OneToMany(mappedBy = "session")
+    @OneToMany(mappedBy = "session",
+            fetch = FetchType.LAZY)
     private List<UsersOfSession> sessionMembers;
 
 
-
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "timestamp_id")
@@ -48,14 +47,20 @@ public class Session {
     private List<Timestamp> timestampList;
 
 
-@OneToMany(mappedBy = "session")
-private List<Requirement> sessionRequirements;
+    @OneToMany(mappedBy = "session",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Requirement> sessionRequirements;
 
-@OneToMany(mappedBy = "session")
-private List<Task> tasks;
+    @OneToMany(mappedBy = "session",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
+    private List<Task> tasks;
 
 
-@OneToMany(mappedBy = "session")
-    private List <Request> requests;
+    @OneToMany(mappedBy = "session",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
+    private List<Request> requests;
 
 }

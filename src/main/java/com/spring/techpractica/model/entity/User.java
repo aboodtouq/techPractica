@@ -36,26 +36,31 @@ public class User {
     @Column(name = "user_email")
     private String userEmail;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY)
     private List<UsersOfSession> usersOfSessions;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_SKILLS",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_type"))
     private List<Skill> userSkills;
 
 
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
     private List<SocialAccount> userSocialAccounts;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Request> requests;
 
 
-    @ManyToMany(mappedBy = "usersAssigned")
+    @ManyToMany(mappedBy = "usersAssigned"
+            , fetch = FetchType.LAZY)
     private List<Task> tasksAssigned;
 
 

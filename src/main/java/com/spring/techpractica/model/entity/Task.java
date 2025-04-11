@@ -30,17 +30,17 @@ public class Task {
     @Column(name = "user_owner_id")
     private String userOwnerId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id")
     private Session session;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "timestamp_id"))
     private List<Timestamp> timestampList;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn(name = "task_id")
-            ,inverseJoinColumns = @JoinColumn(name = "user_assign_id",referencedColumnName = "user_id")
+            , inverseJoinColumns = @JoinColumn(name = "user_assign_id", referencedColumnName = "user_id")
 
     )
     private List<User> usersAssigned;
