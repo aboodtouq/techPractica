@@ -53,5 +53,11 @@ public class UserService {
     //LOGIN
     public void userLogin(UserLogin userLogin) {
 
+        User user = userRepository.findUserByUserEmail(userLogin.getEmail())
+                .orElseThrow(() -> new AuthenticationException("User not found"));
+
+        if (!passwordEncoder.matches(userLogin.getPassword(), user.getUserPassword())){
+            throw new AuthenticationException("Wrong password");
+        }
     }
 }
