@@ -3,10 +3,7 @@ package com.spring.techpractica.controller;
 import com.spring.techpractica.dto.UserCreateAccount;
 import com.spring.techpractica.dto.UserLogin;
 import com.spring.techpractica.service.UserService;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/authenticated")
@@ -19,12 +16,12 @@ public class AuthenticatedController {
     }
 
     @PostMapping("/registration")
-    public void createAccount(@ModelAttribute UserCreateAccount userCreateAccount) {
+    public void createAccount(@RequestBody UserCreateAccount userCreateAccount) {
         userService.createAccount(userCreateAccount);
     }
 
     @PostMapping("/login")
-    public void login(@ModelAttribute UserLogin userLogin) {
+    public void login(@RequestBody UserLogin userLogin) {
         userService.userLogin(userLogin);
     }
 }
