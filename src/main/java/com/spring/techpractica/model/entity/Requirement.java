@@ -19,8 +19,6 @@ public class Requirement {
     @Column(name = "requirement_id")
     private long requirementId;
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "session_id")
     private Session session;
