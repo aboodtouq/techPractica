@@ -2,6 +2,7 @@ package com.spring.techpractica.service;
 
 import com.spring.techpractica.dto.UserCreateAccount;
 import com.spring.techpractica.dto.UserLogin;
+import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,32 +26,32 @@ public class UserService {
     //save User
     public void createAccount(UserCreateAccount userCreateAccount) {
 
-        if(userRepository.existsByEmail(  userCreateAccount.getUserEmail()  ) ) {
+        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail())
+                .ifPresent(user -> {
+                    throw new AuthenticationException("Email is already in use");
+                });
 
-            throw new IllegalArgumentException("the email already exists");
-        }
-
-        if (userRepository.existsByUsername(  userCreateAccount.getName()  )){
-            throw new IllegalArgumentException("the username already exists");
-        }
+        userRepository.findUserByUserName(userCreateAccount.getName())
+                .ifPresent(user -> {
+                    throw new AuthenticationException("User name is already in use");
+                });
 
 
         String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
 
 
-        User user =User.builder()
+        User user = User.builder()
                 .userName(userCreateAccount.getName())
                 .userFirstName(userCreateAccount.getFirstName())
                 .userLastName(userCreateAccount.getLastName())
                 .userEmail(userCreateAccount.getUserEmail())
-                        .userPassword(encodedPassword).build();
+                .userPassword(encodedPassword).build();
 
         userRepository.save(user);
     }
 
     //LOGIN
-    //cheak
     public void userLogin(UserLogin userLogin) {
-        // تنفيذ منطق تسجيل الدخول هنا
+
     }
 }
