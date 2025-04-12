@@ -1,6 +1,12 @@
 package com.spring.techpractica.dto;
 
-public class ResetPasswordRequest {
+import lombok.*;
 
-    private String email;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ResetPasswordRequest {
+    @NonNull
+    private String userEmail;
 }

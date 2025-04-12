@@ -22,9 +22,28 @@ public class ResetPasswordService {
         //isUsed by default False
         //expiration date 5m from created (localDateTime.know)+
      */
-       public ResetPasswordResponse createResetPassword(ResetPasswordRequest resetPasswordRequest) {
+    public ResetPasswordResponse createResetPassword(ResetPasswordRequest resetPasswordRequest) {
+        ResetPassword resetPassword = new ResetPassword();
 
-           return null;
+        resetPassword.setUserEmail(resetPasswordRequest.getUserEmail());
+
+        String otpCode = String.format("%06d", (int) (Math.random() * 1000000));
+
+        resetPassword.setOtpCode(otpCode);
+
+        resetPassword.setUsed(Boolean.FALSE);
+
+        resetPassword.setExpirationDate(java.time.LocalDateTime.now().plusMinutes(5));
+
+        resetPasswordRepository.save(resetPassword);
+
+        ResetPasswordResponse resetPasswordResponse = new ResetPasswordResponse();
+
+        resetPasswordResponse.setResetId(resetPassword.getResetPasswordId());
+
+        resetPasswordResponse.setUserEmail(resetPassword.getUserEmail());
+
+        return resetPasswordResponse;
     }
 
     public boolean isValid() {

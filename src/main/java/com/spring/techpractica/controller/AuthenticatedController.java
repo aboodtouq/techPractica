@@ -1,7 +1,7 @@
 package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.*;
-import com.spring.techpractica.service.MailSender;
+import com.spring.techpractica.service.MailSenderService;
 import com.spring.techpractica.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +15,11 @@ public class AuthenticatedController {
 
     private final UserService userService;
 
-    private final MailSender mailSender;
+    private final MailSenderService mailSenderService;
 
-    public AuthenticatedController(UserService userService, MailSender mailSender) {
+    public AuthenticatedController(UserService userService, MailSenderService mailSenderService) {
         this.userService = userService;
-        this.mailSender = mailSender;
+        this.mailSenderService = mailSenderService;
     }
 
     @PostMapping("/registration")
@@ -39,9 +39,9 @@ public class AuthenticatedController {
      */
     @PostMapping("/send-reset-password")
     public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
-        ResetPasswordResponse resetPassword = userService.userCreateResetPassword(resetPasswordRequest);
-        mailSender.sendResetPassword(resetPassword);
-        return ResponseEntity.ok(resetPassword);
+        ResetPasswordResponse resetPasswordResponse = userService.userCreateResetPassword(resetPasswordRequest);
+        mailSenderService.sendResetPassword(resetPasswordResponse);
+        return ResponseEntity.ok(resetPasswordResponse);
     }
 
     /*
