@@ -24,12 +24,12 @@ public class ResetPassword {
     @Column(name = "user_email")
     private String userEmail;
 
-    private String code;
+    private String otpCode;
 
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
     @Column(name = "is_used")
     private boolean isUsed;
-    
+
 }

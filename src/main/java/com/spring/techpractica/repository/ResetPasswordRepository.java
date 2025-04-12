@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ResetPasswordRepository extends JpaRepository<ResetPassword, Long> {
+    ResetPassword getResetPasswordByResetPasswordId(Long resetId);
 }
