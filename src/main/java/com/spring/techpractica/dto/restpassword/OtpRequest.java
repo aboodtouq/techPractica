@@ -1,6 +1,5 @@
-package com.spring.techpractica.dto;
+package com.spring.techpractica.dto.restpassword;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 public class OtpRequest {

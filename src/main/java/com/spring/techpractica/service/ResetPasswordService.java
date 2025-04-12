@@ -1,49 +1,44 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.dto.OtpRequest;
-import com.spring.techpractica.dto.ResetPasswordRequest;
-import com.spring.techpractica.dto.ResetPasswordResponse;
+import com.spring.techpractica.dto.restpassword.OtpRequest;
+import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
+import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
+import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.repository.ResetPasswordRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ResetPasswordService {
 
     private final ResetPasswordRepository resetPasswordRepository;
 
-    public ResetPasswordService(ResetPasswordRepository resetPasswordRepository) {
+    private final UserService userService;
+
+    public ResetPasswordService(ResetPasswordRepository resetPasswordRepository, UserService userService) {
         this.resetPasswordRepository = resetPasswordRepository;
+        this.userService = userService;
     }
 
-    /*
-        //Create Reset Password entity
-        //generate code 6 digit
-        //isUsed by default False
-        //expiration date 5m from created (localDateTime.know)+
-     */
+
+    @Transactional
     public ResetPasswordResponse createResetPassword(ResetPasswordRequest resetPasswordRequest) {
-        ResetPassword resetPassword = new ResetPassword();
 
-        resetPassword.setUserEmail(resetPasswordRequest.getUserEmail());
+        userService.findUserByUserEmail(resetPasswordRequest.getUserEmail())
+                .orElseThrow(() -> new AuthenticationException("User Not Found In System !!"));
 
-        String otpCode = String.format("%06d", (int) (Math.random() * 1000000));
-
-        resetPassword.setOtpCode(otpCode);
-
-        resetPassword.setUsed(Boolean.FALSE);
-
-        resetPassword.setExpirationDate(java.time.LocalDateTime.now().plusMinutes(5));
+        ResetPassword resetPassword = ResetPassword.builder()
+                .userEmail(resetPasswordRequest.getUserEmail())
+                .build();
 
         resetPasswordRepository.save(resetPassword);
 
-        ResetPasswordResponse resetPasswordResponse = new ResetPasswordResponse();
+        return ResetPasswordResponse.builder()
+                .resetId(resetPassword.getResetPasswordId())
+                .userEmail(resetPassword.getUserEmail())
+                .build();
 
-        resetPasswordResponse.setResetId(resetPassword.getResetPasswordId());
-
-        resetPasswordResponse.setUserEmail(resetPassword.getUserEmail());
-
-        return resetPasswordResponse;
     }
 
     public boolean isValid() {

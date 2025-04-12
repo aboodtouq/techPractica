@@ -1,4 +1,4 @@
-package com.spring.techpractica.dto;
+package com.spring.techpractica.dto.restpassword;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserLogin {
+public class ResetPasswordResponse {
 
+    private Long resetId;
 
-    public String userEmail;
-
-    public String userPassword;
-
-
+    private String userEmail;
 }

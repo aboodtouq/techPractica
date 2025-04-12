@@ -16,6 +16,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ResetPassword {
 
+
+    @PrePersist
+    public void prePersist() {
+        otpCode = String.format("%06d", (int) (Math.random() * 1000000));
+        expirationDate = LocalDateTime.now().plusMinutes(5);
+        isUsed = false;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reset_password_id")

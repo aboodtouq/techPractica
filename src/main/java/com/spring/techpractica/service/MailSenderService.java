@@ -1,6 +1,6 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.dto.ResetPasswordResponse;
+import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
 import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.repository.ResetPasswordRepository;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,17 +27,18 @@ public class MailSenderService {
         this.resetPasswordRepository = resetPasswordRepository;
     }
 
-    /*
-    send Email
-    */
+
     public void sendResetPassword(ResetPasswordResponse resetPasswordResponse) {
-        //Still need some work
+
         SimpleMailMessage message = new SimpleMailMessage();
-        ResetPassword resetPassword = resetPasswordRepository.getResetPasswordByResetPasswordId(resetPasswordResponse.getResetId());
+
+        ResetPassword resetPassword = resetPasswordRepository
+                .getResetPasswordByResetPasswordId(resetPasswordResponse.getResetId());
+
         message.setTo(resetPasswordResponse.getUserEmail());
         message.setSubject(SUBJECT_EMAIL_RESET_PASSWORD);
 
-        message.setText("This is your Otp " + resetPassword.getOtpCode() +"\n\n"+"the code will expire in  minutes.");
+        message.setText("This is your Otp " + resetPassword.getOtpCode() + "\n\n" + "the code will expire in 5 minutes.");
         javaMailSender.send(message);
     }
 }

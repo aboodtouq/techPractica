@@ -1,4 +1,4 @@
-package com.spring.techpractica.dto;
+package com.spring.techpractica.dto.restpassword;
 
 import lombok.*;
 

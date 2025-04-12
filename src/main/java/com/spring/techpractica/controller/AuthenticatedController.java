@@ -1,6 +1,10 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.dto.*;
+import com.spring.techpractica.dto.restpassword.OtpRequest;
+import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
+import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
+import com.spring.techpractica.dto.user.UserCreateAccount;
+import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
 import com.spring.techpractica.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +43,12 @@ public class AuthenticatedController {
      */
     @PostMapping("/send-reset-password")
     public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
-        ResetPasswordResponse resetPasswordResponse = userService.userCreateResetPassword(resetPasswordRequest);
+
+        ResetPasswordResponse resetPasswordResponse =
+                userService.userCreateResetPassword(resetPasswordRequest);
+
         mailSenderService.sendResetPassword(resetPasswordResponse);
+
         return ResponseEntity.ok(resetPasswordResponse);
     }
 
