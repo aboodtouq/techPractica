@@ -9,9 +9,9 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
 
-    @Mapping(target = "userName",source ="userCreateAccount.name")
-    @Mapping(target = "userFirstName",source ="userCreateAccount.firstName")
-    @Mapping(target = "userLastName",source ="userCreateAccount.LastName")
-    @Mapping(target = "userEmail",source ="userCreateAccount.userEmail")
+    @Mapping(target = "userName", source = "userCreateAccount.name")
+    @Mapping(target = "userFirstName", source = "userCreateAccount.firstName")
+    @Mapping(target = "userLastName", source = "userCreateAccount.lastName")
+    @Mapping(target = "userEmail", source = "userCreateAccount.userEmail")
     User userCreateAccountToUser(UserCreateAccount userCreateAccount);
 }
