@@ -29,7 +29,7 @@ public class UserService {
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                      @Lazy ResetPasswordService resetPasswordService,
+                       @Lazy ResetPasswordService resetPasswordService,
                        UserMapper userMapper) {
 
         this.userRepository = userRepository;
@@ -38,11 +38,6 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    //createAccount
-    //HashingPassword
-    //check email is exist
-    //check username is exist
-    //save User
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
 
@@ -62,17 +57,10 @@ public class UserService {
         User user = userMapper.userCreateAccountToUser(userCreateAccount);
         user.setUserPassword(encodedPassword);
 
-//        User user = User.builder()
-//                .userName(userCreateAccount.getName())
-//                .userFirstName(userCreateAccount.getFirstName())
-//                .userLastName(userCreateAccount.getLastName())
-//                .userEmail(userCreateAccount.getUserEmail())
-//                .userPassword(encodedPassword).build();
 
         userRepository.save(user);
     }
 
-    //LOGIN
 
     public void userLogin(UserLogin userLogin) {
         //getOrElse

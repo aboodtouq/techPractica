@@ -38,9 +38,6 @@ public class AuthenticatedController {
         return ResponseEntity.ok("Login Successful ");
     }
 
-    /*
-    Abood
-     */
     @PostMapping("/send-reset-password")
     public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
 

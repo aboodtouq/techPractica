@@ -39,7 +39,6 @@ public class Session {
     private List<UsersOfSession> sessionMembers;
 
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
@@ -63,5 +62,7 @@ public class Session {
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
     private List<Request> requests;
+
+
 
 }
