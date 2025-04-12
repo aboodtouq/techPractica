@@ -39,6 +39,7 @@ public class UserService {
                 });
 
 
+
         String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
 
 
@@ -56,5 +57,11 @@ public class UserService {
     public void userLogin(UserLogin userLogin) {
     //getOrElse
 
+        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
+                .orElseThrow(() -> new AuthenticationException("User not found"));
+
+        if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())){
+            throw new AuthenticationException("Wrong password");
+        }
     }
 }
