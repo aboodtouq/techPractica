@@ -1,8 +1,8 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.dto.UserCreateAccount;
-import com.spring.techpractica.dto.UserLogin;
+import com.spring.techpractica.dto.*;
 import com.spring.techpractica.exception.AuthenticationException;
+import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,10 +14,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ResetPasswordService resetPasswordService;
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       ResetPasswordService resetPasswordService) {
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.resetPasswordService = resetPasswordService;
     }
 
     //createAccount
@@ -63,5 +67,13 @@ public class UserService {
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())){
             throw new AuthenticationException("Wrong password");
         }
+    }
+
+    public ResetPasswordResponse userCreateResetPassword(ResetPasswordRequest resetPasswordRequest) {
+        return resetPasswordService.createResetPassword(resetPasswordRequest);
+    }
+
+    public void userSubmitOtp(OtpRequest otpRequest) {
+        resetPasswordService.submitOtp(otpRequest);
     }
 }
