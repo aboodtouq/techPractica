@@ -34,14 +34,19 @@ public class AuthenticatedController {
         return ResponseEntity.ok("Login Successful ");
     }
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    /*
+    Abood
+     */
+    @PostMapping("/send-reset-password")
+    public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
         ResetPasswordResponse resetPassword = userService.userCreateResetPassword(resetPasswordRequest);
         mailSender.sendResetPassword(resetPassword);
         return ResponseEntity.ok(resetPassword);
-
     }
 
+    /*
+     Qandeel
+     */
     @PostMapping("/submit-OTP")
     public ResponseEntity<String> submitOtp(@RequestBody OtpRequest otpRequest) {
 
