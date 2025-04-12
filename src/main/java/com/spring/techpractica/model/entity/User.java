@@ -69,6 +69,11 @@ public class User {
     private List<Notification> notifications;
 
 
-
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "role_name"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<Role> roles;
 
 }
