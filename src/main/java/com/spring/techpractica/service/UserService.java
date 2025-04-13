@@ -77,12 +77,13 @@ public class UserService {
         return jwtService.generateToken(user.getUserEmail());
     }
 
-    public ResetPasswordResponse userCreateResetPassword(ResetPasswordRequest resetPasswordRequest) {
+    public ResetPasswordResponse userCreateOtpCode(ResetPasswordRequest resetPasswordRequest) {
         return resetPasswordService.createResetPassword(resetPasswordRequest);
     }
 
-    public void userSubmitOtp(OtpRequest otpRequest) {
-        resetPasswordService.submitOtp(otpRequest);
+    public String userSubmitOtp(OtpRequest otpRequest) {
+        resetPasswordService.validationOtp(otpRequest);
+        return jwtService.generateToken(otpRequest.getUserEmail());
     }
 
     public Optional<User> findUserByUserEmail(String userEmail) {

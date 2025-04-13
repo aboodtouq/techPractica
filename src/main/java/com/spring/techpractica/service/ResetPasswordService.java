@@ -7,22 +7,19 @@ import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.repository.ResetPasswordRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
+@AllArgsConstructor
 public class ResetPasswordService {
 
     private final ResetPasswordRepository resetPasswordRepository;
 
     private final UserService userService;
-
-    public ResetPasswordService(ResetPasswordRepository resetPasswordRepository, UserService userService) {
-        this.resetPasswordRepository = resetPasswordRepository;
-        this.userService = userService;
-    }
 
 
     @Transactional
@@ -45,18 +42,16 @@ public class ResetPasswordService {
     }
 
     public void resetPasswordValid(ResetPassword resetPassword) {
-        if (resetPassword.isUsed()){
+        if (resetPassword.isUsed()) {
             throw new AuthenticationException("Reset Password Used");
         }
 
-        if (resetPassword.getExpirationDate().isBefore(LocalDateTime.now())){
+        if (resetPassword.getExpirationDate().isBefore(LocalDateTime.now())) {
             throw new AuthenticationException("Expired Expiration Date");
-        }    }
+        }
+    }
 
-    /*
-    fitch reset password entity and check isOtp valid
-     */
-    public void submitOtp(OtpRequest otpRequest) {
+    public void validationOtp(OtpRequest otpRequest) {
 
         ResetPassword resetPassword = resetPasswordRepository.
                 getResetPasswordByResetPasswordId(otpRequest.getResetPasswordId())

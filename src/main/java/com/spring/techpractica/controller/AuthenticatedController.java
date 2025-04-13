@@ -49,7 +49,7 @@ public class AuthenticatedController {
     @PostMapping("/send-reset-password")
     public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
 
-        ResetPasswordResponse resetPasswordResponse = userService.userCreateResetPassword(resetPasswordRequest);
+        ResetPasswordResponse resetPasswordResponse = userService.userCreateOtpCode(resetPasswordRequest);
 
         mailSenderService.sendResetPassword(resetPasswordResponse);
 
@@ -58,9 +58,8 @@ public class AuthenticatedController {
 
     @PostMapping("/submit-OTP")
     public ResponseEntity<String> submitOtp(@RequestBody OtpRequest otpRequest) {
-        userService.userSubmitOtp(otpRequest);
-        userService.userSubmitOtp(otpRequest);
-        return ResponseEntity.ok("Submit OTP Successful ");
-
+        String token = userService.userSubmitOtp(otpRequest);
+        return ResponseEntity.ok(token);
     }
+
 }

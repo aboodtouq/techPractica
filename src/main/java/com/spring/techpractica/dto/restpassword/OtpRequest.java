@@ -15,8 +15,8 @@ public class OtpRequest {
 
     private Long resetPasswordId;
 
-    @Size(min=6,max=6)
+    @Size(min = 6, max = 6)
     private String otp;
 
-
+    private String userEmail;
 }

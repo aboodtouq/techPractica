@@ -4,11 +4,13 @@ import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.repository.ResetPasswordRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class MailSenderService {
 
 
@@ -20,13 +22,6 @@ public class MailSenderService {
 
 
     private final ResetPasswordRepository resetPasswordRepository;
-
-    public MailSenderService(JavaMailSender javaMailSender,
-                             ResetPasswordRepository resetPasswordRepository) {
-        this.javaMailSender = javaMailSender;
-
-        this.resetPasswordRepository = resetPasswordRepository;
-    }
 
 
     public void sendResetPassword(ResetPasswordResponse resetPasswordResponse) {
