@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "ROLES")
@@ -13,11 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @Enumerated(EnumType.STRING)
     @Column(name = "role_type")
     private RoleType roleType;
 
+    @Override
+    public String getAuthority() {
+        return roleType.toString();
+    }
 }

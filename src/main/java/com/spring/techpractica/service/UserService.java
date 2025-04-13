@@ -19,6 +19,8 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private final JwtService jwtService;
+
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -27,10 +29,11 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository,
+    public UserService(JwtService jwtService, UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        @Lazy ResetPasswordService resetPasswordService,
                        UserMapper userMapper) {
+        this.jwtService = jwtService;
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -62,7 +65,7 @@ public class UserService {
     }
 
 
-    public void userLogin(UserLogin userLogin) {
+    public String userLogin(UserLogin userLogin) {
         //getOrElse
 
         User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
@@ -71,6 +74,7 @@ public class UserService {
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())) {
             throw new AuthenticationException("Wrong password");
         }
+        return jwtService.generateToken(user.getUserEmail());
     }
 
     public ResetPasswordResponse userCreateResetPassword(ResetPasswordRequest resetPasswordRequest) {
