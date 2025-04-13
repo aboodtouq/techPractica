@@ -1,7 +1,16 @@
 package com.spring.techpractica.dto.restpassword;
 
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OtpRequest {
 
     @Size(min=6,max=6)

@@ -55,6 +55,8 @@ public class AuthenticatedController {
     @PostMapping("/submit-OTP")
     public ResponseEntity<String> submitOtp(@RequestBody OtpRequest otpRequest) {
 
-        return null;
+        userService.userSubmitOtp(otpRequest);
+        return ResponseEntity.ok("Submit OTP Successful ");
+
     }
 }

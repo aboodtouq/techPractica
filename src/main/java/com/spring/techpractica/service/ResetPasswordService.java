@@ -4,10 +4,13 @@ import com.spring.techpractica.dto.restpassword.OtpRequest;
 import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
 import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
 import com.spring.techpractica.exception.AuthenticationException;
+import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.ResetPassword;
 import com.spring.techpractica.repository.ResetPasswordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 public class ResetPasswordService {
@@ -41,13 +44,31 @@ public class ResetPasswordService {
 
     }
 
-    public boolean isValid() {
-        return false;
-    }
+    public void resetPasswordValid(ResetPassword resetPassword) {
+        if (resetPassword.isUsed()){
+            throw new AuthenticationException("Reset Password Used");
+        }
+
+        if (resetPassword.getExpirationDate().isBefore(LocalDateTime.now())){
+            throw new AuthenticationException("Expired Expiration Date");
+        }    }
 
     /*
     fitch reset password entity and check isOtp valid
      */
     public void submitOtp(OtpRequest otpRequest) {
+
+        ResetPassword resetPassword = resetPasswordRepository.
+                getResetPasswordByResetPasswordId(otpRequest.getResetPasswordId())
+                .orElseThrow(() -> new ResourcesNotFoundException("Not found OTP"));
+
+        String submittedOTP = otpRequest.getOtp();
+        String storedOTP = resetPassword.getOtpCode();
+
+        if (!submittedOTP.equals(storedOTP)) {
+            throw new AuthenticationException("Wrong OTP");
+        }
+
+        resetPasswordValid(resetPassword);
     }
 }
