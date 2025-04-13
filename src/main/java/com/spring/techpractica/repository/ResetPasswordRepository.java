@@ -4,7 +4,9 @@ import com.spring.techpractica.model.entity.ResetPassword;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ResetPasswordRepository extends JpaRepository<ResetPassword, Long> {
-    ResetPassword getResetPasswordByResetPasswordId(Long resetId);
+    Optional<ResetPassword> getResetPasswordByResetPasswordId(Long resetId);
 }
