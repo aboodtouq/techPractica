@@ -7,7 +7,7 @@ import com.spring.techpractica.dto.user.UserCreateAccount;
 import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.service.JwtService;
 import com.spring.techpractica.service.MailSenderService;
-import com.spring.techpractica.service.ResetPasswordService;
+import com.spring.techpractica.service.OtpService;
 import com.spring.techpractica.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +23,15 @@ public class AuthenticatedController {
 
     private final MailSenderService mailSenderService;
 
+    private final OtpService otpService;
 
-    public AuthenticatedController(UserService userService, MailSenderService mailSenderService, ResetPasswordService resetPasswordService, JwtService jwtService) {
+    private final JwtService jwtService;
+
+    public AuthenticatedController(UserService userService, MailSenderService mailSenderService, OtpService otpService, JwtService jwtService) {
         this.userService = userService;
         this.mailSenderService = mailSenderService;
+        this.otpService = otpService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/registration")
@@ -43,11 +48,8 @@ public class AuthenticatedController {
 
     @PostMapping("/send-reset-password")
     public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserSendOtp userSendOtp) {
-
         OtpResponse otpResponse = userService.userCreateOtpCode(userSendOtp);
-
         mailSenderService.sendResetPassword(otpResponse);
-
         return ResponseEntity.ok(otpResponse);
     }
 
@@ -56,5 +58,4 @@ public class AuthenticatedController {
         String token = userService.userSubmitOtp(otpRequest);
         return ResponseEntity.ok(token);
     }
-
 }

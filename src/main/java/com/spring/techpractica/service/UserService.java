@@ -25,13 +25,13 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final ResetPasswordService resetPasswordService;
+    private final OtpService resetPasswordService;
 
     private final UserMapper userMapper;
 
     public UserService(JwtService jwtService, UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       @Lazy ResetPasswordService resetPasswordService,
+                       @Lazy OtpService resetPasswordService,
                        UserMapper userMapper) {
         this.jwtService = jwtService;
 
