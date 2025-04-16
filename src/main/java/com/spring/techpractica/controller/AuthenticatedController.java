@@ -7,7 +7,6 @@ import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.user.UserCreateAccount;
 import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
-import com.spring.techpractica.service.OtpService;
 import com.spring.techpractica.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
