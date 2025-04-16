@@ -1,16 +1,23 @@
 package com.spring.techpractica.service;
 
+import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.dto.otp.UserSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.user.UserCreateAccount;
 import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.exception.AuthenticationException;
+import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.UserMapper;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +75,7 @@ public class UserService {
     public String userLogin(UserLogin userLogin) {
 
         User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
-                .orElseThrow(() -> new AuthenticationException("User not found"));
+                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
 
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())) {
             throw new AuthenticationException("Wrong password");
@@ -88,4 +95,16 @@ public class UserService {
     public Optional<User> findUserByUserEmail(String userEmail) {
         return userRepository.findUserByUserEmail(userEmail);
     }
+
+    public void userChangePassword(String userEmail,
+                                   NewPassword newPassword) {
+
+        User user = findUserByUserEmail(userEmail).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+        if (!newPassword.getPassword().equals(user.getUserPassword())) {
+            throw new AuthenticationException("Wrong password");
+        }
+
+        user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
+    }
+
 }
