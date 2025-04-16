@@ -1,8 +1,8 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.dto.restpassword.OtpRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
+import com.spring.techpractica.dto.otp.OtpResponse;
+import com.spring.techpractica.dto.otp.UserSendOtp;
+import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.user.UserCreateAccount;
 import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.exception.AuthenticationException;
@@ -64,9 +64,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-
+    @Transactional
     public String userLogin(UserLogin userLogin) {
-        //getOrElse
 
         User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
                 .orElseThrow(() -> new AuthenticationException("User not found"));
@@ -77,13 +76,13 @@ public class UserService {
         return jwtService.generateToken(user.getUserEmail());
     }
 
-    public ResetPasswordResponse userCreateOtpCode(ResetPasswordRequest resetPasswordRequest) {
-        return resetPasswordService.createResetPassword(resetPasswordRequest);
+    public OtpResponse userCreateOtpCode(UserSendOtp userSendOtp) {
+        return resetPasswordService.createResetPassword(userSendOtp);
     }
 
-    public String userSubmitOtp(OtpRequest otpRequest) {
-        resetPasswordService.validationOtp(otpRequest);
-        return jwtService.generateToken(otpRequest.getUserEmail());
+    public String userSubmitOtp(UserSubmitOtp userSubmitOtp) {
+        resetPasswordService.validationOtp(userSubmitOtp);
+        return jwtService.generateToken(userSubmitOtp.getUserEmail());
     }
 
     public Optional<User> findUserByUserEmail(String userEmail) {

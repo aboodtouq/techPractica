@@ -1,11 +1,11 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.dto.restpassword.OtpRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
+import com.spring.techpractica.dto.otp.OtpResponse;
+import com.spring.techpractica.dto.otp.UserSendOtp;
+import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
-import com.spring.techpractica.model.entity.ResetPassword;
+import com.spring.techpractica.model.entity.Otp;
 import com.spring.techpractica.repository.ResetPasswordRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,47 +23,51 @@ public class ResetPasswordService {
 
 
     @Transactional
-    public ResetPasswordResponse createResetPassword(ResetPasswordRequest resetPasswordRequest) {
+    public OtpResponse createResetPassword(UserSendOtp userSendOtp) {
 
-        userService.findUserByUserEmail(resetPasswordRequest.getUserEmail())
+        userService.findUserByUserEmail(userSendOtp.getUserEmail())
                 .orElseThrow(() -> new AuthenticationException("User Not Found In System !!"));
 
-        ResetPassword resetPassword = ResetPassword.builder()
-                .userEmail(resetPasswordRequest.getUserEmail())
+        Otp otp = Otp.builder()
+                .userEmail(userSendOtp.getUserEmail())
                 .build();
 
-        resetPasswordRepository.save(resetPassword);
+        resetPasswordRepository.save(otp);
 
-        return ResetPasswordResponse.builder()
-                .resetId(resetPassword.getResetPasswordId())
-                .userEmail(resetPassword.getUserEmail())
+        return OtpResponse.builder()
+                .otpId(otp.getOtpId())
+                .userEmail(otp.getUserEmail())
                 .build();
 
     }
 
-    public void resetPasswordValid(ResetPassword resetPassword) {
-        if (resetPassword.isUsed()) {
-            throw new AuthenticationException("Reset Password Used");
-        }
+    public void resetPasswordValid(Otp otp) {
 
-        if (resetPassword.getExpirationDate().isBefore(LocalDateTime.now())) {
+        if (otp.getExpirationDate().isBefore(LocalDateTime.now())) {
             throw new AuthenticationException("Expired Expiration Date");
         }
     }
 
-    public void validationOtp(OtpRequest otpRequest) {
+    @Transactional
+    public void validationOtp(UserSubmitOtp userSubmitOtp) {
 
-        ResetPassword resetPassword = resetPasswordRepository.
-                getResetPasswordByResetPasswordId(otpRequest.getResetPasswordId())
+        Otp otp = resetPasswordRepository.
+                getResetPasswordByResetPasswordId(userSubmitOtp.getResetPasswordId())
                 .orElseThrow(() -> new ResourcesNotFoundException("Not found OTP"));
 
-        String submittedOTP = otpRequest.getOtp();
-        String storedOTP = resetPassword.getOtpCode();
+        String submittedOTP = userSubmitOtp.getOtp();
+        String storedOTP = otp.getOtpCode();
 
         if (!submittedOTP.equals(storedOTP)) {
             throw new AuthenticationException("Wrong OTP");
         }
 
-        resetPasswordValid(resetPassword);
+        resetPasswordValid(otp);
+        resetPasswordRepository.delete(otp);
+    }
+
+    //query delete resetPasswordByExpirationTimeBefore
+    public void deleteResetPasswordByExpirationTimeBefore(LocalDateTime now) {
+
     }
 }

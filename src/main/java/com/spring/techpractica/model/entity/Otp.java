@@ -14,20 +14,20 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResetPassword {
+public class Otp {
 
 
     @PrePersist
     public void prePersist() {
         otpCode = String.format("%06d", (int) (Math.random() * 1000000));
         expirationDate = LocalDateTime.now().plusMinutes(5);
-        isUsed = false;
+
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reset_password_id")
-    private Long resetPasswordId;
+    private Long otpId;
 
     @Column(name = "user_email")
     private String userEmail;
@@ -37,7 +37,5 @@ public class ResetPassword {
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @Column(name = "is_used")
-    private boolean isUsed;
 
 }

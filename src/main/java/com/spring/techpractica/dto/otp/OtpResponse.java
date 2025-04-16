@@ -1,4 +1,4 @@
-package com.spring.techpractica.dto.restpassword;
+package com.spring.techpractica.dto.otp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResetPasswordResponse {
+public class OtpResponse {
 
-    private Long resetId;
+    private Long otpId;
 
     private String userEmail;
 }

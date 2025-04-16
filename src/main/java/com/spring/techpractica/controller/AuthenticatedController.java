@@ -1,8 +1,8 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.dto.restpassword.OtpRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordRequest;
-import com.spring.techpractica.dto.restpassword.ResetPasswordResponse;
+import com.spring.techpractica.dto.otp.OtpResponse;
+import com.spring.techpractica.dto.otp.UserSendOtp;
+import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.user.UserCreateAccount;
 import com.spring.techpractica.dto.user.UserLogin;
 import com.spring.techpractica.service.JwtService;
@@ -23,15 +23,10 @@ public class AuthenticatedController {
 
     private final MailSenderService mailSenderService;
 
-    private final ResetPasswordService resetPasswordService;
-
-    private final JwtService jwtService;
 
     public AuthenticatedController(UserService userService, MailSenderService mailSenderService, ResetPasswordService resetPasswordService, JwtService jwtService) {
         this.userService = userService;
         this.mailSenderService = mailSenderService;
-        this.resetPasswordService = resetPasswordService;
-        this.jwtService = jwtService;
     }
 
     @PostMapping("/registration")
@@ -47,17 +42,17 @@ public class AuthenticatedController {
     }
 
     @PostMapping("/send-reset-password")
-    public ResponseEntity<ResetPasswordResponse> sendResetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserSendOtp userSendOtp) {
 
-        ResetPasswordResponse resetPasswordResponse = userService.userCreateOtpCode(resetPasswordRequest);
+        OtpResponse otpResponse = userService.userCreateOtpCode(userSendOtp);
 
-        mailSenderService.sendResetPassword(resetPasswordResponse);
+        mailSenderService.sendResetPassword(otpResponse);
 
-        return ResponseEntity.ok(resetPasswordResponse);
+        return ResponseEntity.ok(otpResponse);
     }
 
     @PostMapping("/submit-OTP")
-    public ResponseEntity<String> submitOtp(@RequestBody OtpRequest otpRequest) {
+    public ResponseEntity<String> submitOtp(@RequestBody UserSubmitOtp otpRequest) {
         String token = userService.userSubmitOtp(otpRequest);
         return ResponseEntity.ok(token);
     }

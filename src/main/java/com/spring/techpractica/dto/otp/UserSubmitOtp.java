@@ -1,4 +1,4 @@
-package com.spring.techpractica.dto.restpassword;
+package com.spring.techpractica.dto.otp;
 
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OtpRequest {
-
+public class UserSubmitOtp{
     private Long resetPasswordId;
 
     @Size(min = 6, max = 6)
