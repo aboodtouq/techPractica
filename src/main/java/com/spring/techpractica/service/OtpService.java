@@ -6,7 +6,7 @@ import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Otp;
-import com.spring.techpractica.repository.ResetPasswordRepository;
+import com.spring.techpractica.repository.OtpRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
-public class ResetPasswordService {
+public class OtpService {
 
-    private final ResetPasswordRepository resetPasswordRepository;
+    private final OtpRepository otpRepository;
 
     private final UserService userService;
 
@@ -32,7 +32,7 @@ public class ResetPasswordService {
                 .userEmail(userSendOtp.getUserEmail())
                 .build();
 
-        resetPasswordRepository.save(otp);
+        otpRepository.save(otp);
 
         return OtpResponse.builder()
                 .otpId(otp.getOtpId())
@@ -51,8 +51,8 @@ public class ResetPasswordService {
     @Transactional
     public void validationOtp(UserSubmitOtp userSubmitOtp) {
 
-        Otp otp = resetPasswordRepository.
-                getResetPasswordByResetPasswordId(userSubmitOtp.getResetPasswordId())
+        Otp otp = otpRepository.
+                getOtpByOtpId(userSubmitOtp.getResetPasswordId())
                 .orElseThrow(() -> new ResourcesNotFoundException("Not found OTP"));
 
         String submittedOTP = userSubmitOtp.getOtp();
@@ -63,11 +63,12 @@ public class ResetPasswordService {
         }
 
         resetPasswordValid(otp);
-        resetPasswordRepository.delete(otp);
+        otpRepository.delete(otp);
     }
 
     //query delete resetPasswordByExpirationTimeBefore
-    public void deleteResetPasswordByExpirationTimeBefore(LocalDateTime now) {
 
+    public void deleteOtpByExpirationTimeBefore(LocalDateTime now) {
+        otpRepository.deleteOtpsByExpirationDateBefore(now);
     }
 }

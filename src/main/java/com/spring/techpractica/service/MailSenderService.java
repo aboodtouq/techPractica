@@ -3,7 +3,7 @@ package com.spring.techpractica.service;
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Otp;
-import com.spring.techpractica.repository.ResetPasswordRepository;
+import com.spring.techpractica.repository.OtpRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,15 +21,15 @@ public class MailSenderService {
     private final JavaMailSender javaMailSender;
 
 
-    private final ResetPasswordRepository resetPasswordRepository;
+    private final OtpRepository otpRepository;
 
 
     public void sendResetPassword(OtpResponse otpResponse) {
 
         SimpleMailMessage message = new SimpleMailMessage();
 
-        Otp otp = resetPasswordRepository
-                .getResetPasswordByResetPasswordId(otpResponse.getOtpId()).
+        Otp otp = otpRepository
+                .getOtpByOtpId(otpResponse.getOtpId()).
                 orElseThrow(() -> new ResourcesNotFoundException("Not found reset password"));
 
         message.setTo(otpResponse.getUserEmail());

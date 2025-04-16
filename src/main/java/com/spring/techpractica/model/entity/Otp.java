@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "RESET_PASSWORD")
+@Table(name = "OTPS")
 @Data
 @Builder
 @NoArgsConstructor

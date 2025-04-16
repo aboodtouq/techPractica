@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 
 public class OtpCleanupSchedule {
 
-    private ResetPasswordService resetPasswordService;
+    private OtpService otpService;
 
     //expire otp
     @Scheduled(fixedRate = 5 * 60 * 1000) //every 15m
     public void removeExpireOtps() {
-        resetPasswordService.deleteResetPasswordByExpirationTimeBefore(LocalDateTime.now());
+       otpService.deleteOtpByExpirationTimeBefore(LocalDateTime.now());
     }
 
 }
