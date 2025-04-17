@@ -9,6 +9,8 @@ import com.spring.techpractica.service.JwtService;
 import com.spring.techpractica.service.MailSenderService;
 import com.spring.techpractica.service.OtpService;
 import com.spring.techpractica.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/authenticated")
+@Tag(
+        name = "Authentication Controller",
+        description = "Handles user authentication operations including registration, login, and password reset via OTP."
+)
 public class AuthenticatedController {
 
     private final UserService userService;
@@ -34,18 +40,29 @@ public class AuthenticatedController {
         this.jwtService = jwtService;
     }
 
-    @PostMapping("/registration")
+    @Operation(
+            summary = "Create a new user account",
+            description = "Allows a user to register by providing required account details like name, email, and password."
+    )    @PostMapping("/registration")
     public ResponseEntity<String> createAccount(@RequestBody UserCreateAccount userCreateAccount) {
         userService.createAccount(userCreateAccount);
         return ResponseEntity.ok("Create Account Successful ");
     }
 
+    @Operation(
+            summary = "Login with email and password",
+            description = "Authenticates the user with the provided credentials and returns a JWT token on success."
+    )
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
         return ResponseEntity.ok(token);
     }
 
+    @Operation(
+            summary = "Send password reset OTP",
+            description = "Generates a one-time password (OTP) and sends it to the user's email to begin the password reset process."
+    )
     @PostMapping("/send-reset-password")
     public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserSendOtp userSendOtp) {
         OtpResponse otpResponse = userService.userCreateOtpCode(userSendOtp);
@@ -53,6 +70,10 @@ public class AuthenticatedController {
         return ResponseEntity.ok(otpResponse);
     }
 
+    @Operation(
+            summary = "Submit OTP for password reset",
+            description = "Validates the submitted OTP and returns a temporary token for resetting the password."
+    )
     @PostMapping("/submit-OTP")
     public ResponseEntity<String> submitOtp(@RequestBody UserSubmitOtp otpRequest) {
         String token = userService.userSubmitOtp(otpRequest);
