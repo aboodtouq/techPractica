@@ -12,12 +12,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.nio.file.attribute.UserPrincipal;
 
 @RestController
 @RequestMapping("/api/v1/authenticated")
@@ -41,7 +40,8 @@ public class AuthenticatedController {
     @Operation(
             summary = "Create a new user account",
             description = "Allows a user to register by providing required account details like name, email, and password."
-    )    @PostMapping("/registration")
+    )
+    @PostMapping("/registration")
     public ResponseEntity<String> createAccount(@RequestBody UserCreateAccount userCreateAccount) {
         userService.createAccount(userCreateAccount);
         return ResponseEntity.ok("Create Account Successful ");
@@ -82,10 +82,10 @@ public class AuthenticatedController {
     }
 
     @PostMapping("/submit-new-password")
-    public ResponseEntity<String> submitNewPassword(NewPassword newPassword,
-                                                    @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
+                                                    @AuthenticationPrincipal UserDetails userDetails) {
 
-        String userEmail = userPrincipal.getName();
+        String userEmail = userDetails.getUsername();
         userService.userChangePassword(userEmail, newPassword);
         return ResponseEntity.ok("Password changed. Please log in again.");
     }

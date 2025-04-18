@@ -11,13 +11,8 @@ import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.UserMapper;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,10 +31,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public UserService(JwtService jwtService, UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       @Lazy OtpService resetPasswordService,
-                       UserMapper userMapper) {
+    public UserService(JwtService jwtService, UserRepository userRepository, PasswordEncoder passwordEncoder, @Lazy OtpService resetPasswordService, UserMapper userMapper) {
         this.jwtService = jwtService;
 
         this.userRepository = userRepository;
@@ -51,15 +43,13 @@ public class UserService {
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
 
-        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail())
-                .ifPresent(user -> {
-                    throw new AuthenticationException("Email is already in use");
-                });
+        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail()).ifPresent(user -> {
+            throw new AuthenticationException("Email is already in use");
+        });
 
-        userRepository.findUserByUserName(userCreateAccount.getName())
-                .ifPresent(user -> {
-                    throw new AuthenticationException("User name is already in use");
-                });
+        userRepository.findUserByUserName(userCreateAccount.getName()).ifPresent(user -> {
+            throw new AuthenticationException("User name is already in use");
+        });
 
 
         String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
@@ -74,8 +64,7 @@ public class UserService {
     @Transactional
     public String userLogin(UserLogin userLogin) {
 
-        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
-                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail()).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
 
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())) {
             throw new AuthenticationException("Wrong password");
@@ -96,11 +85,10 @@ public class UserService {
         return userRepository.findUserByUserEmail(userEmail);
     }
 
-    public void userChangePassword(String userEmail,
-                                   NewPassword newPassword) {
+    public void userChangePassword(String userEmail, NewPassword newPassword) {
 
         User user = findUserByUserEmail(userEmail).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
-        if (!newPassword.getPassword().equals(user.getUserPassword())) {
+        if (!newPassword.getPassword().equals(newPassword.getConfirmPassword())) {
             throw new AuthenticationException("Wrong password");
         }
 
