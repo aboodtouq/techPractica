@@ -102,7 +102,7 @@ const ResetPass = () => {
       });
       if (response.status === 200) {
         CookiesService.remove("jwt");
-        setTimeout(() => navigate("/User"), 2000);
+        setTimeout(() => navigate("/User"), 1000);
       }
     } catch (error) {
       const errorObj = error as AxiosError<IErrorResponse>;
