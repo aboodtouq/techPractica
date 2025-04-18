@@ -88,7 +88,7 @@ public class UserService {
     public void userChangePassword(String userEmail, NewPassword newPassword) {
 
         User user = findUserByUserEmail(userEmail).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
-        if (!newPassword.getPassword().equals(newPassword.getConfirmPassword())) {
+        if (!newPassword.getPassword().equals(newPassword.getConfirmPassword()) ) {
             throw new AuthenticationException("Wrong password");
         }
 

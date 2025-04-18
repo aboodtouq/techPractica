@@ -36,44 +36,31 @@ public class User {
     @Column(name = "user_email")
     private String userEmail;
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UsersOfSession> usersOfSessions;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USERS_SKILLS",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_type"))
+    @JoinTable(name = "USERS_SKILLS", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "skill_type"))
     private List<Skill> userSkills;
 
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<SocialAccount> userSocialAccounts;
 
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Request> requests;
 
 
-    @ManyToMany(mappedBy = "usersAssigned",
-            fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "usersAssigned", fetch = FetchType.LAZY)
     private List<Task> tasksAssigned;
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY
-            , cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Notification> notifications;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "role_name"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinTable(joinColumns = @JoinColumn(name = "role_name"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Role> roles;
 
 
