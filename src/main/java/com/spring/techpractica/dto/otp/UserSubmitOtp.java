@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserSubmitOtp{
-    private Long resetPasswordId;
+    private Long otpId;
 
     @Size(min = 6, max = 6)
     private String otp;

@@ -26,7 +26,7 @@ public class Otp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reset_password_id")
+    @Column(name = "otp_id")
     private Long otpId;
 
     @Column(name = "user_email")
