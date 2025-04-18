@@ -52,7 +52,7 @@ public class OtpService {
     public void validationOtp(UserSubmitOtp userSubmitOtp) {
 
         Otp otp = otpRepository.
-                getOtpByOtpId(userSubmitOtp.getResetPasswordId())
+                getOtpByOtpId(userSubmitOtp.getOtpId())
                 .orElseThrow(() -> new ResourcesNotFoundException("Not found OTP"));
 
         String submittedOTP = userSubmitOtp.getOtp();
