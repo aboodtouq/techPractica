@@ -64,7 +64,8 @@ public class UserService {
     @Transactional
     public String userLogin(UserLogin userLogin) {
 
-        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail()).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
+                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
 
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())) {
             throw new AuthenticationException("Wrong password");
@@ -93,6 +94,8 @@ public class UserService {
         }
 
         user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
+
+        userRepository.save(user);
     }
 
 }
