@@ -100,6 +100,7 @@ public class UserService {
         }
 
         user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
+        userRepository.save(user);
     }
 
 }
