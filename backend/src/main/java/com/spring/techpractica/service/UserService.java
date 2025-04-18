@@ -31,7 +31,10 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public UserService(JwtService jwtService, UserRepository userRepository, PasswordEncoder passwordEncoder, @Lazy OtpService resetPasswordService, UserMapper userMapper) {
+    public UserService(JwtService jwtService, UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       @Lazy OtpService resetPasswordService,
+                       UserMapper userMapper) {
         this.jwtService = jwtService;
 
         this.userRepository = userRepository;
@@ -43,13 +46,15 @@ public class UserService {
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
 
-        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail()).ifPresent(user -> {
-            throw new AuthenticationException("Email is already in use");
-        });
+        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail())
+                .ifPresent(user -> {
+                    throw new AuthenticationException("Email is already in use");
+                });
 
-        userRepository.findUserByUserName(userCreateAccount.getName()).ifPresent(user -> {
-            throw new AuthenticationException("User name is already in use");
-        });
+        userRepository.findUserByUserName(userCreateAccount.getName())
+                .ifPresent(user -> {
+                    throw new AuthenticationException("User name is already in use");
+                });
 
 
         String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
@@ -86,16 +91,15 @@ public class UserService {
         return userRepository.findUserByUserEmail(userEmail);
     }
 
-    public void userChangePassword(String userEmail, NewPassword newPassword) {
+    public void userChangePassword(String userEmail,
+                                   NewPassword newPassword) {
 
         User user = findUserByUserEmail(userEmail).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
-        if (!newPassword.getPassword().equals(newPassword.getConfirmPassword()) ) {
+        if (!newPassword.getPassword().equals(newPassword.getConfirmPassword())) {
             throw new AuthenticationException("Wrong password");
         }
 
         user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
-
-        userRepository.save(user);
     }
 
 }
