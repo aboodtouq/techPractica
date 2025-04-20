@@ -14,6 +14,7 @@ public class SessionMapper {
                 .sessionName(sessionCreatorRequest.getNameSession())
                 .sessionDescription(sessionCreatorRequest.getDescriptionSession())
                 .isPrivate(sessionCreatorRequest.isPrivateSession())
+                .sessionRequirements(sessionCreatorRequest.getRequirements())
                 .build();
     }
 

@@ -2,6 +2,7 @@ package com.spring.techpractica.dto.session;
 
 import com.spring.techpractica.dto.RequirementUsers;
 import com.spring.techpractica.model.entity.Category;
+import com.spring.techpractica.model.entity.Requirement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,6 @@ public class SessionCreatorRequest {
 
     private Category category;
 
-    private List<RequirementUsers> requirements;
+    private List<Requirement> requirements;
 
 }
