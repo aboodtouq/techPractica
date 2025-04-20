@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="more code readability">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session.">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/TechPracticaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/TechPracticaApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/configration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/configration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/AuthenticatedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/AuthenticatedController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/filter/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Otp.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Otp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/OtpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/OtpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/SessionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SkillsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/TechnologiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,32 +148,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.UserServiceTest.createAccount.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.TechPracticaApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/trainingJava/projectG/techPractica/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.UserServiceTest.createAccount.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "Maven.techPractica [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.TechPracticaApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/trainingJava/projectG/techPractica/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15527344",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\trainingJava\projectG\techPractica\doc" />
@@ -517,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744983436577</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="create system architecture for a session.">
+      <option name="closed" value="true" />
+      <created>1745154073880</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1745154073880</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add cascading for class and feting type ." />
     <MESSAGE value="Add cascading for class and feting type." />
     <MESSAGE value="Add a relationship between User and Notification with cascading." />
     <MESSAGE value="Add security Configuration And add service for users" />
@@ -560,7 +562,8 @@
     <MESSAGE value="edit jwt generation for more secure" />
     <MESSAGE value="fix some bugs in User" />
     <MESSAGE value="more code readability" />
-    <option name="LAST_COMMIT_MESSAGE" value="more code readability" />
+    <MESSAGE value="create system architecture for a session." />
+    <option name="LAST_COMMIT_MESSAGE" value="create system architecture for a session." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
