@@ -4,8 +4,6 @@ import com.spring.techpractica.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,7 +38,12 @@ public class SecurityConfig {
         return http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .anyRequest()
+                        .authenticated()
+                        .requestMatchers("/api/v1/authenticated/registration",
+                                "/api/v1/authenticated/login")
+                        .permitAll()
+
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

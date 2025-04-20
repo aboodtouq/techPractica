@@ -23,4 +23,10 @@ public class Skill {
     @Column(name = "skill_name")
     private SkillType skillName;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "skill_name"),
+            inverseJoinColumns = @JoinColumn(name = "category_name")
+    )
+    private List<Category> categories;
 }

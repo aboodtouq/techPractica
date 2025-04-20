@@ -79,7 +79,7 @@ public class UserService {
     }
 
     public OtpResponse userCreateOtpCode(UserSendOtp userSendOtp) {
-        return resetPasswordService.createResetPassword(userSendOtp);
+        return resetPasswordService.createOtp(userSendOtp);
     }
 
     public String userSubmitOtp(UserSubmitOtp userSubmitOtp) {

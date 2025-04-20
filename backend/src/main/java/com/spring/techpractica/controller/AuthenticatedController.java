@@ -84,7 +84,7 @@ public class AuthenticatedController {
     @PostMapping("/submit-new-password")
     public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
                                                     @AuthenticationPrincipal UserDetails userDetails) {
-
+//Jwt Token
         String userEmail = userDetails.getUsername();
         userService.userChangePassword(userEmail, newPassword);
         return ResponseEntity.ok("Password changed. Please log in again.");

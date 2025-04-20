@@ -6,7 +6,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,16 +36,16 @@ public class JwtFilter extends OncePerRequestFilter {
         String headerAuthorization = request.getHeader("Authorization");
         String token = null;
         String userName = null;
-
         if (headerAuthorization != null && headerAuthorization.startsWith("Bearer ")) {
             token = headerAuthorization.substring(7);
-            userName = jwtService.extractUserName(token);
+            userName = jwtService.extractUserEmail(token);
         }
 
         if (userName != null &&
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication() == null) {
+
             UserDetails userDetails = customUserDetailService.loadUserByUsername(userName);
             if (jwtService.validateToken(token, userDetails)) {
 

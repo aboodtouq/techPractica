@@ -29,9 +29,12 @@ public class Otp {
     @Column(name = "otp_id")
     private Long otpId;
 
-    @Column(name = "user_email")
-    private String userEmail;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+
+    @Column(name = "otp_code")
     private String otpCode;
 
     @Column(name = "expiration_date")

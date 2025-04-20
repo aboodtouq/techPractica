@@ -6,6 +6,7 @@ import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Otp;
+import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.OtpRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,20 +24,20 @@ public class OtpService {
 
 
     @Transactional
-    public OtpResponse createResetPassword(UserSendOtp userSendOtp) {
+    public OtpResponse createOtp(UserSendOtp userSendOtp) {
 
-        userService.findUserByUserEmail(userSendOtp.getUserEmail())
+        User user = userService.findUserByUserEmail(userSendOtp.getUserEmail())
                 .orElseThrow(() -> new AuthenticationException("User Not Found In System !!"));
 
         Otp otp = Otp.builder()
-                .userEmail(userSendOtp.getUserEmail())
+                .user(user)
                 .build();
 
         otpRepository.save(otp);
 
         return OtpResponse.builder()
                 .otpId(otp.getOtpId())
-                .userEmail(otp.getUserEmail())
+                .userEmail(otp.getUser().getUserEmail())
                 .build();
 
     }

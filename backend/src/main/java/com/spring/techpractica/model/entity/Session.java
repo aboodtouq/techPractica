@@ -16,6 +16,10 @@ import java.util.List;
 @Table(name = "SESSIONS")
 public class Session {
 
+    @PrePersist
+    public void prePersist() {
+        isRunning = false;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +35,13 @@ public class Session {
     @Column(name = "is_private")
     private boolean isPrivate;
 
-    @Column(name = "required_users")
-    private int requiredUsers;
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY)
     private List<UsersOfSession> sessionMembers;
 
+    @Column(name = "is_running")
+    private boolean isRunning;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -62,7 +66,5 @@ public class Session {
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
     private List<Request> requests;
-
-
 
 }
