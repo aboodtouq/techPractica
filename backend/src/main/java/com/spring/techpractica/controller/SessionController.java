@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("api/v1/sessions")
+@RequestMapping("/api/v1/sessions")
 public class SessionController {
 
 
