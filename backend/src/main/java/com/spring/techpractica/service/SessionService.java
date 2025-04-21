@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class SessionService {
@@ -24,11 +23,17 @@ public class SessionService {
 
     private final UserService userService;
 
+    private final FieldService fieldService;
+
+    private final TechnologyService technologyService;
+
     public SessionService(SessionRepository sessionRepository,
-                          SessionMapper sessionMapper, SessionMapper sessionMapper1, UserService userService) {
+                          SessionMapper sessionMapper, SessionMapper sessionMapper1, UserService userService, FieldService fieldService, TechnologyService technologyService) {
         this.sessionRepository = sessionRepository;
         this.sessionMapper = sessionMapper1;
         this.userService = userService;
+        this.fieldService = fieldService;
+        this.technologyService = technologyService;
     }
 
     @Transactional
@@ -42,22 +47,24 @@ public class SessionService {
         Session createdSession =
                 sessionMapper.sessionCreatorToSession(creatorRequest);
 
-
-        //set Owner
         setUserSessionRole(createdSession, userOwner, "OWNER");
 
-        // should check of fields is exists in database
+
         creatorRequest
                 .getFields()
                 .forEach(field -> {
                     createdSession.setSessionRequests(new ArrayList<>());
                     createdSession.getSessionRequirements().add(Requirement.builder()
-                            .field(field)
+                            .field(fieldService.findFieldByFieldName(field).orElseThrow(() -> new ResourcesNotFoundException("Field not found")))
                             .session(createdSession)
                             .build());
                 });
 
-        createdSession.setSessionTechnologies(creatorRequest.getTechnologies());
+        createdSession.setSessionTechnologies(creatorRequest
+                .getTechnologies()
+                .stream()
+                .map((tech) -> technologyService.findTechnologyByName(tech)
+                        .orElseThrow(() -> new ResourcesNotFoundException("Tech not found"))).toList());
 
         sessionRepository.save(createdSession);
 

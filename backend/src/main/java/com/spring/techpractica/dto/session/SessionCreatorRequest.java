@@ -25,9 +25,9 @@ public class SessionCreatorRequest {
     private Category category;
 
 
-    private List<Technology> technologies;
+    private List<String> technologies;
 
 
-    private List<Field> fields;
+    private List<String> fields;
 
 }
