@@ -1,6 +1,6 @@
 package com.spring.techpractica.service;
 
-import com.spring.techpractica.model.entity.Skill;
+import com.spring.techpractica.model.entity.Technology;
 import com.spring.techpractica.repository.SkillRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class SkillService {
         this.skillRepository = skillRepository;
     }
 
-    public List<Skill> findAll() {
+    public List<Technology> findAll() {
         return skillRepository.findAll();
     }
 

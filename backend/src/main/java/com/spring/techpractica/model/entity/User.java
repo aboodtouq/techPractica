@@ -37,11 +37,11 @@ public class User {
     private String userEmail;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UsersOfSession> usersOfSessions;
+    private List<AuthenticatedUserSession> authenticatedUserSessions;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_SKILLS", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "skill_type"))
-    private List<Skill> userSkills;
+    private List<Technology> userTechnologies;
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

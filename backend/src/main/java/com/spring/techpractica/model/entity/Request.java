@@ -1,10 +1,14 @@
 package com.spring.techpractica.model.entity;
 
+import com.spring.techpractica.model.RequestRequirementId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -38,5 +42,7 @@ public class Request {
     @JoinColumn(name = "user_id")
     private User user;
 
-
+    @OneToOne
+    @JoinColumn(name = "requirement_id")
+     private Requirement requirement;
 }

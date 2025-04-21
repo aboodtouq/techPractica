@@ -2,10 +2,15 @@ package com.spring.techpractica.model.entity;
 
 import com.spring.techpractica.model.UserSessionId;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name = "USERS_SESSION")
-public class UsersOfSession {
+@Table(name = "AUTHENTICATED_USER_SESSION")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthenticatedUserSession {
 
     @EmbeddedId
     private UserSessionId userSessionId;
@@ -20,6 +25,6 @@ public class UsersOfSession {
     @JoinColumn(name = "session_id")
     private Session session;
 
-    @Column(name = "user_role")
-    private String userRole;
+    @Column(name = "socoped_role")
+    private String scopedRole;
 }

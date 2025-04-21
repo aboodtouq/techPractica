@@ -11,21 +11,20 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "SKILLS")
+@Table(name = "TECHNOLOGIES")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Skill {
+public class Technology {
 
     @Id
-    @Enumerated(EnumType.STRING)
-    @Column(name = "skill_name")
-    private SkillType skillName;
+    @Column(name = "technology_name")
+    private String technologyName;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            joinColumns = @JoinColumn(name = "skill_name"),
+            joinColumns = @JoinColumn(name = "technology_name"),
             inverseJoinColumns = @JoinColumn(name = "category_name")
     )
     private List<Category> categories;

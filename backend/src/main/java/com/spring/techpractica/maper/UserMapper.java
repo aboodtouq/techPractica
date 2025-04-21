@@ -1,6 +1,6 @@
 package com.spring.techpractica.maper;
 
-import com.spring.techpractica.dto.user.UserCreateAccount;
+import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.model.entity.User;
 import org.springframework.stereotype.Component;
 

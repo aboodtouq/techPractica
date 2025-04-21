@@ -23,7 +23,7 @@ public class Requirement {
     @JoinColumn(name = "session_id")
     private Session session;
 
-    @ManyToOne
-    @JoinColumn(name = "skill_name")
-    private Skill skillType;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "field_name")
+    private Field field;
 }

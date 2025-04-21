@@ -1,4 +1,4 @@
-package com.spring.techpractica.dto.user;
+package com.spring.techpractica.dto.userRegestation;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
