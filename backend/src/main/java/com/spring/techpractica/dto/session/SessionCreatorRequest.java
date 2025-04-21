@@ -22,7 +22,7 @@ public class SessionCreatorRequest {
 
     private boolean isPrivateSession;
 
-    private Category category;
+    private String category;
 
 
     private List<String> technologies;

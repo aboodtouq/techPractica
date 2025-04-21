@@ -27,13 +27,16 @@ public class SessionService {
 
     private final TechnologyService technologyService;
 
+    private final CategoryService categoryService;
+
     public SessionService(SessionRepository sessionRepository,
-                          SessionMapper sessionMapper, SessionMapper sessionMapper1, UserService userService, FieldService fieldService, TechnologyService technologyService) {
+                          SessionMapper sessionMapper, SessionMapper sessionMapper1, UserService userService, FieldService fieldService, TechnologyService technologyService, CategoryService categoryService) {
         this.sessionRepository = sessionRepository;
         this.sessionMapper = sessionMapper1;
         this.userService = userService;
         this.fieldService = fieldService;
         this.technologyService = technologyService;
+        this.categoryService = categoryService;
     }
 
     @Transactional
@@ -59,6 +62,8 @@ public class SessionService {
                             .session(createdSession)
                             .build());
                 });
+//
+        createdSession.getSessionCategories().add(categoryService.findCategoryByName(creatorRequest.getCategory()));
 
         createdSession.setSessionTechnologies(creatorRequest
                 .getTechnologies()

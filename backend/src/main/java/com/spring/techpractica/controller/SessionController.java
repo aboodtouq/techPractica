@@ -22,7 +22,7 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/create-session")
     public ResponseEntity<SessionResponse> createSession(
             @RequestBody SessionCreatorRequest sessionCreatorRequest
             , @AuthenticationPrincipal UserDetails userDetails) {
