@@ -1,5 +1,6 @@
 package com.spring.techpractica.service;
 
+import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Category;
 import com.spring.techpractica.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,8 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Category findCategoryByName(String name) {
+        return  categoryRepository.findById(name).orElseThrow(()->new ResourcesNotFoundException("categoria no encontrada"));
+
+    }
 }

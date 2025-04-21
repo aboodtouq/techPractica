@@ -18,7 +18,7 @@ public class SessionMapper {
                 .sessionName(sessionCreatorRequest.getNameSession())
                 .sessionDescription(sessionCreatorRequest.getDescriptionSession())
                 .isPrivate(sessionCreatorRequest.isPrivateSession())
-                .sessionCategories(List.of(sessionCreatorRequest.getCategory()))
+                .sessionCategories(new ArrayList<>())
                 .sessionRequests(new ArrayList<>())
                 .sessionRequirements(new ArrayList<>())
                 .sessionMembers(new ArrayList<>())
