@@ -62,7 +62,7 @@ public class SessionService {
                             .session(createdSession)
                             .build());
                 });
-
+//
         createdSession.getSessionCategories().add(categoryService.findCategoryByName(creatorRequest.getCategory()));
 
         createdSession.setSessionTechnologies(creatorRequest
