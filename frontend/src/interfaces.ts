@@ -121,3 +121,19 @@ export const ResetinputPassword: IResetPas[] = [
     label: "Confirm Password",
   },
 ];
+export type Inputs = {
+  nameSession: string;
+  descriptionSession: string;
+  category: string;
+  technologies: string[];
+  fields: string[];
+  privateSession: boolean;
+};
+export type FormInput = "nameSession" | "descriptionSession";
+
+export interface Iinpform {
+  name: FormInput;
+  placeholder: string;
+  type: string;
+  label: string;
+}
