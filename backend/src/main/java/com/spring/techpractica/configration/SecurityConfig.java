@@ -42,10 +42,10 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/v1/authenticated/registration",
                                 "/api/v1/authenticated/login",
-                                "/swagger-ui/**",         // Swagger UI files
-                                "/v3/api-docs/**",        // OpenAPI JSON
-                                "/swagger-resources/**",  // Swagger static resources (if used)
-                                "/webjars/**"             // Required assets (JS, CSS)
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
                         )
                         .permitAll()
                         .anyRequest().authenticated()

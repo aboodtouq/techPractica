@@ -94,14 +94,17 @@ public class SessionService {
     }
 
     public List<SessionResponse> getSessions(String userEmail, int pageSize, int pageNumber) {
+
         User user = userService.findUserByUserEmail(userEmail).orElseThrow(() ->
                 new ResourcesNotFoundException("User not found")
         );
 
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
+
             if (pageNumber < 0 || pageSize <= 0) {
                 throw new ResourcesNotFoundException("Page number or Size is negative");
             }
+
             Pageable sessionPage = PageRequest.of(pageNumber, pageSize);
             Page<Session> page = sessionRepository.findAll(sessionPage);
             return page.map(sessionMapper::sessionToSessionResponse).stream().toList();
