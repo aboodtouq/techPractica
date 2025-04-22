@@ -4,10 +4,7 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.SessionMapper;
-import com.spring.techpractica.model.entity.AuthenticatedUserSession;
-import com.spring.techpractica.model.entity.Requirement;
-import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.model.entity.*;
 import com.spring.techpractica.repository.SessionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -110,5 +107,21 @@ public class SessionService {
             return page.map(sessionMapper::sessionToSessionResponse).stream().toList();
         }
         return null;
+    }
+
+    public List<SessionResponse> getSessionsByCategoryName(String categoryName , int pageSize, int pageNumber) {
+
+        Category category = categoryService.findCategoryByName(categoryName);
+
+
+        if (pageNumber < 0 || pageSize <= 0) {
+            throw new ResourcesNotFoundException("Page number or Size is negative");
+        }
+
+        Pageable sessionPage = PageRequest.of(pageNumber, pageSize);
+        Page<Session> page = sessionRepository.findAllBySessionCategories(category,sessionPage);
+
+
+        return page.map(sessionMapper::sessionToSessionResponse).stream().toList();
     }
 }

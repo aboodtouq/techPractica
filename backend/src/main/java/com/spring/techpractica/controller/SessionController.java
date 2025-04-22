@@ -47,8 +47,8 @@ public class SessionController {
 
 
     @Operation(
-            summary = "Create a new Session",
-            description = "Allows a user to create a new Session by providing required session details like name, description, and many data fielis"
+            summary = "Get Available Sessions",
+            description = "Retrieves a paginated list of available sessions for the authenticated user using page size and page number."
     )
     @GetMapping("/")
     public ResponseEntity<List<SessionResponse>> getSessions(
@@ -59,4 +59,13 @@ public class SessionController {
 
         return ResponseEntity.ok(sessionService.getSessions(userEmail,pageSize,pageNumber));
     }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
+            @RequestParam String categoryName,
+            @RequestParam int  pageSize,@RequestParam int pageNumber) {
+
+        return ResponseEntity.ok(sessionService.getSessionsByCategoryName(categoryName, pageSize,pageNumber));
+    }
+
 }
