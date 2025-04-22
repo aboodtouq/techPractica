@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticatedUserSession {
+public class SessionMemberRelationShip {
 
     @EmbeddedId
     private UserSessionId userSessionId;

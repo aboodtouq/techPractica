@@ -4,10 +4,7 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.SessionMapper;
-import com.spring.techpractica.model.entity.AuthenticatedUserSession;
-import com.spring.techpractica.model.entity.Requirement;
-import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.model.entity.*;
 import com.spring.techpractica.repository.SessionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SessionService {
@@ -44,56 +42,82 @@ public class SessionService {
     }
 
     @Transactional
-    public SessionResponse createSession(SessionCreatorRequest creatorRequest,
-                                         String userEmail) {
+    public SessionResponse createSession(SessionCreatorRequest creatorRequest, String userEmail) {
 
-        User userOwner = userService.findUserByUserEmail(userEmail).orElseThrow(() ->
-                new ResourcesNotFoundException("User not found")
-        );
+        User userOwner = getUserByEmail(userEmail);
 
-        Session createdSession =
-                sessionMapper.sessionCreatorToSession(creatorRequest);
+        Session createdSession = createSessionFromRequest(creatorRequest);
 
         setUserSessionRole(createdSession, userOwner, "OWNER");
 
+        addSessionRequirements(createdSession, creatorRequest.getFields());
 
-        creatorRequest
-                .getFields()
-                .forEach(field -> {
-                    createdSession.setSessionRequests(new ArrayList<>());
-                    createdSession.getSessionRequirements().add(Requirement.builder()
-                            .field(fieldService.findFieldByFieldName(field).orElseThrow(() -> new ResourcesNotFoundException("Field not found")))
-                            .session(createdSession)
-                            .build());
-                });
-//
-        createdSession.getSessionCategories().add(categoryService.findCategoryByName(creatorRequest.getCategory()));
+        addCategoryToSession(createdSession, creatorRequest.getCategory());
 
-        createdSession.setSessionTechnologies(creatorRequest
-                .getTechnologies()
-                .stream()
-                .map((tech) -> technologyService.findTechnologyByName(tech)
-                        .orElseThrow(() -> new ResourcesNotFoundException("Tech not found"))).toList());
+
+        addTechnologiesToSession(createdSession, creatorRequest.getTechnologies());
+
 
         sessionRepository.save(createdSession);
+
 
         return sessionMapper.sessionToSessionResponse(createdSession);
     }
 
+    private void setUserSessionRole(Session session, User user, String role) {
+        SessionMemberRelationShip sessionRole = SessionMemberRelationShip.builder()
+                .user(user)
+                .session(session)
+                .scopedRole(role)
+                .build();
 
-    private void setUserSessionRole(Session createdSession, User userOwner, String scopedRole) {
-
-        createdSession.setSessionMembers(new ArrayList<>());
-        createdSession.getSessionMembers()
-                .add(
-                        AuthenticatedUserSession
-                                .builder()
-                                .user(userOwner)
-                                .scopedRole(scopedRole)
-                                .build());
+        session.getSessionMembers().add(sessionRole);
     }
 
-    public List<SessionResponse> getSessions(String userEmail, int pageSize, int pageNumber) {
+
+
+    private User getUserByEmail(String userEmail) {
+        return userService.findUserByUserEmail(userEmail)
+                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+    }
+
+    private Session createSessionFromRequest(SessionCreatorRequest creatorRequest) {
+        return sessionMapper.sessionCreatorToSession(creatorRequest);
+    }
+
+    private void addSessionRequirements(Session createdSession, List<String> fields) {
+        createdSession.setSessionRequests(new ArrayList<>());
+        fields.forEach(field -> {
+            createdSession.getSessionRequirements().add(createRequirementForField(field, createdSession));
+        });
+    }
+
+    private Requirement createRequirementForField(String fieldName, Session session) {
+
+        Field field = fieldService.findFieldByFieldName(fieldName)
+                .orElseThrow(() -> new ResourcesNotFoundException("Field not found"));
+        return Requirement.builder()
+                .field(field)
+                .session(session)
+                .build();
+    }
+
+    private void addCategoryToSession(Session createdSession, String categoryName) {
+        Category category = categoryService.findCategoryByName(categoryName);
+        createdSession.getSessionCategories().add(category);
+    }
+
+    private void addTechnologiesToSession(Session createdSession, List<String> technologies) {
+
+        List<Technology> techList = technologies.stream()
+                .map(tech -> technologyService.findTechnologyByName(tech)
+                        .orElseThrow(() -> new ResourcesNotFoundException("Tech not found")))
+                .collect(Collectors.toList());
+
+        createdSession.setSessionTechnologies(techList);
+    }
+
+    public List<SessionResponse> getSessionsByUserEmail(String userEmail, int pageSize, int pageNumber) {
 
         User user = userService.findUserByUserEmail(userEmail).orElseThrow(() ->
                 new ResourcesNotFoundException("User not found")
@@ -111,4 +135,6 @@ public class SessionService {
         }
         return null;
     }
+
+
 }

@@ -37,7 +37,7 @@ public class User {
     private String userEmail;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<AuthenticatedUserSession> authenticatedUserSessions;
+    private List<SessionMemberRelationShip> sessionMemberRelationShips;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_SKILLS", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "skill_type"))

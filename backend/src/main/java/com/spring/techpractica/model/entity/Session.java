@@ -49,7 +49,7 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY)
-    private List<AuthenticatedUserSession> sessionMembers = new ArrayList<>();
+    private List<SessionMemberRelationShip> sessionMembers = new ArrayList<>();
 
     @Column(name = "is_running")
     private boolean sessionIsRunning;

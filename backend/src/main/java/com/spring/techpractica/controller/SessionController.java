@@ -57,6 +57,6 @@ public class SessionController {
         String userEmail = userDetails.getUsername();
 
 
-        return ResponseEntity.ok(sessionService.getSessions(userEmail,pageSize,pageNumber));
+        return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail,pageSize,pageNumber));
     }
 }
