@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,7 +23,7 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @PostMapping("/create-session")
+    @PostMapping("/")
     public ResponseEntity<SessionResponse> createSession(
             @RequestBody SessionCreatorRequest sessionCreatorRequest
             , @AuthenticationPrincipal UserDetails userDetails) {
@@ -32,5 +33,6 @@ public class SessionController {
         return ResponseEntity.ok(sessionService.createSession(sessionCreatorRequest,
                 userEmail));
     }
+
 
 }
