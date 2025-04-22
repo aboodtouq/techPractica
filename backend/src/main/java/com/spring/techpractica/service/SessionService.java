@@ -9,10 +9,14 @@ import com.spring.techpractica.model.entity.Requirement;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.SessionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SessionService {
@@ -87,5 +91,21 @@ public class SessionService {
                                 .user(userOwner)
                                 .scopedRole(scopedRole)
                                 .build());
+    }
+
+    public List<SessionResponse> getSessions(String userEmail, int pageSize, int pageNumber) {
+        User user = userService.findUserByUserEmail(userEmail).orElseThrow(() ->
+                new ResourcesNotFoundException("User not found")
+        );
+
+        if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
+            if (pageNumber < 0 || pageSize <= 0) {
+                throw new ResourcesNotFoundException("Page number or Size is negative");
+            }
+            Pageable sessionPage = PageRequest.of(pageNumber, pageSize);
+            Page<Session> page = sessionRepository.findAll(sessionPage);
+            return page.map(sessionMapper::sessionToSessionResponse).stream().toList();
+        }
+        return null;
     }
 }

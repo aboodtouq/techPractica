@@ -15,6 +15,8 @@ public class SkillService {
         this.skillRepository = skillRepository;
     }
 
+
+
     public List<Technology> findAll() {
         return skillRepository.findAll();
     }

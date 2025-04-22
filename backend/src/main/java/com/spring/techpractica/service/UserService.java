@@ -9,6 +9,7 @@ import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.UserMapper;
+import com.spring.techpractica.model.entity.Technology;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import org.springframework.context.annotation.Lazy;
@@ -31,16 +32,19 @@ public class UserService {
 
     private final UserMapper userMapper;
 
+    private final TechnologyService technologyService;
+
     public UserService(JwtService jwtService, UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        @Lazy OtpService resetPasswordService,
-                       UserMapper userMapper) {
+                       UserMapper userMapper, TechnologyService technologyService) {
         this.jwtService = jwtService;
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.resetPasswordService = resetPasswordService;
         this.userMapper = userMapper;
+        this.technologyService = technologyService;
     }
 
     @Transactional
@@ -102,5 +106,7 @@ public class UserService {
         user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
         userRepository.save(user);
     }
+
+
 
 }

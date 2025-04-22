@@ -64,7 +64,7 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+            cascade = { CascadeType.REMOVE})
     private List<Requirement> sessionRequirements = new ArrayList<>();
 
     @OneToMany(mappedBy = "session",
