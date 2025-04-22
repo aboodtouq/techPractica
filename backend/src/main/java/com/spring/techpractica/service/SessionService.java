@@ -136,5 +136,19 @@ public class SessionService {
         return null;
     }
 
+    public List<SessionResponse> getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
 
+        Category category = categoryService.findCategoryByName(categoryName);
+
+
+        if (pageNumber < 0 || pageSize <= 0) {
+            throw new ResourcesNotFoundException("Page number or Size is negative");
+        }
+
+        Pageable sessionPage = PageRequest.of(pageNumber, pageSize);
+        Page<Session> page = sessionRepository.findAllBySessionCategories(category, sessionPage);
+
+
+        return page.map(sessionMapper::sessionToSessionResponse).stream().toList();
+    }
 }

@@ -11,10 +11,11 @@ function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const RenderNavLinks = NavLinks.filter(({ label }) => {
-    if (token && (label === "Join" || label === "Login")) {
-      return false;
+    if (token) {
+      return label !== "Login" && label !== "Join";
+    } else {
+      return label !== "Profile" && label !== "Projects";
     }
-    return true;
   }).map(({ label, path }) => (
     <NavLink key={label} to={path} className="px-4">
       {label}
