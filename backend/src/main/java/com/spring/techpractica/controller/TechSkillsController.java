@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/v1/TechSkills")
+@RequestMapping("/api/v1/tech-skills")
 @Tag(
         name = "TechSkills Controller",
         description = "Handles The Skills and categories operations including getting all the  tech , fields and technologies "

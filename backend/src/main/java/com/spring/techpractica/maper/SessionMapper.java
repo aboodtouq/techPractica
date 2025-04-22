@@ -3,6 +3,7 @@ package com.spring.techpractica.maper;
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.Technology;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -32,8 +33,9 @@ public class SessionMapper {
                 builder()
                 .sessionName(session.getSessionName())
                 .sessionDescription(session.getSessionDescription())
-                .category(session.getSessionCategories().get(0))
-                .technologies(session.getSessionTechnologies())
+                .category(session.getSessionCategories().getFirst().getCategoryName())
+                .technologies(session.getSessionTechnologies().stream()
+                        .map(Technology::getTechnologyName).toList())
                 .build();
     }
 

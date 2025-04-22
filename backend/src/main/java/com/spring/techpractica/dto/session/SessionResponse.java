@@ -1,5 +1,7 @@
 package com.spring.techpractica.dto.session;
 
+import com.spring.techpractica.dto.techSkills.CategoryTransfer;
+import com.spring.techpractica.dto.techSkills.TechnologyTransfer;
 import com.spring.techpractica.model.entity.Category;
 import com.spring.techpractica.model.entity.Technology;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class SessionResponse {
 
     private String sessionDescription;
 
-    private List<Technology> technologies;
+    private List<String> technologies;
 
-    private Category category;
+    private String category;
 }
