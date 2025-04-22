@@ -17,14 +17,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/TechSkills")
-<<<<<<< HEAD
-@Tag(name = "Tech Skills API", description = "API for retrieving tech skills like categories, technologies, and fields")
-=======
 @Tag(
         name = "TechSkills Controller",
         description = "Handles The Skills and categories operations including getting all the  tech , fields and technologies "
 )
->>>>>>> origin/master
 public class TechSkillsController {
 
 
@@ -38,41 +34,28 @@ public class TechSkillsController {
         this.fieldService = fieldService;
     }
 
-<<<<<<< HEAD
-
-    @Operation(summary = "Get all categories", description = "Returns a list of all skill categories")
-=======
     @Operation(
             summary = "Retrieve All Categories",
             description = "Fetches a list of all available categories that can be used to classify sessions."
     )
->>>>>>> origin/master
     @GetMapping("/categories")
     public ResponseEntity<List<Category>> getCategories() {
         return ResponseEntity.ok(categoryService.findAllCategories());
     }
 
-<<<<<<< HEAD
-    @Operation(summary = "Get all technologies", description = "Returns a list of all technologies")
-=======
     @Operation(
             summary = "Retrieve All Technologies",
             description = "Fetches a list of all available technologies that can be associated with sessions."
     )
->>>>>>> origin/master
     @GetMapping("/technologies")
     public ResponseEntity<List<Technology>> getTechnologies() {
         return ResponseEntity.ok(technologyService.findAllTechnologies());
     }
-<<<<<<< HEAD
 
-    @Operation(summary = "Get all technologies", description = "Returns a list of all technologies")
-=======
     @Operation(
             summary = "Retrieve All Fields",
             description = "Fetches a list of all fields related to the session context, useful for filtering or tagging."
     )
->>>>>>> origin/master
     @GetMapping("/fields")
     public ResponseEntity<List<Field>> getFields() {
         return ResponseEntity.ok(fieldService.findAllFields());
