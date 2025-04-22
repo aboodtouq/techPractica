@@ -75,7 +75,6 @@ public class SessionService {
     }
 
 
-
     private User getUserByEmail(String userEmail) {
         return userService.findUserByUserEmail(userEmail)
                 .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
@@ -88,7 +87,8 @@ public class SessionService {
     private void addSessionRequirements(Session createdSession, List<String> fields) {
         createdSession.setSessionRequests(new ArrayList<>());
         fields.forEach(field -> {
-            createdSession.getSessionRequirements().add(createRequirementForField(field, createdSession));
+            createdSession.getSessionRequirements()
+                    .add(createRequirementForField(field, createdSession));
         });
     }
 
