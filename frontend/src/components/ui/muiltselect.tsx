@@ -9,19 +9,20 @@ import { Controller, get, useFormContext } from "react-hook-form";
 import { RiExpandUpDownLine } from "react-icons/ri";
 import ErrorMsg from "./ErrorMsg";
 
-type MultiSelectFieldProps = {
+type MultiSelectFieldProps<T> = {
   name: string;
   label: string;
-  options: string[];
+  options: T[];
   rules?: object;
+  getLabel: (item: T) => string;
 };
-
-export default function MultiSelectField({
+export default function MultiSelectField<T>({
   name,
   label,
   options,
   rules = {},
-}: MultiSelectFieldProps) {
+  getLabel,
+}: MultiSelectFieldProps<T>) {
   const {
     control,
     formState: { errors },
@@ -42,16 +43,18 @@ export default function MultiSelectField({
             <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left border border-gray-300 shadow-sm sm:text-sm min-h-[42px]">
               <span className="flex flex-wrap gap-2 items-center">
                 {value.length > 0 ? (
-                  value.map((item: string, idx: number) => (
+                  value.map((item: T, idx: number) => (
                     <span
                       key={idx}
                       onClick={(e) => {
                         e.stopPropagation();
-                        onChange(value.filter((v: string) => v !== item));
+                        onChange(
+                          value.filter((v: T) => getLabel(v) !== getLabel(item))
+                        );
                       }}
                       className="bg-green-100 text-black text-xs px-2 py-1 rounded-full hover:bg-green-200 transition cursor-pointer"
                     >
-                      {item}
+                      {getLabel(item)}
                     </span>
                   ))
                 ) : (
@@ -67,7 +70,10 @@ export default function MultiSelectField({
             </ListboxButton>
             <ListboxOptions className="absolute z-50 mt-1 w-full max-h-60 overflow-y-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 sm:text-sm">
               {options
-                .filter((option) => !value.includes(option))
+                .filter(
+                  (option) =>
+                    !value.some((v: T) => getLabel(v) === getLabel(option))
+                )
                 .map((option, idx) => (
                   <ListboxOption
                     key={idx}
@@ -80,7 +86,7 @@ export default function MultiSelectField({
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {option}
+                        {getLabel(option)}
                       </span>
                     )}
                   </ListboxOption>

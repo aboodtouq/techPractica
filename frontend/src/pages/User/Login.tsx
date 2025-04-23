@@ -25,13 +25,13 @@ const Login = () => {
   });
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const response = await axiosInstance.post("/login", data);
+      const response = await axiosInstance.post("/authenticated/login", data);
       if (response.status == 200) {
         toast.success(" Login successful !", {
           position: "top-center",
           duration: 1000,
         });
-        CookiesService.set("jwt", response.data);
+        CookiesService.set("UserToken", response.data);
       }
       setTimeout(() => {
         navigate("/");

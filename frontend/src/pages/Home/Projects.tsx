@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Iinpform, ISessionForm } from "../..//interfaces";
+import { Category, ISessionForm } from "../..//interfaces";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import {
   Inputs,
@@ -11,6 +11,7 @@ import {
   SelectField,
   Textarea,
 } from "../../imports.ts";
+import { inputData } from "../../data/data.ts";
 interface IProps {}
 const Projects = ({}: IProps) => {
   /*______STATE______*/
@@ -18,29 +19,42 @@ const Projects = ({}: IProps) => {
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
   /*______SelectData______*/
-  const Token = CookiesService.get("jwt");
-  const CategoryData = useAuthQuery({
+  const Token = CookiesService.get("UserToken");
+  const { data: CategoryData } = useAuthQuery({
     queryKey: ["CategoryData"],
-    url: "/api/v1/TechSkills/categories",
+    url: "/tech-skills/categories",
     config: {
       headers: {
         Authorization: `Bearer ${Token}`,
       },
     },
   });
-  console.log(CategoryData);
+
+  const { data: fieldsData } = useAuthQuery({
+    queryKey: ["fieldsData"],
+    url: "/tech-skills/fields",
+    config: {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    },
+  });
+  const { data: technologiesData } = useAuthQuery({
+    queryKey: ["technologiesData"],
+    url: "/tech-skills/technologies",
+    config: {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    },
+  });
+  console.log(fieldsData);
   /*______SUBMIT______*/
   const methods = useForm<ISessionForm>({});
   const onSubmit: SubmitHandler<ISessionForm> = (data) => {
     console.log(data);
   };
 
-  const inputData: Iinpform = {
-    name: "nameSession",
-    type: "text",
-    placeholder: "Project Name",
-    label: "Project Name",
-  };
   return (
     <>
       <main className="container">
@@ -97,21 +111,23 @@ const Projects = ({}: IProps) => {
                 {""} Public Session
               </label>
             </div>
-            <SelectField
+            <SelectField<Category>
               label="Category"
               name="category"
-              options={["web", "mobile"]}
-              getLabel={(category) => category}
+              options={CategoryData}
+              getLabel={(item) => item.categoryName}
             />
-            <MultiSelectField
+            <MultiSelectField<string>
               label="Fields"
               name="fields"
-              options={["BackEnd", "FrontEnd"]}
+              options={fieldsData}
+              getLabel={(item) => item}
             />
-            <MultiSelectField
+            <MultiSelectField<{ technologyName: string; categories: any[] }>
               label="Technologies"
               name="technologies"
-              options={["java", "node.js"]}
+              options={technologiesData}
+              getLabel={(item) => item.technologyName}
             />
             <div className="flex mt-4  space-x-2">
               {" "}

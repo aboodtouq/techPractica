@@ -42,23 +42,14 @@ export const RegisterForm: IRegister[] = [
     label: "Password",
   },
 ];
-// export interface IErrorResponse {
-//   error: {
-//     details?: {
-//       errors: {
-//         message: string;
-//       }[];
-//     };
-//     message?: string;
-//   };
-// }
+
 export interface IErrorResponse {
   error?: {
     message?: string;
-    [key: string]: any; // لو فيه مفاتيح إضافية
+    [key: string]: any;
   };
-  message?: string; // أحياناً السيرفر يرسل الرسالة مباشرة هنا
-  [key: string]: any; // احتياط لأي خصائص إضافية
+  message?: string;
+  [key: string]: any;
 }
 export type FormInputLogin = "userEmail" | "userPassword";
 interface ILogin {
@@ -137,3 +128,7 @@ export interface Iinpform {
   type: string;
   label: string;
 }
+export type Category = {
+  categoryName: string;
+  technologies: any[];
+};

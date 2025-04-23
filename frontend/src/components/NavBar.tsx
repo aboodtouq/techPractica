@@ -7,7 +7,7 @@ import { CiMenuBurger, CiMenuFries } from "react-icons/ci";
 import CookiesService from "../service.ts";
 
 function Navbar() {
-  const token = CookiesService.get("jwt");
+  const token = CookiesService.get("UserToken");
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const RenderNavLinks = NavLinks.filter(({ label }) => {
@@ -44,7 +44,7 @@ function Navbar() {
               <NavLink
                 to={""}
                 onClick={() => {
-                  CookiesService.remove("jwt");
+                  CookiesService.remove("UserToken");
                   navigate("/");
                 }}
               >

@@ -36,7 +36,10 @@ const ResetPass = () => {
 
   const onSubmitEmail: SubmitHandler<EmailForm> = async (data) => {
     try {
-      const response = await axiosInstance.post("/send-reset-password", data);
+      const response = await axiosInstance.post(
+        "/authenticated/send-reset-password",
+        data
+      );
       if (response.status === 200) {
         setUserData({
           userEmail: data.userEmail,
@@ -71,9 +74,12 @@ const ResetPass = () => {
 
   const onSubmitOtp: SubmitHandler<OtpForm> = async (data) => {
     try {
-      const response = await axiosInstance.post("/submit-OTP", data);
+      const response = await axiosInstance.post(
+        "/authenticated/submit-OTP",
+        data
+      );
       if (response.status === 200) {
-        CookiesService.set("jwt", response.data);
+        CookiesService.set("UserToken", response.data);
 
         setTimeout(() => setStep(3));
       }
@@ -92,14 +98,18 @@ const ResetPass = () => {
     handleSubmit: handlePassSubmit,
     formState: { errors: passErrors, isSubmitting: isSubmittingPass },
   } = useForm<PasswordForm>({ resolver: yupResolver(ResetPassSchema) });
-  const Token = CookiesService.get("jwt");
+  const Token = CookiesService.get("UserToken");
   const onSubmitPassword: SubmitHandler<PasswordForm> = async (data) => {
     try {
-      const response = await axiosInstance.post("/submit-new-password", data, {
-        headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      });
+      const response = await axiosInstance.post(
+        "/authenticated/submit-new-password",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
       if (response.status === 200) {
         CookiesService.remove("jwt");
         setTimeout(() => navigate("/User"), 1000);

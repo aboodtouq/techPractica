@@ -31,7 +31,10 @@ const Register = () => {
   });
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const response = await axiosInstance.post("/registration", data);
+      const response = await axiosInstance.post(
+        "/authenticated/registration",
+        data
+      );
 
       setTimeout(() => {
         navigate("/User");
