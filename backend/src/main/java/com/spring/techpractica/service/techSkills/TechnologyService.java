@@ -1,7 +1,7 @@
-package com.spring.techpractica.service;
+package com.spring.techpractica.service.techSkills;
 
-import com.spring.techpractica.model.entity.Technology;
-import com.spring.techpractica.repository.TechnologyRepository;
+import com.spring.techpractica.model.entity.techSkills.Technology;
+import com.spring.techpractica.repository.techSkills.TechnologyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

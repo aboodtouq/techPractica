@@ -1,7 +1,7 @@
-package com.spring.techpractica.repository;
+package com.spring.techpractica.repository.techSkills;
 
 
-import com.spring.techpractica.model.entity.Category;
+import com.spring.techpractica.model.entity.techSkills.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

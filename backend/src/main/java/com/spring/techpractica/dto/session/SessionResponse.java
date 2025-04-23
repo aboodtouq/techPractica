@@ -1,9 +1,5 @@
 package com.spring.techpractica.dto.session;
 
-import com.spring.techpractica.dto.techSkills.CategoryTransfer;
-import com.spring.techpractica.dto.techSkills.TechnologyTransfer;
-import com.spring.techpractica.model.entity.Category;
-import com.spring.techpractica.model.entity.Technology;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

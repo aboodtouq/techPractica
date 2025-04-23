@@ -1,4 +1,4 @@
-package com.spring.techpractica.service;
+package com.spring.techpractica.service.user;
 
 import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
@@ -9,15 +9,14 @@ import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.UserMapper;
-import com.spring.techpractica.model.entity.Technology;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
+import com.spring.techpractica.service.JwtService;
+import com.spring.techpractica.service.otp.OtpService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -32,49 +31,31 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    private final TechnologyService technologyService;
+    private final UserAccountService userAccountService;
 
     public UserService(JwtService jwtService, UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        @Lazy OtpService resetPasswordService,
-                       UserMapper userMapper, TechnologyService technologyService) {
+                       UserMapper userMapper, UserAccountService userAccountService) {
         this.jwtService = jwtService;
-
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.resetPasswordService = resetPasswordService;
         this.userMapper = userMapper;
-        this.technologyService = technologyService;
+        this.userAccountService = userAccountService;
     }
+
 
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
-
-        userRepository.findUserByUserEmail(userCreateAccount.getUserEmail())
-                .ifPresent(user -> {
-                    throw new AuthenticationException("Email is already in use");
-                });
-
-        userRepository.findUserByUserName(userCreateAccount.getName())
-                .ifPresent(user -> {
-                    throw new AuthenticationException("User name is already in use");
-                });
-
-
-        String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
-
-        User user = userMapper.userCreateAccountToUser(userCreateAccount);
-        user.setUserPassword(encodedPassword);
-
-
-        userRepository.save(user);
+    userAccountService.createAccount(userCreateAccount);
     }
+
 
     @Transactional
     public String userLogin(UserLogin userLogin) {
 
-        User user = userRepository.findUserByUserEmail(userLogin.getUserEmail())
-                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+        User user = findUserByUserEmail(userLogin.getUserEmail());
 
         if (!passwordEncoder.matches(userLogin.getUserPassword(), user.getUserPassword())) {
             throw new AuthenticationException("Wrong password");
@@ -91,14 +72,18 @@ public class UserService {
         return jwtService.generateToken(userSubmitOtp.getUserEmail());
     }
 
-    public Optional<User> findUserByUserEmail(String userEmail) {
-        return userRepository.findUserByUserEmail(userEmail);
+
+    public User findUserByUserEmail(String userEmail) {
+        return userRepository.findUserByUserEmail(userEmail)
+                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+
     }
 
     public void userChangePassword(String userEmail,
                                    NewPassword newPassword) {
 
-        User user = findUserByUserEmail(userEmail).orElseThrow(() -> new ResourcesNotFoundException("User not found"));
+        User user = findUserByUserEmail(userEmail);
+
         if (!newPassword.getPassword().equals(newPassword.getConfirmPassword())) {
             throw new AuthenticationException("Wrong password");
         }
@@ -106,7 +91,6 @@ public class UserService {
         user.setUserPassword(passwordEncoder.encode(newPassword.getPassword()));
         userRepository.save(user);
     }
-
 
 
 }

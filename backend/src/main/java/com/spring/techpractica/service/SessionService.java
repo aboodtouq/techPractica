@@ -4,8 +4,19 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.maper.SessionMapper;
-import com.spring.techpractica.model.entity.*;
+import com.spring.techpractica.model.SessionRole;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
+import com.spring.techpractica.model.entity.Requirement;
+import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.techSkills.Field;
+import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.repository.SessionRepository;
+import com.spring.techpractica.service.techSkills.CategoryService;
+import com.spring.techpractica.service.techSkills.FieldService;
+import com.spring.techpractica.service.techSkills.TechnologyService;
+import com.spring.techpractica.service.user.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -44,11 +55,11 @@ public class SessionService {
     @Transactional
     public SessionResponse createSession(SessionCreatorRequest creatorRequest, String userEmail) {
 
-        User userOwner = getUserByEmail(userEmail);
+        User userOwner = userService.findUserByUserEmail(userEmail);
 
         Session createdSession = createSessionFromRequest(creatorRequest);
 
-        setUserSessionRole(createdSession, userOwner, "OWNER");
+        setUserSessionRole(createdSession, userOwner, SessionRole.OWNER);
 
         addSessionRequirements(createdSession, creatorRequest.getFields());
 
@@ -64,8 +75,8 @@ public class SessionService {
         return sessionMapper.sessionToSessionResponse(createdSession);
     }
 
-    private void setUserSessionRole(Session session, User user, String role) {
-        SessionMemberRelationShip sessionRole = SessionMemberRelationShip.builder()
+    private void setUserSessionRole(Session session, User user, SessionRole role) {
+        AuthenticatedUserSession sessionRole = AuthenticatedUserSession.builder()
                 .user(user)
                 .session(session)
                 .scopedRole(role)
@@ -74,11 +85,6 @@ public class SessionService {
         session.getSessionMembers().add(sessionRole);
     }
 
-
-    private User getUserByEmail(String userEmail) {
-        return userService.findUserByUserEmail(userEmail)
-                .orElseThrow(() -> new ResourcesNotFoundException("User not found"));
-    }
 
     private Session createSessionFromRequest(SessionCreatorRequest creatorRequest) {
         return sessionMapper.sessionCreatorToSession(creatorRequest);
@@ -119,9 +125,7 @@ public class SessionService {
 
     public List<SessionResponse> getSessionsByUserEmail(String userEmail, int pageSize, int pageNumber) {
 
-        User user = userService.findUserByUserEmail(userEmail).orElseThrow(() ->
-                new ResourcesNotFoundException("User not found")
-        );
+        User user = userService.findUserByUserEmail(userEmail);
 
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
 

@@ -7,7 +7,7 @@ import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
-import com.spring.techpractica.service.UserService;
+import com.spring.techpractica.service.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

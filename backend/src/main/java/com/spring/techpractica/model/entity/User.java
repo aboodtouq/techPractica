@@ -1,5 +1,6 @@
 package com.spring.techpractica.model.entity;
 
+import com.spring.techpractica.model.entity.techSkills.Technology;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +38,7 @@ public class User {
     private String userEmail;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<SessionMemberRelationShip> sessionMemberRelationShips;
+    private List<AuthenticatedUserSession> authenticatedUserSessions;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_SKILLS", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "skill_type"))

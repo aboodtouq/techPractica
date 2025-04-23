@@ -1,7 +1,7 @@
-package com.spring.techpractica.service;
+package com.spring.techpractica.service.techSkills;
 
-import com.spring.techpractica.model.entity.Field;
-import com.spring.techpractica.repository.FieldRepository;
+import com.spring.techpractica.model.entity.techSkills.Field;
+import com.spring.techpractica.repository.techSkills.FieldRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

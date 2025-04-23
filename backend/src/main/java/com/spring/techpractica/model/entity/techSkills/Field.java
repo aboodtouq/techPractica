@@ -1,4 +1,4 @@
-package com.spring.techpractica.model.entity;
+package com.spring.techpractica.model.entity.techSkills;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

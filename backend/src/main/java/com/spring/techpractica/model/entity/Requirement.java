@@ -1,5 +1,6 @@
 package com.spring.techpractica.model.entity;
 
+import com.spring.techpractica.model.entity.techSkills.Field;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

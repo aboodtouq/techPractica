@@ -1,6 +1,8 @@
 package com.spring.techpractica.model.entity;
 
 import com.spring.techpractica.model.TimestampType;
+import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.techSkills.Technology;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,7 +51,7 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY)
-    private List<SessionMemberRelationShip> sessionMembers = new ArrayList<>();
+    private List<AuthenticatedUserSession> sessionMembers = new ArrayList<>();
 
     @Column(name = "is_running")
     private boolean sessionIsRunning;

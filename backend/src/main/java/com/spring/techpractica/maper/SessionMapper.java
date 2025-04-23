@@ -3,11 +3,10 @@ package com.spring.techpractica.maper;
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.Technology;
+import com.spring.techpractica.model.entity.techSkills.Technology;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class SessionMapper {

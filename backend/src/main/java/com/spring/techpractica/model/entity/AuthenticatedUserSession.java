@@ -1,8 +1,12 @@
 package com.spring.techpractica.model.entity;
 
+import com.spring.techpractica.model.SessionRole;
 import com.spring.techpractica.model.UserSessionId;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "AUTHENTICATED_USER_SESSION")
@@ -10,7 +14,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionMemberRelationShip {
+public class AuthenticatedUserSession {
 
     @EmbeddedId
     private UserSessionId userSessionId;
@@ -25,6 +29,7 @@ public class SessionMemberRelationShip {
     @JoinColumn(name = "session_id")
     private Session session;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "socoped_role")
-    private String scopedRole;
+    private SessionRole scopedRole;
 }

@@ -1,4 +1,4 @@
-package com.spring.techpractica.service;
+package com.spring.techpractica.service.otp;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

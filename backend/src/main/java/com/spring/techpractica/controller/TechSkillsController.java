@@ -1,11 +1,11 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.model.entity.Category;
-import com.spring.techpractica.model.entity.Field;
-import com.spring.techpractica.model.entity.Technology;
-import com.spring.techpractica.service.CategoryService;
-import com.spring.techpractica.service.FieldService;
-import com.spring.techpractica.service.TechnologyService;
+import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.techSkills.Field;
+import com.spring.techpractica.model.entity.techSkills.Technology;
+import com.spring.techpractica.service.techSkills.CategoryService;
+import com.spring.techpractica.service.techSkills.FieldService;
+import com.spring.techpractica.service.techSkills.TechnologyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

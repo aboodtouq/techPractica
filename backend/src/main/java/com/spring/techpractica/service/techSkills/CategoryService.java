@@ -1,8 +1,8 @@
-package com.spring.techpractica.service;
+package com.spring.techpractica.service.techSkills;
 
 import com.spring.techpractica.exception.ResourcesNotFoundException;
-import com.spring.techpractica.model.entity.Category;
-import com.spring.techpractica.repository.CategoryRepository;
+import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.repository.techSkills.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
