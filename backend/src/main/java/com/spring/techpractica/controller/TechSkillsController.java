@@ -1,6 +1,6 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.dto.techSkills.CategoryResponse;
 import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.service.techSkills.CategoryService;
@@ -35,12 +35,12 @@ public class TechSkillsController {
     }
 
     @Operation(
-            summary = "Retrieve All Categories",
+            summary = "Retrieve AGI`fgll Categories",
             description = "Fetches a list of all available categories that can be used to classify sessions."
     )
     @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getCategories() {
-        return ResponseEntity.ok(categoryService.findAllCategories());
+    public ResponseEntity<List<CategoryResponse>> getCategories() {
+        return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
     @Operation(

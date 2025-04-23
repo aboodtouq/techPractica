@@ -24,4 +24,6 @@ public class Category {
     @ManyToMany(mappedBy = "sessionCategories")
     private List<Session> sessions;
 
+    @ManyToMany(mappedBy = "categories")
+    private List<Technology> technologies;
 }
