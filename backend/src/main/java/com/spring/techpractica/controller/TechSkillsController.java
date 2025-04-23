@@ -1,6 +1,7 @@
 package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.techSkills.CategoryResponse;
+import com.spring.techpractica.dto.techSkills.FieldTransfer;
 import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.service.techSkills.CategoryService;
@@ -57,7 +58,7 @@ public class TechSkillsController {
             description = "Fetches a list of all fields related to the session context, useful for filtering or tagging."
     )
     @GetMapping("/fields")
-    public ResponseEntity<List<Field>> getFields() {
+    public ResponseEntity<List<FieldTransfer>> getFields() {
         return ResponseEntity.ok(fieldService.findAllFields());
     }
 }

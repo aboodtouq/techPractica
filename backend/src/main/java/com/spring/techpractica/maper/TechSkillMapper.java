@@ -1,7 +1,9 @@
 package com.spring.techpractica.maper;
 
 import com.spring.techpractica.dto.techSkills.CategoryResponse;
+import com.spring.techpractica.dto.techSkills.FieldTransfer;
 import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +31,18 @@ public class TechSkillMapper {
     private List<String> technologiesToListString(List<Technology> technologies) {
         return technologies.stream().map((Technology::getTechnologyName))
                 .toList();
+    }
+
+
+    public FieldTransfer fieldToFieldTransfer(Field field) {
+
+       return FieldTransfer.builder().fieldName(field.getFieldName())
+               .build();
+
+    }
+
+    public List<FieldTransfer> fieldToFieldTransferList(List<Field> fields) {
+        return fields.stream().map(this::fieldToFieldTransfer).toList();
+
     }
 }
