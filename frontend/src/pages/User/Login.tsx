@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Inputs from "../../components/ui/Input.tsx";
+import { Inputs, CookiesService, Button, ErrorMsg } from "../../imports.ts";
 import { IErrorResponse, LoginForm } from "../../interfaces.ts";
-import ErrorMsg from "../../components/ui/ErrorMsg.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validation/index.ts";
@@ -10,8 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import Button from "../../components/ui/Buttom.tsx";
-import CookiesService from "../../service.ts";
 
 const Login = () => {
   const navigate = useNavigate();

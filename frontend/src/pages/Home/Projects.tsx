@@ -1,22 +1,37 @@
 import { useState } from "react";
-import Button from "../../components/ui/Buttom";
-import Modal from "../../components/ui/Modal";
-import Inputs from "../../components/ui/Input";
+import { Iinpform, ISessionForm } from "../..//interfaces";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import Textarea from "../../components/ui/Textarea";
-import { Iinpform, Inputs as InputInterf } from "../../interfaces";
-import SelectField from "../../components/ui/Select";
-import MultiSelectField from "../../components/ui/muiltselect";
+import {
+  Inputs,
+  Button,
+  CookiesService,
+  Modal,
+  MultiSelectField,
+  useAuthQuery,
+  SelectField,
+  Textarea,
+} from "../../imports.ts";
 interface IProps {}
 const Projects = ({}: IProps) => {
   /*______STATE______*/
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
-
+  /*______SelectData______*/
+  const Token = CookiesService.get("jwt");
+  const CategoryData = useAuthQuery({
+    queryKey: ["CategoryData"],
+    url: "/api/v1/TechSkills/categories",
+    config: {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    },
+  });
+  console.log(CategoryData);
   /*______SUBMIT______*/
-  const methods = useForm<InputInterf>({});
-  const onSubmit: SubmitHandler<InputInterf> = (data) => {
+  const methods = useForm<ISessionForm>({});
+  const onSubmit: SubmitHandler<ISessionForm> = (data) => {
     console.log(data);
   };
 

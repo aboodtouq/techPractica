@@ -121,7 +121,7 @@ export const ResetinputPassword: IResetPas[] = [
     label: "Confirm Password",
   },
 ];
-export type Inputs = {
+export type ISessionForm = {
   nameSession: string;
   descriptionSession: string;
   category: string;

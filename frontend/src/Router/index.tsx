@@ -3,16 +3,19 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import LayoutHome from "../pages/Home/Layout";
-import LayoutLogin from "../pages/User/Layout";
-import Home from "../pages/Home/Home";
-import PageNotFound from "../pages/User/PageNotFound";
-import Login from "../pages/User/Login";
-import Learn from "../pages/Home/Learn";
-import Projects from "../pages/Home/Projects";
-import Profile from "../pages/Home/Profile";
-import Register from "../pages/User/Register";
-import ResetPass from "../pages/User/ResetPass";
+import {
+  LayoutHome,
+  LayoutLogin,
+  Home,
+  PageNotFound,
+  Login,
+  Learn,
+  Projects,
+  Profile,
+  Register,
+  ResetPass,
+} from "../imports";
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
