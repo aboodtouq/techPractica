@@ -12,6 +12,7 @@ import {
   Textarea,
 } from "../../imports.ts";
 import { inputData } from "../../data/data.ts";
+import axiosInstance from "../../config/axios.config.ts";
 interface IProps {}
 const Projects = ({}: IProps) => {
   /*______STATE______*/
@@ -48,11 +49,14 @@ const Projects = ({}: IProps) => {
       },
     },
   });
-  console.log(fieldsData);
   /*______SUBMIT______*/
   const methods = useForm<ISessionForm>({});
-  const onSubmit: SubmitHandler<ISessionForm> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ISessionForm> = async (data) => {
+    const response = await axiosInstance.post("/sessions/", data, {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    });
   };
 
   return (
@@ -117,11 +121,11 @@ const Projects = ({}: IProps) => {
               options={CategoryData}
               getLabel={(item) => item.categoryName}
             />
-            <MultiSelectField<string>
+            <MultiSelectField<{ fieldName: string }>
               label="Fields"
               name="fields"
               options={fieldsData}
-              getLabel={(item) => item}
+              getLabel={(item) => item.fieldName}
             />
             <MultiSelectField<{ technologyName: string; categories: any[] }>
               label="Technologies"
