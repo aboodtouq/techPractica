@@ -13,6 +13,7 @@ import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import com.spring.techpractica.service.JwtService;
 import com.spring.techpractica.service.otp.OtpService;
+import com.spring.techpractica.service.user.createAccount.UserAccountService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
