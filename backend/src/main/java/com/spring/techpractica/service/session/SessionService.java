@@ -4,6 +4,7 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.factory.PageRequestFactory;
 import com.spring.techpractica.maper.SessionMapper;
+import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
@@ -27,7 +28,9 @@ public class SessionService {
 
     private final CreateSessionService createSessionService;
 
-
+/*
+10 controller
+ */
     public SessionResponse createSession(SessionCreatorRequest sessionCreatorRequest,
                                          String userEmail) {
 

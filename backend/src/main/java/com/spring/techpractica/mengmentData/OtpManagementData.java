@@ -1,4 +1,4 @@
-package com.spring.techpractica.service.otp;
+package com.spring.techpractica.mengmentData;
 
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Otp;

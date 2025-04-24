@@ -29,7 +29,6 @@ public class UserService {
 
     private final OtpService otpService;
 
-
     private final UserAccountService userAccountService;
 
     public UserService(JwtService jwtService, UserRepository userRepository,

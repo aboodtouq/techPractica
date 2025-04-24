@@ -6,7 +6,7 @@ import com.spring.techpractica.factory.SessionFactory;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.service.session.SessionManagementData;
+import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.service.user.UserManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

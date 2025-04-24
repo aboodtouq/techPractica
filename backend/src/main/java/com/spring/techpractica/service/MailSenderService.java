@@ -2,7 +2,7 @@ package com.spring.techpractica.service;
 
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.model.entity.Otp;
-import com.spring.techpractica.service.otp.OtpManagementData;
+import com.spring.techpractica.mengmentData.OtpManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

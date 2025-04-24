@@ -29,7 +29,5 @@ public class CategoryService {
     public Category findCategoryByName(String name) {
         return categoryRepository.findById(name)
                 .orElseThrow(() -> new ResourcesNotFoundException("categorise no concentrate"));
-
-
     }
 }

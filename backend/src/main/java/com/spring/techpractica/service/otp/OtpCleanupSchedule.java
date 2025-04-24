@@ -1,5 +1,6 @@
 package com.spring.techpractica.service.otp;
 
+import com.spring.techpractica.mengmentData.OtpManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
