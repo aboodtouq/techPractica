@@ -9,8 +9,8 @@ import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
-import com.spring.techpractica.service.techSkills.CategoryService;
-import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.service.techSkills.Category.CategoryService;
+import com.spring.techpractica.mengmentData.UserManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +57,7 @@ public class SessionService {
     public List<SessionResponse> getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
 
         Category category = categoryService
-                .findCategoryByName(categoryName);
+                .getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
                 .getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));

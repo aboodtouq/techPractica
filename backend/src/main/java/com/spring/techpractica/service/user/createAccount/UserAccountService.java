@@ -3,7 +3,7 @@ package com.spring.techpractica.service.user.createAccount;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.factory.UserFactory;
 import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.mengmentData.UserManagementData;
 import com.spring.techpractica.validator.validatorCreateAccount.CreateAccountValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

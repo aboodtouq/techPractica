@@ -2,11 +2,10 @@ package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.techSkills.CategoryResponse;
 import com.spring.techpractica.dto.techSkills.FieldTransfer;
-import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
-import com.spring.techpractica.service.techSkills.CategoryService;
-import com.spring.techpractica.service.techSkills.FieldService;
-import com.spring.techpractica.service.techSkills.TechnologyService;
+import com.spring.techpractica.service.techSkills.Category.CategoryService;
+import com.spring.techpractica.service.techSkills.Field.FieldService;
+import com.spring.techpractica.service.techSkills.Technology.TechnologyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class TechSkillsController {
     )
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryResponse>> getCategories() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
+        return ResponseEntity.ok(categoryService.findAllCategories());
     }
 
     @Operation(
@@ -50,7 +49,7 @@ public class TechSkillsController {
     )
     @GetMapping("/technologies")
     public ResponseEntity<List<Technology>> getTechnologies() {
-        return ResponseEntity.ok(technologyService.findAllTechnologies());
+        return ResponseEntity.ok(technologyService.getAllTechnologies());
     }
 
     @Operation(
@@ -59,6 +58,6 @@ public class TechSkillsController {
     )
     @GetMapping("/fields")
     public ResponseEntity<List<FieldTransfer>> getFields() {
-        return ResponseEntity.ok(fieldService.findAllFields());
+        return ResponseEntity.ok(fieldService.getAllFields());
     }
 }

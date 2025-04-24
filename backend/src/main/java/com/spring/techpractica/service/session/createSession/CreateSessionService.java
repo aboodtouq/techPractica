@@ -7,7 +7,7 @@ import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.mengmentData.SessionManagementData;
-import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.mengmentData.UserManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

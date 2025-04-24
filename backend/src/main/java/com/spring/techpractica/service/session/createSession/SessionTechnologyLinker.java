@@ -3,7 +3,7 @@ package com.spring.techpractica.service.session.createSession;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.techSkills.Technology;
-import com.spring.techpractica.service.techSkills.TechnologyService;
+import com.spring.techpractica.service.techSkills.Technology.TechnologyService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

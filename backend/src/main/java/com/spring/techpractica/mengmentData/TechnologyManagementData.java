@@ -1,5 +1,6 @@
-package com.spring.techpractica.service.techSkills;
+package com.spring.techpractica.mengmentData;
 
+import com.spring.techpractica.dto.techSkills.TechnologyTransfer;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.repository.techSkills.TechnologyRepository;
 import org.springframework.stereotype.Service;
@@ -8,15 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TechnologyService {
+public class TechnologyManagementData {
 
     private final TechnologyRepository technologyRepository;
 
-    public TechnologyService(TechnologyRepository technologyRepository) {
+    public TechnologyManagementData(TechnologyRepository technologyRepository) {
         this.technologyRepository = technologyRepository;
     }
 
-    public List<Technology> findAllTechnologies() {
+
+    public List<Technology> getAllTechnologies() {
         return technologyRepository.findAll();
     }
 

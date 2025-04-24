@@ -3,7 +3,7 @@ package com.spring.techpractica.validator.validatorCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.exception.UserAlreadyExistsException;
 import com.spring.techpractica.service.user.createAccount.UserAccountService;
-import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.mengmentData.UserManagementData;
 import org.springframework.stereotype.Component;
 
 /**
