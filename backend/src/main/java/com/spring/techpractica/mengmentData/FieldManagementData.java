@@ -1,7 +1,8 @@
-package com.spring.techpractica.service.techSkills;
+package com.spring.techpractica.mengmentData;
+
 
 import com.spring.techpractica.dto.techSkills.FieldTransfer;
-import com.spring.techpractica.maper.TechSkillMapper;
+import com.spring.techpractica.maper.FieldMapper;
 import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.repository.techSkills.FieldRepository;
 import org.springframework.stereotype.Service;
@@ -10,21 +11,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FieldService {
+public class FieldManagementData {
 
     private final FieldRepository fieldRepository;
-    private final TechSkillMapper techSkillMapper;
 
-    public FieldService(FieldRepository fieldRepository, TechSkillMapper techSkillMapper) {
+    private final FieldMapper fieldMapper;
 
+    public FieldManagementData(FieldRepository fieldRepository, FieldMapper fieldMapper) {
         this.fieldRepository = fieldRepository;
-        this.techSkillMapper = techSkillMapper;
+        this.fieldMapper = fieldMapper;
     }
 
-
-    public List<FieldTransfer> findAllFields() {
-
-        return techSkillMapper.fieldToFieldTransferList(fieldRepository.findAll());
+    public List<FieldTransfer> getAllFields() {
+        return fieldMapper.fieldToFieldTransferList(fieldRepository.findAll());
     }
 
     public Optional<Field> findFieldByFieldName(String fieldName) {

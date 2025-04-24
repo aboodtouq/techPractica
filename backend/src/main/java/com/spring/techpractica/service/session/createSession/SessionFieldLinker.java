@@ -4,7 +4,7 @@ import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.Requirement;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.techSkills.Field;
-import com.spring.techpractica.service.techSkills.FieldService;
+import com.spring.techpractica.service.techSkills.Field.FieldService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

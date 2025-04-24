@@ -5,7 +5,7 @@ import com.spring.techpractica.factory.OtpFactory;
 import com.spring.techpractica.mengmentData.OtpManagementData;
 import com.spring.techpractica.model.entity.Otp;
 import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.mengmentData.UserManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
