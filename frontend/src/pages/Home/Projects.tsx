@@ -13,6 +13,7 @@ import {
 } from "../../imports.ts";
 import { inputData } from "../../data/data.ts";
 import axiosInstance from "../../config/axios.config.ts";
+import toast from "react-hot-toast";
 interface IProps {}
 const Projects = ({}: IProps) => {
   /*______STATE______*/
@@ -30,7 +31,6 @@ const Projects = ({}: IProps) => {
       },
     },
   });
-
   const { data: fieldsData } = useAuthQuery({
     queryKey: ["fieldsData"],
     url: "/tech-skills/fields",
@@ -40,6 +40,9 @@ const Projects = ({}: IProps) => {
       },
     },
   });
+  const fieldName = fieldsData?.map(
+    (tech: { fieldName: string }) => tech.fieldName
+  );
   const { data: technologiesData } = useAuthQuery({
     queryKey: ["technologiesData"],
     url: "/tech-skills/technologies",
@@ -49,14 +52,25 @@ const Projects = ({}: IProps) => {
       },
     },
   });
+  const technologyNames = technologiesData?.map(
+    (tech: { technologyName: string }) => tech.technologyName
+  );
+
   /*______SUBMIT______*/
   const methods = useForm<ISessionForm>({});
   const onSubmit: SubmitHandler<ISessionForm> = async (data) => {
-    const response = await axiosInstance.post("/sessions/", data, {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    });
+    try {
+      const response = await axiosInstance.post("/sessions/", data, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      });
+      toast.success(" Create successful !", {
+        position: "top-center",
+        duration: 1000,
+      });
+    } catch {}
+    console.log(data);
   };
 
   return (
@@ -121,17 +135,17 @@ const Projects = ({}: IProps) => {
               options={CategoryData}
               getLabel={(item) => item.categoryName}
             />
-            <MultiSelectField<{ fieldName: string }>
+            <MultiSelectField<string>
               label="Fields"
               name="fields"
-              options={fieldsData}
-              getLabel={(item) => item.fieldName}
+              options={fieldName}
+              getLabel={(item) => item}
             />
-            <MultiSelectField<{ technologyName: string; categories: any[] }>
+            <MultiSelectField<string>
               label="Technologies"
               name="technologies"
-              options={technologiesData}
-              getLabel={(item) => item.technologyName}
+              options={technologyNames}
+              getLabel={(item) => item}
             />
             <div className="flex mt-4  space-x-2">
               {" "}
