@@ -16,7 +16,8 @@ public class CategoryService {
 
     private final TechSkillMapper techSkillMapper;
 
-    public CategoryService(CategoryRepository categoryRepository, TechSkillMapper techSkillMapper) {
+    public CategoryService(CategoryRepository categoryRepository,
+                           TechSkillMapper techSkillMapper) {
         this.categoryRepository = categoryRepository;
         this.techSkillMapper = techSkillMapper;
     }

@@ -1,19 +1,20 @@
 package com.spring.techpractica.service.otp;
 
+import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
+@AllArgsConstructor
 public class OtpCleanupSchedule {
 
-    private OtpService otpService;
+    private final OtpService otpService;
 
-    //expire otp
-    @Scheduled(fixedRate = 5 * 60 * 1000) //every 15m
+    @Scheduled(fixedRate = 5 * 60 * 1000)
     public void removeExpireOtps() {
-       otpService.deleteOtpByExpirationTimeBefore(LocalDateTime.now());
+        otpService.deleteOtpByExpirationTimeBefore(LocalDateTime.now());
     }
 
 }

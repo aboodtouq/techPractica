@@ -1,12 +1,11 @@
 package com.spring.techpractica.service.user.createAccount;
 
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
-import com.spring.techpractica.maper.UserMapper;
+import com.spring.techpractica.factory.UserFactory;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.service.user.UserManagementData;
 import com.spring.techpractica.service.user.createAccount.validatorCreateAccount.ValidatorCreateAccount;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +32,8 @@ import java.util.List;
 public class UserAccountService {
 
     private final UserManagementData userManagementData;
-    private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
-    private final List<ValidatorCreateAccount> validator;
+    private final List<ValidatorCreateAccount> validators;
+    private final UserFactory userFactory;
 
     /**
      * Creates a new user account. This method:
@@ -51,7 +49,7 @@ public class UserAccountService {
      */
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
-        validator.forEach(v -> v.validate(userCreateAccount));
+        validators.forEach(v -> v.validate(userCreateAccount));
         User user = prepareUserForSaving(userCreateAccount);
         userManagementData.saveUser(user);
     }
@@ -63,9 +61,6 @@ public class UserAccountService {
      * @return a {@link User} entity ready for persistence
      */
     private User prepareUserForSaving(UserCreateAccount userCreateAccount) {
-        String encodedPassword = passwordEncoder.encode(userCreateAccount.getUserPassword());
-        User user = userMapper.userCreateAccountToUser(userCreateAccount);
-        user.setUserPassword(encodedPassword);
-        return user;
+        return userFactory.createFrom(userCreateAccount);
     }
 }
