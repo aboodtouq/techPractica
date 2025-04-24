@@ -1,4 +1,4 @@
-package com.spring.techpractica.service.user.createAccount.validatorCreateAccount;
+package com.spring.techpractica.validator.validatorCreateAccount;
 
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.exception.UserAlreadyExistsException;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * Validator for checking the uniqueness of a user's email during registration.
  *
- * <p>This class is a concrete implementation of {@link ValidatorCreateAccount} that checks
+ * <p>This class is a concrete implementation of {@link CreateAccountValidator} that checks
  * whether the provided email already exists in the system. If the email is already in use,
  * it throws a {@link UserAlreadyExistsException} with a specific error message.</p>
  *
@@ -21,9 +21,9 @@ import org.springframework.stereotype.Component;
  * in {@link UserAccountService}.</p>
  */
 @Component
-public class ValidatorUserEmail extends ValidatorCreateAccount {
+public class UserEmailValidator extends CreateAccountValidator {
 
-    protected ValidatorUserEmail(UserManagementData userManagementData) {
+    protected UserEmailValidator(UserManagementData userManagementData) {
         super(userManagementData);
     }
 

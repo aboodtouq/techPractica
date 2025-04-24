@@ -6,7 +6,7 @@ import com.spring.techpractica.factory.SessionFactory;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.repository.SessionRepository;
+import com.spring.techpractica.service.session.SessionManagementData;
 import com.spring.techpractica.service.user.UserManagementData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
  *     <li>Returning the session data in a {@link SessionResponse} DTO</li>
  * </ul>
  * </p>
- *
  */
 @Service
 @AllArgsConstructor
@@ -37,8 +36,7 @@ public class CreateSessionService {
     private final SessionFieldLinker fieldLinker;
     private final SessionCategoryLinker categoryLinker;
     private final SessionTechnologyLinker technologyLinker;
-    private final SessionRepository sessionRepo;
-    private final SessionMapper sessionMapper;
+    private final SessionManagementData sessionManagementData;
 
     /**
      * Creates a new session based on the data provided by the user and the session creation request.
@@ -49,6 +47,7 @@ public class CreateSessionService {
      */
     @Transactional
     public SessionResponse createSession(SessionCreatorRequest request, String userEmail) {
+
         User owner = userManagementData.getUserByEmail(userEmail);
         Session session = sessionFactory.createFrom(request);
 
@@ -57,8 +56,8 @@ public class CreateSessionService {
         categoryLinker.linkCategoryToSession(session, request.getCategory());
         technologyLinker.linkTechnologiesToSession(session, request.getTechnologies());
 
-        sessionRepo.save(session);
-        return sessionMapper.sessionToSessionResponse(session);
+        session = sessionManagementData.saveSession(session);
+        return SessionMapper.sessionToSessionResponse(session);
     }
 
 }

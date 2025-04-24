@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserSendOtp {
+public class UserEmailSendOtp {
 
     @NonNull
     private String userEmail;

@@ -4,15 +4,16 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.techSkills.Technology;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@Component
 public class SessionMapper {
 
+    private SessionMapper() {
+    }
 
-    public Session sessionCreatorToSession(SessionCreatorRequest sessionCreatorRequest) {
+    public static Session sessionCreatorToSession(SessionCreatorRequest sessionCreatorRequest) {
 
         return Session.builder()
                 .sessionName(sessionCreatorRequest.getNameSession())
@@ -27,7 +28,7 @@ public class SessionMapper {
                 .build();
     }
 
-    public SessionResponse sessionToSessionResponse(Session session) {
+    public static SessionResponse sessionToSessionResponse(Session session) {
         return SessionResponse.
                 builder()
                 .sessionName(session.getSessionName())
@@ -36,6 +37,13 @@ public class SessionMapper {
                 .technologies(session.getSessionTechnologies().stream()
                         .map(Technology::getTechnologyName).toList())
                 .build();
+    }
+
+    public static List<SessionResponse> sessionsToSessionResponses(List<Session> sessions) {
+        return sessions.
+                stream()
+                .map(SessionMapper::sessionToSessionResponse)
+                .toList();
     }
 
 }

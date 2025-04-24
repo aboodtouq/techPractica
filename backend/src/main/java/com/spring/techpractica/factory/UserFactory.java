@@ -13,12 +13,11 @@ public class UserFactory {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final UserMapper userMapper;
 
 
     public User createFrom(UserCreateAccount dto) {
         String encodedPassword = passwordEncoder.encode(dto.getUserPassword());
-        User user = userMapper.userCreateAccountToUser(dto);
+        User user = UserMapper.userCreateAccountToUser(dto);
         user.setUserPassword(encodedPassword);
         return user;
     }

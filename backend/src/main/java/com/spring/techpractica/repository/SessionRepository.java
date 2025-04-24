@@ -11,8 +11,6 @@ import org.springframework.data.domain.Pageable;
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
 
-//    @Query("select s from sessions s where s.category_name = :categoryName")
-//    Page<Session> findAllBySessionCategoryName( String categoryName, Pageable sessionPage);
 
     Page<Session> findAllBySessionCategories(Category category, Pageable pageable);
 }

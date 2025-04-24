@@ -7,13 +7,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+
 public class SessionFactory {
 
-    private final SessionMapper sessionMapper;
 
     public Session createFrom(SessionCreatorRequest request) {
-        return sessionMapper.sessionCreatorToSession(request);
+        return SessionMapper.sessionCreatorToSession(request);
     }
 
 }

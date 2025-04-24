@@ -2,13 +2,12 @@ package com.spring.techpractica.service.user;
 
 import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
-import com.spring.techpractica.dto.otp.UserSendOtp;
+import com.spring.techpractica.dto.otp.UserEmailSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.exception.ResourcesNotFoundException;
-import com.spring.techpractica.maper.UserMapper;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.repository.UserRepository;
 import com.spring.techpractica.service.JwtService;
@@ -28,28 +27,26 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final OtpService resetPasswordService;
+    private final OtpService otpService;
 
-    private final UserMapper userMapper;
 
     private final UserAccountService userAccountService;
 
     public UserService(JwtService jwtService, UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       @Lazy OtpService resetPasswordService,
-                       UserMapper userMapper, UserAccountService userAccountService) {
+                       @Lazy OtpService otpService,
+                       UserAccountService userAccountService) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.resetPasswordService = resetPasswordService;
-        this.userMapper = userMapper;
+        this.otpService = otpService;
         this.userAccountService = userAccountService;
     }
 
 
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
-    userAccountService.createAccount(userCreateAccount);
+        userAccountService.createAccount(userCreateAccount);
     }
 
 
@@ -64,12 +61,12 @@ public class UserService {
         return jwtService.generateToken(user.getUserEmail());
     }
 
-    public OtpResponse userCreateOtpCode(UserSendOtp userSendOtp) {
-        return resetPasswordService.createOtp(userSendOtp);
+    public OtpResponse userCreateOtpCode(UserEmailSendOtp userEmailSendOtp) {
+        return otpService.createOtp(userEmailSendOtp);
     }
 
     public String userSubmitOtp(UserSubmitOtp userSubmitOtp) {
-        resetPasswordService.validationOtp(userSubmitOtp);
+        otpService.validationOtp(userSubmitOtp);
         return jwtService.generateToken(userSubmitOtp.getUserEmail());
     }
 

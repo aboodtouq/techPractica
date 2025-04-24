@@ -2,7 +2,6 @@ package com.spring.techpractica.repository;
 
 import com.spring.techpractica.model.entity.Otp;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -14,7 +13,4 @@ public interface OtpRepository extends JpaRepository<Otp, Long> {
 
     void deleteOtpsByExpirationDateBefore(LocalDateTime now);
 
-
-//    @Query("delete from Otps o where o.expiration_date <= NOW()")
-//    void deleteOtpByExpirationTimeBefore();
 }

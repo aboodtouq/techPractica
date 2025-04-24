@@ -4,7 +4,7 @@ import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.factory.UserFactory;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.service.user.UserManagementData;
-import com.spring.techpractica.service.user.createAccount.validatorCreateAccount.ValidatorCreateAccount;
+import com.spring.techpractica.validator.validatorCreateAccount.CreateAccountValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +32,7 @@ import java.util.List;
 public class UserAccountService {
 
     private final UserManagementData userManagementData;
-    private final List<ValidatorCreateAccount> validators;
+    private final List<CreateAccountValidator> validators;
     private final UserFactory userFactory;
 
     /**

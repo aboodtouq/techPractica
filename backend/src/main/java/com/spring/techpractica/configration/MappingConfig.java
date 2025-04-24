@@ -8,15 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MappingConfig {
 
-    @Bean
-    public SessionMapper sessionMapper() {
-        return new SessionMapper();
-    }
 
-    @Bean
-    public UserMapper userMapper() {
-        return new UserMapper();
-    }
+
+
 
 
 }

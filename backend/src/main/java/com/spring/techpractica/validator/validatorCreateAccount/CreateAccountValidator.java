@@ -1,8 +1,9 @@
-package com.spring.techpractica.service.user.createAccount.validatorCreateAccount;
+package com.spring.techpractica.validator.validatorCreateAccount;
 
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.exception.UserAlreadyExistsException;
 import com.spring.techpractica.service.user.UserManagementData;
+import com.spring.techpractica.validator.Validator;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,11 +19,11 @@ import org.springframework.stereotype.Component;
  * inject all beans into the service that uses the {@link java.util.List} of validators.</p>
  */
 @Component
-public abstract class ValidatorCreateAccount {
+public abstract class CreateAccountValidator implements Validator<UserCreateAccount> {
 
     protected final UserManagementData userManagementData;
 
-    protected ValidatorCreateAccount(UserManagementData userManagementData) {
+    protected CreateAccountValidator(UserManagementData userManagementData) {
         this.userManagementData = userManagementData;
     }
 
@@ -32,5 +33,8 @@ public abstract class ValidatorCreateAccount {
      * @param userCreateAccount The registration details to validate.
      * @throws UserAlreadyExistsException if validation fails due to duplication or conflict.
      */
+    @Override
     public abstract void validate(UserCreateAccount userCreateAccount) throws UserAlreadyExistsException;
+
+
 }

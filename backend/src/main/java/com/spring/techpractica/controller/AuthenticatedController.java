@@ -2,7 +2,7 @@ package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
-import com.spring.techpractica.dto.otp.UserSendOtp;
+import com.spring.techpractica.dto.otp.UserEmailSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
@@ -62,9 +62,9 @@ public class AuthenticatedController {
             description = "Generates a one-time password (OTP) and sends it to the user's email to begin the password reset process."
     )
     @PostMapping("/send-reset-password")
-    public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserSendOtp userSendOtp) {
+    public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserEmailSendOtp userEmailSendOtp) {
 
-        OtpResponse otpResponse = userService.userCreateOtpCode(userSendOtp);
+        OtpResponse otpResponse = userService.userCreateOtpCode(userEmailSendOtp);
 
         mailSenderService.sendResetPassword(otpResponse);
 
