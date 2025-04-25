@@ -2,7 +2,6 @@ package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
-import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,7 +49,7 @@ public class SessionController {
             description = "Retrieves a paginated list of available sessions for the authenticated user using page size and page number."
     )
     @GetMapping("/")
-    public ResponseEntity<SessionsResponse> getSessions(
+    public ResponseEntity<List<SessionResponse>> getSessions(
             @AuthenticationPrincipal UserDetails userDetails, @RequestParam int pageSize, @RequestParam int pageNumber) {
 
         String userEmail = userDetails.getUsername();
@@ -58,41 +57,18 @@ public class SessionController {
 
         return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail, pageSize, pageNumber));
     }
-
     @Operation(
-
             summary = "Get Available Sessions by there category",
             description = "Retrieves a paginated list of available sessions filterd by categoryy for the authenticated user using page size and page number."
     )
     @GetMapping("/category")
-    public ResponseEntity<SessionsResponse> getSessionsByCategoryName(
-
+    public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
             @RequestParam String categoryName,
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
 
-    }
-    @Operation(
-            summary = "Get User Sessions ",
-            description = "Retrieves a paginated list of the user sessions using page size and page number."
-    )
-    @GetMapping("/users")
-    public ResponseEntity<SessionsResponse> getUserSessions(@AuthenticationPrincipal UserDetails userDetails,
-                                                            @RequestParam int pageSize, @RequestParam int pageNumber) {
-        String userEmail = userDetails.getUsername();
-        return ResponseEntity.ok(sessionService.
-                getUserSessions(userEmail, pageSize, pageNumber));
-
-
-    }
-
-
-    @DeleteMapping("/{sessionId}")
-    public ResponseEntity<String> deleteSession(@AuthenticationPrincipal UserDetails userDetails,
-                                                @PathVariable Long sessionId) {
-        sessionService.deleteSessionByUserEmailAndSessionId(userDetails.getUsername(), sessionId);
-        return ResponseEntity.ok("Deleted Successfully");
+        //
     }
 
 }
