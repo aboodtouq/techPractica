@@ -4,6 +4,7 @@ import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.dto.otp.UserEmailSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
+import com.spring.techpractica.dto.userRegestation.LoginResponse;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
@@ -52,9 +53,11 @@ public class AuthenticatedController {
             description = "Authenticates the user with the provided credentials and returns a JWT token on success."
     )
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserLogin userLogin) {
+    public ResponseEntity<LoginResponse> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
-        return ResponseEntity.ok(token);
+        String email = userLogin.getUserEmail();
+        LoginResponse response = new LoginResponse( email,token);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(
