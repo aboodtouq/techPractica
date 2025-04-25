@@ -84,7 +84,11 @@ public class AuthenticatedController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/submit-new-password")
+    @Operation(
+            summary = "Submit a new password",
+            description = "Allows an authenticated user to submit a new password. " +
+                    "The user must be logged in, and the new password is provided in the request body."
+    )    @PostMapping("/submit-new-password")
     public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
                                                     @AuthenticationPrincipal UserDetails userDetails) {
         String userEmail = userDetails.getUsername();
