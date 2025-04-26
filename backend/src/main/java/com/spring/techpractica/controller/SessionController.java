@@ -64,7 +64,8 @@ public class SessionController {
     @GetMapping("/category")
     public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
             @RequestParam String categoryName,
-            @RequestParam int pageSize, @RequestParam int pageNumber) {
+            @RequestParam int pageSize,
+            @RequestParam int pageNumber) {
 
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));

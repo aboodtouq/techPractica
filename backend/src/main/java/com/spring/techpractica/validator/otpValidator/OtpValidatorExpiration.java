@@ -1,4 +1,4 @@
-package com.spring.techpractica.validator;
+package com.spring.techpractica.validator.otpValidator;
 
 import com.spring.techpractica.exception.AuthenticationException;
 import org.springframework.stereotype.Component;
