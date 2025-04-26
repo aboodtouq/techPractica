@@ -47,7 +47,7 @@ public class SessionService {
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
 
             List<Session> sessions = sessionManagementData.getSessionsByPageable(
-                    PageRequestFactory.createPageRequest(pageSize,pageNumber));
+                    PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
             return SessionMapper.sessionsToSessionResponses(sessions);
         }
@@ -59,7 +59,9 @@ public class SessionService {
         Category category = categoryManagementData.getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
-                .getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));
+                .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
+
 
         return SessionMapper.sessionsToSessionResponses(sessions);
 
