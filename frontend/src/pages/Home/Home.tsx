@@ -30,7 +30,7 @@ const HomePage = () => {
             ea. Veniam. <br />
             Get unlimited candidates and admins on every plan.
           </p>
-          <div className="mt-8 flex justify-center">
+          {/* <div className="mt-8 flex justify-center">
             <input
               type="email"
               placeholder="Work email address"
@@ -39,7 +39,7 @@ const HomePage = () => {
             <button className="bg-green-500 text-white px-6 py-3 rounded-r-lg hover:bg-green-600">
               Start Trial
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* CATEGORIES SECTION */}

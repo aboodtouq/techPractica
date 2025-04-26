@@ -44,13 +44,13 @@ export const categories: Category[] = [
   {
     title: "Artificial Intelligence",
     Icon: FaRobot,
-    style: "text-indigo-600 w-6 h-6",
+    style: "text-teal-600 w-6 h-6",
   },
 
   {
     title: "Game Development",
     Icon: FaGamepad,
-    style: "text-emerald-600 w-6 h-6",
+    style: "text-purple-600 w-6 h-6",
   },
 ];
 export const features: Feature[] = [
@@ -96,7 +96,7 @@ interface Itags {
 }
 export const tags: Itags[] = [
   {
-    Mcolor: "bg-red-500",
+    Mcolor: "bg-red-200 text-red-800",
     txt: "Java",
   },
   {
@@ -121,4 +121,18 @@ export const inputData: Iinpform = {
   type: "text",
   placeholder: "Project Name",
   label: "Project Name",
+};
+export type CategoryType =
+  | "Web Development"
+  | "Cybersecurity"
+  | "Game Development"
+  | "Artificial Intelligence"
+  | "Mobile Development";
+
+export const CategoryColor = (Name: CategoryType) => {
+  if (Name == "Web Development") return "bg-blue-100 text-blue-700";
+  if (Name == "Cybersecurity") return "bg-red-100 text-red-700";
+  if (Name == "Game Development") return "bg-purple-100 text-purple-700";
+  if (Name == "Artificial Intelligence") return "bg-teal-100 text-teal-700";
+  if (Name == "Mobile Development") return "bg-green-100 text-green-700";
 };

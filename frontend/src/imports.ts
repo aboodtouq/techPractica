@@ -15,14 +15,23 @@ import Home from "../src/pages/Home/Home";
 import PageNotFound from "../src/pages/User/PageNotFound";
 import Login from "../src/pages/User/Login";
 import Learn from "../src/pages/Home/Learn";
-import Projects from "../src/pages/Home/Projects";
+import Projects from "../src/pages/Projects/Projects";
 import Profile from "../src/pages/Home/Profile";
 import Register from "../src/pages/User/Register";
 import ResetPass from "../src/pages/User/ResetPass";
+import ProjectsLayout from "../src/pages/Projects/ProjectsLayout";
+import SessionRequests from "../src/pages/Projects/SessionRequests";
+import SessionForm from "../src/components/SessionForm.tsx";
+import SessionCardUser from "./components/ui/SessionCardUser.tsx";
+
 export {
   LayoutHome,
+  ProjectsLayout,
+  SessionForm,
+  SessionCardUser,
   LayoutLogin,
   Home,
+  SessionRequests,
   PageNotFound,
   Login,
   Learn,
