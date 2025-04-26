@@ -10,19 +10,23 @@ import {
   PageNotFound,
   Login,
   Learn,
-  Projects,
   Profile,
   Register,
   ResetPass,
+  ProjectsLayout,
+  Projects,
+  SessionRequests,
 } from "../imports";
-
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<LayoutHome />}>
         <Route index element={<Home />} />
         <Route path="Learn" element={<Learn />} />
-        <Route path="Projects" element={<Projects />} />
+        <Route path="Projects" element={<ProjectsLayout />}>
+          <Route index element={<Projects />} />
+          <Route path="SessionRequests" element={<SessionRequests />} />
+        </Route>
         <Route path="Profile" element={<Profile />} />
       </Route>
       <Route path="User" element={<LayoutLogin />}>
