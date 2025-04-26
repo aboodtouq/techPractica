@@ -20,8 +20,8 @@ public class CategoryManagementData {
         this.categoryMapper = categoryMapper;
     }
 
-    public List<CategoryResponse> getAllCategories() {
-        return categoryMapper.categoryToCategoryResponseList(categoryRepository.findAll());
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 
     public Category getCategoryByName(String name) {

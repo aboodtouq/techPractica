@@ -1,6 +1,8 @@
 package com.spring.techpractica.service.session.createSession;
 
 import com.spring.techpractica.exception.ResourcesNotFoundException;
+import com.spring.techpractica.maper.TechnologyMapper;
+import com.spring.techpractica.mengmentData.TechnologyManagementData;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.service.techSkills.Technology.TechnologyService;
@@ -14,13 +16,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SessionTechnologyLinker {
 
-    private final TechnologyService technologyService;
+
+   private final TechnologyMapper technologyMapper;
 
     public void linkTechnologiesToSession(Session session, List<String> techNames) {
-        List<Technology> technologies = techNames.stream()
-                .map(name -> technologyService.findTechnologyByName(name)
-                        .orElseThrow(() -> new ResourcesNotFoundException("Technology not found")))
-                .collect(Collectors.toList());
+        List<Technology> technologies = technologyMapper.technologiesStringToTechnologyList(techNames);
 
         session.setSessionTechnologies(technologies);
     }

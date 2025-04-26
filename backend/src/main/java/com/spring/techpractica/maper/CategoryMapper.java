@@ -11,23 +11,24 @@ import java.util.List;
 @Component
 public class CategoryMapper {
 
-    public CategoryResponse CategoryToCategoryResponse(Category category) {
+
+    private CategoryMapper() {
+    }
+
+    public static CategoryResponse CategoryToCategoryResponse(Category category) {
         if (category.getTechnologies().isEmpty()) {
             category.setTechnologies(new ArrayList<>());
         }
         return CategoryResponse.builder().categoryName(category.getCategoryName())
-                .technologies(technologiesToListString(category.getTechnologies()))
+                .technologies(TechnologyMapper.technologiesToListString(category.getTechnologies()))
                 .build();
 
     }
 
-    public List<CategoryResponse> categoryToCategoryResponseList(List<Category> categories) {
-        return categories.stream().map(this::CategoryToCategoryResponse).toList();
+    public static List<CategoryResponse> categoryToCategoryResponseList(List<Category> categories) {
+        return categories.stream().map(CategoryMapper::CategoryToCategoryResponse).toList();
 
     }
 
-    private List<String> technologiesToListString(List<Technology> technologies) {
-        return technologies.stream().map((Technology::getTechnologyName))
-                .toList();
-    }
+
 }

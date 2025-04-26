@@ -15,15 +15,12 @@ public class FieldManagementData {
 
     private final FieldRepository fieldRepository;
 
-    private final FieldMapper fieldMapper;
-
-    public FieldManagementData(FieldRepository fieldRepository, FieldMapper fieldMapper) {
+    public FieldManagementData(FieldRepository fieldRepository) {
         this.fieldRepository = fieldRepository;
-        this.fieldMapper = fieldMapper;
     }
 
-    public List<FieldTransfer> getAllFields() {
-        return fieldMapper.fieldToFieldTransferList(fieldRepository.findAll());
+    public List<Field> getAllFields() {
+        return fieldRepository.findAll();
     }
 
     public Optional<Field> findFieldByFieldName(String fieldName) {

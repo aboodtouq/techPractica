@@ -1,6 +1,7 @@
 package com.spring.techpractica.mengmentData;
 
 import com.spring.techpractica.dto.techSkills.TechnologyTransfer;
+import com.spring.techpractica.exception.ResourcesNotFoundException;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import com.spring.techpractica.repository.techSkills.TechnologyRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,10 @@ public class TechnologyManagementData {
 
     public Optional<Technology> findTechnologyByName(String technologyName) {
         return technologyRepository.findById(technologyName);
+    }
+
+    public Technology getTechnologyByName(String technologyName) {
+        return technologyRepository.findById(technologyName).
+                orElseThrow(() -> new ResourcesNotFoundException("Technology not found"));
     }
 }
