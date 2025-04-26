@@ -57,7 +57,10 @@ public class SessionController {
 
         return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail, pageSize, pageNumber));
     }
-
+    @Operation(
+            summary = "Get Available Sessions by there category",
+            description = "Retrieves a paginated list of available sessions filterd by category for the authenticated user using page size and page number."
+    )
     @GetMapping("/category")
     public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
             @RequestParam String categoryName,
