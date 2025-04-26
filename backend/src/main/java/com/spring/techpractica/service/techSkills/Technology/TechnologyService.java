@@ -22,7 +22,5 @@ public class TechnologyService {
         return technologyManagementData.getAllTechnologies();
     }
 
-    public Optional<Technology> findTechnologyByName(String technologyName) {
-        return technologyManagementData.findTechnologyByName(technologyName);
-    }
+
 }

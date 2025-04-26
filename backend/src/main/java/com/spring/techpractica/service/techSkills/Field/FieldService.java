@@ -19,11 +19,8 @@ public class FieldService {
     }
 
 
-    public List<FieldTransfer> getAllFields() {
+    public List<Field> getAllFields() {
         return fieldManagementData.getAllFields();
     }
 
-    public Optional<Field> findFieldByFieldName(String fieldName) {
-        return fieldManagementData.findFieldByFieldName(fieldName);
-    }
 }

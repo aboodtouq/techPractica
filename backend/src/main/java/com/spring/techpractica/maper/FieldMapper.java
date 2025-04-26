@@ -14,11 +14,9 @@ public class FieldMapper {
 
         return FieldTransfer.builder().fieldName(field.getFieldName())
                 .build();
-
     }
 
     public List<FieldTransfer> fieldToFieldTransferList(List<Field> fields) {
         return fields.stream().map(this::fieldToFieldTransfer).toList();
-
     }
 }
