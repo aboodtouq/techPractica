@@ -15,7 +15,11 @@ public class FieldService {
     private final FieldManagementData fieldManagementData;
 
     public FieldService(FieldManagementData fieldManagementData) {
+
+
         this.fieldManagementData = fieldManagementData;
+
+
     }
 
 
