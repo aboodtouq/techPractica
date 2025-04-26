@@ -67,6 +67,8 @@ public class SessionController {
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
+
+        //
     }
 
 }
