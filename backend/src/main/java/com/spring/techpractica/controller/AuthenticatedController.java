@@ -4,7 +4,6 @@ import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.dto.otp.UserEmailSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
-import com.spring.techpractica.dto.userRegestation.LoginResponse;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
@@ -53,11 +52,9 @@ public class AuthenticatedController {
             description = "Authenticates the user with the provided credentials and returns a JWT token on success."
     )
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody UserLogin userLogin) {
+    public ResponseEntity<String> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
-        String email = userLogin.getUserEmail();
-        LoginResponse response = new LoginResponse( email,token);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(token);
     }
 
     @Operation(
@@ -65,7 +62,8 @@ public class AuthenticatedController {
             description = "Generates a one-time password (OTP) and sends it to the user's email to begin the password reset process."
     )
     @PostMapping("/send-reset-password")
-    public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserEmailSendOtp userEmailSendOtp) {
+    public ResponseEntity<OtpResponse> sendResetPassword(
+            @RequestBody UserEmailSendOtp userEmailSendOtp) {
 
         OtpResponse otpResponse = userService.userCreateOtpCode(userEmailSendOtp);
 
@@ -88,7 +86,8 @@ public class AuthenticatedController {
             summary = "Submit a new password",
             description = "Allows an authenticated user to submit a new password. " +
                     "The user must be logged in, and the new password is provided in the request body."
-    )    @PostMapping("/submit-new-password")
+    )
+    @PostMapping("/submit-new-password")
     public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
                                                     @AuthenticationPrincipal UserDetails userDetails) {
         String userEmail = userDetails.getUsername();
