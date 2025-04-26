@@ -59,7 +59,7 @@ public class SessionController {
     }
     @Operation(
             summary = "Get Available Sessions by there category",
-            description = "Retrieves a paginated list of available sessions filterd by category for the authenticated user using page size and page number."
+            description = "Retrieves a paginated list of available sessions filterd by categoryy for the authenticated user using page size and page number."
     )
     @GetMapping("/category")
     public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
