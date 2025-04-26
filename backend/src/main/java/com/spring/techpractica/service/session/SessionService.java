@@ -61,7 +61,7 @@ public class SessionService {
         List<Session> sessions = sessionManagementData
                 .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-
+//hii
 
         return SessionMapper.sessionsToSessionResponses(sessions);
 
