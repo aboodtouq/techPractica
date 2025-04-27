@@ -62,8 +62,6 @@ public class SessionService {
         List<Session> sessions = sessionManagementData
                 .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-//hii
-
         return SessionMapper.sessionsToSessionResponses(sessions);
 
     }
@@ -71,8 +69,10 @@ public class SessionService {
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {
-        //Authorizeation
+
+        //Validation ---
         Session session = sessionManagementData.getSessionById(sessionId);
         sessionManagementData.deleteSession(session);
+
     }
 }

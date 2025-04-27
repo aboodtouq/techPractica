@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session." />
+    <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session.">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_18_2025_6_42_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_18_2025_6_42_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/factory/PageRequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/factory/PageRequestFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/otp/ValidationOtp.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/otp/ValidationOtp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/OtpMatchValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/otpValidator/OtpMatchValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/OtpValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/otpValidator/OtpValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/OtpValidatorExpiration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/validator/otpValidator/OtpValidatorExpiration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,6 +136,13 @@
         &quot;number&quot;: 41
       },
       &quot;lastSeen&quot;: 1745663736288
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6UATaG&quot;,
+        &quot;number&quot;: 43
+      },
+      &quot;lastSeen&quot;: 1745667824527
     }
   ]
 }</component>
@@ -162,7 +183,7 @@
     "Spring Boot.TechPracticaApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/techPractica/backend",
+    "last_opened_file_path": "C:/Users/User/trainingJava/projectG/techPractica/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -173,6 +194,12 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "6f670617-1ea7-4117-be04-bd9d95adcefd",
+      "java.sql.Driver"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -251,8 +278,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
@@ -277,6 +304,7 @@
       <workItem from="1744988379938" duration="17000" />
       <workItem from="1745231841729" duration="2000" />
       <workItem from="1745231861213" duration="11000" />
+      <workItem from="1745672353980" duration="75000" />
     </task>
     <task id="LOCAL-00001" summary="create folder doc and upload database ERD.png">
       <option name="closed" value="true" />

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthenticatedUserSessionFactory {
+
     private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
 
 
@@ -19,16 +20,14 @@ public class AuthenticatedUserSessionFactory {
 
 
     public AuthenticatedUserSession createAuthenticatedUserSession(Session session,
-                                                                          User user,
-                                                                          SessionRole role) {
+                                                                   User user,
+                                                                   SessionRole role) {
         return AuthenticatedUserSession.builder()
                 .userSessionId(new UserSessionId())
                 .user(user)
                 .session(session)
                 .scopedRole(role)
                 .build();
-
-
     }
 
 }

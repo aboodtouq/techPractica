@@ -20,4 +20,5 @@ public class Field {
     @Id
     @Column(name = "field_name")
     private String fieldName;
+
 }
