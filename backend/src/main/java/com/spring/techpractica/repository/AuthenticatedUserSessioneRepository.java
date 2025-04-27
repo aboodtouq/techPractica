@@ -1,0 +1,19 @@
+package com.spring.techpractica.repository;
+
+import com.spring.techpractica.model.UserSessionId;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
+
+import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.model.entity.techSkills.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AuthenticatedUserSessioneRepository extends JpaRepository<AuthenticatedUserSession, UserSessionId> {
+    Page<AuthenticatedUserSession> findAllByUser(User user, Pageable pageable);
+
+    long countByUserSessionId(UserSessionId userSessionId);
+
+    long countByUser(User user);
+}

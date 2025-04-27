@@ -13,7 +13,6 @@ import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,9 +28,10 @@ public class SessionService {
 
     private final CreateSessionService createSessionService;
 
-    /*
-    10 controller
-     */
+    private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
+/*
+10 controller
+ */
     public SessionResponse createSession(SessionCreatorRequest sessionCreatorRequest,
                                          String userEmail) {
 
@@ -39,7 +39,7 @@ public class SessionService {
     }
 
 
-    public List<SessionResponse> getSessionsByUserEmail(String userEmail,
+    public SessionsResponse getSessionsByUserEmail(String userEmail,
                                                         int pageSize,
                                                         int pageNumber) {
 
@@ -50,22 +50,37 @@ public class SessionService {
             List<Session> sessions = sessionManagementData.getSessionsByPageable(
                     PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-            return SessionMapper.sessionsToSessionResponses(sessions);
+            long totalSession= sessionManagementData.getNumberOfSessions();
+
+            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
         }
         return null;
     }
 
-    public List<SessionResponse> getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
+    public SessionsResponse getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
 
         Category category = categoryManagementData.getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
                 .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-        return SessionMapper.sessionsToSessionResponses(sessions);
+        long totalSession= sessionManagementData.getNumberOfCategorySessions(category);
+
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
 
     }
 
+    public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
+        User user = userManagementData.getUserByEmail(userEmail);
+
+      List<Session> sessions=  authenticatedUserSessionManagementData.getUserSessionsByPageable
+               (user,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
+      long totalSession= authenticatedUserSessionManagementData.getNumberOfUserSessions(user);
+
+
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
+    }
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {

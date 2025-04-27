@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +100,16 @@ public class SessionManagementData {
      */
     public List<Session> getSessionsByPageable(Pageable pageable) {
         return sessionRepository.findAll(pageable).getContent();
+    }
+
+    public long getNumberOfCategorySessions(Category category) {
+        List<Category> categories =new ArrayList<>();
+        categories.add(category);
+        return sessionRepository.countBySessionCategories(categories);
+    }
+
+    public long getNumberOfSessions() {
+        return sessionRepository.count();
     }
 }
 
