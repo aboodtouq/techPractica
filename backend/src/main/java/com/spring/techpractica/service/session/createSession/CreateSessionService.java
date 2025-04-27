@@ -1,6 +1,6 @@
 package com.spring.techpractica.service.session.createSession;
 
-import com.spring.techpractica.dto.session.SessionCreatorRequest;
+import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.factory.AuthenticatedUserSessionFactory;
 import com.spring.techpractica.factory.SessionFactory;
@@ -49,7 +49,7 @@ public class CreateSessionService {
      * @return a {@link SessionResponse} containing the created session's data
      */
     @Transactional
-    public SessionResponse createSession(SessionCreatorRequest request, String userEmail) {
+    public SessionResponse createSession(SessionRequest request, String userEmail) {
 
         User owner = userManagementData.getUserByEmail(userEmail);
         Session session = sessionFactory.createFrom(request);

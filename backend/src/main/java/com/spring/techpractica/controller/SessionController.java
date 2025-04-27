@@ -1,6 +1,6 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.dto.session.SessionCreatorRequest;
+import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.service.session.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,12 +34,12 @@ public class SessionController {
     )
     @PostMapping("/")
     public ResponseEntity<SessionResponse> createSession(
-            @RequestBody SessionCreatorRequest sessionCreatorRequest
+            @RequestBody SessionRequest sessionRequest
             , @AuthenticationPrincipal UserDetails userDetails) {
 
         String userEmail = userDetails.getUsername();
 
-        return ResponseEntity.ok(sessionService.createSession(sessionCreatorRequest,
+        return ResponseEntity.ok(sessionService.createSession(sessionRequest,
                 userEmail));
     }
 
@@ -57,9 +57,10 @@ public class SessionController {
 
         return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail, pageSize, pageNumber));
     }
+
     @Operation(
-            summary = "Get Available Sessions by there category",
-            description = "Retrieves a paginated list of available sessions filterd by categoryy for the authenticated user using page size and page number."
+            summary = "Get Sessions by Category",
+            description = "Fetches a paginated list of sessions based on the provided category name."
     )
     @GetMapping("/category")
     public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
@@ -70,5 +71,37 @@ public class SessionController {
 
         //
     }
+
+    @Operation(
+            summary = "Edit a Session",
+            description = "Updates the session details for the given session ID. Requires the user's authentication."
+    )
+    @PutMapping("/{sessionId}")
+    public ResponseEntity<SessionResponse> editSession(
+            @PathVariable Long sessionId,
+            @RequestBody SessionRequest updatedSessionRequest,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        String userEmail = userDetails.getUsername();
+
+
+        return ResponseEntity.ok(sessionService.
+                updateSession(sessionId,updatedSessionRequest,userEmail));
+    }
+
+    @Operation(
+            summary = "Delete a Session",
+            description = "Deletes the session identified by the given session ID. Requires user authentication."
+    )
+    @DeleteMapping("/{sessionId}")
+    public ResponseEntity<String> deleteSession(
+            @PathVariable Long sessionId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        String userEmail = userDetails.getUsername();
+
+        return ResponseEntity.ok("Deleted Successfully");
+    }
+
 
 }

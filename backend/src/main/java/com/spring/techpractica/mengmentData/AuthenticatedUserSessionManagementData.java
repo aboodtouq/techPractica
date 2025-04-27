@@ -1,17 +1,11 @@
 package com.spring.techpractica.mengmentData;
 
 import com.spring.techpractica.model.entity.AuthenticatedUserSession;
-import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.repository.AuthenticatedUserSessioneRepository;
-
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AuthenticatedUserSessionManagementData {
     private final AuthenticatedUserSessioneRepository authenticatedUserSessioneRepository;
 
@@ -33,9 +27,13 @@ public class AuthenticatedUserSessionManagementData {
 
 //    private
 
+    private final AuthenticatedUserSessionRepository authenticatedUserSessionRepository;
     //fitch getAll count authtication specif users (COUNT)
     public long getNumberOfUserSessions(User user) {
         return  authenticatedUserSessioneRepository.countByUser(user);
 
+    public Optional<AuthenticatedUserSession> findByUserUserIdAndUserSessionId(Long userId, long sessionId) {
+        return authenticatedUserSessionRepository
+                .findByUserUserIdAndUserSessionId(userId, sessionId);
     }
 }

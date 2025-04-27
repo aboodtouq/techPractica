@@ -31,4 +31,8 @@ public class TechnologyManagementData {
         return technologyRepository.findById(technologyName).
                 orElseThrow(() -> new ResourcesNotFoundException("Technology not found"));
     }
+
+    public List<Technology> getTechnologiesByTechnologiesName(List<String> technologiesName) {
+        return technologyRepository.findAllById(technologiesName);
+    }
 }

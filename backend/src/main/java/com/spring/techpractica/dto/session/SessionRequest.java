@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionCreatorRequest {
+public class SessionRequest {
 
     private String nameSession;
 
@@ -21,10 +21,10 @@ public class SessionCreatorRequest {
 
     private String category;
 
-
     private List<String> technologies;
 
-
     private List<String> fields;
+
+
 
 }
