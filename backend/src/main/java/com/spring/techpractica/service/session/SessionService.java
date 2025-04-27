@@ -2,11 +2,14 @@ package com.spring.techpractica.service.session;
 
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
+import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.factory.PageRequestFactory;
 import com.spring.techpractica.maper.SessionMapper;
+import com.spring.techpractica.mengmentData.AuthenticatedUserSessionManagementData;
 import com.spring.techpractica.mengmentData.CategoryManagementData;
 import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
@@ -15,6 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +32,7 @@ public class SessionService {
 
     private final CreateSessionService createSessionService;
 
+    private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
 /*
 10 controller
  */
@@ -38,7 +43,7 @@ public class SessionService {
     }
 
 
-    public List<SessionResponse> getSessionsByUserEmail(String userEmail,
+    public SessionsResponse getSessionsByUserEmail(String userEmail,
                                                         int pageSize,
                                                         int pageNumber) {
 
@@ -49,22 +54,35 @@ public class SessionService {
             List<Session> sessions = sessionManagementData.getSessionsByPageable(
                     PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-            return SessionMapper.sessionsToSessionResponses(sessions);
+            long totalSession= sessionManagementData.getNumberOfSessions();
+
+            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
         }
         return null;
     }
 
-    public List<SessionResponse> getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
+    public SessionsResponse getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
 
         Category category = categoryManagementData.getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
                 .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-//hii
+        long totalSession= sessionManagementData.getNumberOfCategorySessions(category);
 
-        return SessionMapper.sessionsToSessionResponses(sessions);
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
 
     }
 
+    public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
+        User user = userManagementData.getUserByEmail(userEmail);
+
+      List<Session> sessions=  authenticatedUserSessionManagementData.getUserSessionsByPageable
+               (user,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
+      long totalSession= authenticatedUserSessionManagementData.getNumberOfUserSessions(user);
+
+
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
+    }
 }
