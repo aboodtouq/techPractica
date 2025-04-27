@@ -34,7 +34,8 @@ public class AuthenticatedUserSessionManagementData {
 //    private
 
     //fitch getAll count authtication specif users (COUNT)
-    public int getNumberOfUserSessions(User user) {
-        return 0;
+    public long getNumberOfUserSessions(User user) {
+        return  authenticatedUserSessioneRepository.countByUser(user);
+
     }
 }
