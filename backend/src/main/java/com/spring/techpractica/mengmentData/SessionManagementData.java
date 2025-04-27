@@ -63,7 +63,9 @@ public class SessionManagementData {
                 .findById(id)
                 .orElseThrow(() ->
                         new ResourcesNotFoundException("Session not found with ID: " + id));
+
     }
+
 
     /**
      * Retrieves a session by its ID. This method returns an {@link Optional}

@@ -13,6 +13,7 @@ import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,9 +29,9 @@ public class SessionService {
 
     private final CreateSessionService createSessionService;
 
-/*
-10 controller
- */
+    /*
+    10 controller
+     */
     public SessionResponse createSession(SessionCreatorRequest sessionCreatorRequest,
                                          String userEmail) {
 
@@ -47,7 +48,7 @@ public class SessionService {
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
 
             List<Session> sessions = sessionManagementData.getSessionsByPageable(
-                    PageRequestFactory.createPageRequest(pageSize,pageNumber));
+                    PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
             return SessionMapper.sessionsToSessionResponses(sessions);
         }
@@ -65,4 +66,11 @@ public class SessionService {
 
     }
 
+    @Transactional
+    public void deleteSessionByUserEmailAndSessionId(String username
+            , Long sessionId) {
+        //Authorizeation
+        Session session = sessionManagementData.getSessionById(sessionId);
+        sessionManagementData.deleteSession(session);
+    }
 }

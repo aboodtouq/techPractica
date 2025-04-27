@@ -50,13 +50,16 @@ public class SessionController {
     )
     @GetMapping("/")
     public ResponseEntity<List<SessionResponse>> getSessions(
-            @AuthenticationPrincipal UserDetails userDetails, @RequestParam int pageSize, @RequestParam int pageNumber) {
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam int pageSize,
+            @RequestParam int pageNumber) {
 
         String userEmail = userDetails.getUsername();
 
 
         return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail, pageSize, pageNumber));
     }
+
     @Operation(
             summary = "Get Available Sessions by there category",
             description = "Retrieves a paginated list of available sessions filterd by categoryy for the authenticated user using page size and page number."
@@ -69,6 +72,13 @@ public class SessionController {
 
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
+    }
+
+    @DeleteMapping("/{sessionId}")
+    public ResponseEntity<String> deleteSession(@AuthenticationPrincipal UserDetails userDetails,
+                                                @PathVariable Long sessionId) {
+        sessionService.deleteSessionByUserEmailAndSessionId(userDetails.getUsername(), sessionId);
+        return ResponseEntity.ok("Deleted Successfully");
     }
 
 }

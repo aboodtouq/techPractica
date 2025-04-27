@@ -8,7 +8,8 @@ public class OtpVerificationInputFactory {
     private OtpVerificationInputFactory() {
     }
 
-    public static OtpVerificationInput createOtpVerificationInput(String storedDatabase, String otpUser) {
+    public static OtpVerificationInput createOtpVerificationInput(String storedDatabase,
+                                                                  String otpUser) {
         return OtpVerificationInput
                 .builder()
                 .storedOtp(storedDatabase)
