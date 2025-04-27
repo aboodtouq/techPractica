@@ -1,8 +1,14 @@
 package com.spring.techpractica.mengmentData;
 
 import com.spring.techpractica.model.entity.AuthenticatedUserSession;
+import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.repository.AuthenticatedUserSessionRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,25 +21,23 @@ public class AuthenticatedUserSessionManagementData {
 
     }
 
-    /*
-    Get authentication specif users  by pages find
-     */
 
     public List<Session> getUserSessionsByPageable(User user, Pageable pageable) {
-        List<AuthenticatedUserSession> authenticatedUserSessions= authenticatedUserSessioneRepository.findAllByUser(user,pageable).getContent();
-       return authenticatedUserSessions.stream().map
-                ((session)-> session.getSession()).collect(Collectors.toList());
+        List<AuthenticatedUserSession> authenticatedUserSessions = authenticatedUserSessioneRepository.findAllByUser(user, pageable).getContent();
+        return authenticatedUserSessions.stream().map
+                ((session) -> session.getSession()).collect(Collectors.toList());
     }
 
-//    private
 
     private final AuthenticatedUserSessionRepository authenticatedUserSessionRepository;
-    //fitch getAll count authtication specif users (COUNT)
-    public long getNumberOfUserSessions(User user) {
-        return  authenticatedUserSessioneRepository.countByUser(user);
 
-    public Optional<AuthenticatedUserSession> findByUserUserIdAndUserSessionId(Long userId, long sessionId) {
-        return authenticatedUserSessionRepository
-                .findByUserUserIdAndUserSessionId(userId, sessionId);
+    public long getNumberOfUserSessions(User user) {
+        return authenticatedUserSessioneRepository.countByUser(user);
+
+        public Optional<AuthenticatedUserSession> findByUserUserIdAndUserSessionId (Long userId, Long sessionId){
+            return authenticatedUserSessionRepository
+                    .findByUserUserIdAndSessionSessionId(userId, sessionId);
+        }
+
+
     }
-}

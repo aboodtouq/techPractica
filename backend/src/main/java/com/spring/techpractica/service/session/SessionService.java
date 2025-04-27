@@ -14,7 +14,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -105,29 +107,42 @@ public class SessionService {
 
         Session session = sessionManagementData.getSessionById(sessionId);
 
-        if (getSessionRole(user.getUserId(),sessionId) != SessionRole.OWNER){
-                throw new AuthenticationException("User must be an OWNER to perform this action.");
+        if (getSessionRole(user.getUserId(), sessionId) != SessionRole.OWNER) {
+            throw new AuthenticationException("User must be an OWNER to perform this action.");
         }
 
+        session.setSessionName(updatedSessionRequest.getNameSession());
 
-        session.setSessionTechnologies(technologyManagementData
-                .getTechnologiesByTechnologiesName(updatedSessionRequest.getTechnologies()));
+        session.setSessionDescription(updatedSessionRequest.getDescriptionSession());
 
-        session.setSessionCategories
-                (categoriesStringToCategoriesList
-                        (List.of(updatedSessionRequest.getCategory())));
+        session.setPrivate(updatedSessionRequest.isPrivateSession());
 
-        List <Requirement> requirements = updatedSessionRequest
-                .getFields().stream().map((field)->
-                        RequirementFactory
-                                .createRequirement(session
-                                        ,fieldManagementData.getFieldByFieldName(field)))
-                .toList();
+        session.setSessionTechnologies(
+                new ArrayList<>(technologyManagementData
+                        .getTechnologiesByTechnologiesName(updatedSessionRequest.getTechnologies()))
+        );
 
-        session.setSessionRequirements(requirements);
+        session.setSessionCategories(
+                new ArrayList<>(categoriesStringToCategoriesList(
+                        List.of(updatedSessionRequest.getCategory())
+                ))
+        );
 
-        session.setSessionFields(fieldManagementData
-                .getFieldsByFieldsName(updatedSessionRequest.getFields()));
+        session.getSessionRequirements().clear();
+
+        List<Requirement> requirements = updatedSessionRequest.getFields().stream()
+                .map(field -> RequirementFactory.createRequirement(
+                        session,
+                        fieldManagementData.getFieldByFieldName(field)
+                ))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        session.getSessionRequirements().addAll(requirements);
+
+        session.setSessionFields(
+                new ArrayList<>(fieldManagementData
+                        .getFieldsByFieldsName(updatedSessionRequest.getFields()))
+        );
 
         sessionManagementData.saveSession(session);
 
@@ -140,17 +155,6 @@ public class SessionService {
                 .toList();
     }
 
-    private List<Field> fieldsStringToFieldsList(List<String> fields) {
-        return fields.stream()
-                .map(fieldManagementData::getFieldByFieldName)
-                .toList();
-    }
-
-    public boolean isUserOwnerOfSession(User user, Session session) {
-        return user.getAuthenticatedUserSessions().stream()
-                .anyMatch(aus -> aus.getSession().getSessionId() == session.getSessionId()
-                        && aus.getScopedRole() == SessionRole.OWNER);
-    }
 
     public SessionRole getSessionRole(Long userId, Long sessionId) {
 
