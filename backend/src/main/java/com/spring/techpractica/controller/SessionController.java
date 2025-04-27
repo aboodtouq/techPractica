@@ -71,4 +71,15 @@ public class SessionController {
         //
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<SessionResponse>> getUserSessions(@AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam int pageSize, @RequestParam int pageNumber) {
+        String userEmail = userDetails.getUsername();
+        return ResponseEntity.ok(sessionService.
+                getUserSessions(userEmail, pageSize, pageNumber));
+
+
+    }
+
+
 }

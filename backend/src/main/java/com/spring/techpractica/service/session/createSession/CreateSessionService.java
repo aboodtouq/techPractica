@@ -2,8 +2,11 @@ package com.spring.techpractica.service.session.createSession;
 
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
+import com.spring.techpractica.factory.AuthenticatedUserSessionFactory;
 import com.spring.techpractica.factory.SessionFactory;
 import com.spring.techpractica.maper.SessionMapper;
+import com.spring.techpractica.model.SessionRole;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.mengmentData.SessionManagementData;
@@ -57,6 +60,7 @@ public class CreateSessionService {
         technologyLinker.linkTechnologiesToSession(session, request.getTechnologies());
 
         session = sessionManagementData.saveSession(session);
+
         return SessionMapper.sessionToSessionResponse(session);
     }
 

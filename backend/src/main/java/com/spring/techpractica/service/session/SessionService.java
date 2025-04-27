@@ -4,9 +4,11 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.factory.PageRequestFactory;
 import com.spring.techpractica.maper.SessionMapper;
+import com.spring.techpractica.mengmentData.AuthenticatedUserSessionManagementData;
 import com.spring.techpractica.mengmentData.CategoryManagementData;
 import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
@@ -15,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +31,7 @@ public class SessionService {
 
     private final CreateSessionService createSessionService;
 
+    private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
 /*
 10 controller
  */
@@ -67,4 +71,13 @@ public class SessionService {
 
     }
 
+    public List<SessionResponse> getUserSessions(String userEmail, int pageSize, int pageNumber) {
+        User user = userManagementData.getUserByEmail(userEmail);
+
+      List<Session> sessions=  authenticatedUserSessionManagementData.getUserSessionsByPageable
+               (user,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
+
+        return SessionMapper.sessionsToSessionResponses(sessions);
+    }
 }
