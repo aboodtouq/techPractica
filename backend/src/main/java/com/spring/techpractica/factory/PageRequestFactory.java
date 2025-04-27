@@ -11,7 +11,8 @@ public class PageRequestFactory {
     }
 
     public static PageRequest createPageRequest(int pageSize, int pageNumber) {
-        if ( pageSize <= 0|| pageNumber < 0 ) {
+        if (pageSize < 1 || pageNumber < 0) {
+
             throw new ResourcesNotFoundException("Page number or Size is negative");
         }
 
