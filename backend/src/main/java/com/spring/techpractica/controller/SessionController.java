@@ -70,7 +70,6 @@ public class SessionController {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
 
-        //
     }
     @Operation(
             summary = "Get User Sessions ",
