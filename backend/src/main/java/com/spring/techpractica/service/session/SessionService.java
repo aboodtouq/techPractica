@@ -60,7 +60,9 @@ public class SessionService {
         Category category = categoryManagementData.getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
-                .getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));
+                .getSessionsByCategoryAndPageable(category,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
+//hii
 
         return SessionMapper.sessionsToSessionResponses(sessions);
 

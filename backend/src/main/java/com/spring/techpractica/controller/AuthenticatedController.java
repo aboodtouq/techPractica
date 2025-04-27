@@ -54,7 +54,9 @@ public class AuthenticatedController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
+
         return ResponseEntity.ok(token);
+
     }
 
     @Operation(
