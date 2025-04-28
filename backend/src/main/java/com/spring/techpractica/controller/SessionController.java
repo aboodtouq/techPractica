@@ -71,6 +71,20 @@ public class SessionController {
     }
 
     @Operation(
+            summary = "Get User Sessions ",
+            description = "Retrieves a paginated list of the user sessions using page size and page number."
+    )
+    @GetMapping("/users")
+    public ResponseEntity<SessionsResponse> getUserSessions(@AuthenticationPrincipal UserDetails userDetails,
+                                                            @RequestParam int pageSize, @RequestParam int pageNumber) {
+        String userEmail = userDetails.getUsername();
+        return ResponseEntity.ok(sessionService.
+                getUserSessions(userEmail, pageSize, pageNumber));
+
+
+    }
+
+    @Operation(
             summary = "Edit a Session",
             description = "Updates the session details for the given session ID. Requires the user's authentication."
     )
