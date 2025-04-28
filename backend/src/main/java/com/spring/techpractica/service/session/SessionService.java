@@ -2,10 +2,15 @@ package com.spring.techpractica.service.session;
 
 import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
+import com.spring.techpractica.dto.session.SessionsResponse;
+import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.factory.PageRequestFactory;
+import com.spring.techpractica.factory.RequirementFactory;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.mengmentData.*;
 import com.spring.techpractica.model.SessionRole;
+import com.spring.techpractica.model.entity.AuthenticatedUserSession;
+import com.spring.techpractica.model.entity.Requirement;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
@@ -39,14 +44,14 @@ public class SessionService {
     public SessionResponse createSession(SessionRequest sessionRequest,
                                          String userEmail) {
 
-        return createSessionService.createSession(sessionCreatorRequest,
+        return createSessionService.createSession(sessionRequest,
                 userEmail);
     }
 
 
-    public List<SessionResponse> getSessionsByUserEmail(String userEmail,
-                                                        int pageSize,
-                                                        int pageNumber) {
+    public SessionsResponse getSessionsByUserEmail(String userEmail,
+                                                   int pageSize,
+                                                   int pageNumber) {
 
         User user = userManagementData.getUserByEmail(userEmail);
 

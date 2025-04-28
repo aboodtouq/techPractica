@@ -10,10 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface AuthenticatedUserSessioneRepository extends JpaRepository<AuthenticatedUserSession, UserSessionId> {
     Page<AuthenticatedUserSession> findAllByUser(User user, Pageable pageable);
 
     long countByUserSessionId(UserSessionId userSessionId);
 
     long countByUser(User user);
+
+    Optional<AuthenticatedUserSession> findByUserUserIdAndSessionSessionId(Long userId, Long sessionId);
 }

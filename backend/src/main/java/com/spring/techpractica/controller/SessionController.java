@@ -2,6 +2,7 @@ package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
+import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,8 +11,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/sessions")
@@ -49,7 +48,7 @@ public class SessionController {
             description = "Retrieves a paginated list of available sessions for the authenticated user using page size and page number."
     )
     @GetMapping("/")
-    public ResponseEntity<List<SessionResponse>> getSessions(
+    public ResponseEntity<SessionsResponse> getSessions(
             @AuthenticationPrincipal UserDetails userDetails, @RequestParam int pageSize, @RequestParam int pageNumber) {
 
         String userEmail = userDetails.getUsername();
@@ -63,13 +62,12 @@ public class SessionController {
             description = "Fetches a paginated list of sessions based on the provided category name."
     )
     @GetMapping("/category")
-    public ResponseEntity<List<SessionResponse>> getSessionsByCategoryName(
+    public ResponseEntity<SessionsResponse> getSessionsByCategoryName(
             @RequestParam String categoryName,
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
 
-        //
     }
 
     @Operation(
@@ -85,9 +83,8 @@ public class SessionController {
         String userEmail = userDetails.getUsername();
 
         return ResponseEntity.ok(sessionService.
-                updateSession(sessionId,updatedSessionRequest,userEmail));
+                updateSession(sessionId, updatedSessionRequest, userEmail));
 
-        /////TEST
     }
 
     @Operation(
