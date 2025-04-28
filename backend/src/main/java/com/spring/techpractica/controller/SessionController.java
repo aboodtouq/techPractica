@@ -73,6 +73,7 @@ public class SessionController {
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
 
     }
+    //
     @Operation(
             summary = "Get User Sessions ",
             description = "Retrieves a paginated list of the user sessions using page size and page number."
@@ -86,7 +87,7 @@ public class SessionController {
 
 
     }
-
+    //
 
     @DeleteMapping("/{sessionId}")
     public ResponseEntity<String> deleteSession(@AuthenticationPrincipal UserDetails userDetails,

@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthenticatedUserSessioneRepository extends JpaRepository<AuthenticatedUserSession, UserSessionId> {
     Page<AuthenticatedUserSession> findAllByUser(User user, Pageable pageable);
+    //
 
-    long countByUserSessionId(UserSessionId userSessionId);
-
+    //
     long countByUser(User user);
 }

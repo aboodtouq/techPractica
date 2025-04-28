@@ -24,18 +24,20 @@ public class AuthenticatedUserSessionManagementData {
     /*
     Get authentication specif users  by pages find
      */
-
+    //
     public List<Session> getUserSessionsByPageable(User user, Pageable pageable) {
         List<AuthenticatedUserSession> authenticatedUserSessions= authenticatedUserSessioneRepository.findAllByUser(user,pageable).getContent();
        return authenticatedUserSessions.stream().map
                 ((session)-> session.getSession()).collect(Collectors.toList());
     }
+    //
 
 //    private
-
+//
     //fitch getAll count authtication specif users (COUNT)
     public long getNumberOfUserSessions(User user) {
         return  authenticatedUserSessioneRepository.countByUser(user);
 
     }
+    //
 }
