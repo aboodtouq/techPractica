@@ -1,6 +1,6 @@
 package com.spring.techpractica.controller;
 
-import com.spring.techpractica.dto.session.SessionCreatorRequest;
+import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
@@ -11,8 +11,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/sessions")
@@ -35,12 +33,12 @@ public class SessionController {
     )
     @PostMapping("/")
     public ResponseEntity<SessionResponse> createSession(
-            @RequestBody SessionCreatorRequest sessionCreatorRequest
+            @RequestBody SessionRequest sessionRequest
             , @AuthenticationPrincipal UserDetails userDetails) {
 
         String userEmail = userDetails.getUsername();
 
-        return ResponseEntity.ok(sessionService.createSession(sessionCreatorRequest,
+        return ResponseEntity.ok(sessionService.createSession(sessionRequest,
                 userEmail));
     }
 
@@ -60,40 +58,50 @@ public class SessionController {
     }
 
     @Operation(
-
-            summary = "Get Available Sessions by there category",
-            description = "Retrieves a paginated list of available sessions filterd by categoryy for the authenticated user using page size and page number."
+            summary = "Get Sessions by Category",
+            description = "Fetches a paginated list of sessions based on the provided category name."
     )
     @GetMapping("/category")
     public ResponseEntity<SessionsResponse> getSessionsByCategoryName(
-
             @RequestParam String categoryName,
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
 
     }
-    //
-    @Operation(
-            summary = "Get User Sessions ",
-            description = "Retrieves a paginated list of the user sessions using page size and page number."
-    )
-    @GetMapping("/users")
-    public ResponseEntity<SessionsResponse> getUserSessions(@AuthenticationPrincipal UserDetails userDetails,
-                                                            @RequestParam int pageSize, @RequestParam int pageNumber) {
-        String userEmail = userDetails.getUsername();
-        return ResponseEntity.ok(sessionService.
-                getUserSessions(userEmail, pageSize, pageNumber));
 
+    @Operation(
+            summary = "Edit a Session",
+            description = "Updates the session details for the given session ID. Requires the user's authentication."
+    )
+    @PutMapping("/{sessionId}")
+    public ResponseEntity<SessionResponse> editSession(
+            @PathVariable Long sessionId,
+            @RequestBody SessionRequest updatedSessionRequest,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        String userEmail = userDetails.getUsername();
+
+        return ResponseEntity.ok(sessionService.
+                updateSession(sessionId, updatedSessionRequest, userEmail));
 
     }
-    //
+
+
+    @Operation(
+            summary = "Delete a Session",
+            description = "Deletes the session identified by the given session ID. Requires user authentication."
+    )
 
     @DeleteMapping("/{sessionId}")
-    public ResponseEntity<String> deleteSession(@AuthenticationPrincipal UserDetails userDetails,
-                                                @PathVariable Long sessionId) {
-        sessionService.deleteSessionByUserEmailAndSessionId(userDetails.getUsername(), sessionId);
+    public ResponseEntity<String> deleteSession(
+            @PathVariable Long sessionId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        String userEmail = userDetails.getUsername();
+
         return ResponseEntity.ok("Deleted Successfully");
     }
+
 
 }
