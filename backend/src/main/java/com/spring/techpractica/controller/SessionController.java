@@ -84,9 +84,10 @@ public class SessionController {
 
         String userEmail = userDetails.getUsername();
 
-
         return ResponseEntity.ok(sessionService.
                 updateSession(sessionId,updatedSessionRequest,userEmail));
+
+        /////TEST
     }
 
     @Operation(

@@ -103,6 +103,8 @@ public class SessionService {
                                          SessionRequest updatedSessionRequest,
                                          String userEmail) {
 
+        //TEST
+
         User user = userManagementData.getUserByEmail(userEmail);
 
         Session session = sessionManagementData.getSessionById(sessionId);
@@ -153,6 +155,8 @@ public class SessionService {
         return categories.stream()
                 .map(categoryManagementData::getCategoryByName)
                 .toList();
+
+
     }
 
 
