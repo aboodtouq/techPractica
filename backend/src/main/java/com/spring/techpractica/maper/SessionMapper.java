@@ -33,6 +33,7 @@ public class SessionMapper {
     public static SessionResponse sessionToSessionResponse(Session session) {
         return SessionResponse.
                 builder()
+                .id(session.getSessionId())
                 .sessionName(session.getSessionName())
                 .sessionDescription(session.getSessionDescription())
                 .category(session.getSessionCategories().getFirst().getCategoryName())
