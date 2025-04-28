@@ -14,9 +14,9 @@ import java.util.Optional;
 
 public interface AuthenticatedUserSessioneRepository extends JpaRepository<AuthenticatedUserSession, UserSessionId> {
     Page<AuthenticatedUserSession> findAllByUser(User user, Pageable pageable);
+    //
 
-    long countByUserSessionId(UserSessionId userSessionId);
-
+    //
     long countByUser(User user);
 
     Optional<AuthenticatedUserSession> findByUserUserIdAndSessionSessionId(Long userId, Long sessionId);

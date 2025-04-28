@@ -29,7 +29,7 @@ public class SessionMapper {
                 .sessionTechnologies(new ArrayList<>())
                 .build();
     }
-
+    //
     public static SessionResponse sessionToSessionResponse(Session session) {
         return SessionResponse.
                 builder()
@@ -40,14 +40,14 @@ public class SessionMapper {
                         .map(Technology::getTechnologyName).toList())
                 .build();
     }
-
+    //
     public static List<SessionResponse> sessionsToSessionResponses(List<Session> sessions) {
         return sessions.
                 stream()
                 .map(SessionMapper::sessionToSessionResponse)
                 .toList();
     }
-
+    //
     public static SessionsResponse sessionsAndTotalSessionsToSessionsResponses(List<Session> sessions,long totalSessions) {
         List<SessionResponse> sessionResponse = sessionsToSessionResponses(sessions);
         return SessionsResponse.builder()
@@ -55,4 +55,5 @@ public class SessionMapper {
                 .sessions(sessionResponse)
                 .build();
     }
+    //
 }

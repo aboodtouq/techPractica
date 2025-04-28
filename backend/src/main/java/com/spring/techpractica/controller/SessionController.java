@@ -87,10 +87,12 @@ public class SessionController {
 
     }
 
+
     @Operation(
             summary = "Delete a Session",
             description = "Deletes the session identified by the given session ID. Requires user authentication."
     )
+
     @DeleteMapping("/{sessionId}")
     public ResponseEntity<String> deleteSession(
             @PathVariable Long sessionId,

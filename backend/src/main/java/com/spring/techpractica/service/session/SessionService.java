@@ -80,7 +80,7 @@ public class SessionService {
 
     }
 
-
+    //
     public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
         User user = userManagementData.getUserByEmail(userEmail);
 
@@ -92,7 +92,7 @@ public class SessionService {
 
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
     }
-  
+  //
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {
