@@ -4,7 +4,6 @@ import com.spring.techpractica.dto.otp.NewPassword;
 import com.spring.techpractica.dto.otp.OtpResponse;
 import com.spring.techpractica.dto.otp.UserEmailSendOtp;
 import com.spring.techpractica.dto.otp.UserSubmitOtp;
-import com.spring.techpractica.dto.userRegestation.LoginResponse;
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.dto.userRegestation.UserLogin;
 import com.spring.techpractica.service.MailSenderService;
