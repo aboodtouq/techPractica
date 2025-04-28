@@ -130,9 +130,10 @@ export type CategoryType =
   | "Mobile Development";
 
 export const CategoryColor = (Name: CategoryType) => {
-  if (Name == "Web Development") return "bg-blue-100 text-blue-700";
-  if (Name == "Cybersecurity") return "bg-red-100 text-red-700";
-  if (Name == "Game Development") return "bg-purple-100 text-purple-700";
-  if (Name == "Artificial Intelligence") return "bg-teal-100 text-teal-700";
-  if (Name == "Mobile Development") return "bg-green-100 text-green-700";
+  if (Name.includes("Web Development")) return "bg-blue-100 text-blue-700";
+  if (Name.includes("Cybersecurity")) return "bg-red-100 text-red-700";
+  if (Name.includes("Game Development")) return "bg-purple-100 text-purple-700";
+  if (Name.includes("Artificial Intelligence"))
+    return "bg-teal-100 text-teal-700";
+  if (Name.includes("Mobile Development")) return "bg-green-100 text-green-700";
 };

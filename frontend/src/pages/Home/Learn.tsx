@@ -1,37 +1,56 @@
+import { useState } from "react";
+import Paginator from "../../components/ui/Paginator";
 import SessionCard from "../../components/ui/SessionCard";
 import { CategoryType } from "../../data/data";
 import { CookiesService, useAuthQuery } from "../../imports";
+import { ISession } from "../../interfaces";
 
-interface IProps {}
-const Learn = ({}: IProps) => {
-  const Token = CookiesService.get("UserToken");
-  const { data: Session } = useAuthQuery({
-    queryKey: ["SessionData"],
-    url: "/sessions/?pageSize=12&pageNumber=0",
+const Learn = () => {
+  const [page, setPage] = useState<number>(1);
+  const sessionsPerPage = 12;
+  const token = CookiesService.get("UserToken");
+
+  const { data: sessionData } = useAuthQuery({
+    queryKey: [`SessionData-${page}`],
+    url: `/sessions/?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`,
     config: {
       headers: {
-        Authorization: `Bearer ${Token}`,
+        Authorization: `Bearer ${token}`,
       },
     },
   });
-  interface SessionType {
-    sessionName: string;
-    sessionDescription: string;
-    technologies: string[];
-    category: CategoryType;
-  }
-  const SessionData = Session?.map((session: SessionType, index: number) => (
-    <SessionCard key={index} session={session} />
-  ));
+
+  const onClickNext = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const onClickPrev = () => {
+    setPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const totalSessions = sessionData?.sessionsCount || 0;
+  const pageCount = Math.ceil(totalSessions / sessionsPerPage);
+
   return (
-    <>
-      <main className="container mx-auto">
-        {" "}
-        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4   gap-2 ">
-          {SessionData}
+    <main className="min-h-screen container mx-auto p-10 pb-20 flex flex-col justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+        {sessionData?.sessions.map((session: ISession, index: number) => (
+          <SessionCard key={index} session={session} />
+        ))}
+      </div>
+
+      {pageCount > 1 && (
+        <div className="flex justify-end  ">
+          <Paginator
+            page={page}
+            pageCount={pageCount}
+            onClickNext={onClickNext}
+            onClickPrev={onClickPrev}
+          />
         </div>
-      </main>
-    </>
+      )}
+    </main>
   );
 };
+
 export default Learn;
