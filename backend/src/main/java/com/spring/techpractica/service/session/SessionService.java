@@ -8,12 +8,16 @@ import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.mengmentData.CategoryManagementData;
 import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
+
 import com.spring.techpractica.mengmentData.AuthenticatedUserSessionManagementData;
+
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
+
 import jakarta.transaction.Transactional;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +78,7 @@ public class SessionService {
 
     }
 
+
     public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
         User user = userManagementData.getUserByEmail(userEmail);
 
@@ -85,6 +90,7 @@ public class SessionService {
 
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
     }
+  
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {
@@ -94,4 +100,5 @@ public class SessionService {
         sessionManagementData.deleteSession(session);
 
     }
+
 }
