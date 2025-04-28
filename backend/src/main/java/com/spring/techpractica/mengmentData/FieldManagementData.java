@@ -1,26 +1,20 @@
 package com.spring.techpractica.mengmentData;
 
 
-import com.spring.techpractica.dto.techSkills.FieldTransfer;
-import com.spring.techpractica.maper.FieldMapper;
-
-import com.spring.techpractica.model.entity.techSkills.Category;
-
 import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.repository.techSkills.FieldRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class FieldManagementData {
 
     private final FieldRepository fieldRepository;
 
-    public FieldManagementData(FieldRepository fieldRepository) {
-        this.fieldRepository = fieldRepository;
-    }
 
     public List<Field> getAllFields() {
         return fieldRepository.findAll();
@@ -30,4 +24,12 @@ public class FieldManagementData {
         return fieldRepository.findById(fieldName);
     }
 
+    public Field getFieldByFieldName(String fieldName) {
+        return fieldRepository.findById(fieldName)
+                .orElseThrow(() -> new IllegalArgumentException("Field not found"));
+    }
+
+    public List<Field> getFieldsByFieldsName(List<String> fieldsName) {
+        return fieldRepository.findAllById(fieldsName);
+    }
 }

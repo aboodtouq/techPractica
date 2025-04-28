@@ -1,9 +1,8 @@
 package com.spring.techpractica.factory;
 
-import com.spring.techpractica.dto.session.SessionCreatorRequest;
+import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.model.entity.Session;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class SessionFactory {
 
 
-    public Session createFrom(SessionCreatorRequest request) {
+    public Session createFrom(SessionRequest request) {
         return SessionMapper.sessionCreatorToSession(request);
     }
 

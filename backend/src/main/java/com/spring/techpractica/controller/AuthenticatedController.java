@@ -53,12 +53,10 @@ public class AuthenticatedController {
             description = "Authenticates the user with the provided credentials and returns a JWT token on success."
     )
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody UserLogin userLogin) {
+    public ResponseEntity<String> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
 
-        String email = userLogin.getUserEmail();
-        LoginResponse response = new LoginResponse( email,token);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(token);
 
     }
 
@@ -91,12 +89,9 @@ public class AuthenticatedController {
             summary = "Submit a new password",
             description = "Allows an authenticated user to submit a new password. " +
                     "The user must be logged in, and the new password is provided in the request body."
-
-    )   
     )
-
-      @PostMapping("/submit-new-password")
-      public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
+    @PostMapping("/submit-new-password")
+    public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
                                                     @AuthenticationPrincipal UserDetails userDetails) {
         String userEmail = userDetails.getUsername();
         userService.userChangePassword(userEmail, newPassword);
