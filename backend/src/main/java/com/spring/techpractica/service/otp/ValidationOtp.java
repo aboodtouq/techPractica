@@ -5,7 +5,7 @@ import com.spring.techpractica.dto.otp.UserSubmitOtp;
 import com.spring.techpractica.factory.OtpVerificationInputFactory;
 import com.spring.techpractica.mengmentData.OtpManagementData;
 import com.spring.techpractica.model.entity.Otp;
-import com.spring.techpractica.validator.OtpValidator;
+import com.spring.techpractica.validator.otpValidator.OtpValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +42,7 @@ public class ValidationOtp {
                                LocalDateTime otpExpiration) {
         otpExpirationValidator.validate(otpExpiration);
         otpMatchingValidator.validate(otpVerificationInput);
+
     }
 
 }

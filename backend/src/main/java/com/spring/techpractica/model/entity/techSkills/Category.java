@@ -21,9 +21,9 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-    @ManyToMany(mappedBy = "sessionCategories")
+    @ManyToMany(mappedBy = "sessionCategories", fetch = FetchType.LAZY)
     private List<Session> sessions;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<Technology> technologies;
 }

@@ -19,12 +19,13 @@ public class CategoryService {
 
 
 
-
     public List<CategoryResponse> findAllCategories() {
         return CategoryMapper.categoryToCategoryResponseList(categoryManagementData.getAllCategories());
     }
 
-    public Category getCategoryByName(String name) {
+
+    public Category getCategoryByName(String name)       {
+
         return categoryManagementData.getCategoryByName(name);
     }
 

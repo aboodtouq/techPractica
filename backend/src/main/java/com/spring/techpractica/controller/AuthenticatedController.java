@@ -55,9 +55,11 @@ public class AuthenticatedController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody UserLogin userLogin) {
         String token = userService.userLogin(userLogin);
+
         String email = userLogin.getUserEmail();
         LoginResponse response = new LoginResponse( email,token);
         return ResponseEntity.ok(response);
+
     }
 
     @Operation(
@@ -65,7 +67,8 @@ public class AuthenticatedController {
             description = "Generates a one-time password (OTP) and sends it to the user's email to begin the password reset process."
     )
     @PostMapping("/send-reset-password")
-    public ResponseEntity<OtpResponse> sendResetPassword(@RequestBody UserEmailSendOtp userEmailSendOtp) {
+    public ResponseEntity<OtpResponse> sendResetPassword(
+            @RequestBody UserEmailSendOtp userEmailSendOtp) {
 
         OtpResponse otpResponse = userService.userCreateOtpCode(userEmailSendOtp);
 
@@ -88,8 +91,12 @@ public class AuthenticatedController {
             summary = "Submit a new password",
             description = "Allows an authenticated user to submit a new password. " +
                     "The user must be logged in, and the new password is provided in the request body."
-    )    @PostMapping("/submit-new-password")
-    public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
+
+    )   
+    )
+
+      @PostMapping("/submit-new-password")
+      public ResponseEntity<String> submitNewPassword(@RequestBody NewPassword newPassword,
                                                     @AuthenticationPrincipal UserDetails userDetails) {
         String userEmail = userDetails.getUsername();
         userService.userChangePassword(userEmail, newPassword);

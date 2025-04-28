@@ -17,7 +17,6 @@ public class SessionRoleAssigner {
 
         session.getSessionMembers()
                 .add(authenticatedUserSessionFactory.createAuthenticatedUserSession(session,
-                        user,
-                        SessionRole.OWNER));
+                        user, SessionRole.OWNER));
     }
 }
