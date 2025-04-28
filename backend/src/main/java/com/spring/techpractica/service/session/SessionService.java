@@ -103,7 +103,6 @@ public class SessionService {
                                          SessionRequest updatedSessionRequest,
                                          String userEmail) {
 
-        //TEST
 
         User user = userManagementData.getUserByEmail(userEmail);
 
@@ -155,10 +154,7 @@ public class SessionService {
         return categories.stream()
                 .map(categoryManagementData::getCategoryByName)
                 .toList();
-
-
     }
-
 
     public SessionRole getSessionRole(Long userId, Long sessionId) {
 

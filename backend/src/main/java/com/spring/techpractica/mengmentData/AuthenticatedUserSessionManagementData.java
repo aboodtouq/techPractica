@@ -38,6 +38,13 @@ public class AuthenticatedUserSessionManagementData {
             return authenticatedUserSessionRepository
                     .findByUserUserIdAndSessionSessionId(userId, sessionId);
         }
+        public Optional<AuthenticatedUserSession> findByUserUserIdAndUserSessionId (Long userId, Long sessionId){
+            return authenticatedUserSessionRepository
+                    .findByUserUserIdAndSessionSessionId(userId, sessionId);
+
+
+        }
 
 
     }
+}
