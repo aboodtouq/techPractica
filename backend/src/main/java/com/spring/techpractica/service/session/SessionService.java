@@ -2,8 +2,10 @@ package com.spring.techpractica.service.session;
 
 import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
+import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.factory.PageRequestFactory;
 import com.spring.techpractica.maper.SessionMapper;
+import com.spring.techpractica.mengmentData.AuthenticatedUserSessionManagementData;
 import com.spring.techpractica.mengmentData.CategoryManagementData;
 import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
@@ -13,6 +15,7 @@ import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

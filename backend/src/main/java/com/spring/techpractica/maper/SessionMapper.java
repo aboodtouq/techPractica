@@ -4,11 +4,11 @@ import com.spring.techpractica.dto.session.SessionCreatorRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SessionMapper {
 
@@ -38,6 +38,12 @@ public class SessionMapper {
                 .category(session.getSessionCategories().getFirst().getCategoryName())
                 .technologies(session.getSessionTechnologies().stream()
                         .map(Technology::getTechnologyName).toList())
+                .isPrivate(session.isPrivate())
+                .fields(session.
+                        getFields()
+                        .stream()
+                        .map(Field::getFieldName)
+                        .toList())
                 .build();
     }
 
@@ -48,7 +54,7 @@ public class SessionMapper {
                 .toList();
     }
 
-    public static SessionsResponse sessionsAndTotalSessionsToSessionsResponses(List<Session> sessions,long totalSessions) {
+    public static SessionsResponse sessionsAndTotalSessionsToSessionsResponses(List<Session> sessions, long totalSessions) {
         List<SessionResponse> sessionResponse = sessionsToSessionResponses(sessions);
         return SessionsResponse.builder()
                 .sessionsCount(totalSessions)

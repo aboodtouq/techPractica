@@ -21,4 +21,9 @@ public class SessionResponse {
     private List<String> technologies;
 
     private String category;
+
+    private boolean isPrivate;
+
+    private List<String> fields;
+
 }

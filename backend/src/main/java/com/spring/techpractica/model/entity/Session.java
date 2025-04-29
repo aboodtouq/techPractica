@@ -2,6 +2,7 @@ package com.spring.techpractica.model.entity;
 
 import com.spring.techpractica.model.TimestampType;
 import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.techSkills.Field;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -95,4 +96,10 @@ public class Session {
             , inverseJoinColumns = @JoinColumn(name = "session_id")
     )
     private List<Technology> sessionTechnologies = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "FIELDS_SESSIONS",
+    joinColumns = @JoinColumn(name = "session_id"),
+    inverseJoinColumns = @JoinColumn(name = "field_name"))
+    private List<Field> fields;
 }
