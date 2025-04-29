@@ -60,9 +60,9 @@ public class SessionService {
             List<Session> sessions = sessionManagementData.getSessionsByPageable(
                     PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-            long totalSession= sessionManagementData.getNumberOfSessions();
+            long totalSession = sessionManagementData.getNumberOfSessions();
 
-            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
+            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
         }
         return null;
     }
@@ -74,30 +74,29 @@ public class SessionService {
         List<Session> sessions = sessionManagementData
                 .getSessionsByCategoryAndPageable(category, PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-        long totalSession= sessionManagementData.getNumberOfCategorySessions(category);
+        long totalSession = sessionManagementData.getNumberOfCategorySessions(category);
 
-        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
 
     }
 
-    //
     public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
         User user = userManagementData.getUserByEmail(userEmail);
 
-      List<Session> sessions=  authenticatedUserSessionManagementData.getUserSessionsByPageable
-               (user,PageRequestFactory.createPageRequest(pageSize, pageNumber));
+        List<Session> sessions = authenticatedUserSessionManagementData.getUserSessionsByPageable
+                (user, PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-      long totalSession= authenticatedUserSessionManagementData.getNumberOfUserSessions(user);
+        long totalSession = authenticatedUserSessionManagementData.getNumberOfUserSessions(user);
 
 
-        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions,totalSession);
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
     }
-  //
+
+    //
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {
 
-        //Validation ---
         Session session = sessionManagementData.getSessionById(sessionId);
         sessionManagementData.deleteSession(session);
 
