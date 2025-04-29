@@ -9,16 +9,20 @@ import {
 } from "../imports.ts";
 import { inputData } from "../data/data.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { ISessionForm, Category, IErrorResponse } from "../interfaces";
+import {
+  ISessionForm,
+  Category,
+  IErrorResponse,
+  ISession,
+} from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { CreatSessionSchema } from "../validation/index.ts";
 interface IProps {
+  session: ISession;
   closeModal: () => void;
 }
-const SessionForm = ({ closeModal }: IProps) => {
+const EditSessionForm = ({ session, closeModal }: IProps) => {
   /*______SelectData______*/
   const Token = CookiesService.get("UserToken");
   const { data: CategoryData } = useAuthQuery({
@@ -54,15 +58,24 @@ const SessionForm = ({ closeModal }: IProps) => {
   const technologyNames = technologiesData?.map(
     (tech: { technologyName: string }) => tech.technologyName
   );
-  const methods = useForm<ISessionForm>();
+  const methods = useForm<ISessionForm>({
+    defaultValues: {
+      sessionName: session.sessionName,
+      sessionDescription: session.sessionDescription,
+      technologies: session.technologies,
+      category: session.category,
+    },
+  });
   const onSubmit: SubmitHandler<ISessionForm> = async (data) => {
+    console.log(data);
+
     try {
-      await axiosInstance.post("/sessions/", data, {
+      await axiosInstance.put(`/sessions/${session.id}`, data, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
       });
-      toast.success("Create successful!", {
+      toast.success("Edit successful !", {
         position: "top-center",
         duration: 1000,
       });
@@ -74,7 +87,6 @@ const SessionForm = ({ closeModal }: IProps) => {
       });
     }
   };
-
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
@@ -97,7 +109,7 @@ const SessionForm = ({ closeModal }: IProps) => {
           <Textarea
             id="Project Description"
             placeholder="Project Description"
-            {...methods.register("descriptionSession", {
+            {...methods.register("sessionDescription", {
               required: true,
               min: 100,
               max: 250,
@@ -151,7 +163,7 @@ const SessionForm = ({ closeModal }: IProps) => {
             width="w-full"
             type="submit"
           >
-            Create Session
+            Edit Session
           </Button>
           <Button
             className=" hover:bg-red-400 bg-red-600 font-medium"
@@ -170,4 +182,4 @@ const SessionForm = ({ closeModal }: IProps) => {
   );
 };
 
-export default SessionForm;
+export default EditSessionForm;

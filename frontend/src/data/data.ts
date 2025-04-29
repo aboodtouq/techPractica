@@ -117,7 +117,7 @@ export const tags: Itags[] = [
   },
 ];
 export const inputData: Iinpform = {
-  name: "nameSession",
+  name: "sessionName",
   type: "text",
   placeholder: "Project Name",
   label: "Project Name",

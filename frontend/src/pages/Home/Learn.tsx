@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator";
 import SessionCard from "../../components/ui/SessionCard";
-import { CategoryType } from "../../data/data";
 import { CookiesService, useAuthQuery } from "../../imports";
 import { ISession } from "../../interfaces";
 
@@ -27,7 +26,7 @@ const Learn = () => {
   const onClickPrev = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
-
+  console.log(sessionData);
   const totalSessions = sessionData?.sessionsCount || 0;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
 

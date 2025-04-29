@@ -3,15 +3,19 @@ import {
   CookiesService,
   Modal,
   SessionCardUser,
-  SessionForm,
+  CreateSessionForm,
   useAuthQuery,
 } from "../../imports.ts";
 import useModal from "../../hooks/useModal.ts";
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator.tsx";
 import { ISession } from "../../interfaces.ts";
+import EditSessionForm from "../../components/EditFormSession.tsx";
 const Projects = () => {
   const { isOpen, openModal, closeModal } = useModal();
+  const [selectedSession, setSelectedSession] = useState<ISession>();
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+
   const [page, setPage] = useState<number>(1);
   const sessionsPerPage = 12;
   const token = CookiesService.get("UserToken");
@@ -29,19 +33,56 @@ const Projects = () => {
   const onClickNext = () => {
     setPage((prev) => prev + 1);
   };
+  const openEditModal = (session: ISession) => {
+    setSelectedSession(session);
+    setIsModalEditOpen(true);
+  };
+  const closeEditModal = () => {
+    setSelectedSession({
+      category: "Cybersecurity",
+      sessionDescription: "",
+      sessionName: "",
+      technologies: [""],
+      id: 4,
+    });
+    setIsModalEditOpen(false);
+  };
 
   const onClickPrev = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
   const totalSessions = sessionData?.sessionsCount || 0;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
-  const Data = sessionData?.sessions.map((session: ISession, index: number) => (
-    <SessionCardUser key={index} session={session} />
-  ));
+  const Data = sessionData?.sessions.map(
+    ({
+      category,
+      sessionDescription,
+      sessionName,
+      technologies,
+      id,
+    }: ISession) => (
+      <SessionCardUser
+        category={category}
+        openModal={() => {
+          openEditModal({
+            category,
+            sessionDescription,
+            sessionName,
+            technologies,
+            id,
+          });
+        }}
+        sessionDescription={sessionDescription}
+        sessionName={sessionName}
+        technologies={technologies}
+        key={id}
+      />
+    )
+  );
   return (
     <>
       <main className="min-h-screen container flex flex-col pb-30 justify-between">
-        <div className="flex flex-row items-center justify-between m-10">
+        <div className="flex md:flex-row  flex-col items-center justify-between m-10">
           <div className="  flex-1/2 font-medium text-3xl ml-4">
             My Sessions
           </div>
@@ -58,9 +99,18 @@ const Projects = () => {
           closeModal={closeModal}
           title="ADD A NEW SESSION"
         >
-          <SessionForm closeModal={closeModal} />
+          <CreateSessionForm closeModal={closeModal} />
         </Modal>
-
+        <Modal
+          isOpen={isModalEditOpen}
+          closeModal={closeEditModal}
+          title="EDIT SESSION"
+        >
+          <EditSessionForm
+            session={selectedSession!}
+            closeModal={closeEditModal}
+          />
+        </Modal>
         <div className="flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {Data}

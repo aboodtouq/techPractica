@@ -115,14 +115,14 @@ export const ResetinputPassword: IResetPas[] = [
   },
 ];
 export type ISessionForm = {
-  nameSession: string;
-  descriptionSession: string;
+  sessionName: string;
+  sessionDescription: string;
   category: string;
   technologies: string[];
   fields: string[];
   privateSession: boolean;
 };
-export type FormInput = "nameSession" | "descriptionSession";
+export type FormInput = "sessionName" | "sessionDescription";
 
 export interface Iinpform {
   name: FormInput;
@@ -132,9 +132,10 @@ export interface Iinpform {
 }
 export type Category = {
   categoryName: string;
-  technologies: any[];
+  technologies?: any[];
 };
 export interface ISession {
+  id: number;
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
