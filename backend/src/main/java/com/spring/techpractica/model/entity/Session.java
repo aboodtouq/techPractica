@@ -107,17 +107,10 @@ public class Session {
     private List<Technology> sessionTechnologies = new ArrayList<>();
 
     @ManyToMany
-<<<<<<< HEAD
-    @JoinTable(name = "FIELDS_SESSIONS",
-    joinColumns = @JoinColumn(name = "session_id"),
-    inverseJoinColumns = @JoinColumn(name = "field_name"))
-    private List<Field> fields;
-=======
     @JoinTable(
             name = "FIELDS_SESSIONS",
             joinColumns = @JoinColumn(name = "field_name"),
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
     private List<Field> sessionFields = new ArrayList<>();
->>>>>>> 72bc7089974fdc73faaed020aea303aae21549a1
 }

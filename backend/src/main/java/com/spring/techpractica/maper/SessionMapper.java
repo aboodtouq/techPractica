@@ -40,8 +40,7 @@ public class SessionMapper {
                 .technologies(session.getSessionTechnologies().stream()
                         .map(Technology::getTechnologyName).toList())
                 .isPrivate(session.isPrivate())
-                .fields(session.
-                        getFields()
+                .fields(session.getSessionFields()
                         .stream()
                         .map(Field::getFieldName)
                         .toList())
