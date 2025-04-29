@@ -13,6 +13,8 @@ import { ISessionForm, Category, IErrorResponse } from "../interfaces";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CreatSessionSchema } from "../validation/index.ts";
 interface IProps {
   closeModal: () => void;
 }
@@ -82,7 +84,11 @@ const SessionForm = ({ closeModal }: IProps) => {
             id={inputData.label}
             type="text"
             placeholder={inputData.placeholder}
-            {...methods.register(inputData.name)}
+            {...methods.register(inputData.name, {
+              required: true,
+              min: 8,
+              max: 20,
+            })}
           />
         </div>
 
@@ -91,7 +97,11 @@ const SessionForm = ({ closeModal }: IProps) => {
           <Textarea
             id="Project Description"
             placeholder="Project Description"
-            {...methods.register("descriptionSession")}
+            {...methods.register("descriptionSession", {
+              required: true,
+              min: 100,
+              max: 250,
+            })}
           />
         </div>
 
@@ -140,12 +150,6 @@ const SessionForm = ({ closeModal }: IProps) => {
             className=" hover:bg-green-400 bg-green-600 font-medium"
             width="w-full"
             type="submit"
-            onClick={() => {
-              setTimeout(() => {
-                closeModal();
-                methods.reset();
-              }, 200);
-            }}
           >
             Create Session
           </Button>

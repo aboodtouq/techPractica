@@ -1,29 +1,35 @@
+import { CategoryColor, CategoryType, slicer } from "../../data/data";
+
 interface SessionUserType {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
-  category: string;
+  category: CategoryType;
 }
 
 const SessionCardUser = ({ session }: { session: SessionUserType }) => {
+  const color = CategoryColor(session.category);
+
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between h-full max-w-sm border border-gray-200 relative">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col justify-between h-full w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl border border-gray-200 relative">
       {/* Title and Category */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold text-gray-900">
-          {session.sessionName}
+      <div className="flex  justify-between items-center mb-4">
+        <h2 className="text font-bold text-gray-900">
+          {slicer(session.sessionName, 20)}
         </h2>
-        <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+        <span
+          className={`${color} text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap`}
+        >
           {session.category}
         </span>
       </div>
-
       {/* Description */}
-      <p className="text-gray-600 text-sm mb-6">{session.sessionDescription}</p>
-
+      <p className="text-gray-600 text-sm mb-2 break-words overflow-hidden line-clamp-3 flex-grow">
+        {slicer(session.sessionDescription, 100)}
+      </p>
       {/* Technologies */}
       <div className="flex flex-wrap gap-2 mb-10">
-        {session.technologies.map((tech) => (
+        {session.technologies.slice(0, 5).map((tech) => (
           <span
             key={tech}
             className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-md"

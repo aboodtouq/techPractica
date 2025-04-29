@@ -23,6 +23,15 @@ import java.util.List;
 public class Session {
 
 
+    @PostUpdate
+    public void postUpdate() {
+        timestampList.add(
+                Timestamp.builder()
+                        .eventDate(LocalDate.now())
+                        .eventType(TimestampType.UPDATED)
+                        .build());
+    }
+
     @PrePersist
     public void prePersist() {
         sessionIsRunning = false;
@@ -32,7 +41,6 @@ public class Session {
                         .eventDate(LocalDate.now())
                         .eventType(TimestampType.CREATED)
                         .build());
-
     }
 
     @Id
@@ -67,7 +75,8 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.REMOVE})
+            cascade = {CascadeType.REMOVE},
+            orphanRemoval = true)
     private List<Requirement> sessionRequirements = new ArrayList<>();
 
     @OneToMany(mappedBy = "session",
@@ -98,8 +107,17 @@ public class Session {
     private List<Technology> sessionTechnologies = new ArrayList<>();
 
     @ManyToMany
+<<<<<<< HEAD
     @JoinTable(name = "FIELDS_SESSIONS",
     joinColumns = @JoinColumn(name = "session_id"),
     inverseJoinColumns = @JoinColumn(name = "field_name"))
     private List<Field> fields;
+=======
+    @JoinTable(
+            name = "FIELDS_SESSIONS",
+            joinColumns = @JoinColumn(name = "field_name"),
+            inverseJoinColumns = @JoinColumn(name = "session_id")
+    )
+    private List<Field> sessionFields = new ArrayList<>();
+>>>>>>> 72bc7089974fdc73faaed020aea303aae21549a1
 }

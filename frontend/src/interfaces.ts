@@ -1,3 +1,5 @@
+import { CategoryType } from "./data/data";
+
 export type FormInputRegister =
   | "firstName"
   | "lastName"
@@ -132,3 +134,9 @@ export type Category = {
   categoryName: string;
   technologies: any[];
 };
+export interface ISession {
+  sessionName: string;
+  sessionDescription: string;
+  technologies: string[];
+  category: CategoryType;
+}

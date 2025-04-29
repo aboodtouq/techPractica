@@ -56,7 +56,6 @@ export const ResetSchema = yup
   })
   .required();
 
-
 export const ResetPassSchema = yup
   .object({
     password: yup
@@ -68,5 +67,23 @@ export const ResetPassSchema = yup
       .string()
       .oneOf([yup.ref("password")], "Passwords must match")
       .required("Confirm Password is required"),
+  })
+  .required();
+export const CreatSessionSchema = yup
+  .object({
+    nameSession: yup
+      .string()
+      .required("Session Name is required")
+      .min(100, "Session Name  should be at least 8 charachters.")
+      .max(20, "Must be 20 characters or less"),
+    descriptionSession: yup
+      .string()
+      .min(100, "Session Name  should be at least 100 charachters.")
+      .max(250, "Session Description Must be 250 characters or less")
+      .required("Session Description is required"),
+    category: yup.string().required("Category is required"),
+    technologies: yup.array().of(yup.string().required()).optional(),
+    fields: yup.array().of(yup.string().required()).optional(),
+    privateSession: yup.boolean().required("Select at least one "),
   })
   .required();

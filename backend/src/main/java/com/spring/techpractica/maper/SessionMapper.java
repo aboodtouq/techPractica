@@ -1,6 +1,6 @@
 package com.spring.techpractica.maper;
 
-import com.spring.techpractica.dto.session.SessionCreatorRequest;
+import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.model.entity.Session;
@@ -15,12 +15,12 @@ public class SessionMapper {
     private SessionMapper() {
     }
 
-    public static Session sessionCreatorToSession(SessionCreatorRequest sessionCreatorRequest) {
+    public static Session sessionCreatorToSession(SessionRequest sessionRequest) {
 
         return Session.builder()
-                .sessionName(sessionCreatorRequest.getNameSession())
-                .sessionDescription(sessionCreatorRequest.getDescriptionSession())
-                .isPrivate(sessionCreatorRequest.isPrivateSession())
+                .sessionName(sessionRequest.getNameSession())
+                .sessionDescription(sessionRequest.getDescriptionSession())
+                .isPrivate(sessionRequest.isPrivateSession())
                 .sessionCategories(new ArrayList<>())
                 .sessionRequests(new ArrayList<>())
                 .sessionRequirements(new ArrayList<>())
@@ -33,6 +33,7 @@ public class SessionMapper {
     public static SessionResponse sessionToSessionResponse(Session session) {
         return SessionResponse.
                 builder()
+                .id(session.getSessionId())
                 .sessionName(session.getSessionName())
                 .sessionDescription(session.getSessionDescription())
                 .category(session.getSessionCategories().getFirst().getCategoryName())
