@@ -92,8 +92,8 @@ export default function MultiSelectField<T>({
                   </ListboxOption>
                 ))}
             </ListboxOptions>
+            {errors[name] && <ErrorMsg Msg={errorMessage} />}
           </div>
-          {errors[name] && <ErrorMsg Msg={errorMessage} />}
         </Listbox>
       )}
     />

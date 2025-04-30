@@ -122,7 +122,7 @@ export type ISessionForm = {
   fields: string[];
   privateSession: boolean;
 };
-export type FormInput = "sessionName" | "sessionDescription";
+export type FormInput = "nameSession" | "sessionDescription";
 
 export interface Iinpform {
   name: FormInput;
@@ -140,4 +140,6 @@ export interface ISession {
   sessionDescription: string;
   technologies: string[];
   category: CategoryType;
+  fields: string[];
+  privateSession: string;
 }

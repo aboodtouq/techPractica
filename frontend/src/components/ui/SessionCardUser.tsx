@@ -1,4 +1,4 @@
-import { CategoryColor, CategoryType, slicer } from "../../data/data";
+import { CategoryColor, CategoryType } from "../../data/data";
 
 interface SessionUserType {
   sessionName: string;
@@ -22,7 +22,9 @@ const SessionCardUser = ({
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col justify-between h-full w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl border border-gray-200 relative">
       {/* Title and Category */}
       <div className="flex  justify-between items-center mb-4">
-        <h2 className="text font-bold text-gray-900">{sessionName}</h2>
+        <h2 className="text font-bold text-gray-900">
+          {sessionName?.slice(0, 20)}
+        </h2>
         <span
           className={`${color} text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap`}
         >
@@ -31,7 +33,7 @@ const SessionCardUser = ({
       </div>
       {/* Description */}
       <p className="text-gray-600 text-sm mb-2 break-words overflow-hidden line-clamp-3 flex-grow">
-        {sessionDescription}
+        {sessionDescription?.slice(0, 100)}
       </p>
       {/* Technologies */}
       <div className="flex flex-wrap gap-2 mb-10">

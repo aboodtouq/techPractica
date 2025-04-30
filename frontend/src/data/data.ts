@@ -23,7 +23,6 @@ import {
   FaBug,
   FaProjectDiagram,
 } from "react-icons/fa";
-import { Iinpform } from "../interfaces";
 export const categories: Category[] = [
   {
     title: "Web Development",
@@ -116,12 +115,7 @@ export const tags: Itags[] = [
     txt: "Figma",
   },
 ];
-export const inputData: Iinpform = {
-  name: "sessionName",
-  type: "text",
-  placeholder: "Project Name",
-  label: "Project Name",
-};
+
 export type CategoryType =
   | "Web Development"
   | "Cybersecurity"

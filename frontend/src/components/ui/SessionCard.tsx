@@ -1,4 +1,4 @@
-import { CategoryColor, CategoryType, slicer } from "../../data/data";
+import { CategoryColor, CategoryType } from "../../data/data";
 export interface SessionType {
   sessionName: string;
   sessionDescription: string;
@@ -12,7 +12,7 @@ const SessionCard = ({ session }: { session: SessionType }) => {
       {/* Title and Category */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-md font-bold text-gray-900">
-          {slicer(session.sessionName, 20)}
+          {session.sessionName?.slice(0, 20)}
         </h2>
         <span
           className={`${color} text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap`}
@@ -23,7 +23,7 @@ const SessionCard = ({ session }: { session: SessionType }) => {
 
       {/* Description */}
       <p className="text-gray-600 text-sm mb-2 break-words overflow-hidden line-clamp-3 flex-grow">
-        {slicer(session.sessionDescription, 100)}
+        {session.sessionDescription?.slice(0, 100)}
       </p>
 
       {/* Technologies */}

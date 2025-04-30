@@ -27,7 +27,7 @@ const Learn = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
   console.log(sessionData);
-  const totalSessions = sessionData?.sessionsCount || 0;
+  const totalSessions = sessionData?.sessionsCount;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
 
   return (

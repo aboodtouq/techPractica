@@ -43,6 +43,8 @@ const Projects = () => {
       sessionDescription: "",
       sessionName: "",
       technologies: [""],
+      fields: [""],
+      privateSession: "",
       id: 4,
     });
     setIsModalEditOpen(false);
@@ -60,6 +62,8 @@ const Projects = () => {
       sessionName,
       technologies,
       id,
+      fields,
+      privateSession,
     }: ISession) => (
       <SessionCardUser
         category={category}
@@ -70,6 +74,8 @@ const Projects = () => {
             sessionName,
             technologies,
             id,
+            fields,
+            privateSession,
           });
         }}
         sessionDescription={sessionDescription}

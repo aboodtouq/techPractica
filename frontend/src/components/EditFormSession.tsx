@@ -4,81 +4,65 @@ import {
   SelectField,
   MultiSelectField,
   Button,
-  useAuthQuery,
-  CookiesService,
+  ErrorMsg,
 } from "../imports.ts";
-import { inputData } from "../data/data.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import {
-  ISessionForm,
-  Category,
-  IErrorResponse,
-  ISession,
-} from "../interfaces.ts";
+import { Category, IErrorResponse, ISession } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { token, useCategories, useFields, useTechnologies } from "../api.ts";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { sessionSchema } from "../validation/index.ts";
+import { InferType } from "yup";
 interface IProps {
   session: ISession;
   closeModal: () => void;
 }
+
 const EditSessionForm = ({ session, closeModal }: IProps) => {
   /*______SelectData______*/
-  const Token = CookiesService.get("UserToken");
-  const { data: CategoryData } = useAuthQuery({
-    queryKey: ["CategoryData"],
-    url: "/tech-skills/categories",
-    config: {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    },
-  });
-  const { data: fieldsData } = useAuthQuery({
-    queryKey: ["fieldsData"],
-    url: "/tech-skills/fields",
-    config: {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    },
-  });
+  const { data: CategoryData } = useCategories();
+  const { data: fieldsData } = useFields();
+  const { data: technologiesData } = useTechnologies();
   const fieldName = fieldsData?.map(
     (tech: { fieldName: string }) => tech.fieldName
   );
-  const { data: technologiesData } = useAuthQuery({
-    queryKey: ["technologiesData"],
-    url: "/tech-skills/technologies",
-    config: {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    },
-  });
   const technologyNames = technologiesData?.map(
     (tech: { technologyName: string }) => tech.technologyName
   );
-  const methods = useForm<ISessionForm>({
+  /*______onSubmit______*/
+  type CreateSession = InferType<typeof sessionSchema>;
+  const methods = useForm<CreateSession>({
+    resolver: yupResolver(sessionSchema),
+
     defaultValues: {
-      sessionName: session.sessionName,
-      sessionDescription: session.sessionDescription,
+      nameSession: session.sessionName,
+      descriptionSession: session.sessionDescription,
       technologies: session.technologies,
       category: session.category,
+      fields: session.fields,
+      privateSession: session.privateSession,
     },
   });
-  const onSubmit: SubmitHandler<ISessionForm> = async (data) => {
-    console.log(data);
 
+  const onSubmit: SubmitHandler<CreateSession> = async (data) => {
+    const formattedData = {
+      ...data,
+      privateSession: data.privateSession === "Private Session",
+    };
     try {
-      await axiosInstance.put(`/sessions/${session.id}`, data, {
+      await axiosInstance.put(`/sessions/${session.id}`, formattedData, {
         headers: {
-          Authorization: `Bearer ${Token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       toast.success("Edit successful !", {
         position: "top-center",
         duration: 1000,
       });
+      methods.reset();
+      closeModal();
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
       toast.error(`${ErrorObj.response?.data.message}`, {
@@ -91,17 +75,16 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor={inputData.label}>{inputData.label}</label>
+          <label htmlFor="SessionName">Session Name</label>
           <Inputs
-            id={inputData.label}
+            id="SessionName"
             type="text"
-            placeholder={inputData.placeholder}
-            {...methods.register(inputData.name, {
-              required: true,
-              min: 8,
-              max: 20,
-            })}
+            placeholder="Session Name"
+            {...methods.register("nameSession")}
           />
+          {methods.formState.errors && (
+            <ErrorMsg Msg={methods.formState.errors.nameSession?.message} />
+          )}
         </div>
 
         <div>
@@ -109,29 +92,20 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
           <Textarea
             id="Project Description"
             placeholder="Project Description"
-            {...methods.register("sessionDescription", {
-              required: true,
-              min: 100,
-              max: 250,
-            })}
+            {...methods.register("descriptionSession")}
           />
+          {methods.formState.errors && (
+            <ErrorMsg
+              Msg={methods.formState.errors.descriptionSession?.message}
+            />
+          )}
         </div>
-
-        <div className="flex flex-row space-x-6">
-          {["true", "false"].map((val) => (
-            <label key={val}>
-              <input
-                type="radio"
-                value={val}
-                {...methods.register("privateSession", {
-                  required: "Please select an option",
-                })}
-              />
-              {val === "true" ? "Private" : "Public"} Session
-            </label>
-          ))}
-        </div>
-
+        <SelectField<string>
+          label="Sesseion State"
+          name="privateSession"
+          options={["Public Sesssion", "Private Session"]}
+          getLabel={(item) => item}
+        />
         {fieldName?.length > 0 && (
           <MultiSelectField<string>
             label="Fields"
