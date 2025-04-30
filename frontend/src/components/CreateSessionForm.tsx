@@ -30,6 +30,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
   const technologyNames = technologiesData?.map(
     (tech: { technologyName: string }) => tech.technologyName
   );
+
   /*______onSubmit______*/
   type CreateSession = InferType<typeof sessionSchema>;
 
@@ -52,8 +53,10 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
         position: "top-center",
         duration: 1000,
       });
-      methods.reset();
-      closeModal();
+      setTimeout(() => {
+        closeModal();
+        window.location.href = window.location.href;
+      }, 500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
       toast.error(`${ErrorObj.response?.data.message}`, {
@@ -92,21 +95,6 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           )}
         </div>
 
-        <SelectField<string>
-          label="Sesseion State"
-          name="privateSession"
-          options={["Public Session", "Private Session"]}
-          getLabel={(item) => item}
-        />
-
-        {fieldNames?.length > 0 && (
-          <MultiSelectField<string>
-            label="Fields"
-            name="fields"
-            options={fieldNames}
-            getLabel={(item) => item}
-          />
-        )}
         {CategoryData?.length > 0 && (
           <SelectField<Category>
             label="Category"
@@ -124,6 +112,21 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
             getLabel={(item) => item}
           />
         )}
+        {fieldNames?.length > 0 && (
+          <MultiSelectField<string>
+            label="Fields"
+            name="fields"
+            options={fieldNames}
+            getLabel={(item) => item}
+          />
+        )}
+
+        <SelectField<string>
+          label="Sesseion State"
+          name="privateSession"
+          options={["Public Session", "Private Session"]}
+          getLabel={(item) => item}
+        />
         <div className="flex mt-4 space-x-2">
           <Button
             className=" hover:bg-green-400 bg-green-600 font-medium"

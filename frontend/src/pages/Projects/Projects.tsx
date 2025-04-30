@@ -9,11 +9,12 @@ import {
 import useModal from "../../hooks/useModal.ts";
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator.tsx";
-import { ISession } from "../../interfaces.ts";
+import { ISessionRes } from "../../interfaces.ts";
 import EditSessionForm from "../../components/EditFormSession.tsx";
+import { BiPlus } from "react-icons/bi";
 const Projects = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const [selectedSession, setSelectedSession] = useState<ISession>();
+  const [selectedSession, setSelectedSession] = useState<ISessionRes>();
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
 
   const [page, setPage] = useState<number>(1);
@@ -33,7 +34,7 @@ const Projects = () => {
   const onClickNext = () => {
     setPage((prev) => prev + 1);
   };
-  const openEditModal = (session: ISession) => {
+  const openEditModal = (session: ISessionRes) => {
     setSelectedSession(session);
     setIsModalEditOpen(true);
   };
@@ -44,7 +45,7 @@ const Projects = () => {
       sessionName: "",
       technologies: [""],
       fields: [""],
-      privateSession: "",
+      isPrivate: false,
       id: 4,
     });
     setIsModalEditOpen(false);
@@ -63,41 +64,43 @@ const Projects = () => {
       technologies,
       id,
       fields,
-      privateSession,
-    }: ISession) => (
-      <SessionCardUser
-        category={category}
-        openModal={() => {
-          openEditModal({
-            category,
-            sessionDescription,
-            sessionName,
-            technologies,
-            id,
-            fields,
-            privateSession,
-          });
-        }}
-        sessionDescription={sessionDescription}
-        sessionName={sessionName}
-        technologies={technologies}
-        key={id}
-      />
+      isPrivate,
+    }: ISessionRes) => (
+      <>
+        <SessionCardUser
+          category={category}
+          openModal={() => {
+            openEditModal({
+              category,
+              sessionDescription,
+              sessionName,
+              technologies,
+              id,
+              fields,
+              isPrivate,
+            });
+          }}
+          sessionDescription={sessionDescription}
+          sessionName={sessionName}
+          technologies={technologies}
+          key={id}
+        />
+        {console.log(isPrivate)}{" "}
+      </>
     )
   );
+  console.log(sessionData?.sessions);
   return (
     <>
-      <main className="min-h-screen container flex flex-col pb-30 justify-between">
-        <div className="flex md:flex-row  flex-col items-center justify-between m-10">
-          <div className="  flex-1/2 font-medium text-3xl ml-4">
-            My Sessions
-          </div>
+      <main className="min-h-screen container mx-auto p-10 pb-20 flex flex-col justify-between">
+        <div className="flex md:flex-row flex-col items-center justify-between mb-5">
+          <div className=" font-medium text-3xl ml-4">My Sessions</div>
           <Button
-            className=" bg-green-200 hover:bg-green-200 text-green-800 px-10 font-medium"
+            className="bg-green-200 hover:bg-green-200 text-green-800 px-10 font-medium "
+            width="w-fit"
             onClick={openModal}
-            width=" w-fit"
           >
-            Add Session
+            <BiPlus size={18} className="mr-1" /> Add Session
           </Button>
         </div>
         <Modal
@@ -118,7 +121,7 @@ const Projects = () => {
           />
         </Modal>
         <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-4 gap-6 justify-items-center">
             {Data}
           </div>
         </div>

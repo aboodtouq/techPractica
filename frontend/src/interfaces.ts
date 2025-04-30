@@ -141,5 +141,14 @@ export interface ISession {
   technologies: string[];
   category: CategoryType;
   fields: string[];
-  privateSession: string;
+  privateSession: boolean;
+}
+export interface ISessionRes {
+  id: number;
+  sessionName: string;
+  sessionDescription: string;
+  technologies: string[];
+  category: CategoryType;
+  fields: string[];
+  isPrivate: boolean;
 }

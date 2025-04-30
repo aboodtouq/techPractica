@@ -7,7 +7,7 @@ import {
   ErrorMsg,
 } from "../imports.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Category, IErrorResponse, ISession } from "../interfaces.ts";
+import { Category, IErrorResponse, ISessionRes } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
@@ -16,7 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
 interface IProps {
-  session: ISession;
+  session: ISessionRes;
   closeModal: () => void;
 }
 
@@ -42,10 +42,9 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
       technologies: session.technologies,
       category: session.category,
       fields: session.fields,
-      privateSession: session.privateSession,
+      privateSession: session.isPrivate ? "Private Session" : "Public Sesssion",
     },
   });
-
   const onSubmit: SubmitHandler<CreateSession> = async (data) => {
     const formattedData = {
       ...data,
@@ -61,8 +60,10 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
         position: "top-center",
         duration: 1000,
       });
-      methods.reset();
-      closeModal();
+      setTimeout(() => {
+        closeModal();
+        window.location.href = window.location.href;
+      }, 500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
       toast.error(`${ErrorObj.response?.data.message}`, {
@@ -100,20 +101,6 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
             />
           )}
         </div>
-        <SelectField<string>
-          label="Sesseion State"
-          name="privateSession"
-          options={["Public Sesssion", "Private Session"]}
-          getLabel={(item) => item}
-        />
-        {fieldName?.length > 0 && (
-          <MultiSelectField<string>
-            label="Fields"
-            name="fields"
-            options={fieldName}
-            getLabel={(item) => item}
-          />
-        )}
         {CategoryData?.length > 0 && (
           <SelectField<Category>
             label="Category"
@@ -131,6 +118,21 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
             getLabel={(item) => item}
           />
         )}
+        {fieldName?.length > 0 && (
+          <MultiSelectField<string>
+            label="Fields"
+            name="fields"
+            options={fieldName}
+            getLabel={(item) => item}
+          />
+        )}
+        <SelectField<string>
+          label="Sesseion State"
+          name="privateSession"
+          options={["Public Sesssion", "Private Session"]}
+          getLabel={(item) => item}
+        />
+
         <div className="flex mt-4 space-x-2">
           <Button
             className=" hover:bg-green-400 bg-green-600 font-medium"

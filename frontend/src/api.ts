@@ -1,5 +1,3 @@
-// sessionApi.ts
-
 import { CookiesService, useAuthQuery } from "./imports.ts";
 
 export const token = CookiesService.get("UserToken");

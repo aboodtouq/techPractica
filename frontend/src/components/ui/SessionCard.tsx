@@ -1,34 +1,37 @@
 import { CategoryColor, CategoryType } from "../../data/data";
+
 export interface SessionType {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
   category: CategoryType;
 }
+
 const SessionCard = ({ session }: { session: SessionType }) => {
   const color = CategoryColor(session.category);
+
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col justify-between h-full w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl border border-gray-200 relative">
-      {/* Title and Category */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-md font-bold text-gray-900">
-          {session.sessionName?.slice(0, 20)}
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
+      {/* Header Section */}
+      <div className="flex justify-between items-start gap-2 mb-3">
+        <h2 className="text-md font-semibold text-gray-900  flex-1">
+          {session.sessionName}
         </h2>
         <span
-          className={`${color} text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap`}
+          className={`${color}  text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit`}
         >
           {session.category}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm mb-2 break-words overflow-hidden line-clamp-3 flex-grow">
-        {session.sessionDescription?.slice(0, 100)}
+      <p className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3">
+        {session.sessionDescription.trim().slice(0, 100)}
       </p>
 
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        {session.technologies.slice(0, 5).map((tech) => (
+      {/* Technologies Section */}
+      <div className="flex flex-wrap gap-2 mb-12 sm:mb-10 max-h-7">
+        {session.technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
             className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-md"
@@ -36,11 +39,15 @@ const SessionCard = ({ session }: { session: SessionType }) => {
             {tech}
           </span>
         ))}
+        {session.technologies.length > 4 && (
+          <span className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-md">
+            +{session.technologies.length - 4}
+          </span>
+        )}
       </div>
-
-      {/* Show More Button */}
+      {/* Show More Button (absolute positioned as requested) */}
       <button
-        className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium  ${color} bg-white transition group`}
+        className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors group`}
       >
         Show More
         <svg
