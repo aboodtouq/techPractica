@@ -21,6 +21,7 @@ public class SessionFieldLinker {
         fieldNames.forEach(name -> {
             Field field = fieldManagementData.findFieldByFieldName(name)
                     .orElseThrow(() -> new ResourcesNotFoundException("Field not found"));
+            session.getSessionFields().add(field);
             Requirement requirement = Requirement.builder()
                     .field(field)
                     .session(session)
