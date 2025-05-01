@@ -15,10 +15,16 @@ interface IProps {
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, title, description, children }: IProps) => {
+const Modal = ({
+  isOpen,
+  title,
+  description,
+  children,
+  closeModal,
+}: IProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50 w-100" onClose={() => {}}>
+      <Dialog as="div" className="relative z-50 w-100" onClose={closeModal}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

@@ -22,8 +22,10 @@ export const router = createBrowserRouter(
     <>
       <Route path="/" element={<LayoutHome />}>
         <Route index element={<Home />} />
-        <Route path="Learn" element={<Learn />} />
-        <Route path="Projects" element={<ProjectsLayout />}>
+        <Route path="Learn/:category" element={<Learn />} />
+        <Route path="Learn/" element={<Learn />} />
+
+        <Route path="Sessions" element={<ProjectsLayout />}>
           <Route index element={<Projects />} />
           <Route path="SessionRequests" element={<SessionRequests />} />
         </Route>

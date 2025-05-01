@@ -127,16 +127,16 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           options={["Public Session", "Private Session"]}
           getLabel={(item) => item}
         />
-        <div className="flex mt-4 space-x-2">
+        <div className="flex mt-6 gap-4">
           <Button
-            className=" hover:bg-green-400 bg-green-600 font-medium"
+            className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"
             width="w-full"
             type="submit"
           >
             Create Session
           </Button>
           <Button
-            className=" hover:bg-red-400 bg-red-600 font-medium"
+            className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
             width="w-full"
             type="button"
             onClick={() => {

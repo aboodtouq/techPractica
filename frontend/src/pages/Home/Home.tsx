@@ -1,17 +1,20 @@
 import { motion } from "framer-motion";
 import { categories, features } from "../../data/data.ts";
 import { useNavigate } from "react-router-dom";
+import { CookiesService } from "../../imports.ts";
 
 const HomePage = () => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
-  const navegate = useNavigate();
+  const navigate = useNavigate();
+  const token = CookiesService.get("UserToken");
+  const txt = token ? "Start Learning" : "Get Started";
   return (
     <div className="overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative bg-gradient-to-br from-gray-50 to-white h-[600px] flex items-center justify-center px-6">
+      <section className="relative bg-gradient-to-br from-[#f8fafc] to-white h-[600px] flex items-center justify-center px-6">
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/src/assets/left-side.png"
@@ -32,32 +35,34 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           className="text-center max-w-2xl z-10"
         >
-          <motion.div
-            variants={fadeIn}
-            transition={{ delay: 0.2 }}
-            className="mb-4 inline-block rounded-full border border-gray-200 px-4 py-1 text-xs text-gray-600 bg-white/80 backdrop-blur-sm"
-          >
-            Start Your Tech Journey Today
-          </motion.div>
+          {!token && (
+            <motion.div
+              variants={fadeIn}
+              transition={{ delay: 0.2 }}
+              className="mb-4 inline-block rounded-full border border-gray-200 px-4 py-1 text-xs text-gray-600 bg-white/80 backdrop-blur-sm"
+            >
+              Start Your Tech Journey Today
+            </motion.div>
+          )}
           <motion.h1
             variants={fadeIn}
             transition={{ delay: 0.3 }}
             className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight"
           >
-            Accelerate Your <span className="text-green-500">Tech Career</span>
+            Turn Knowledge <span className="text-[#42D5AE]"> into Action</span>
           </motion.h1>
           <motion.div
             variants={fadeIn}
             transition={{ delay: 0.4 }}
-            className="w-24 h-1 bg-gradient-to-r from-green-400 to-teal-500 mx-auto rounded-full"
+            className="w-24 h-1 bg-[#42D5AE] mx-auto rounded-full"
           />
           <motion.p
             variants={fadeIn}
             transition={{ delay: 0.5 }}
             className="mt-6 text-gray-600 text-lg leading-relaxed"
           >
-            Join thousands of developers leveling up their skills through our
-            interactive coding sessions and hands-on projects.
+            Build real-world projects and apply your technical skills in a
+            practical, hands-on environment.
           </motion.p>
           <motion.div
             variants={fadeIn}
@@ -66,18 +71,20 @@ const HomePage = () => {
           >
             <button
               onClick={() => {
-                navegate("/Learn");
+                token
+                  ? navigate("/Learn", { replace: true })
+                  : navigate("/User/Register", { replace: true });
               }}
-              className="bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Get Started
+              {txt}
             </button>
           </motion.div>
         </motion.div>
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-[#f8fafc] py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0 }}
@@ -89,7 +96,7 @@ const HomePage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Explore Categories
             </h2>
-            <div className="w-44 h-1 bg-gradient-to-r from-green-400 to-teal-500 mx-auto mb-12 rounded-full" />
+            <div className="w-44 h-1 bg-[#42D5AE] mx-auto mb-12 rounded-full" />
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
@@ -102,8 +109,9 @@ const HomePage = () => {
                 variants={fadeIn}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="group flex flex-col items-center p-6 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
+                onClick={() => navigate(`/Learn/${title}`)}
               >
-                <div className="bg-white p-4 rounded-full shadow-sm group-hover:shadow-md group-hover:bg-green-50 transition-all mb-4">
+                <div className="bg-white p-4 rounded-full shadow-sm group-hover:shadow-md group-hover:bg-[#42D5AE]/10 transition-all mb-4">
                   <Icon className={`${style} text-xl`} />
                 </div>
                 <h3 className="text-base font-semibold text-gray-800 text-center">
@@ -128,7 +136,7 @@ const HomePage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               Why Choose Us?
             </h2>
-            <div className="w-44 h-1 bg-gradient-to-r from-green-400 to-teal-500 mx-auto mt-4 rounded-full" />
+            <div className="w-44 h-1 bg-[#42D5AE] mx-auto mt-4 rounded-full" />
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -142,7 +150,7 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 border border-gray-100"
               >
-                <div className="bg-green-50 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-6 mx-auto">
+                <div className="bg-[#42D5AE]/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-6 mx-auto">
                   <Icon className={`${style} text-xl`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 text-center mb-3">

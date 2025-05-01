@@ -20,6 +20,7 @@ import CookiesService from "../../service.ts";
 const ResetPass = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState<{
     otpId?: number;
     otp?: string;
@@ -80,7 +81,6 @@ const ResetPass = () => {
       );
       if (response.status === 200) {
         CookiesService.set("UserToken", response.data);
-
         setTimeout(() => setStep(3));
       }
     } catch (error) {
@@ -91,6 +91,7 @@ const ResetPass = () => {
       });
     }
   };
+
   // Step 3: New Password
   type PasswordForm = { password: string; confirmPassword: string };
   const {
@@ -116,7 +117,6 @@ const ResetPass = () => {
       }
     } catch (error) {
       const errorObj = error as AxiosError<IErrorResponse>;
-
       toast.error(`${errorObj.response?.data.message}`, {
         position: "top-center",
         duration: 2000,
@@ -124,128 +124,157 @@ const ResetPass = () => {
     }
   };
 
-  const [showPassword, setShowPassword] = useState(false);
-  const RenderRegisterForm = ResetinputPassword.map(
-    ({ label, name, placeholder, type }) => {
-      const isPasswordField = type === "password";
-      return (
-        <div key={name}>
-          <label htmlFor={label}>{label}</label>
-          <div className="relative">
-            <Inputs
-              id={label}
-              type={
-                isPasswordField ? (showPassword ? "text" : "password") : type
-              }
-              placeholder={placeholder}
-              {...registerPass(name)}
-            />
-            {isPasswordField && (
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
-              >
-                {showPassword ? (
-                  <BiHide className="w-5 h-5 text-gray-500" />
-                ) : (
-                  <BiShow className="w-5 h-5 text-gray-500" />
-                )}
-              </button>
-            )}
-          </div>
-          {passErrors[name] && <ErrorMsg Msg={passErrors[name]?.message} />}
+  const renderInputField = ({
+    label,
+    name,
+    placeholder,
+    type,
+  }: (typeof ResetinputPassword)[0]) => {
+    const isPasswordField = type === "password";
+    return (
+      <div className="mb-4">
+        <label
+          htmlFor={label}
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          {label}
+        </label>
+        <div className="relative">
+          <Inputs
+            id={label}
+            type={isPasswordField ? (showPassword ? "text" : "password") : type}
+            placeholder={placeholder}
+            {...registerPass(name)}
+            className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42D5AE] focus:border-transparent"
+          />
+          {isPasswordField && (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#42D5AE]"
+            >
+              {showPassword ? (
+                <BiHide className="w-5 h-5" />
+              ) : (
+                <BiShow className="w-5 h-5" />
+              )}
+            </button>
+          )}
         </div>
-      );
-    }
-  );
+        {passErrors[name] && <ErrorMsg Msg={passErrors[name]?.message} />}
+      </div>
+    );
+  };
 
   return (
-    <div className="mt-10">
-      <h2 className="text-2xl font-semibold mb-6 text-center">
-        Reset your password
-      </h2>
+    <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold text-[#022639]">Reset Password</h2>
+        <p className="text-gray-600 mt-2">
+          {step === 1 && "Enter your email to receive a verification code"}
+          {step === 2 && "Enter the 6-digit code sent to your email"}
+          {step === 3 && "Create your new password"}
+        </p>
+      </div>
 
       {step === 1 && (
-        <form onSubmit={handleEmailSubmit(onSubmitEmail)}>
-          <label>{ResetPassword.label}</label>
-          <Inputs
-            id={ResetPassword.label}
-            type={ResetPassword.type}
-            placeholder={ResetPassword.placeholder}
-            {...registerEmail(ResetPassword.name)}
-          />
-          {emailErrors[ResetPassword.name] && (
-            <ErrorMsg Msg={emailErrors[ResetPassword.name]?.message} />
-          )}
+        <form onSubmit={handleEmailSubmit(onSubmitEmail)} className="space-y-6">
+          <div>
+            <label
+              htmlFor={ResetPassword.label}
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {ResetPassword.label}
+            </label>
+            <Inputs
+              id={ResetPassword.label}
+              type={ResetPassword.type}
+              placeholder={ResetPassword.placeholder}
+              {...registerEmail(ResetPassword.name)}
+              className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42D5AE] focus:border-transparent"
+            />
+            {emailErrors[ResetPassword.name] && (
+              <ErrorMsg Msg={emailErrors[ResetPassword.name]?.message} />
+            )}
+          </div>
           <Button
             type="submit"
             disabled={isSubmittingEmail}
-            className="bg-green-400 hover:bg-green-600 mt-6"
+            className="w-full py-3 px-4 bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-colors"
           >
-            Send OTP
+            {isSubmittingEmail ? "Sending..." : "Send Verification Code"}
           </Button>
         </form>
       )}
 
       {step === 2 && (
-        <form onSubmit={handleOtpSubmit(onSubmitOtp)}>
-          <label>Enter OTP Code</label>
+        <form onSubmit={handleOtpSubmit(onSubmitOtp)} className="space-y-6">
           <input
             type="hidden"
             value={userData.otpId}
             {...registerOtp("otpId")}
           />
-
-          <Inputs
-            type="text"
-            placeholder="OTP"
-            {...registerOtp("otp", {
-              required: "OTP is required",
-              pattern: {
-                value: /^\d{6}$/,
-                message: "OTP must be exactly 6 digits",
-              },
-            })}
-          />
-          {otpErrors.otp && <ErrorMsg Msg={otpErrors.otp.message} />}
-
           <input
             type="hidden"
             value={userData.userEmail}
             {...registerOtp("userEmail")}
           />
 
+          <div>
+            <label
+              htmlFor="otp"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Verification Code
+            </label>
+            <Inputs
+              type="text"
+              placeholder="Enter 6-digit code"
+              {...registerOtp("otp", {
+                required: "Verification code is required",
+                pattern: {
+                  value: /^\d{6}$/,
+                  message: "Code must be exactly 6 digits",
+                },
+              })}
+              className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42D5AE] focus:border-transparent"
+            />
+            {otpErrors.otp && <ErrorMsg Msg={otpErrors.otp.message} />}
+          </div>
           <Button
             type="submit"
             disabled={isSubmittingOtp}
-            className="bg-green-400 hover:bg-green-600 mt-6"
+            className="w-full py-3 px-4 bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-colors"
           >
-            Verify OTP
+            {isSubmittingOtp ? "Verifying..." : "Verify Code"}
           </Button>
         </form>
       )}
 
       {step === 3 && (
-        <form onSubmit={handlePassSubmit(onSubmitPassword)}>
-          {RenderRegisterForm}
+        <form
+          onSubmit={handlePassSubmit(onSubmitPassword)}
+          className="space-y-6"
+        >
+          {ResetinputPassword.map(renderInputField)}
           <Button
             type="submit"
             disabled={isSubmittingPass}
-            className="bg-green-400 hover:bg-green-600 mt-6"
+            className="w-full py-3 px-4 bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-colors"
           >
-            Reset Password
+            {isSubmittingPass ? "Resetting..." : "Reset Password"}
           </Button>
         </form>
       )}
 
-      <Button
-        type="button"
-        onClick={() => navigate("/User")}
-        className="bg-green-400 hover:bg-green-600 mt-2"
-      >
-        Back to Login
-      </Button>
+      <div className="mt-4 text-center">
+        <button
+          onClick={() => navigate("/User")}
+          className="text-sm font-medium text-[#42D5AE] hover:text-[#38b28d]"
+        >
+          Back to Login
+        </button>
+      </div>
     </div>
   );
 };

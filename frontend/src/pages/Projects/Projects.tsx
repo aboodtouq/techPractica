@@ -18,7 +18,7 @@ const Projects = () => {
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
 
   const [page, setPage] = useState<number>(1);
-  const sessionsPerPage = 12;
+  const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
 
   const { data: sessionData } = useAuthQuery({
@@ -30,7 +30,6 @@ const Projects = () => {
       },
     },
   });
-  console.log(sessionData);
   const onClickNext = () => {
     setPage((prev) => prev + 1);
   };
@@ -54,6 +53,7 @@ const Projects = () => {
   const onClickPrev = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
+
   const totalSessions = sessionData?.sessionsCount || 0;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
   const Data = sessionData?.sessions.map(
@@ -66,76 +66,72 @@ const Projects = () => {
       fields,
       isPrivate,
     }: ISessionRes) => (
-      <>
-        <SessionCardUser
-          category={category}
-          openModal={() => {
-            openEditModal({
-              category,
-              sessionDescription,
-              sessionName,
-              technologies,
-              id,
-              fields,
-              isPrivate,
-            });
-          }}
-          sessionDescription={sessionDescription}
-          sessionName={sessionName}
-          technologies={technologies}
-          key={id}
-        />
-        {console.log(isPrivate)}{" "}
-      </>
+      <SessionCardUser
+        category={category}
+        openModal={() => {
+          openEditModal({
+            category,
+            sessionDescription,
+            sessionName,
+            technologies,
+            id,
+            fields,
+            isPrivate,
+          });
+        }}
+        sessionDescription={sessionDescription}
+        sessionName={sessionName}
+        technologies={technologies}
+        key={id}
+      />
     )
   );
-  console.log(sessionData?.sessions);
   return (
     <>
-      <main className="min-h-screen container mx-auto p-10 pb-20 flex flex-col justify-between">
-        <div className="flex md:flex-row flex-col items-center justify-between mb-5">
-          <div className=" font-medium text-3xl ml-4">My Sessions</div>
+      <Modal isOpen={isOpen} closeModal={closeModal} title="ADD A NEW SESSION">
+        <CreateSessionForm closeModal={closeModal} />
+      </Modal>
+      <Modal
+        isOpen={isModalEditOpen}
+        closeModal={closeEditModal}
+        title="EDIT SESSION"
+      >
+        <EditSessionForm
+          session={selectedSession!}
+          closeModal={closeEditModal}
+        />
+      </Modal>
+      <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#022639]">
+            My Sessions
+          </h1>
           <Button
-            className="bg-green-200 hover:bg-green-200 text-green-800 px-10 font-medium "
-            width="w-fit"
+            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
           >
-            <BiPlus size={18} className="mr-1" /> Add Session
+            <BiPlus size={18} className="mr-2" />
+            Add Session
           </Button>
         </div>
-        <Modal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          title="ADD A NEW SESSION"
-        >
-          <CreateSessionForm closeModal={closeModal} />
-        </Modal>
-        <Modal
-          isOpen={isModalEditOpen}
-          closeModal={closeEditModal}
-          title="EDIT SESSION"
-        >
-          <EditSessionForm
-            session={selectedSession!}
-            closeModal={closeEditModal}
-          />
-        </Modal>
-        <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-4 gap-6 justify-items-center">
+      </div>
+      <div className="lg:max-h-[900px] lg:min-h-[900px] min-h-screen flex flex-col -mt-5">
+        <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
             {Data}
           </div>
-        </div>
-        {pageCount > 1 && (
-          <div className="flex justify-end ">
-            <Paginator
-              page={page}
-              pageCount={pageCount}
-              onClickNext={onClickNext}
-              onClickPrev={onClickPrev}
-            />
-          </div>
-        )}
-      </main>
+          {pageCount > 1 && (
+            <div className="flex justify-start">
+              <Paginator
+                page={page}
+                pageCount={pageCount}
+                onClickNext={onClickNext}
+                onClickPrev={onClickPrev}
+              />
+            </div>
+          )}
+        </main>
+      </div>
     </>
   );
 };

@@ -2,16 +2,30 @@ import logo from "/src/assets/white.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-6 w-full mt-auto ">
-      <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
-        {/* Logo */}
-        <div className="text-xl font-bold text-white mb-4 sm:mb-0">
-          <img src={logo} className="h-32 w-32" />
+    <footer className="bg-[#022639] text-white w-full mt-auto border-t border-[#3b82f6]/30">
+      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
+        {/* Logo with hover effect */}
+        <div className="mb-4 sm:mb-0 transform transition duration-300 hover:scale-105">
+          <img src={logo} className="h-20 w-auto" alt="TechPractica Logo" />
         </div>
 
-        {/* Rights Text */}
-        <div className="text-sm text-gray-400">
-          © 2025 TechPractica All rights reserved.
+        {/* Copyright with dynamic year */}
+        <div className="text-center sm:text-right">
+          <p className="text-gray-200 text-sm">
+            © {new Date().getFullYear()} TechPractica. All rights reserved.
+          </p>
+          {/* Optional: Add Coderbyte-style links */}
+          <div className="flex space-x-4 mt-2 justify-center sm:justify-end">
+            <a href="#" className="text-gray-300 hover:text-white text-xs">
+              Terms
+            </a>
+            <a href="#" className="text-gray-300 hover:text-white text-xs">
+              Privacy
+            </a>
+            <a href="#" className="text-gray-300 hover:text-white text-xs">
+              Contact
+            </a>
+          </div>
         </div>
       </div>
     </footer>

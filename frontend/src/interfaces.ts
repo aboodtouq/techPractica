@@ -6,7 +6,7 @@ export type FormInputRegister =
   | "name"
   | "userEmail"
   | "userPassword";
-interface IRegister {
+export interface IRegister {
   name: FormInputRegister;
   placeholder: string;
   type: string;
@@ -40,7 +40,7 @@ export const RegisterForm: IRegister[] = [
   {
     name: "userPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
 ];
@@ -70,7 +70,7 @@ export const LoginForm: ILogin[] = [
   {
     name: "userPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
 ];
@@ -104,13 +104,13 @@ export const ResetinputPassword: IResetPas[] = [
   {
     name: "password",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
   {
     name: "confirmPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Confirm Password",
   },
 ];

@@ -12,8 +12,8 @@ export const NavLinks: Inav[] = [
     path: "/Learn",
   },
   {
-    label: "Projects",
-    path: "/Projects",
+    label: "Sessions",
+    path: "/Sessions",
   },
   {
     label: "Profile",
