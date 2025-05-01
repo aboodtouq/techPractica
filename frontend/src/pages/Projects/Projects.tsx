@@ -67,7 +67,6 @@ const Projects = () => {
       isPrivate,
     }: ISessionRes) => (
       <SessionCardUser
-        category={category}
         openModal={() => {
           openEditModal({
             category,
@@ -79,6 +78,7 @@ const Projects = () => {
             isPrivate,
           });
         }}
+        category={category}
         sessionDescription={sessionDescription}
         sessionName={sessionName}
         technologies={technologies}
@@ -88,24 +88,17 @@ const Projects = () => {
   );
   return (
     <>
-      <Modal isOpen={isOpen} closeModal={closeModal} title="ADD A NEW SESSION">
+      <Modal isOpen={isOpen} title="ADD A NEW SESSION">
         <CreateSessionForm closeModal={closeModal} />
       </Modal>
-      <Modal
-        isOpen={isModalEditOpen}
-        closeModal={closeEditModal}
-        title="EDIT SESSION"
-      >
+      <Modal isOpen={isModalEditOpen} title="EDIT SESSION">
         <EditSessionForm
           session={selectedSession!}
           closeModal={closeEditModal}
         />
       </Modal>
       <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#022639]">
-            My Sessions
-          </h1>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 mb-6">
           <Button
             className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}

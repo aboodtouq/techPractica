@@ -73,7 +73,7 @@ const HomePage = () => {
               onClick={() => {
                 token
                   ? navigate("/Learn", { replace: true })
-                  : navigate("/User/Register", { replace: true });
+                  : navigate("/User", { replace: true });
               }}
               className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
