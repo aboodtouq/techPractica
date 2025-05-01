@@ -5,6 +5,7 @@ interface IProps {
   session: ISessionRes;
   closeModal: () => void;
 }
+
 const SessionCardDetails = ({ session, closeModal }: IProps) => {
   return (
     <>

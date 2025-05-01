@@ -29,7 +29,18 @@ const Login = () => {
       const response = await axiosInstance.post("/authenticated/login", data);
       toast.success("Login successful!", { position: "top-center" });
       CookiesService.set("UserToken", response.data);
-      setTimeout(() => navigate("/"), 1500);
+      const token = CookiesService.get("UserToken");
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const isAdmin = payload.sub === "3raffat@gmail.com";
+      CookiesService.set("isAdmin", isAdmin);
+
+      setTimeout(() => {
+        if (isAdmin) {
+          navigate("/Admin");
+        } else {
+          navigate("/");
+        }
+      }, 1500);
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data.message || "Login failed", {
