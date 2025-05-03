@@ -6,7 +6,7 @@ export type FormInputRegister =
   | "name"
   | "userEmail"
   | "userPassword";
-interface IRegister {
+export interface IRegister {
   name: FormInputRegister;
   placeholder: string;
   type: string;
@@ -40,7 +40,7 @@ export const RegisterForm: IRegister[] = [
   {
     name: "userPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
 ];
@@ -70,7 +70,7 @@ export const LoginForm: ILogin[] = [
   {
     name: "userPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
 ];
@@ -104,25 +104,25 @@ export const ResetinputPassword: IResetPas[] = [
   {
     name: "password",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Password",
   },
   {
     name: "confirmPassword",
     type: "password",
-    placeholder: "********",
+    placeholder: "••••••••",
     label: "Confirm Password",
   },
 ];
 export type ISessionForm = {
-  nameSession: string;
-  descriptionSession: string;
+  sessionName: string;
+  sessionDescription: string;
   category: string;
   technologies: string[];
   fields: string[];
   privateSession: boolean;
 };
-export type FormInput = "nameSession" | "descriptionSession";
+export type FormInput = "nameSession" | "sessionDescription";
 
 export interface Iinpform {
   name: FormInput;
@@ -132,11 +132,23 @@ export interface Iinpform {
 }
 export type Category = {
   categoryName: string;
-  technologies: any[];
+  technologies?: any[];
 };
 export interface ISession {
+  id: number;
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
   category: CategoryType;
+  fields: string[];
+  privateSession: boolean;
+}
+export interface ISessionRes {
+  id: number;
+  sessionName: string;
+  sessionDescription: string;
+  technologies: string[];
+  category: CategoryType;
+  fields: string[];
+  isPrivate: boolean;
 }

@@ -9,16 +9,23 @@ import { Fragment, ReactNode } from "react";
 
 interface IProps {
   isOpen: boolean;
-  closeModal: () => void;
+  closeModal?: () => void;
   title?: string;
   description?: string;
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, title, description, children }: IProps) => {
+const Modal = ({
+  isOpen,
+  title,
+  description,
+  children,
+  closeModal = () => {},
+}: IProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50 w-100" onClose={() => {}}>
+      <Dialog as="div" className="relative z-50 w-100" onClose={closeModal}>
+        <div className="fixed inset-0 backdrop-blur-xs" aria-hidden="true" />
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

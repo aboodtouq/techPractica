@@ -16,7 +16,7 @@ const Paginator = ({
       {/* Previous Button */}
       <button
         type="button"
-        className="flex items-center justify-center px-4 h-10 rounded-md border bg-gray-800 text-white text-sm font-medium hover:bg-indigo-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="flex items-center justify-center px-4 h-10 rounded-md  bg-[#42D5AE] text-[#022639] text-sm font-medium hover:bg-[#38b28d] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors duration-200"
         disabled={page <= 1}
         onClick={onClickPrev}
       >
@@ -40,7 +40,7 @@ const Paginator = ({
       {/* Next Button */}
       <button
         type="button"
-        className="flex items-center justify-center px-4 h-10 rounded-md border bg-gray-800 text-white text-sm font-medium hover:bg-indigo-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="flex items-center justify-center px-4 h-10 rounded-md  bg-[#42D5AE] text-[#022639] text-sm font-medium hover:bg-[#38b28d] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors duration-200"
         disabled={page >= pageCount}
         onClick={onClickNext}
       >

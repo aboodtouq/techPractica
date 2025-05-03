@@ -25,8 +25,7 @@ public class SessionResponse {
 
     private String category;
 
-    private boolean isPrivate;
-
     private List<String> fields;
 
+    private boolean IsPrivate;
 }

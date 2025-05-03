@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 
 export interface Category {
-  title: string;
+  title: CategoryType;
   Icon: IconType;
   style: string;
 }
@@ -23,7 +23,6 @@ import {
   FaBug,
   FaProjectDiagram,
 } from "react-icons/fa";
-import { Iinpform } from "../interfaces";
 export const categories: Category[] = [
   {
     title: "Web Development",
@@ -49,6 +48,11 @@ export const categories: Category[] = [
 
   {
     title: "Game Development",
+    Icon: FaGamepad,
+    style: "text-purple-600 w-6 h-6",
+  },
+  {
+    title: "FF",
     Icon: FaGamepad,
     style: "text-purple-600 w-6 h-6",
   },
@@ -83,12 +87,6 @@ export const features: Feature[] = [
     style: "text-gray-700 w-6 h-6",
   },
 ];
-export const slicer = (txt: string, length: number = 60) => {
-  if (txt.length > length) {
-    return `${txt.slice(0, length)}...`;
-  }
-  return txt;
-};
 
 interface Itags {
   Mcolor: string;
@@ -116,24 +114,11 @@ export const tags: Itags[] = [
     txt: "Figma",
   },
 ];
-export const inputData: Iinpform = {
-  name: "nameSession",
-  type: "text",
-  placeholder: "Project Name",
-  label: "Project Name",
-};
+
 export type CategoryType =
   | "Web Development"
   | "Cybersecurity"
   | "Game Development"
   | "Artificial Intelligence"
-  | "Mobile Development";
-
-export const CategoryColor = (Name: CategoryType) => {
-  if (Name.includes("Web Development")) return "bg-blue-100 text-blue-700";
-  if (Name.includes("Cybersecurity")) return "bg-red-100 text-red-700";
-  if (Name.includes("Game Development")) return "bg-purple-100 text-purple-700";
-  if (Name.includes("Artificial Intelligence"))
-    return "bg-teal-100 text-teal-700";
-  if (Name.includes("Mobile Development")) return "bg-green-100 text-green-700";
-};
+  | "Mobile Development"
+  | "FF";

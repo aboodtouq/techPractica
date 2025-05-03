@@ -3,17 +3,22 @@ import {
   CookiesService,
   Modal,
   SessionCardUser,
-  SessionForm,
+  CreateSessionForm,
   useAuthQuery,
 } from "../../imports.ts";
 import useModal from "../../hooks/useModal.ts";
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator.tsx";
-import { ISession } from "../../interfaces.ts";
+import { ISessionRes } from "../../interfaces.ts";
+import EditSessionForm from "../../components/EditFormSession.tsx";
+import { BiPlus } from "react-icons/bi";
 const Projects = () => {
   const { isOpen, openModal, closeModal } = useModal();
+  const [selectedSession, setSelectedSession] = useState<ISessionRes>();
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+
   const [page, setPage] = useState<number>(1);
-  const sessionsPerPage = 12;
+  const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
 
   const { data: sessionData } = useAuthQuery({
@@ -25,58 +30,101 @@ const Projects = () => {
       },
     },
   });
-  console.log(sessionData);
   const onClickNext = () => {
     setPage((prev) => prev + 1);
+  };
+  const openEditModal = (session: ISessionRes) => {
+    setSelectedSession(session);
+    setIsModalEditOpen(true);
+  };
+  const closeEditModal = () => {
+    setSelectedSession({
+      category: "Cybersecurity",
+      sessionDescription: "",
+      sessionName: "",
+      technologies: [""],
+      fields: [""],
+      isPrivate: false,
+      id: 4,
+    });
+    setIsModalEditOpen(false);
   };
 
   const onClickPrev = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
+
   const totalSessions = sessionData?.sessionsCount || 0;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
-  const Data = sessionData?.sessions.map((session: ISession, index: number) => (
-    <SessionCardUser key={index} session={session} />
-  ));
+  const Data = sessionData?.sessions.map(
+    ({
+      category,
+      sessionDescription,
+      sessionName,
+      technologies,
+      id,
+      fields,
+      isPrivate,
+    }: ISessionRes) => (
+      <SessionCardUser
+        openModal={() => {
+          openEditModal({
+            category,
+            sessionDescription,
+            sessionName,
+            technologies,
+            id,
+            fields,
+            isPrivate,
+          });
+        }}
+        category={category}
+        sessionDescription={sessionDescription}
+        sessionName={sessionName}
+        technologies={technologies}
+        key={id}
+      />
+    )
+  );
   return (
     <>
-      <main className="min-h-screen container flex flex-col pb-30 justify-between">
-        <div className="flex flex-row items-center justify-between m-10">
-          <div className="  flex-1/2 font-medium text-3xl ml-4">
-            My Sessions
-          </div>
+      <Modal isOpen={isOpen} title="ADD A NEW SESSION">
+        <CreateSessionForm closeModal={closeModal} />
+      </Modal>
+      <Modal isOpen={isModalEditOpen} title="EDIT SESSION">
+        <EditSessionForm
+          session={selectedSession!}
+          closeModal={closeEditModal}
+        />
+      </Modal>
+      <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 mb-6">
           <Button
-            className=" bg-green-200 hover:bg-green-200 text-green-800 px-10 font-medium"
+            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
-            width=" w-fit"
           >
+            <BiPlus size={18} className="mr-2" />
             Add Session
           </Button>
         </div>
-        <Modal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          title="ADD A NEW SESSION"
-        >
-          <SessionForm closeModal={closeModal} />
-        </Modal>
-
-        <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+      </div>
+      <div className="lg:max-h-[900px] lg:min-h-[900px] min-h-screen flex flex-col -mt-5">
+        <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
             {Data}
           </div>
-        </div>
-        {pageCount > 1 && (
-          <div className="flex justify-end ">
-            <Paginator
-              page={page}
-              pageCount={pageCount}
-              onClickNext={onClickNext}
-              onClickPrev={onClickPrev}
-            />
-          </div>
-        )}
-      </main>
+          {pageCount > 1 && (
+            <div className="flex justify-start">
+              <Paginator
+                page={page}
+                pageCount={pageCount}
+                onClickNext={onClickNext}
+                onClickPrev={onClickPrev}
+              />
+            </div>
+          )}
+        </main>
+      </div>
     </>
   );
 };

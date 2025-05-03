@@ -69,21 +69,32 @@ export const ResetPassSchema = yup
       .required("Confirm Password is required"),
   })
   .required();
-export const CreatSessionSchema = yup
-  .object({
-    nameSession: yup
-      .string()
-      .required("Session Name is required")
-      .min(100, "Session Name  should be at least 8 charachters.")
-      .max(20, "Must be 20 characters or less"),
-    descriptionSession: yup
-      .string()
-      .min(100, "Session Name  should be at least 100 charachters.")
-      .max(250, "Session Description Must be 250 characters or less")
-      .required("Session Description is required"),
-    category: yup.string().required("Category is required"),
-    technologies: yup.array().of(yup.string().required()).optional(),
-    fields: yup.array().of(yup.string().required()).optional(),
-    privateSession: yup.boolean().required("Select at least one "),
-  })
-  .required();
+export const sessionSchema = yup.object({
+  nameSession: yup
+    .string()
+    .required("Session name is required")
+    .min(8, "Minimum 8 characters")
+    .max(30, "Maximum 30 characters"),
+
+  descriptionSession: yup
+    .string()
+    .required("Description is required")
+    .min(100, "Minimum 100 characters")
+    .max(550, "Maximum 250 characters"),
+
+  privateSession: yup.string().required("Select session type"),
+
+  category: yup.string().required("Select a category"),
+
+  fields: yup
+    .array()
+    .of(yup.string().required())
+    .min(1, "Select at least one field")
+    .required("Fields are required"),
+
+  technologies: yup
+    .array()
+    .of(yup.string().required())
+    .min(1, "Select at least one technology")
+    .required("Technologies are required"),
+});

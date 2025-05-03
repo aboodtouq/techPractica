@@ -81,9 +81,8 @@ export default function SelectField<T>({
                   </ListboxOption>
                 ))}
               </ListboxOptions>
+              {errorMessage && <ErrorMsg Msg={errorMessage} />}
             </div>
-
-            {errorMessage && <ErrorMsg Msg={errorMessage} />}
           </Listbox>
         );
       }}

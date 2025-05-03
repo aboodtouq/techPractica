@@ -1,46 +1,58 @@
-import { CategoryColor, CategoryType, slicer } from "../../data/data";
-export interface SessionType {
+import { CategoryType } from "../../data/data";
+interface SessionUserType {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
   category: CategoryType;
+
+  openModal: () => void;
 }
-const SessionCard = ({ session }: { session: SessionType }) => {
-  const color = CategoryColor(session.category);
+const SessionCard = ({
+  category,
+  openModal,
+  sessionDescription,
+  sessionName,
+  technologies,
+}: SessionUserType) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col justify-between h-full w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl border border-gray-200 relative">
-      {/* Title and Category */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-md font-bold text-gray-900">
-          {slicer(session.sessionName, 20)}
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
+      {/* Header Section */}
+      <div className="flex justify-between items-start gap-2 mb-3">
+        <h2 className="text-md font-semibold text-[#022639] flex-1">
+          {sessionName}
         </h2>
-        <span
-          className={`${color} text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap`}
-        >
-          {session.category}
+        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
+          {category}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm mb-2 break-words overflow-hidden line-clamp-3 flex-grow">
-        {slicer(session.sessionDescription, 100)}
-      </p>
+      <p
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3"
+        dangerouslySetInnerHTML={{ __html: sessionDescription }}
+      />
 
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        {session.technologies.slice(0, 5).map((tech) => (
+      {/* Technologies Section */}
+      <div className="flex flex-wrap gap-2 mb-12 sm:mb-10 max-h-7">
+        {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-md"
+            className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md"
           >
             {tech}
           </span>
         ))}
+        {technologies.length > 4 && (
+          <span className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md">
+            +{technologies.length - 4}
+          </span>
+        )}
       </div>
 
       {/* Show More Button */}
       <button
-        className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium  ${color} bg-white transition group`}
+        onClick={openModal}
+        className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group`}
       >
         Show More
         <svg

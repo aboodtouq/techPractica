@@ -37,7 +37,7 @@ const Profile = () => {
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-black  dark:text-purple-300 rounded-lg text-sm font-medium"
+                className="px-3 py-1 bg-purple-100 dark:bg-[#42D5AE] text-black  dark:text-white rounded-lg text-sm font-medium"
               >
                 {skill}
               </span>

@@ -27,6 +27,7 @@ public class SessionMapper {
                 .sessionMembers(new ArrayList<>())
                 .timestampList(new ArrayList<>())
                 .sessionTechnologies(new ArrayList<>())
+                .sessionFields(new ArrayList<>())
                 .build();
     }
 
@@ -35,12 +36,11 @@ public class SessionMapper {
                 builder()
                 .id(session.getSessionId())
                 .sessionName(session.getSessionName())
+                .IsPrivate(session.isPrivate())
                 .sessionDescription(session.getSessionDescription())
                 .category(session.getSessionCategories().getFirst().getCategoryName())
                 .technologies(session.getSessionTechnologies().stream()
-                        .map(Technology::getTechnologyName)
-                        .toList())
-                .isPrivate(session.isPrivate())
+                        .map(Technology::getTechnologyName).toList())
                 .fields(session.getSessionFields()
                         .stream()
                         .map(Field::getFieldName)

@@ -1,7 +1,7 @@
 import { PiWarningCircleBold } from "react-icons/pi";
 
 interface IProps {
-  Msg?: string;
+  Msg?: string | undefined;
 }
 const ErrorMsg = ({ Msg }: IProps) => {
   return Msg ? (

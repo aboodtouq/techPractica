@@ -9,11 +9,7 @@ const Inputs = forwardRef<HTMLInputElement, IProps>(
     return (
       <input
         ref={ref}
-        className={`border-[1px] border-gray-300 shadow-lg ${
-          errorStyle
-            ? " focus:ring-red-500  focus:border-red-500"
-            : " focus:ring-black focus:border-black"
-        }  focus:outline-none focus:ring-1 rounded-lg px-3 py-3 text-md w-full bg-transparent `}
+        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42D5AE] focus:border-transparent transition-colors duration-200"
         {...rest}
       />
     );

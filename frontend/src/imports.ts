@@ -21,13 +21,13 @@ import Register from "../src/pages/User/Register";
 import ResetPass from "../src/pages/User/ResetPass";
 import ProjectsLayout from "../src/pages/Projects/ProjectsLayout";
 import SessionRequests from "../src/pages/Projects/SessionRequests";
-import SessionForm from "../src/components/SessionForm.tsx";
+import CreateSessionForm from "./components/CreateSessionForm.tsx";
 import SessionCardUser from "./components/ui/SessionCardUser.tsx";
 
 export {
   LayoutHome,
   ProjectsLayout,
-  SessionForm,
+  CreateSessionForm,
   SessionCardUser,
   LayoutLogin,
   Home,

@@ -52,7 +52,7 @@ export default function MultiSelectField<T>({
                           value.filter((v: T) => getLabel(v) !== getLabel(item))
                         );
                       }}
-                      className="bg-green-100 text-black text-xs px-2 py-1 rounded-full hover:bg-green-200 transition cursor-pointer"
+                      className="bg-teal-100 text-black text-xs px-2 py-1 rounded-full hover:bg-teal-200 transition cursor-pointer"
                     >
                       {getLabel(item)}
                     </span>
@@ -92,8 +92,8 @@ export default function MultiSelectField<T>({
                   </ListboxOption>
                 ))}
             </ListboxOptions>
+            {errors[name] && <ErrorMsg Msg={errorMessage} />}
           </div>
-          {errors[name] && <ErrorMsg Msg={errorMessage} />}
         </Listbox>
       )}
     />

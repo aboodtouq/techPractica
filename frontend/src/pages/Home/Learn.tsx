@@ -1,24 +1,50 @@
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator";
 import SessionCard from "../../components/ui/SessionCard";
-import { CategoryType } from "../../data/data";
-import { CookiesService, useAuthQuery } from "../../imports";
-import { ISession } from "../../interfaces";
+import { CookiesService, Modal, useAuthQuery } from "../../imports";
+import { ISessionRes } from "../../interfaces";
+import { useParams } from "react-router-dom";
+import SessionCardDetails from "../../components/ui/SessionCardDetails";
 
 const Learn = () => {
-  const [page, setPage] = useState<number>(1);
-  const sessionsPerPage = 12;
-  const token = CookiesService.get("UserToken");
+  const { category } = useParams();
+  const [isModalShowMoreOpen, setIsModalShowMoreOpen] = useState(false);
+  const [selectedSession, setSelectedSession] = useState<ISessionRes>();
 
+  const [page, setPage] = useState<number>(1);
+  const sessionsPerPage = 9;
+  const token = CookiesService.get("UserToken");
+  const Url = category
+    ? `/sessions/category?categoryName=${category}&pageNumber=${
+        page - 1
+      }&pageSize=${sessionsPerPage}`
+    : `/sessions/?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`;
+  console.log(Url);
   const { data: sessionData } = useAuthQuery({
     queryKey: [`SessionData-${page}`],
-    url: `/sessions/?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`,
+    url: Url,
     config: {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   });
+  const openModalShowMore = (session: ISessionRes) => {
+    setSelectedSession(session);
+    setIsModalShowMoreOpen(true);
+  };
+  const closeModalShowMore = () => {
+    setSelectedSession({
+      category: "Cybersecurity",
+      sessionDescription: "",
+      sessionName: "",
+      technologies: [""],
+      fields: [""],
+      isPrivate: false,
+      id: 4,
+    });
+    setIsModalShowMoreOpen(false);
+  };
 
   const onClickNext = () => {
     setPage((prev) => prev + 1);
@@ -28,28 +54,69 @@ const Learn = () => {
     setPage((prev) => Math.max(prev - 1, 1));
   };
 
-  const totalSessions = sessionData?.sessionsCount || 0;
+  const totalSessions = sessionData?.sessionsCount;
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
-
+  const Data = sessionData?.sessions.map(
+    ({
+      category,
+      sessionDescription,
+      sessionName,
+      technologies,
+      id,
+      fields,
+      isPrivate,
+    }: ISessionRes) => (
+      <SessionCard
+        openModal={() => {
+          openModalShowMore({
+            category,
+            sessionDescription,
+            sessionName,
+            technologies,
+            id,
+            fields,
+            isPrivate,
+          });
+        }}
+        category={category}
+        sessionDescription={sessionDescription}
+        sessionName={sessionName}
+        technologies={technologies}
+        key={id}
+      />
+    )
+  );
   return (
-    <main className="min-h-screen container mx-auto p-10 pb-20 flex flex-col justify-between">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-        {sessionData?.sessions.map((session: ISession, index: number) => (
-          <SessionCard key={index} session={session} />
-        ))}
-      </div>
+    <>
+      <div className="lg:max-h-[900px] lg:min-h-[900px] min-h-screen flex flex-col">
+        <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+            {Data}
+          </div>
 
-      {pageCount > 1 && (
-        <div className="flex justify-end  ">
-          <Paginator
-            page={page}
-            pageCount={pageCount}
-            onClickNext={onClickNext}
-            onClickPrev={onClickPrev}
-          />
-        </div>
-      )}
-    </main>
+          {pageCount > 1 && (
+            <div className="flex justify-start">
+              <Paginator
+                page={page}
+                pageCount={pageCount}
+                onClickNext={onClickNext}
+                onClickPrev={onClickPrev}
+              />
+            </div>
+          )}
+        </main>
+      </div>
+      <Modal
+        isOpen={isModalShowMoreOpen}
+        closeModal={closeModalShowMore}
+        title={selectedSession?.sessionName}
+      >
+        <SessionCardDetails
+          session={selectedSession!}
+          closeModal={closeModalShowMore}
+        />
+      </Modal>
+    </>
   );
 };
 
