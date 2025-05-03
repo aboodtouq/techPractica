@@ -126,7 +126,7 @@ public class SessionController {
 
     @Operation(
             summary = "Get sessions matching user's skills",
-            description = "Returns sessions that match the authenticated user's skills, with pagination support.",
+            description = "Returns sessions that match the authenticated user's skills, with pagination support."
     )
             @GetMapping("/user/skills")
     public ResponseEntity<SessionsResponse> getSessionsByUserSkills(@AuthenticationPrincipal UserDetails userDetails,
