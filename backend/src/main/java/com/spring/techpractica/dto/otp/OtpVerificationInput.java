@@ -16,5 +16,4 @@ public class OtpVerificationInput {
     private String userOtp;
     private String storedOtp;
 
-
 }

@@ -1,4 +1,4 @@
-package com.spring.techpractica.service.session.createSession;
+package com.spring.techpractica.service.session.linker;
 
 import com.spring.techpractica.factory.AuthenticatedUserSessionFactory;
 import com.spring.techpractica.model.SessionRole;
@@ -13,10 +13,11 @@ public class SessionRoleAssigner {
 
     private final AuthenticatedUserSessionFactory authenticatedUserSessionFactory;
 
-    public void assignOwner(Session session, User user) {
+    public void assignRole(Session session, User user) {
 
         session.getSessionMembers()
-                .add(authenticatedUserSessionFactory.createAuthenticatedUserSession(session,
+                .add(authenticatedUserSessionFactory
+                        .createAuthenticatedUserSession(session,
                         user, SessionRole.OWNER));
     }
 }

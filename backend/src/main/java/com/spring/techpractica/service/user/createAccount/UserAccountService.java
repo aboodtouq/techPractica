@@ -2,8 +2,8 @@ package com.spring.techpractica.service.user.createAccount;
 
 import com.spring.techpractica.dto.userRegestation.UserCreateAccount;
 import com.spring.techpractica.factory.UserFactory;
-import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.mengmentData.UserManagementData;
+import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.validator.validatorCreateAccount.CreateAccountValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,9 +49,13 @@ public class UserAccountService {
      */
     @Transactional
     public void createAccount(UserCreateAccount userCreateAccount) {
-        validators.forEach(v -> v.validate(userCreateAccount));
+
+        validators.forEach(v ->
+                v.validate(userCreateAccount));
+
         User user = prepareUserForSaving(userCreateAccount);
         userManagementData.saveUser(user);
+
     }
 
     /**

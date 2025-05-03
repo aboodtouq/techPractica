@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Field {
+public class  Field {
 
     @Id
     @Column(name = "field_name")

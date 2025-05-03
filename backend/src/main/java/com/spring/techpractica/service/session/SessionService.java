@@ -53,6 +53,7 @@ public class SessionService {
                                                    int pageSize,
                                                    int pageNumber) {
 
+
         User user = userManagementData.getUserByEmail(userEmail);
 
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
@@ -72,7 +73,8 @@ public class SessionService {
         Category category = categoryManagementData.getCategoryByName(categoryName);
 
         List<Session> sessions = sessionManagementData
-                .getSessionsByCategoryAndPageable(category, PageRequestFactory.createPageRequest(pageSize, pageNumber));
+                .getSessionsByCategoryAndPageable(category,
+                        PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
         long totalSession = sessionManagementData.getNumberOfCategorySessions(category);
 
@@ -92,7 +94,6 @@ public class SessionService {
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
     }
 
-    //
     @Transactional
     public void deleteSessionByUserEmailAndSessionId(String username
             , Long sessionId) {
@@ -135,7 +136,9 @@ public class SessionService {
 
         session.getSessionRequirements().clear();
 
-        List<Requirement> requirements = updatedSessionRequest.getFields().stream()
+        List<Requirement> requirements = updatedSessionRequest
+                .getFields()
+                .stream()
                 .map(field -> RequirementFactory.createRequirement(
                         session,
                         fieldManagementData.getFieldByFieldName(field)
@@ -170,4 +173,9 @@ public class SessionService {
 
     }
 
+    public SessionsResponse getSessions(int pageSize, int pageNumber) {
+        List<Session> sessions = sessionManagementData.
+                getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, sessionManagementData.getNumberOfSessions());
+    }
 }
