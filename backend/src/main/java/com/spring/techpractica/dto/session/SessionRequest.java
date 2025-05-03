@@ -25,6 +25,4 @@ public class SessionRequest {
 
     private List<String> fields;
 
-
-
 }

@@ -2,15 +2,16 @@ package com.spring.techpractica.service.session.createSession;
 
 import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
-import com.spring.techpractica.factory.AuthenticatedUserSessionFactory;
 import com.spring.techpractica.factory.SessionFactory;
 import com.spring.techpractica.maper.SessionMapper;
-import com.spring.techpractica.model.SessionRole;
-import com.spring.techpractica.model.entity.AuthenticatedUserSession;
-import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.User;
 import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
+import com.spring.techpractica.model.entity.Session;
+import com.spring.techpractica.model.entity.User;
+import com.spring.techpractica.service.session.linker.SessionCategoryLinker;
+import com.spring.techpractica.service.session.linker.SessionFieldLinker;
+import com.spring.techpractica.service.session.linker.SessionRoleAssigner;
+import com.spring.techpractica.service.session.linker.SessionTechnologyLinker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,17 +45,15 @@ public class CreateSessionService {
     /**
      * Creates a new session based on the data provided by the user and the session creation request.
      *
-     * @param request   the session creation data sent by the client
-     * @param userEmail the email of the user creating the session (used to retrieve the user)
-     * @return a {@link SessionResponse} containing the created session's data
-     */
+       */
     @Transactional
     public SessionResponse createSession(SessionRequest request, String userEmail) {
+
 
         User owner = userManagementData.getUserByEmail(userEmail);
         Session session = sessionFactory.createFrom(request);
 
-        roleAssigner.assignOwner(session, owner);
+        roleAssigner.assignRole(session, owner);
         fieldLinker.linkFieldsToSession(session, request.getFields());
         categoryLinker.linkCategoryToSession(session, request.getCategory());
         technologyLinker.linkTechnologiesToSession(session, request.getTechnologies());

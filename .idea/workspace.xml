@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session.">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_26_2025_1_32_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_26_2025_1_34_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_26_2025_1_35_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_4_26_2025_1_33_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/controller/SessionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/otp/OtpVerificationInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/otp/OtpVerificationInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/session/SessionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/session/SessionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/maper/SessionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/maper/SessionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/mengmentData/AuthenticatedUserSessionManagementData.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/mengmentData/AuthenticatedUserSessionManagementData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/techSkills/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/model/entity/techSkills/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/repository/AuthenticatedUserSessioneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/repository/AuthenticatedUserSessioneRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/CreateSessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/CreateSessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/SessionCategoryLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/linker/SessionCategoryLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/SessionFieldLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/linker/SessionFieldLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/SessionRoleAssigner.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/linker/SessionRoleAssigner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/createSession/SessionTechnologyLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/linker/SessionTechnologyLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/user/createAccount/UserAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/user/createAccount/UserAccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,108 +59,115 @@
   ],
   &quot;lastFilter&quot;: {}
 }</component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6SIhjn",
-        "number": 14
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6SIhjn&quot;,
+        &quot;number&quot;: 14
       },
-      "lastSeen": 1744304039589
+      &quot;lastSeen&quot;: 1744304039589
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6SI-0S",
-        "number": 15
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6SI-0S&quot;,
+        &quot;number&quot;: 15
       },
-      "lastSeen": 1744307289856
+      &quot;lastSeen&quot;: 1744307289856
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6STmPj",
-        "number": 18
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6STmPj&quot;,
+        &quot;number&quot;: 18
       },
-      "lastSeen": 1744398876758
+      &quot;lastSeen&quot;: 1744398876758
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6ST2e6",
-        "number": 19
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6ST2e6&quot;,
+        &quot;number&quot;: 19
       },
-      "lastSeen": 1744401360110
+      &quot;lastSeen&quot;: 1744401360110
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6SUxBm",
-        "number": 21
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6SUxBm&quot;,
+        &quot;number&quot;: 21
       },
-      "lastSeen": 1744488442703
+      &quot;lastSeen&quot;: 1744488442703
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6SXX-w",
-        "number": 22
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6SXX-w&quot;,
+        &quot;number&quot;: 22
       },
-      "lastSeen": 1744488537872
+      &quot;lastSeen&quot;: 1744488537872
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6SXxJF",
-        "number": 23
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6SXxJF&quot;,
+        &quot;number&quot;: 23
       },
-      "lastSeen": 1744502622160
+      &quot;lastSeen&quot;: 1744502622160
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6S4xtT",
-        "number": 24
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6S4xtT&quot;,
+        &quot;number&quot;: 24
       },
-      "lastSeen": 1744831028425
+      &quot;lastSeen&quot;: 1744831028425
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6S9WRT",
-        "number": 25
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6S9WRT&quot;,
+        &quot;number&quot;: 25
       },
-      "lastSeen": 1744978635181
+      &quot;lastSeen&quot;: 1744978635181
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6THXlH",
-        "number": 26
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6THXlH&quot;,
+        &quot;number&quot;: 26
       },
-      "lastSeen": 1744978791006
+      &quot;lastSeen&quot;: 1744978791006
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6TINxw",
-        "number": 27
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6TINxw&quot;,
+        &quot;number&quot;: 27
       },
-      "lastSeen": 1744986538732
+      &quot;lastSeen&quot;: 1744986538732
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6UAF51",
-        "number": 41
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6UAF51&quot;,
+        &quot;number&quot;: 41
       },
-      "lastSeen": 1745663736288
+      &quot;lastSeen&quot;: 1745663736288
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6UATaG",
-        "number": 43
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6UATaG&quot;,
+        &quot;number&quot;: 43
       },
-      "lastSeen": 1745667824527
+      &quot;lastSeen&quot;: 1745667824527
     },
     {
-      "id": {
-        "id": "PR_kwDOOWOAlM6UFF1H",
-        "number": 47
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6UFF1H&quot;,
+        &quot;number&quot;: 47
       },
-      "lastSeen": 1745779931839
+      &quot;lastSeen&quot;: 1745779931839
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOOWOAlM6UFJDh&quot;,
+        &quot;number&quot;: 48
+      },
+      &quot;lastSeen&quot;: 1745781549461
     }
   ]
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/M0hammedAlhaj/techPractica.git&quot;,
@@ -164,40 +190,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.UserServiceTest.createAccount.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.techPractica [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Program.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.TechPracticaApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/trainingJava/projectG/techPractica&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.UserServiceTest.createAccount.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "Maven.techPractica [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Program.executor": "Run",
+    "Spring Boot.TechPracticaApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/OneDrive - Hashemite University/Desktop/clinic-media/backend/clinic-media",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15527344",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;6f670617-1ea7-4117-be04-bd9d95adcefd&quot;,
-      &quot;java.sql.Driver&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "6f670617-1ea7-4117-be04-bd9d95adcefd",
+      "java.sql.Driver"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\trainingJava\projectG\techPractica\doc" />
@@ -302,6 +329,8 @@
       <workItem from="1745231861213" duration="11000" />
       <workItem from="1745672353980" duration="75000" />
       <workItem from="1745779406499" duration="1164000" />
+      <workItem from="1745876482388" duration="325000" />
+      <workItem from="1746052341096" duration="12364000" />
     </task>
     <task id="LOCAL-00001" summary="create folder doc and upload database ERD.png">
       <option name="closed" value="true" />

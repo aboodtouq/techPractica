@@ -49,12 +49,15 @@ public class SessionController {
     )
     @GetMapping("/")
     public ResponseEntity<SessionsResponse> getSessions(
-            @AuthenticationPrincipal UserDetails userDetails, @RequestParam int pageSize, @RequestParam int pageNumber) {
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam int pageSize,
+            @RequestParam int pageNumber) {
 
         String userEmail = userDetails.getUsername();
 
 
-        return ResponseEntity.ok(sessionService.getSessionsByUserEmail(userEmail, pageSize, pageNumber));
+        return ResponseEntity.ok(sessionService.
+                getSessionsByUserEmail(userEmail, pageSize, pageNumber));
     }
 
     @Operation(
@@ -67,7 +70,6 @@ public class SessionController {
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
                 getSessionsByCategoryName(categoryName, pageSize, pageNumber));
-
     }
 
     @Operation(
@@ -117,5 +119,8 @@ public class SessionController {
         return ResponseEntity.ok("Deleted Successfully");
     }
 
+    public ResponseEntity<SessionsResponse> getSessions(@RequestParam int pageSize, @RequestParam int pageNumber) {
+        return ResponseEntity.ok(sessionService.getSessions(pageSize,pageNumber));
+    }
 
 }

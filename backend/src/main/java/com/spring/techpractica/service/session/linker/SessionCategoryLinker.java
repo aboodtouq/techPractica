@@ -1,9 +1,8 @@
-package com.spring.techpractica.service.session.createSession;
+package com.spring.techpractica.service.session.linker;
 
 import com.spring.techpractica.mengmentData.CategoryManagementData;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.techSkills.Category;
-import com.spring.techpractica.service.techSkills.Category.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
