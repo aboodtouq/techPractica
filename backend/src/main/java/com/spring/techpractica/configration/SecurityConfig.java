@@ -4,6 +4,7 @@ import com.spring.techpractica.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,6 +41,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                                HttpMethod.GET,"/api/v1/sessions/",
                                 "/api/v1/authenticated/registration",
                                 "/api/v1/authenticated/login",
                                 "/api/v1/authenticated/send-reset-password",
