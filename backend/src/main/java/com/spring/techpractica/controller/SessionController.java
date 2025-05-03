@@ -123,5 +123,25 @@ public class SessionController {
             @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.getSessions(pageSize, pageNumber));
     }
+
+    @Operation(
+            summary = "Get sessions matching user's skills",
+            description = "Returns sessions that match the authenticated user's skills, with pagination support.",
+    )
+            @GetMapping("/user/skills")
+    public ResponseEntity<SessionsResponse> getSessionsByUserSkills(@AuthenticationPrincipal UserDetails userDetails,
+                                                                  @Parameter(description = "Number of sessions per page", example = "10")
+                                                                  @RequestParam int pageSize,
+
+                                                                  @Parameter(description = "Page number to retrieve", example = "1")
+                                                                  @RequestParam int pageNumber) {
+
+        SessionsResponse sessionsResponse =
+                sessionService.getSessionsByUserEmail(userDetails.getUsername(),
+                        pageSize, pageNumber);
+
+        return ResponseEntity.ok(sessionsResponse);
+    }
+
 }
 

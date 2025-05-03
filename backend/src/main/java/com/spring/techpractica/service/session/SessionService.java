@@ -63,7 +63,7 @@ public class SessionService {
 
             long totalSession = sessionManagementData.getNumberOfSessions();
 
-            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
+            return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, sessionManagementData.getNumberOfSessions());
         }
         return null;
     }
