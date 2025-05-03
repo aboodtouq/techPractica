@@ -11,7 +11,7 @@ const ProtactedRoute = ({
   redirectPath = "/",
   children,
 }: IProps) => {
-  if (!isAllowed) return <Navigate to={redirectPath} />;
-  return children;
+  if (isAllowed) return children;
+  return <Navigate to={redirectPath} />;
 };
 export default ProtactedRoute;

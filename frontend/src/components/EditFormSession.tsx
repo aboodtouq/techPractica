@@ -1,6 +1,5 @@
 import {
   Inputs,
-  Textarea,
   SelectField,
   MultiSelectField,
   Button,
@@ -15,6 +14,7 @@ import { token, useCategories, useFields, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
+import TinyMCEWithForm from "./ui/RichTextEditor.tsx";
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
@@ -87,19 +87,11 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
             <ErrorMsg Msg={methods.formState.errors.nameSession?.message} />
           )}
         </div>
-
         <div>
-          <label htmlFor="descriptionSession">Project Description</label>
-          <Textarea
-            id="Project Description"
-            placeholder="Project Description"
-            {...methods.register("descriptionSession")}
-          />
-          {methods.formState.errors && (
-            <ErrorMsg
-              Msg={methods.formState.errors.descriptionSession?.message}
-            />
-          )}
+          <label className="block text-sm font-medium text-gray-700">
+            Project Description
+          </label>
+          <TinyMCEWithForm />
         </div>
         {CategoryData?.length > 0 && (
           <SelectField<Category>

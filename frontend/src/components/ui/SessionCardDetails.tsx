@@ -7,6 +7,8 @@ interface IProps {
 }
 
 const SessionCardDetails = ({ session, closeModal }: IProps) => {
+  const cleaned = session.sessionDescription.replace(/^"(.*)"$/, "$1");
+
   return (
     <>
       {/* Role and Time */}
@@ -29,9 +31,10 @@ const SessionCardDetails = ({ session, closeModal }: IProps) => {
       {/* Description */}
       <div className="mb-4">
         <h3 className="font-semibold text-gray-800 mb-1">Description</h3>
-        <p className="text-sm italic text-gray-700">
-          {session.sessionDescription}
-        </p>
+        <div
+          className="text-gray-600 text-sm mb-4 sm:mb-6"
+          dangerouslySetInnerHTML={{ __html: cleaned }}
+        />
       </div>
 
       {/* Tags */}

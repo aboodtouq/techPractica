@@ -80,7 +80,7 @@ export const sessionSchema = yup.object({
     .string()
     .required("Description is required")
     .min(100, "Minimum 100 characters")
-    .max(250, "Maximum 250 characters"),
+    .max(550, "Maximum 250 characters"),
 
   privateSession: yup.string().required("Select session type"),
 

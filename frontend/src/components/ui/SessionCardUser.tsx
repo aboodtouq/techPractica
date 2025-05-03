@@ -28,9 +28,10 @@ const SessionCardUser = ({
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3">
-        {sessionDescription.trim().slice(0, 100)}
-      </p>
+      <div
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3"
+        dangerouslySetInnerHTML={{ __html: sessionDescription }}
+      />
 
       {/* Technologies Section */}
       <div className="flex flex-wrap gap-2 mb-12 sm:mb-10 max-h-7">

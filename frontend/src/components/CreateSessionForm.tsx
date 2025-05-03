@@ -15,6 +15,7 @@ import { token, useCategories, useFields, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
+import TinyMCEWithForm from "./ui/RichTextEditor.tsx";
 interface IProps {
   closeModal: () => void;
 }
@@ -42,7 +43,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
       ...data,
       privateSession: data.privateSession === "Private Session",
     };
-
+    console.log(data);
     try {
       await axiosInstance.post("/sessions/", formattedData, {
         headers: {
@@ -55,7 +56,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
       });
       setTimeout(() => {
         closeModal();
-        window.location.href = window.location.href;
+        // window.location.href = window.location.href;
       }, 500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
@@ -69,7 +70,12 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="SessionName">Session Name</label>
+          <label
+            htmlFor="SessionName"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Session Name
+          </label>
           <Inputs
             id="SessionName"
             type="text"
@@ -80,19 +86,11 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
             <ErrorMsg Msg={methods.formState.errors.nameSession?.message} />
           )}
         </div>
-
         <div>
-          <label htmlFor="descriptionSession">Project Description</label>
-          <Textarea
-            id="Project Description"
-            placeholder="Project Description"
-            {...methods.register("descriptionSession")}
-          />
-          {methods.formState.errors && (
-            <ErrorMsg
-              Msg={methods.formState.errors.descriptionSession?.message}
-            />
-          )}
+          <label className="block text-sm font-medium text-gray-700">
+            Project Description
+          </label>
+          <TinyMCEWithForm />
         </div>
 
         {CategoryData?.length > 0 && (
