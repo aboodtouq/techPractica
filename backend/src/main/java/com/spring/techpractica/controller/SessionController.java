@@ -5,6 +5,7 @@ import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -42,23 +43,6 @@ public class SessionController {
                 userEmail));
     }
 
-
-    @Operation(
-            summary = "Get Available Sessions",
-            description = "Retrieves a paginated list of available sessions for the authenticated user using page size and page number."
-    )
-    @GetMapping("/")
-    public ResponseEntity<SessionsResponse> getSessions(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam int pageSize,
-            @RequestParam int pageNumber) {
-
-        String userEmail = userDetails.getUsername();
-
-
-        return ResponseEntity.ok(sessionService.
-                getSessionsByUserEmail(userEmail, pageSize, pageNumber));
-    }
 
     @Operation(
             summary = "Get Sessions by Category",
@@ -119,8 +103,25 @@ public class SessionController {
         return ResponseEntity.ok("Deleted Successfully");
     }
 
-    public ResponseEntity<SessionsResponse> getSessions(@RequestParam int pageSize, @RequestParam int pageNumber) {
-        return ResponseEntity.ok(sessionService.getSessions(pageSize,pageNumber));
-    }
+    /**
+     * Retrieves a paginated list of sessions.
+     *
+     * @param pageSize   the number of sessions per page
+     * @param pageNumber the current page number
+     * @return paginated list of sessions wrapped in SessionsResponse
+     */
+    @Operation(
+            summary = "Get paginated sessions",
+            description = "Returns a list of sessions based on page size and number."
+    )
+    @GetMapping("/")
+    public ResponseEntity<SessionsResponse> getSessions(
+            @Parameter(description = "Number of sessions per page", example = "10")
+            @RequestParam int pageSize,
 
+            @Parameter(description = "Page number to retrieve", example = "1")
+            @RequestParam int pageNumber) {
+        return ResponseEntity.ok(sessionService.getSessions(pageSize, pageNumber));
+    }
 }
+
