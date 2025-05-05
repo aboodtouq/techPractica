@@ -1,20 +1,20 @@
 import { Controller, get, useFormContext } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
 import ErrorMsg from "./ErrorMsg";
-
-const TinyMCEWithForm = () => {
+interface IProps {
+  name: string;
+}
+const TinyMCEWithForm = ({ name }: IProps) => {
   const {
     control,
     formState: { errors },
   } = useFormContext();
-  const errorMessage = get(errors, "descriptionSession")?.message as
-    | string
-    | undefined;
+  const errorMessage = get(errors, name)?.message as string | undefined;
 
   return (
     <div>
       <Controller
-        name="descriptionSession"
+        name={name}
         control={control}
         defaultValue=""
         render={({ field }) => (

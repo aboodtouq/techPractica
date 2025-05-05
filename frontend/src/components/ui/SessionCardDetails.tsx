@@ -4,9 +4,10 @@ import { Button } from "../../imports.ts";
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
+  openModal: () => void;
 }
 
-const SessionCardDetails = ({ session, closeModal }: IProps) => {
+const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
   const cleaned = session.sessionDescription.replace(/^"(.*)"$/, "$1");
 
   return (
@@ -14,7 +15,7 @@ const SessionCardDetails = ({ session, closeModal }: IProps) => {
       {/* Role and Time */}
       <div className="flex justify-between items-center text-sm text-gray-600 mb-4">
         <div className="flex items-center gap-2">
-          <FaUser />{" "}
+          <FaUser />
           <div className="flex  flex-wrap gap-2 mb-12 sm:mb-0 max-h-7 ">
             {session.fields.map((field) => (
               <span
@@ -27,7 +28,6 @@ const SessionCardDetails = ({ session, closeModal }: IProps) => {
           </div>
         </div>
       </div>
-
       {/* Description */}
       <div className="mb-4">
         <h3 className="font-semibold text-gray-800 mb-1">Description</h3>
@@ -36,7 +36,6 @@ const SessionCardDetails = ({ session, closeModal }: IProps) => {
           dangerouslySetInnerHTML={{ __html: cleaned }}
         />
       </div>
-
       {/* Tags */}
       <h4 className="font-semibold text-gray-800 mb-3">Tags</h4>
       <div className="flex  flex-wrap gap-2 mb-12 sm:mb-0 max-h-7 ">
@@ -54,7 +53,9 @@ const SessionCardDetails = ({ session, closeModal }: IProps) => {
         <Button
           className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200 cursor-pointer"
           width="w-full"
-          type="submit"
+          onClick={() => {
+            openModal();
+          }}
         >
           Apply now
         </Button>
