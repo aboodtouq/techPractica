@@ -5,12 +5,15 @@ import { CookiesService, Modal, useAuthQuery } from "../../imports";
 import { ISessionRes } from "../../interfaces";
 import { useParams } from "react-router-dom";
 import SessionCardDetails from "../../components/ui/SessionCardDetails";
+import ApplySessionForm from "../../components/ApplySessionForm";
 
 const Learn = () => {
   const { category } = useParams();
   const [isModalShowMoreOpen, setIsModalShowMoreOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
+  const [selectedfields, setSelectedfieldss] = useState<string[]>();
 
+  const [ApplyModel, setApplyModel] = useState(false);
   const [page, setPage] = useState<number>(1);
   const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
@@ -19,7 +22,6 @@ const Learn = () => {
         page - 1
       }&pageSize=${sessionsPerPage}`
     : `/sessions/?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`;
-  console.log(Url);
   const { data: sessionData } = useAuthQuery({
     queryKey: [`SessionData-${page}`],
     url: Url,
@@ -29,9 +31,19 @@ const Learn = () => {
       },
     },
   });
+  //////////////
   const openModalShowMore = (session: ISessionRes) => {
     setSelectedSession(session);
+    setSelectedfieldss(session.fields);
+
     setIsModalShowMoreOpen(true);
+  };
+  const openApplyModel = () => {
+    setIsModalShowMoreOpen(false);
+    setApplyModel(true);
+  };
+  const CloseApplyModel = () => {
+    setApplyModel(false);
   };
   const closeModalShowMore = () => {
     setSelectedSession({
@@ -113,8 +125,14 @@ const Learn = () => {
       >
         <SessionCardDetails
           session={selectedSession!}
+          openModal={openApplyModel}
           closeModal={closeModalShowMore}
         />
+      </Modal>
+
+      {/* مودال التقديم */}
+      <Modal isOpen={ApplyModel} closeModal={CloseApplyModel} title={"Apply"}>
+        <ApplySessionForm closeModal={CloseApplyModel} f={selectedfields} />
       </Modal>
     </>
   );

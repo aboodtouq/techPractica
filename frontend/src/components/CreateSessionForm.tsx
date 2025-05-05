@@ -1,6 +1,5 @@
 import {
   Inputs,
-  Textarea,
   SelectField,
   MultiSelectField,
   Button,
@@ -90,7 +89,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           <label className="block text-sm font-medium text-gray-700">
             Project Description
           </label>
-          <TinyMCEWithForm />
+          <TinyMCEWithForm name="descriptionSession" />
         </div>
 
         {CategoryData?.length > 0 && (

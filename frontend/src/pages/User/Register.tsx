@@ -4,7 +4,7 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../validation";
-import { IErrorResponse, RegisterForm } from "../../interfaces";
+import { IErrorResponse, IRegister, RegisterForm } from "../../interfaces";
 import ErrorMsg from "../../components/ui/ErrorMsg";
 import Button from "../../components/ui/Buttom";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,12 +50,7 @@ const Register = () => {
     }
   };
 
-  const renderInputField = ({
-    label,
-    name,
-    placeholder,
-    type,
-  }: (typeof RegisterForm)[0]) => {
+  const renderInputField = ({ label, name, placeholder, type }: IRegister) => {
     const isPasswordField = type === "password";
     return (
       <div className="mb-4">
