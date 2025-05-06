@@ -92,7 +92,7 @@ public class Session {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "CATEGORIES_SESSIONS"
+            name = "SYSTEMS_SESSIONS"
             , joinColumns = @JoinColumn(name = "category_name")
             , inverseJoinColumns = @JoinColumn(name = "session_id")
     )
@@ -108,8 +108,8 @@ public class Session {
 
     @ManyToMany
     @JoinTable(
-            name = "FIELDS_SESSIONS",
-            joinColumns = @JoinColumn(name = "field_name"),
+            name = "CATEGORIES_SESSIONS",
+            joinColumns = @JoinColumn(name = "category_name"),
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
     private List<Category> sessionCategories = new ArrayList<>();

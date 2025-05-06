@@ -194,15 +194,13 @@ public class SessionService {
                 createRequestFrom(session, user, sessionRequestCreation.getBrief());
 
 
-
         Requirement requirement =
                 requirementManagementData.
-                        getRequirementBySessionIdAndCategory(session.getSessionId(), sessionRequestCreation.getCategory());
+                        getRequirementBySessionIdAndCategory(session.getSessionId(), sessionRequestCreation.getCategoryName());
 
         request.setRequirement(requirement);
 
         sessionManagementData.saveSession(session);
-
     }
 
 

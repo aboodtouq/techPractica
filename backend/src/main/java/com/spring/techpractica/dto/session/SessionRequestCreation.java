@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +13,7 @@ public class SessionRequestCreation {
 
     private Long sessionId;
 
-    private String category;
+    private String categoryName;
 
     private String brief;
 
