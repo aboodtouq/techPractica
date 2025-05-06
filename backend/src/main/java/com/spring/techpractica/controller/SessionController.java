@@ -1,6 +1,7 @@
 package com.spring.techpractica.controller;
 
 import com.spring.techpractica.dto.session.SessionRequest;
+import com.spring.techpractica.dto.session.SessionRequestCreation;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
@@ -45,15 +46,15 @@ public class SessionController {
 
 
     @Operation(
-            summary = "Get Sessions by Category",
-            description = "Fetches a paginated list of sessions based on the provided category name."
+            summary = "Get Sessions by system",
+            description = "Fetches a paginated list of sessions based on the provided system name."
     )
-    @GetMapping("/category")
-    public ResponseEntity<SessionsResponse> getSessionsByCategoryName(
-            @RequestParam String categoryName,
+    @GetMapping("/system")
+    public ResponseEntity<SessionsResponse> getSessionsBySystemName(
+            @RequestParam String SystemName,
             @RequestParam int pageSize, @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
-                getSessionsByCategoryName(categoryName, pageSize, pageNumber));
+                getSessionsBySystemName(SystemName, pageSize, pageNumber));
     }
 
     @Operation(
@@ -128,19 +129,28 @@ public class SessionController {
             summary = "Get sessions matching user's skills",
             description = "Returns sessions that match the authenticated user's skills, with pagination support."
     )
-            @GetMapping("/user/skills")
-    public ResponseEntity<SessionsResponse> getSessionsByUserSkills(@AuthenticationPrincipal UserDetails userDetails,
-                                                                  @Parameter(description = "Number of sessions per page", example = "10")
-                                                                  @RequestParam int pageSize,
+    @GetMapping("/user/skills")
+    public ResponseEntity<SessionsResponse>
+    getSessionsByUserSkills(@AuthenticationPrincipal UserDetails userDetails,
+                            @Parameter(description = "Number of sessions per page", example = "10")
+                            @RequestParam int pageSize,
 
-                                                                  @Parameter(description = "Page number to retrieve", example = "1")
-                                                                  @RequestParam int pageNumber) {
+                            @Parameter(description = "Page number to retrieve", example = "1")
+                            @RequestParam int pageNumber) {
 
         SessionsResponse sessionsResponse =
                 sessionService.getSessionsByUserEmail(userDetails.getUsername(),
                         pageSize, pageNumber);
 
         return ResponseEntity.ok(sessionsResponse);
+    }
+
+    @PutMapping("/request")
+    public ResponseEntity<String> userRequestSession(@AuthenticationPrincipal UserDetails userDetails,
+                                                     @RequestBody SessionRequestCreation sessionRequestCreation) {
+        String userEmail = userDetails.getUsername();
+        sessionService.createRequestSession(sessionRequestCreation, userEmail);
+        return ResponseEntity.ok("send request successfully to session ");
     }
 
 }

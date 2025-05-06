@@ -1,19 +1,18 @@
 package com.spring.techpractica.service.session;
 
 import com.spring.techpractica.dto.session.SessionRequest;
+import com.spring.techpractica.dto.session.SessionRequestCreation;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.factory.PageRequestFactory;
+import com.spring.techpractica.factory.RequestBuilding;
 import com.spring.techpractica.factory.RequirementFactory;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.mengmentData.*;
 import com.spring.techpractica.model.SessionRole;
-import com.spring.techpractica.model.entity.AuthenticatedUserSession;
-import com.spring.techpractica.model.entity.Requirement;
-import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.model.entity.techSkills.Category;
+import com.spring.techpractica.model.entity.*;
+import com.spring.techpractica.model.entity.techSkills.System;
 import com.spring.techpractica.service.session.createSession.CreateSessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,17 +26,19 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SessionService {
 
+    private final RequirementManagementData requirementManagementData;
+
     private final SessionManagementData sessionManagementData;
 
     private final UserManagementData userManagementData;
 
-    private final CategoryManagementData categoryManagementData;
+    private final SystemManagementData systemManagementData;
 
     private final CreateSessionService createSessionService;
 
     private final TechnologyManagementData technologyManagementData;
 
-    private final FieldManagementData fieldManagementData;
+    private final CategoryManagementData categoryManagementData;
 
     private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
 
@@ -68,15 +69,15 @@ public class SessionService {
         return null;
     }
 
-    public SessionsResponse getSessionsByCategoryName(String categoryName, int pageSize, int pageNumber) {
+    public SessionsResponse getSessionsBySystemName(String categoryName, int pageSize, int pageNumber) {
 
-        Category category = categoryManagementData.getCategoryByName(categoryName);
+        System system = systemManagementData.getSystemByName(categoryName);
 
         List<Session> sessions = sessionManagementData
-                .getSessionsByCategoryAndPageable(category,
+                .getSessionsBySystemAndPageable(system,
                         PageRequestFactory.createPageRequest(pageSize, pageNumber));
 
-        long totalSession = sessionManagementData.getNumberOfCategorySessions(category);
+        long totalSession = sessionManagementData.getNumberOfSystemSessions(system);
 
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
 
@@ -128,28 +129,28 @@ public class SessionService {
                         .getTechnologiesByTechnologiesName(updatedSessionRequest.getTechnologies()))
         );
 
-        session.setSessionCategories(
+        session.setSessionSystems(
                 new ArrayList<>(categoriesStringToCategoriesList(
-                        List.of(updatedSessionRequest.getCategory())
+                        List.of(updatedSessionRequest.getSystem())
                 ))
         );
 
         session.getSessionRequirements().clear();
 
         List<Requirement> requirements = updatedSessionRequest
-                .getFields()
+                .getCategories()
                 .stream()
-                .map(field -> RequirementFactory.createRequirement(
+                .map(category -> RequirementFactory.createRequirement(
                         session,
-                        fieldManagementData.getFieldByFieldName(field)
+                        categoryManagementData.getCategoryByCategoryName(category)
                 ))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         session.getSessionRequirements().addAll(requirements);
 
-        session.setSessionFields(
-                new ArrayList<>(fieldManagementData
-                        .getFieldsByFieldsName(updatedSessionRequest.getFields()))
+        session.setSessionCategories(
+                new ArrayList<>(categoryManagementData
+                        .getCategoriesByCategoriesName(updatedSessionRequest.getCategories()))
         );
 
         sessionManagementData.saveSession(session);
@@ -157,9 +158,9 @@ public class SessionService {
         return SessionMapper.sessionToSessionResponse(session);
     }
 
-    private List<Category> categoriesStringToCategoriesList(List<String> categories) {
+    private List<System> categoriesStringToCategoriesList(List<String> categories) {
         return categories.stream()
-                .map(categoryManagementData::getCategoryByName)
+                .map(systemManagementData::getSystemByName)
                 .toList();
     }
 
@@ -178,4 +179,31 @@ public class SessionService {
                 getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, sessionManagementData.getNumberOfSessions());
     }
+
+    @Transactional
+    public void createRequestSession(SessionRequestCreation sessionRequestCreation,
+                                     String userEmail) {
+
+        Session session =
+                sessionManagementData.getSessionById(sessionRequestCreation.getSessionId());
+
+        User user = userManagementData.getUserByEmail(userEmail);
+
+
+        Request request = RequestBuilding.
+                createRequestFrom(session, user, sessionRequestCreation.getBrief());
+
+
+
+        Requirement requirement =
+                requirementManagementData.
+                        getRequirementBySessionIdAndCategory(session.getSessionId(), sessionRequestCreation.getCategory());
+
+        request.setRequirement(requirement);
+
+        sessionManagementData.saveSession(session);
+
+    }
+
+
 }

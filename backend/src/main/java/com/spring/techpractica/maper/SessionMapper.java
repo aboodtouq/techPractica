@@ -4,7 +4,7 @@ import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionResponse;
 import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.model.entity.Session;
-import com.spring.techpractica.model.entity.techSkills.Field;
+import com.spring.techpractica.model.entity.techSkills.Category;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class SessionMapper {
                 .sessionMembers(new ArrayList<>())
                 .timestampList(new ArrayList<>())
                 .sessionTechnologies(new ArrayList<>())
-                .sessionFields(new ArrayList<>())
+                .sessionCategories(new ArrayList<>())
                 .build();
     }
 
@@ -38,12 +38,12 @@ public class SessionMapper {
                 .sessionName(session.getSessionName())
                 .IsPrivate(session.isPrivate())
                 .sessionDescription(session.getSessionDescription())
-                .category(session.getSessionCategories().getFirst().getCategoryName())
+                .system(session.getSessionCategories().getFirst().getCategoryName())
                 .technologies(session.getSessionTechnologies().stream()
                         .map(Technology::getTechnologyName).toList())
-                .fields(session.getSessionFields()
+                .categories(session.getSessionCategories()
                         .stream()
-                        .map(Field::getFieldName)
+                        .map(Category::getCategoryName)
                         .toList())
                 .build();
     }

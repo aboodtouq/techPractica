@@ -2,7 +2,7 @@ package com.spring.techpractica.model.entity;
 
 import com.spring.techpractica.model.TimestampType;
 import com.spring.techpractica.model.entity.techSkills.Category;
-import com.spring.techpractica.model.entity.techSkills.Field;
+import com.spring.techpractica.model.entity.techSkills.System;
 import com.spring.techpractica.model.entity.techSkills.Technology;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -87,7 +87,7 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = CascadeType.REMOVE)
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Request> sessionRequests = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -96,7 +96,7 @@ public class Session {
             , joinColumns = @JoinColumn(name = "category_name")
             , inverseJoinColumns = @JoinColumn(name = "session_id")
     )
-    private List<Category> sessionCategories = new ArrayList<>();
+    private List<System> sessionSystems = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -112,5 +112,5 @@ public class Session {
             joinColumns = @JoinColumn(name = "field_name"),
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
-    private List<Field> sessionFields = new ArrayList<>();
+    private List<Category> sessionCategories = new ArrayList<>();
 }

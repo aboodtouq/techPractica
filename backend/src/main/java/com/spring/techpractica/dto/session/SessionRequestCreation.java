@@ -8,13 +8,17 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+public class SessionRequestCreation {
 
-public class SessionsResponse {
+    private Long sessionId;
 
-    private long sessionsCount;
+    private String category;
 
-    private List<SessionResponse> sessions;
+    private String brief;
+
+    private Long reqId;
+    
 }

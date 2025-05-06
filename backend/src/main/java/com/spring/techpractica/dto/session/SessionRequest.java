@@ -19,10 +19,10 @@ public class SessionRequest {
 
     private boolean isPrivateSession;
 
-    private String category;
+    private String system;
 
     private List<String> technologies;
 
-    private List<String> fields;
+    private List<String> categories;
 
 }
