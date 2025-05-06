@@ -28,6 +28,7 @@ public class SessionMapper {
                 .timestampList(new ArrayList<>())
                 .sessionTechnologies(new ArrayList<>())
                 .sessionCategories(new ArrayList<>())
+                .sessionSystems(new ArrayList<>())
                 .build();
     }
 

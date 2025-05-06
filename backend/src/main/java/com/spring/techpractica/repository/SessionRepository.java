@@ -13,10 +13,10 @@ import java.util.List;
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
 
-    Page<Session> findAllBySessionCategories(System system, Pageable pageable);
+    Page<Session> findAllBySessionSystems(System system, Pageable pageable);
 
     Session findSessionBySessionId(long sessionId);
 
 
-    long countBySessionCategories(List<System> sessionCategories);
+    long countBySessionSystems(List<System> sessionCategories);
 }

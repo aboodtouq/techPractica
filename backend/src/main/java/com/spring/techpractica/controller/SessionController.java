@@ -51,10 +51,11 @@ public class SessionController {
     )
     @GetMapping("/system")
     public ResponseEntity<SessionsResponse> getSessionsBySystemName(
-            @RequestParam String SystemName,
-            @RequestParam int pageSize, @RequestParam int pageNumber) {
+            @RequestParam String systemName,
+            @RequestParam int pageSize,
+            @RequestParam int pageNumber) {
         return ResponseEntity.ok(sessionService.
-                getSessionsBySystemName(SystemName, pageSize, pageNumber));
+                getSessionsBySystemName(systemName, pageSize, pageNumber));
     }
 
     @Operation(

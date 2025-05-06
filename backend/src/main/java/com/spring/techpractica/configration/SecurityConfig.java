@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/sessions/").permitAll()
                         .requestMatchers(
+                                "/api/v1/sessions/system",
                                 "/api/v1/authenticated/registration",
                                 "/api/v1/authenticated/login",
                                 "/api/v1/authenticated/send-reset-password",
@@ -51,7 +52,8 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

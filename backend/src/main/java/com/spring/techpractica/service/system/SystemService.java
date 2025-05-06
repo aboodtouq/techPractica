@@ -17,13 +17,12 @@ public class SystemService {
     private final SystemManagementData systemManagementData;
 
 
-
     public List<SystemResponse> findAllSystems() {
         return SystemMapper.systemsToSystemResponseList(systemManagementData.getAllSystems());
     }
 
 
-    public System getSystemByName(String name)       {
+    public System getSystemByName(String name) {
 
         return systemManagementData.getSystemByName(name);
     }

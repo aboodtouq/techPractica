@@ -82,13 +82,13 @@ public class SessionManagementData {
     /**
      * Retrieves a paginated list of sessions associated with the given category.
      *
-     * @param system The category used to filter sessions.
+     * @param system   The category used to filter sessions.
      * @param pageable The pagination information.
      * @return A list of sessions that belong to the specified category and page.
      */
     public List<Session> getSessionsBySystemAndPageable(System system,
                                                         Pageable pageable) {
-        Page<Session> page = sessionRepository.findAllBySessionCategories(system, pageable);
+        Page<Session> page = sessionRepository.findAllBySessionSystems(system, pageable);
         return page.getContent();
     }
 
@@ -103,9 +103,9 @@ public class SessionManagementData {
     }
 
     public long getNumberOfSystemSessions(System system) {
-        List<System> categories =new ArrayList<>();
+        List<System> categories = new ArrayList<>();
         categories.add(system);
-        return sessionRepository.countBySessionCategories(categories);
+        return sessionRepository.countBySessionSystems(categories);
     }
 
     public long getNumberOfSessions() {
