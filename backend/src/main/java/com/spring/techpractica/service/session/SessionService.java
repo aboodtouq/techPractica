@@ -200,6 +200,8 @@ public class SessionService {
 
         request.setRequirement(requirement);
 
+        session.getSessionRequests().add(request);
+
         sessionManagementData.saveSession(session);
     }
 

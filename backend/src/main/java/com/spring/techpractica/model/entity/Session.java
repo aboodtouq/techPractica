@@ -87,7 +87,8 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+            cascade = {CascadeType.PERSIST,
+                    CascadeType.REMOVE, CascadeType.MERGE})
     private List<Request> sessionRequests = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -113,4 +114,5 @@ public class Session {
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
     private List<Category> sessionCategories = new ArrayList<>();
+
 }
