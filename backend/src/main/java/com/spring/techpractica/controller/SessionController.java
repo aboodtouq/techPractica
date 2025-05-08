@@ -8,6 +8,8 @@ import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.service.session.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -150,20 +152,33 @@ public class SessionController {
     }
 
     @PutMapping("/request")
+    @Operation(summary = "Send a session request", description = "Allows a user to send a session request")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Request sent successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<String> userRequestSession(@AuthenticationPrincipal UserDetails userDetails,
-                                                     @RequestBody SessionRequestCreation sessionRequestCreation) {
+                                                     @org.springframework.web.bind.annotation.RequestBody SessionRequestCreation sessionRequestCreation) {
         String userEmail = userDetails.getUsername();
         sessionService.createRequestSession(sessionRequestCreation, userEmail);
         return ResponseEntity.ok("send request successfully to session ");
     }
 
     @GetMapping("{sessionId}/request")
+    @Operation(summary = "Get session requests", description = "Retrieves all session requests for a given session ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved session requests"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "404", description = "Session not found")
+    })
     public ResponseEntity<List<UserRequestSession>> userRequestSession(
             @PathVariable Long sessionId,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         return ResponseEntity.ok(sessionService.getSessionsRequest(sessionId, userDetails.getUsername()));
     }
+}
 
 }
 
