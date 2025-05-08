@@ -17,7 +17,7 @@ public class SessionRequest {
 
     private String descriptionSession;
 
-    private boolean isPrivateSession;
+    private boolean privateSession;
 
     private String system;
 

@@ -8,9 +8,9 @@ import com.spring.techpractica.mengmentData.SessionManagementData;
 import com.spring.techpractica.mengmentData.UserManagementData;
 import com.spring.techpractica.model.entity.Session;
 import com.spring.techpractica.model.entity.User;
-import com.spring.techpractica.service.session.linker.SessionSystemLinker;
 import com.spring.techpractica.service.session.linker.SessionCategoryLinker;
 import com.spring.techpractica.service.session.linker.SessionRoleAssigner;
+import com.spring.techpractica.service.session.linker.SessionSystemLinker;
 import com.spring.techpractica.service.session.linker.SessionTechnologyLinker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,8 +44,7 @@ public class CreateSessionService {
 
     /**
      * Creates a new session based on the data provided by the user and the session creation request.
-     *
-       */
+     */
     @Transactional
     public SessionResponse createSession(SessionRequest request, String userEmail) {
 
@@ -55,7 +54,9 @@ public class CreateSessionService {
 
         roleAssigner.assignRole(session, owner);
         categoryLinker.linkCategoriesToSession(session, request.getCategories());
+
         systemLinker.linkSystemToSession(session, request.getSystem());
+
         technologyLinker.linkTechnologiesToSession(session, request.getTechnologies());
 
         session = sessionManagementData.saveSession(session);
