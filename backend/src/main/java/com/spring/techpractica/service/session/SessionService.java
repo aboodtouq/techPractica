@@ -1,5 +1,6 @@
 package com.spring.techpractica.service.session;
 
+import com.spring.techpractica.dto.UserRequestSession;
 import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionRequestCreation;
 import com.spring.techpractica.dto.session.SessionResponse;
@@ -205,5 +206,25 @@ public class SessionService {
         sessionManagementData.saveSession(session);
     }
 
-
+    @Transactional
+    public List<UserRequestSession> getSessionsRequest(Long sessionId, String username) {
+        Session session = sessionManagementData.getSessionById(sessionId);
+        User user = userManagementData.getUserByEmail(username);
+        if (!getSessionRole(session.getSessionId(), user.getUserId()).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User must be an OWNER to perform this action.");
+        }
+        List<Request> requests = session.getSessionRequests();
+        if (requests.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return requests
+                .stream()
+                .map(r -> UserRequestSession.builder()
+                        .brief(r.getBrief())
+                        .username(r.getUser().getUserEmail())
+                        .categoryName(r.getRequirement()
+                                .getCategory()
+                                .getCategoryName())
+                        .build()).collect(Collectors.toList());
+    }
 }

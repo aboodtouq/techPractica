@@ -1,5 +1,6 @@
 package com.spring.techpractica.controller;
 
+import com.spring.techpractica.dto.UserRequestSession;
 import com.spring.techpractica.dto.session.SessionRequest;
 import com.spring.techpractica.dto.session.SessionRequestCreation;
 import com.spring.techpractica.dto.session.SessionResponse;
@@ -13,6 +14,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/sessions")
@@ -152,6 +155,14 @@ public class SessionController {
         String userEmail = userDetails.getUsername();
         sessionService.createRequestSession(sessionRequestCreation, userEmail);
         return ResponseEntity.ok("send request successfully to session ");
+    }
+
+    @GetMapping("{sessionId}/request")
+    public ResponseEntity<List<UserRequestSession>> userRequestSession(
+            @PathVariable Long sessionId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        return ResponseEntity.ok(sessionService.getSessionsRequest(sessionId, userDetails.getUsername()));
     }
 
 }
