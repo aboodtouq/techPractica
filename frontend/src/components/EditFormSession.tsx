@@ -6,11 +6,11 @@ import {
   ErrorMsg,
 } from "../imports.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Category, IErrorResponse, ISessionRes } from "../interfaces.ts";
+import { IErrorResponse, ISessionRes, System } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { token, useCategories, useFields, useTechnologies } from "../api.ts";
+import { token, useCategories, useSystems, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
@@ -22,13 +22,16 @@ interface IProps {
 
 const EditSessionForm = ({ session, closeModal }: IProps) => {
   /*______SelectData______*/
-  const { data: CategoryData } = useCategories();
-  const { data: fieldsData } = useFields();
-  const { data: technologiesData } = useTechnologies();
-  const fieldName = fieldsData?.map(
-    (tech: { fieldName: string }) => tech.fieldName
+  const { data: SystemData } = useSystems();
+  const { data: DataCategoryies } = useCategories();
+  const { data: DataTech } = useTechnologies();
+  const systemName = SystemData?.map(
+    (tech: { systemName: string }) => tech.systemName
   );
-  const technologyNames = technologiesData?.map(
+  const categoryName = DataCategoryies?.map(
+    (tech: { categoryName: string }) => tech.categoryName
+  );
+  const technologyName = DataTech?.map(
     (tech: { technologyName: string }) => tech.technologyName
   );
   /*______onSubmit______*/
@@ -40,8 +43,8 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
       nameSession: session.sessionName,
       descriptionSession: session.sessionDescription,
       technologies: session.technologies,
-      category: session.category,
-      fields: session.fields,
+      system: session.system,
+      categories: session.categories,
       privateSession: session.isPrivate ? "Private Session" : "Public Sesssion",
     },
   });
@@ -91,40 +94,40 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
           <label className="block text-sm font-medium text-gray-700">
             Project Description
           </label>
-          <TinyMCEWithForm />
+          <TinyMCEWithForm name="descriptionSession" />
         </div>
-        {CategoryData?.length > 0 && (
-          <SelectField<Category>
+        {systemName?.length > 0 && (
+          <SelectField<System>
             label="Category"
-            name="category"
-            options={CategoryData}
-            getLabel={(item) => item.categoryName}
+            name="system"
+            options={SystemData}
+            getLabel={(item) => item.systemName}
           />
         )}
 
-        {technologyNames?.length > 0 && (
+        {technologyName?.length > 0 && (
           <MultiSelectField<string>
             label="Technologies"
             name="technologies"
-            options={technologyNames}
+            options={technologyName}
             getLabel={(item) => item}
           />
         )}
-        {fieldName?.length > 0 && (
+        {categoryName?.length > 0 && (
           <MultiSelectField<string>
             label="Fields"
-            name="fields"
-            options={fieldName}
+            name="categories"
+            options={categoryName}
             getLabel={(item) => item}
           />
         )}
+
         <SelectField<string>
           label="Sesseion State"
           name="privateSession"
-          options={["Public Sesssion", "Private Session"]}
+          options={["Public Session", "Private Session"]}
           getLabel={(item) => item}
         />
-
         <div className="flex mt-6 gap-4">
           <Button
             className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"

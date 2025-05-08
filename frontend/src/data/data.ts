@@ -51,11 +51,6 @@ export const categories: Category[] = [
     Icon: FaGamepad,
     style: "text-purple-600 w-6 h-6",
   },
-  {
-    title: "FF",
-    Icon: FaGamepad,
-    style: "text-purple-600 w-6 h-6",
-  },
 ];
 export const features: Feature[] = [
   {

@@ -11,14 +11,17 @@ const Learn = () => {
   const { category } = useParams();
   const [isModalShowMoreOpen, setIsModalShowMoreOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
-  const [selectedfields, setSelectedfieldss] = useState<string[]>();
+  const [selectedfields, setSelectedfieldss] = useState<{
+    SessionId: number;
+    categories: string[];
+  }>();
 
   const [ApplyModel, setApplyModel] = useState(false);
   const [page, setPage] = useState<number>(1);
   const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
   const Url = category
-    ? `/sessions/category?categoryName=${category}&pageNumber=${
+    ? `/sessions/system?systemName=${category}&pageNumber=${
         page - 1
       }&pageSize=${sessionsPerPage}`
     : `/sessions/?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`;
@@ -34,7 +37,10 @@ const Learn = () => {
   //////////////
   const openModalShowMore = (session: ISessionRes) => {
     setSelectedSession(session);
-    setSelectedfieldss(session.fields);
+    setSelectedfieldss({
+      categories: session.categories,
+      SessionId: session.id,
+    });
 
     setIsModalShowMoreOpen(true);
   };
@@ -47,11 +53,11 @@ const Learn = () => {
   };
   const closeModalShowMore = () => {
     setSelectedSession({
-      category: "Cybersecurity",
+      system: "Cybersecurity",
       sessionDescription: "",
       sessionName: "",
       technologies: [""],
-      fields: [""],
+      categories: [""],
       isPrivate: false,
       id: 4,
     });
@@ -70,27 +76,27 @@ const Learn = () => {
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
   const Data = sessionData?.sessions.map(
     ({
-      category,
+      system,
       sessionDescription,
       sessionName,
       technologies,
       id,
-      fields,
+      categories,
       isPrivate,
     }: ISessionRes) => (
       <SessionCard
         openModal={() => {
           openModalShowMore({
-            category,
+            system,
             sessionDescription,
             sessionName,
             technologies,
             id,
-            fields,
+            categories,
             isPrivate,
           });
         }}
-        category={category}
+        system={system}
         sessionDescription={sessionDescription}
         sessionName={sessionName}
         technologies={technologies}
@@ -130,9 +136,11 @@ const Learn = () => {
         />
       </Modal>
 
-      {/* مودال التقديم */}
       <Modal isOpen={ApplyModel} closeModal={CloseApplyModel} title={"Apply"}>
-        <ApplySessionForm closeModal={CloseApplyModel} f={selectedfields} />
+        <ApplySessionForm
+          closeModal={CloseApplyModel}
+          SessionDet={selectedfields}
+        />
       </Modal>
     </>
   );

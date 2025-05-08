@@ -6,11 +6,11 @@ import {
   ErrorMsg,
 } from "../imports.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Category, IErrorResponse } from "../interfaces.ts";
+import { System, IErrorResponse } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { token, useCategories, useFields, useTechnologies } from "../api.ts";
+import { token, useCategories, useSystems, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
@@ -21,16 +21,18 @@ interface IProps {
 
 const CreateSessionForm = ({ closeModal }: IProps) => {
   /*______SelectData______*/
-  const { data: CategoryData } = useCategories();
-  const { data: fieldsData } = useFields();
-  const { data: technologiesData } = useTechnologies();
-  const fieldNames = fieldsData?.map(
-    (tech: { fieldName: string }) => tech.fieldName
+  const { data: SystemData } = useSystems();
+  const { data: DataCategoryies } = useCategories();
+  const { data: DataTech } = useTechnologies();
+  const systemName = SystemData?.map(
+    (tech: { systemName: string }) => tech.systemName
   );
-  const technologyNames = technologiesData?.map(
+  const categoryName = DataCategoryies?.map(
+    (tech: { categoryName: string }) => tech.categoryName
+  );
+  const technologyName = DataTech?.map(
     (tech: { technologyName: string }) => tech.technologyName
   );
-
   /*______onSubmit______*/
   type CreateSession = InferType<typeof sessionSchema>;
 
@@ -42,7 +44,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
       ...data,
       privateSession: data.privateSession === "Private Session",
     };
-    console.log(data);
+    console.log(formattedData);
     try {
       await axiosInstance.post("/sessions/", formattedData, {
         headers: {
@@ -55,7 +57,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
       });
       setTimeout(() => {
         closeModal();
-        // window.location.href = window.location.href;
+        window.location.href = window.location.href;
       }, 500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
@@ -92,28 +94,28 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           <TinyMCEWithForm name="descriptionSession" />
         </div>
 
-        {CategoryData?.length > 0 && (
-          <SelectField<Category>
+        {systemName?.length > 0 && (
+          <SelectField<System>
             label="Category"
-            name="category"
-            options={CategoryData}
-            getLabel={(item) => item.categoryName}
+            name="system"
+            options={SystemData}
+            getLabel={(item) => item.systemName}
           />
         )}
 
-        {technologyNames?.length > 0 && (
+        {technologyName?.length > 0 && (
           <MultiSelectField<string>
             label="Technologies"
             name="technologies"
-            options={technologyNames}
+            options={technologyName}
             getLabel={(item) => item}
           />
         )}
-        {fieldNames?.length > 0 && (
+        {categoryName?.length > 0 && (
           <MultiSelectField<string>
             label="Fields"
-            name="fields"
-            options={fieldNames}
+            name="categories"
+            options={categoryName}
             getLabel={(item) => item}
           />
         )}

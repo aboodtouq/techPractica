@@ -4,12 +4,12 @@ interface SessionUserType {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
-  category: CategoryType;
+  system: CategoryType;
   openModal: () => void;
 }
 
 const SessionCardUser = ({
-  category,
+  system,
   openModal,
   sessionDescription,
   sessionName,
@@ -23,7 +23,7 @@ const SessionCardUser = ({
           {sessionName}
         </h2>
         <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
-          {category}
+          {system}
         </span>
       </div>
 
