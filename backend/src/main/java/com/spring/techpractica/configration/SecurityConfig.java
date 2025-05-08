@@ -40,8 +40,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/v1/sessions/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/sessions/")
+                        .permitAll()
                         .requestMatchers(
+                                "/api/v1/tech-skills/**",
                                 "/api/v1/sessions/system",
                                 "/api/v1/authenticated/registration",
                                 "/api/v1/authenticated/login",

@@ -18,7 +18,8 @@ public class SystemService {
 
 
     public List<SystemResponse> findAllSystems() {
-        return SystemMapper.systemsToSystemResponseList(systemManagementData.getAllSystems());
+        return SystemMapper.
+                systemsToSystemResponseList(systemManagementData.getAllSystems());
     }
 
 
