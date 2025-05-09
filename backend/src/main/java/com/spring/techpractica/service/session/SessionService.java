@@ -55,7 +55,6 @@ public class SessionService {
                                                    int pageSize,
                                                    int pageNumber) {
 
-
         User user = userManagementData.getUserByEmail(userEmail);
 
         if (user.getUserTechnologies() == null || user.getUserTechnologies().isEmpty()) {
