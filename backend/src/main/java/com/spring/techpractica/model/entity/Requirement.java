@@ -24,7 +24,7 @@ public class Requirement {
     @JoinColumn(name = "session_id")
     private Session session;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "category_name")
     private Category category;
 }

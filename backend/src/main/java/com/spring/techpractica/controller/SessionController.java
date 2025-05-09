@@ -160,7 +160,7 @@ public class SessionController {
             @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     public ResponseEntity<String> userRequestSession(@AuthenticationPrincipal UserDetails userDetails,
-                                                     @org.springframework.web.bind.annotation.RequestBody SessionRequestCreation sessionRequestCreation) {
+                                                     @RequestBody SessionRequestCreation sessionRequestCreation) {
         String userEmail = userDetails.getUsername();
         sessionService.createRequestSession(sessionRequestCreation, userEmail);
         return ResponseEntity.ok("send request successfully to session ");
