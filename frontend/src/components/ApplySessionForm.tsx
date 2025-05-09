@@ -1,12 +1,11 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Button, SelectField } from "../imports";
+import { Button, CookiesService, SelectField } from "../imports";
 import TinyMCEWithForm from "./ui/RichTextEditor";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../config/axios.config";
-import { token } from "../api";
 import { IErrorResponse } from "../interfaces";
-
+const token = CookiesService.get("UserToken");
 interface IProps {
   closeModal: () => void;
   SessionDet?: {
@@ -25,7 +24,7 @@ const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
   const methods = useForm<IREQ>();
   const sessionId = SessionDet?.SessionId;
   const onSubmit: SubmitHandler<IREQ> = async (data) => {
-    const Data = { ...data, sessionId, reqId: 1 };
+    const Data = { ...data, sessionId, reqId: 147 };
     console.log(Data);
     try {
       const response = await axiosInstance.put(`/sessions/request`, data, {

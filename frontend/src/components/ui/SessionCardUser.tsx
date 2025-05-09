@@ -6,6 +6,7 @@ interface SessionUserType {
   technologies: string[];
   system: CategoryType;
   openModal: () => void;
+  openDeleteModal: () => void;
 }
 
 const SessionCardUser = ({
@@ -14,6 +15,7 @@ const SessionCardUser = ({
   sessionDescription,
   sessionName,
   technologies,
+  openDeleteModal,
 }: SessionUserType) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
@@ -53,12 +55,19 @@ const SessionCardUser = ({
       {/* Show More Button */}
       <div className="absolute bottom-4 left-4 right-4 flex gap-4 sm:gap-6 justify-end">
         <button
-          onClick={openModal}
+          onClick={() => {
+            openModal();
+          }}
           className="text-sm font-medium text-gray-400 hover:text-[#38b28d] transition-colors px-2 py-1 rounded"
         >
           Edit
         </button>
-        <button className="text-sm font-medium text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded">
+        <button
+          onClick={() => {
+            openDeleteModal();
+          }}
+          className="text-sm font-medium text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded"
+        >
           Delete
         </button>
       </div>

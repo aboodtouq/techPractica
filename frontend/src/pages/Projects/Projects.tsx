@@ -9,18 +9,28 @@ import {
 import useModal from "../../hooks/useModal.ts";
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator.tsx";
-import { ISessionRes } from "../../interfaces.ts";
+import { IErrorResponse, ISessionRes } from "../../interfaces.ts";
 import EditSessionForm from "../../components/EditFormSession.tsx";
 import { BiPlus } from "react-icons/bi";
+import axiosInstance from "../../config/axios.config.ts";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 const Projects = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
-
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [SessionId, setSessionId] = useState<number>();
   const [page, setPage] = useState<number>(1);
   const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
-
+  const closeDeleteModal = () => {
+    setIsOpenDeleteModal(false);
+  };
+  const openDeleteModal = (sessionId: number) => {
+    setSessionId(sessionId);
+    setIsOpenDeleteModal(true);
+  };
   const { data: sessionData } = useAuthQuery({
     queryKey: [`SessionData-${page}`],
     url: `/sessions/users?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`,
@@ -36,6 +46,27 @@ const Projects = () => {
   const openEditModal = (session: ISessionRes) => {
     setSelectedSession(session);
     setIsModalEditOpen(true);
+  };
+  const onSubmitRemoveTodo = async () => {
+    try {
+      const response = await axiosInstance.delete(`/sessions/${SessionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success(response.data, { position: "top-center" });
+      setTimeout(() => {
+        closeDeleteModal();
+        window.location.href = window.location.href;
+      }, 500);
+    } catch (error) {
+      const ErrorObj = error as AxiosError<IErrorResponse>;
+
+      toast.error(`${ErrorObj.response?.data.message}`, {
+        position: "top-center",
+        duration: 2000,
+      });
+    }
   };
   const closeEditModal = () => {
     setSelectedSession({
@@ -67,6 +98,9 @@ const Projects = () => {
       isPrivate,
     }: ISessionRes) => (
       <SessionCardUser
+        openDeleteModal={() => {
+          openDeleteModal(id);
+        }}
         openModal={() => {
           openEditModal({
             system,
@@ -96,6 +130,30 @@ const Projects = () => {
           session={selectedSession!}
           closeModal={closeEditModal}
         />
+      </Modal>
+      <Modal
+        isOpen={isOpenDeleteModal}
+        closeModal={closeDeleteModal}
+        title="Are you sure you want to delete this session?"
+        description="Deleting this session will remove it permanently from your account. This action cannot be undone. Make sure you no longer need this session or any related data before proceeding."
+      >
+        <div className="flex items-center space-x-3">
+          <Button
+            onClick={onSubmitRemoveTodo}
+            className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"
+            width="w-full"
+          >
+            Yes, remove
+          </Button>
+          <Button
+            className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
+            width="w-full"
+            type="button"
+            onClick={closeDeleteModal}
+          >
+            Cancel
+          </Button>
+        </div>
       </Modal>
       <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 mb-6">
