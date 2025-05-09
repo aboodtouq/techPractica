@@ -39,11 +39,11 @@ const Projects = () => {
   };
   const closeEditModal = () => {
     setSelectedSession({
-      category: "Cybersecurity",
+      system: "Cybersecurity",
       sessionDescription: "",
       sessionName: "",
       technologies: [""],
-      fields: [""],
+      categories: [""],
       isPrivate: false,
       id: 4,
     });
@@ -58,27 +58,27 @@ const Projects = () => {
   const pageCount = Math.ceil(totalSessions / sessionsPerPage);
   const Data = sessionData?.sessions.map(
     ({
-      category,
+      system,
       sessionDescription,
       sessionName,
       technologies,
       id,
-      fields,
+      categories,
       isPrivate,
     }: ISessionRes) => (
       <SessionCardUser
         openModal={() => {
           openEditModal({
-            category,
+            system,
             sessionDescription,
             sessionName,
             technologies,
             id,
-            fields,
+            categories,
             isPrivate,
           });
         }}
-        category={category}
+        system={system}
         sessionDescription={sessionDescription}
         sessionName={sessionName}
         technologies={technologies}

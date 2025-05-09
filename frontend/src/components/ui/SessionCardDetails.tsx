@@ -17,12 +17,12 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
         <div className="flex items-center gap-2">
           <FaUser />
           <div className="flex  flex-wrap gap-2 mb-12 sm:mb-0 max-h-7 ">
-            {session.fields.map((field) => (
+            {session.categories.map((categories) => (
               <span
-                key={field}
+                key={categories}
                 className=" text-[#022639] text-xs font-medium  py-1 cursor-pointer"
               >
-                {field}{" "}
+                {categories}
               </span>
             ))}
           </div>

@@ -84,9 +84,9 @@ export const sessionSchema = yup.object({
 
   privateSession: yup.string().required("Select session type"),
 
-  category: yup.string().required("Select a category"),
+  system: yup.string().required("Select a category"),
 
-  fields: yup
+  categories: yup
     .array()
     .of(yup.string().required())
     .min(1, "Select at least one field")

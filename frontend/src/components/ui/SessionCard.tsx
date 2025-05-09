@@ -3,12 +3,12 @@ interface SessionUserType {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
-  category: CategoryType;
+  system: CategoryType;
 
   openModal: () => void;
 }
 const SessionCard = ({
-  category,
+  system,
   openModal,
   sessionDescription,
   sessionName,
@@ -22,13 +22,13 @@ const SessionCard = ({
           {sessionName}
         </h2>
         <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
-          {category}
+          {system}
         </span>
       </div>
 
       {/* Description */}
       <p
-        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3"
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 text-wrap"
         dangerouslySetInnerHTML={{ __html: sessionDescription }}
       />
 

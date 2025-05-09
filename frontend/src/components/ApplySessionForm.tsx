@@ -1,20 +1,47 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Button, MultiSelectField } from "../imports";
+import { Button, SelectField } from "../imports";
 import TinyMCEWithForm from "./ui/RichTextEditor";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import axiosInstance from "../config/axios.config";
+import { token } from "../api";
+import { IErrorResponse } from "../interfaces";
 
 interface IProps {
   closeModal: () => void;
-  f: string[] | undefined;
+  SessionDet?: {
+    SessionId: number;
+    categories: string[];
+  };
 }
 interface IREQ {
-  BreefMsg: string;
-  Fields: string[] | undefined;
+  brief: string;
+  sessionId: number;
+  categoryName: string | undefined;
+  reqId: number;
 }
-const ApplySessionForm = ({ closeModal, f }: IProps) => {
-  const methods = useForm<IREQ>();
 
+const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
+  const methods = useForm<IREQ>();
+  const sessionId = SessionDet?.SessionId;
   const onSubmit: SubmitHandler<IREQ> = async (data) => {
-    console.log(data);
+    const Data = { ...data, sessionId, reqId: 1 };
+    console.log(Data);
+    try {
+      const response = await axiosInstance.put(`/sessions/request`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success(response.data, { position: "top-center" });
+    } catch (error) {
+      const ErrorObj = error as AxiosError<IErrorResponse>;
+
+      toast.error(`${ErrorObj.response?.data.message}`, {
+        position: "top-center",
+        duration: 2000,
+      });
+    }
   };
   return (
     <>
@@ -24,13 +51,13 @@ const ApplySessionForm = ({ closeModal, f }: IProps) => {
             <label className="block text-sm font-medium text-gray-700">
               Introduction message
             </label>
-            <TinyMCEWithForm name="BreefMsg" />
+            <TinyMCEWithForm name="brief" />
           </div>
-          {f?.length ? (
-            <MultiSelectField<string>
-              label="Session Fields"
-              name="Fields"
-              options={f}
+          {SessionDet?.categories?.length ? (
+            <SelectField<string>
+              label="System"
+              name="categoryName"
+              options={SessionDet.categories}
               getLabel={(item) => item}
             />
           ) : (

@@ -130,17 +130,16 @@ export interface Iinpform {
   type: string;
   label: string;
 }
-export type Category = {
-  categoryName: string;
-  technologies?: any[];
+export type System = {
+  systemName: string;
 };
 export interface ISession {
   id: number;
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
-  category: CategoryType;
-  fields: string[];
+  system: CategoryType;
+  categories: string[];
   privateSession: boolean;
 }
 export interface ISessionRes {
@@ -148,7 +147,7 @@ export interface ISessionRes {
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
-  category: CategoryType;
-  fields: string[];
+  system: CategoryType;
+  categories: string[];
   isPrivate: boolean;
 }
