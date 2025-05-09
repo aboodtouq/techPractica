@@ -59,7 +59,8 @@ public class Session {
 
 
     @OneToMany(mappedBy = "session",
-            fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<AuthenticatedUserSession> sessionMembers = new ArrayList<>();
 
     @Column(name = "is_running")
