@@ -106,7 +106,7 @@ public class SessionController {
             @AuthenticationPrincipal UserDetails userDetails) {
 
         String userEmail = userDetails.getUsername();
-
+        sessionService.deleteSessionByUserEmailAndSessionId(userEmail, sessionId);
         return ResponseEntity.ok("Deleted Successfully");
     }
 

@@ -101,8 +101,13 @@ public class SessionService {
             , Long sessionId) {
 
         Session session = sessionManagementData.getSessionById(sessionId);
-        sessionManagementData.deleteSession(session);
+        User user = userManagementData.getUserByEmail(username);
 
+        if (!getUserRole(user.getUserId(),sessionId).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User dont have authorization");
+        }
+
+        sessionManagementData.deleteSession(session);
     }
 
     @Transactional
@@ -115,7 +120,7 @@ public class SessionService {
 
         Session session = sessionManagementData.getSessionById(sessionId);
 
-        if (getSessionRole(user.getUserId(), sessionId) != SessionRole.OWNER) {
+        if (getUserRole(user.getUserId(), sessionId) != SessionRole.OWNER) {
             throw new AuthenticationException("User must be an OWNER to perform this action.");
         }
 
@@ -165,7 +170,7 @@ public class SessionService {
                 .toList();
     }
 
-    public SessionRole getSessionRole(Long userId, Long sessionId) {
+    public SessionRole getUserRole(Long userId, Long sessionId) {
 
         AuthenticatedUserSession authenticatedUserSession = authenticatedUserSessionManagementData
                 .findByUserUserIdAndUserSessionId(userId, sessionId)
@@ -210,7 +215,7 @@ public class SessionService {
     public List<UserRequestSession> getSessionsRequest(Long sessionId, String username) {
         Session session = sessionManagementData.getSessionById(sessionId);
         User user = userManagementData.getUserByEmail(username);
-        if (!getSessionRole(session.getSessionId(), user.getUserId()).equals(SessionRole.OWNER)) {
+        if (!getUserRole(session.getSessionId(), user.getUserId()).equals(SessionRole.OWNER)) {
             throw new AuthenticationException("User must be an OWNER to perform this action.");
         }
         List<Request> requests = session.getSessionRequests();
