@@ -119,9 +119,11 @@ public class SessionService {
 
         Session session = sessionManagementData.getSessionById(sessionId);
 
-        if (!getUserRole(user.getUserId(), session.getSessionId()).equals(SessionRole.OWNER)) {
-            throw new AuthenticationException("User must be an OWNER  to perform this action.");
+
+        if (!getUserRole(user.getUserId(), sessionId).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User dont have authorization");
         }
+
 
         session.setSessionName(updatedSessionRequest.getNameSession());
 
@@ -218,8 +220,8 @@ public class SessionService {
         Session session = sessionManagementData.getSessionById(sessionId);
         User user = userManagementData.getUserByEmail(username);
 
-        if (!getUserRole(user.getUserId(), session.getSessionId()).equals(SessionRole.OWNER)) {
-            throw new AuthenticationException("User must be an OWNER  to perform this action.");
+        if (!getUserRole(user.getUserId(), sessionId).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User dont have authorization");
         }
 
 
