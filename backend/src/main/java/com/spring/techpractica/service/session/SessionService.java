@@ -213,23 +213,31 @@ public class SessionService {
 
     @Transactional
     public List<UserRequestSession> getSessionsRequest(Long sessionId, String username) {
+
         Session session = sessionManagementData.getSessionById(sessionId);
         User user = userManagementData.getUserByEmail(username);
+
         if (!getUserRole(session.getSessionId(), user.getUserId()).equals(SessionRole.OWNER)) {
             throw new AuthenticationException("User must be an OWNER to perform this action.");
         }
+
         List<Request> requests = session.getSessionRequests();
+
+
         if (requests == null) {
             return new ArrayList<>();
         }
+
         return requests
                 .stream()
+                .filter((r) -> r.getRequirement() != null)
                 .map(r -> UserRequestSession.builder()
                         .brief(r.getBrief())
                         .username(r.getUser().getUserEmail())
                         .categoryName(r.getRequirement()
                                 .getCategory()
                                 .getCategoryName())
-                        .build()).collect(Collectors.toList());
+                        .build())
+                .collect(Collectors.toList());
     }
 }
