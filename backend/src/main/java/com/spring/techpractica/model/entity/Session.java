@@ -51,7 +51,9 @@ public class Session {
     @Column(name = "session_name")
     private String sessionName;
 
-    @Column(name = "session_description")
+
+    @Column(name = "session_description",
+            length = 1000)
     private String sessionDescription;
 
     @Column(name = "is_private")
@@ -66,7 +68,8 @@ public class Session {
     @Column(name = "is_running")
     private boolean sessionIsRunning;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
     @JoinTable(
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "timestamp_id")
@@ -76,7 +79,8 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.REMOVE},
+            cascade = {CascadeType.REMOVE,
+                    CascadeType.PERSIST},
             orphanRemoval = true)
     private List<Requirement> sessionRequirements = new ArrayList<>();
 
@@ -92,7 +96,7 @@ public class Session {
                     CascadeType.REMOVE, CascadeType.MERGE})
     private List<Request> sessionRequests = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(
             name = "SYSTEMS_SESSIONS"
             , joinColumns = @JoinColumn(name = "category_name")
@@ -100,7 +104,7 @@ public class Session {
     )
     private List<System> sessionSystems = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(
             name = "TECHNOLOGIES_SESSIONS"
             , joinColumns = @JoinColumn(name = "technology_name")

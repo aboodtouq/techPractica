@@ -16,7 +16,7 @@ import java.util.Set;
 @Data
 @Builder
 @Table(name = "REQUEST")
-public class    Request {
+public class  Request {
 
 
     @Id

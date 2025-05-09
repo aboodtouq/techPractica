@@ -11,7 +11,7 @@ public class RequirementManagementData {
 
     private final RequirementRepository requirementRepository;
 
-    public Requirement getRequirementBySessionIdAndCategory(Long sessionId, String category) {
+    public Requirement getRequirementBySessionIdAndSystem(Long sessionId, String category) {
         return requirementRepository.getRequirementByCategoryCategoryNameAndSessionSessionId(category, sessionId);
     }
 }

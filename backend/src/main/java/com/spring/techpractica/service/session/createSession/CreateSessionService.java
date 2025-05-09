@@ -48,7 +48,6 @@ public class CreateSessionService {
     @Transactional
     public SessionResponse createSession(SessionRequest request, String userEmail) {
 
-
         User owner = userManagementData.getUserByEmail(userEmail);
         Session session = sessionFactory.createFrom(request);
 

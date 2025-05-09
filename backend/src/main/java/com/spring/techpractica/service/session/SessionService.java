@@ -8,7 +8,6 @@ import com.spring.techpractica.dto.session.SessionsResponse;
 import com.spring.techpractica.exception.AuthenticationException;
 import com.spring.techpractica.factory.PageRequestFactory;
 import com.spring.techpractica.factory.RequestBuilding;
-import com.spring.techpractica.factory.RequirementFactory;
 import com.spring.techpractica.maper.SessionMapper;
 import com.spring.techpractica.mengmentData.*;
 import com.spring.techpractica.model.SessionRole;
@@ -43,6 +42,7 @@ public class SessionService {
 
     private final AuthenticatedUserSessionManagementData authenticatedUserSessionManagementData;
 
+
     public SessionResponse createSession(SessionRequest sessionRequest,
                                          String userEmail) {
 
@@ -70,9 +70,9 @@ public class SessionService {
         return null;
     }
 
-    public SessionsResponse getSessionsBySystemName(String categoryName, int pageSize, int pageNumber) {
+    public SessionsResponse getSessionsBySystemName(String systemName, int pageSize, int pageNumber) {
 
-        System system = systemManagementData.getSystemByName(categoryName);
+        System system = systemManagementData.getSystemByName(systemName);
 
         List<Session> sessions = sessionManagementData
                 .getSessionsBySystemAndPageable(system,
@@ -120,8 +120,8 @@ public class SessionService {
 
         Session session = sessionManagementData.getSessionById(sessionId);
 
-        if (getUserRole(user.getUserId(), sessionId) != SessionRole.OWNER) {
-            throw new AuthenticationException("User must be an OWNER to perform this action.");
+        if (!getUserRole(user.getUserId(), session.getSessionId()).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User must be an OWNER  to perform this action.");
         }
 
         session.setSessionName(updatedSessionRequest.getNameSession());
@@ -141,18 +141,19 @@ public class SessionService {
                 ))
         );
 
-        session.getSessionRequirements().clear();
+//        session.getSessionRequirements().clear();
+//
+//        List<Requirement> requirements = updatedSessionRequest
+//                .getCategories()
+//                .stream()
+//                .map(category -> RequirementFactory.createRequirement(
+//                        session,
+//                        categoryManagementData.getCategoryByCategoryName(category)
+//                ))
+//                .collect(Collectors.toCollection(ArrayList::new));
 
-        List<Requirement> requirements = updatedSessionRequest
-                .getCategories()
-                .stream()
-                .map(category -> RequirementFactory.createRequirement(
-                        session,
-                        categoryManagementData.getCategoryByCategoryName(category)
-                ))
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        session.getSessionRequirements().addAll(requirements);
+//        session.getSessionRequirements()
+//                .addAll(requirements);
 
         session.setSessionCategories(
                 new ArrayList<>(categoryManagementData
@@ -174,7 +175,7 @@ public class SessionService {
 
         AuthenticatedUserSession authenticatedUserSession = authenticatedUserSessionManagementData
                 .findByUserUserIdAndUserSessionId(userId, sessionId)
-                .orElseThrow(() -> new AuthenticationException("User is not authenticated"));
+                .orElseThrow(() -> new AuthenticationException("User Don't have access in session"));
 
         return authenticatedUserSession.getScopedRole();
 
@@ -183,6 +184,7 @@ public class SessionService {
     public SessionsResponse getSessions(int pageSize, int pageNumber) {
         List<Session> sessions = sessionManagementData.
                 getSessionsByPageable(PageRequestFactory.createPageRequest(pageSize, pageNumber));
+
         return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, sessionManagementData.getNumberOfSessions());
     }
 
@@ -202,7 +204,7 @@ public class SessionService {
 
         Requirement requirement =
                 requirementManagementData.
-                        getRequirementBySessionIdAndCategory(session.getSessionId(), sessionRequestCreation.getCategoryName());
+                        getRequirementBySessionIdAndSystem(session.getSessionId(), sessionRequestCreation.getCategoryName());
 
         request.setRequirement(requirement);
 
@@ -217,9 +219,10 @@ public class SessionService {
         Session session = sessionManagementData.getSessionById(sessionId);
         User user = userManagementData.getUserByEmail(username);
 
-        if (!getUserRole(session.getSessionId(), user.getUserId()).equals(SessionRole.OWNER)) {
-            throw new AuthenticationException("User must be an OWNER to perform this action.");
+        if (!getUserRole(user.getUserId(), session.getSessionId()).equals(SessionRole.OWNER)) {
+            throw new AuthenticationException("User must be an OWNER  to perform this action.");
         }
+
 
         List<Request> requests = session.getSessionRequests();
 

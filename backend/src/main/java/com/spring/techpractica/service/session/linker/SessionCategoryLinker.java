@@ -18,9 +18,9 @@ public class SessionCategoryLinker {
 
     public void linkCategoriesToSession(Session session, List<String> categoryNames) {
         categoryNames.forEach(name -> {
-            Category category = categoryManagementData.findCategoryByCategoryName(name)
-                    .orElseThrow(() -> new ResourcesNotFoundException("Field not found"));
-            session.getSessionCategories().add(category);
+            Category category = categoryManagementData.getCategoryByCategoryName(name);
+            session.getSessionCategories()
+                    .add(category);
             Requirement requirement = Requirement.builder()
                     .category(category)
                     .session(session)

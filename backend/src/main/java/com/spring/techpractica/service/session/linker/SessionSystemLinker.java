@@ -12,8 +12,8 @@ public class SessionSystemLinker {
 
     private final SystemManagementData systemManagementData;
 
-    public void linkSystemToSession(Session session, String categoryName) {
-        System system = systemManagementData.getSystemByName(categoryName);
+    public void linkSystemToSession(Session session, String systemName) {
+        System system = systemManagementData.getSystemByName(systemName);
         session.getSessionSystems().add(system);
     }
 }
