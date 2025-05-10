@@ -113,6 +113,7 @@ const Projects = () => {
           });
         }}
         system={system}
+        sessionId={id}
         sessionDescription={sessionDescription}
         sessionName={sessionName}
         technologies={technologies}

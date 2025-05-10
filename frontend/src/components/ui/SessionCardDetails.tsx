@@ -1,6 +1,8 @@
 import { FaUser } from "react-icons/fa";
 import { ISessionRes } from "../../interfaces.ts";
-import { Button } from "../../imports.ts";
+import { Button, CookiesService } from "../../imports.ts";
+import { useNavigate } from "react-router-dom";
+const token = CookiesService.get("UserToken");
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
@@ -9,6 +11,7 @@ interface IProps {
 
 const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
   const cleaned = session.sessionDescription.replace(/^"(.*)"$/, "$1");
+  const navigation = useNavigate();
 
   return (
     <>
@@ -32,7 +35,7 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
       <div className="mb-4">
         <h3 className="font-semibold text-gray-800 mb-1">Description</h3>
         <div
-          className="text-gray-600 text-sm mb-4 sm:mb-6"
+          className="text-gray-600 text-sm mb-4 sm:mb-6 [&_ol]:list-decimal [&_ol]:ml-5 [&_ul]:list-disc [&_ul]:ml-5 [&_li]:mb-1 break-words"
           dangerouslySetInnerHTML={{ __html: cleaned }}
         />
       </div>

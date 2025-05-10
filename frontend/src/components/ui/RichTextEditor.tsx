@@ -29,6 +29,11 @@ const TinyMCEWithForm = ({ name }: IProps) => {
                 plugins: ["lists"],
                 toolbar:
                   "undo redo | styleselect | bold italic underline | bullist numlist",
+                content_style: `
+    ul { list-style-type: disc; margin-left: 1.5rem; padding-left: 1rem; }
+    ol { list-style-type: decimal; margin-left: 1.5rem; padding-left: 1rem; }
+    li { margin-bottom: 0.25rem; }
+  `,
               }}
             />
 

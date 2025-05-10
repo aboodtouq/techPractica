@@ -28,7 +28,7 @@ const SessionCard = ({
 
       {/* Description */}
       <p
-        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 text-wrap"
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 break-words"
         dangerouslySetInnerHTML={{ __html: sessionDescription }}
       />
 
@@ -51,7 +51,9 @@ const SessionCard = ({
 
       {/* Show More Button */}
       <button
-        onClick={openModal}
+        onClick={() => {
+          openModal();
+        }}
         className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group`}
       >
         Show More

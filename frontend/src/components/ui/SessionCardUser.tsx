@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { CategoryType } from "../../data/data";
 
 interface SessionUserType {
+  sessionId: number;
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
@@ -8,8 +10,8 @@ interface SessionUserType {
   openModal: () => void;
   openDeleteModal: () => void;
 }
-
 const SessionCardUser = ({
+  sessionId,
   system,
   openModal,
   sessionDescription,
@@ -17,6 +19,8 @@ const SessionCardUser = ({
   technologies,
   openDeleteModal,
 }: SessionUserType) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
       {/* Header Section */}
@@ -31,7 +35,7 @@ const SessionCardUser = ({
 
       {/* Description */}
       <div
-        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3"
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 break-words"
         dangerouslySetInnerHTML={{ __html: sessionDescription }}
       />
 
@@ -69,6 +73,14 @@ const SessionCardUser = ({
           className="text-sm font-medium text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded"
         >
           Delete
+        </button>
+        <button
+          onClick={() => {
+            navigate(`/Requests/${sessionId}`);
+          }}
+          className="text-sm font-medium text-gray-400 hover:text-[#38b28d]  transition-colors px-2 py-1 rounded"
+        >
+          Requests
         </button>
       </div>
     </div>

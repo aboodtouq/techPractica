@@ -5,7 +5,6 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../config/axios.config";
 import { IErrorResponse } from "../interfaces";
-const token = CookiesService.get("UserToken");
 interface IProps {
   closeModal: () => void;
   SessionDet?: {
@@ -17,31 +16,39 @@ interface IREQ {
   brief: string;
   sessionId: number;
   categoryName: string | undefined;
-  reqId: number;
+  reqId?: number;
 }
 
 const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
+  const token = CookiesService.get("UserToken");
+
   const methods = useForm<IREQ>();
   const sessionId = SessionDet?.SessionId;
   const onSubmit: SubmitHandler<IREQ> = async (data) => {
-    const Data = { ...data, sessionId, reqId: 147 };
-    console.log(Data);
+    const Data = {
+      ...data,
+      sessionId: sessionId,
+      reqId: 0,
+    };
+
     try {
-      const response = await axiosInstance.put(`/sessions/request`, data, {
+      const response = await axiosInstance.put(`/sessions/request`, Data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
       toast.success(response.data, { position: "top-center" });
+      closeModal();
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
-
       toast.error(`${ErrorObj.response?.data.message}`, {
         position: "top-center",
         duration: 2000,
       });
     }
   };
+
   return (
     <>
       <FormProvider {...methods}>
