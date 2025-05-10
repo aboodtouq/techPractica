@@ -29,7 +29,8 @@ public class  Request {
     private String requestStatus;
 
 
-    @Column(name = "brief")
+    @Column(name = "brief",
+            length = 1000)
     private String brief;
 
 
