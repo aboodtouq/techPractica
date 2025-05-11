@@ -1,16 +1,6 @@
 import * as yup from "yup";
 export const registerSchema = yup
   .object({
-    firstName: yup
-      .string()
-      .required("First Name is required")
-      .min(3, "Must be at least 3 characters")
-      .max(18, "Must be 20 characters or less"),
-    lastName: yup
-      .string()
-      .required("Last Name is required")
-      .min(3, "Must be at least 3 characters")
-      .max(18, "Must be 20 characters or less"),
     name: yup
       .string()
       .required("Username is required")

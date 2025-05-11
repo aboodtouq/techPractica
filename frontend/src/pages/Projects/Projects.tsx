@@ -16,6 +16,8 @@ import axiosInstance from "../../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 const Projects = () => {
+  document.title = "TechPractica | Sessions";
+
   const { isOpen, openModal, closeModal } = useModal();
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
@@ -133,6 +135,7 @@ const Projects = () => {
         />
       </Modal>
       <Modal
+        Position="fixed top-10 left-1/2 transform -translate-x-1/2 z-50"
         isOpen={isOpenDeleteModal}
         closeModal={closeDeleteModal}
         title="Are you sure you want to delete this session?"
@@ -152,7 +155,7 @@ const Projects = () => {
             type="button"
             onClick={closeDeleteModal}
           >
-            Cancel
+            No
           </Button>
         </div>
       </Modal>

@@ -4,7 +4,7 @@ interface SessionUserType {
   sessionDescription: string;
   technologies: string[];
   system: CategoryType;
-
+  flag?: boolean;
   openModal: () => void;
 }
 const SessionCard = ({
@@ -13,6 +13,7 @@ const SessionCard = ({
   sessionDescription,
   sessionName,
   technologies,
+  flag = true,
 }: SessionUserType) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
@@ -21,7 +22,7 @@ const SessionCard = ({
         <h2 className="text-md font-semibold text-[#022639] flex-1">
           {sessionName}
         </h2>
-        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
+        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit cursor-pointer">
           {system}
         </span>
       </div>
@@ -37,36 +38,42 @@ const SessionCard = ({
         {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer"
           >
             {tech}
           </span>
         ))}
         {technologies.length > 4 && (
-          <span className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md">
+          <span className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer">
             +{technologies.length - 4}
           </span>
         )}
       </div>
 
       {/* Show More Button */}
-      <button
-        onClick={() => {
-          openModal();
-        }}
-        className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group`}
-      >
-        Show More
-        <svg
-          className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
+      {flag && (
+        <button
+          onClick={() => {
+            openModal();
+          }}
+          className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+          Show More
+          <svg
+            className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   );
 };

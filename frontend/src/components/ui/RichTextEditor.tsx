@@ -22,6 +22,7 @@ const TinyMCEWithForm = ({ name }: IProps) => {
             <Editor
               apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
               value={field.value}
+              // initialValue="<p>This is the default text</p>"
               onEditorChange={(content: string) => field.onChange(content)}
               init={{
                 height: 300,

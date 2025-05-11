@@ -4,6 +4,8 @@ import SessionCardReq from "../../components/ui/SessionCardReq";
 
 interface IProps {}
 const SessionRequests = ({}: IProps) => {
+  document.title = "TechPractica | Session Requests";
+
   const token = CookiesService.get("UserToken");
 
   const { id } = useParams();

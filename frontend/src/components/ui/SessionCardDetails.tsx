@@ -1,8 +1,7 @@
 import { FaUser } from "react-icons/fa";
 import { ISessionRes } from "../../interfaces.ts";
 import { Button, CookiesService } from "../../imports.ts";
-import { useNavigate } from "react-router-dom";
-const token = CookiesService.get("UserToken");
+import { Navigate, useNavigate } from "react-router-dom";
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
@@ -12,6 +11,7 @@ interface IProps {
 const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
   const cleaned = session.sessionDescription.replace(/^"(.*)"$/, "$1");
   const navigation = useNavigate();
+  const token = CookiesService.get("UserToken");
 
   return (
     <>
@@ -45,7 +45,7 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
         {session.technologies.map((tech) => (
           <span
             key={tech}
-            className=" bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md cursor-pointer"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer"
           >
             {tech}
           </span>
@@ -57,7 +57,7 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
           className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200 cursor-pointer"
           width="w-full"
           onClick={() => {
-            openModal();
+            token ? openModal() : navigation("/User");
           }}
         >
           Apply now

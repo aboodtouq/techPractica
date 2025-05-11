@@ -28,7 +28,7 @@ const SessionCardUser = ({
         <h2 className="text-md font-semibold text-[#022639] flex-1">
           {sessionName}
         </h2>
-        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
+        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit cursor-pointer">
           {system}
         </span>
       </div>
@@ -44,13 +44,13 @@ const SessionCardUser = ({
         {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer"
           >
             {tech}
           </span>
         ))}
         {technologies.length > 4 && (
-          <span className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md">
+          <span className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer">
             +{technologies.length - 4}
           </span>
         )}

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import Paginator from "../../components/ui/Paginator";
 import SessionCard from "../../components/ui/SessionCard";
-import { CookiesService, Modal, useAuthQuery } from "../../imports";
+import { Modal, useAuthQuery } from "../../imports";
 import { ISessionRes } from "../../interfaces";
 import { useParams } from "react-router-dom";
 import SessionCardDetails from "../../components/ui/SessionCardDetails";
 import ApplySessionForm from "../../components/ApplySessionForm";
 
 const Learn = () => {
+  document.title = "TechPractica | Learn";
+
   const { category } = useParams();
   const [isModalShowMoreOpen, setIsModalShowMoreOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
@@ -19,7 +21,6 @@ const Learn = () => {
   const [ApplyModel, setApplyModel] = useState(false);
   const [page, setPage] = useState<number>(1);
   const sessionsPerPage = 9;
-  const token = CookiesService.get("UserToken");
   const Url = category
     ? `/sessions/system?systemName=${category}&pageNumber=${
         page - 1
@@ -28,11 +29,6 @@ const Learn = () => {
   const { data: sessionData } = useAuthQuery({
     queryKey: [`SessionData-${page}`],
     url: Url,
-    config: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
   });
   //////////////
   const openModalShowMore = (session: ISessionRes) => {

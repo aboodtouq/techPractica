@@ -4,13 +4,14 @@ import {
   MultiSelectField,
   Button,
   ErrorMsg,
+  CookiesService,
 } from "../imports.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { System, IErrorResponse } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { token, useCategories, useSystems, useTechnologies } from "../api.ts";
+import { useCategories, useSystems, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 const CreateSessionForm = ({ closeModal }: IProps) => {
+  const token = CookiesService.get("UserToken");
   /*______SelectData______*/
   const { data: SystemData } = useSystems();
   const { data: DataCategoryies } = useCategories();
@@ -135,7 +137,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
             Create Session
           </Button>
           <Button
-            className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
+            className="bg-white border border-gray-300 !text-gray-600    hover:bg-gray-100 font-medium transition-colors duration-200"
             width="w-full"
             type="button"
             onClick={() => {

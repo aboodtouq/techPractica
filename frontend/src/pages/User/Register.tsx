@@ -13,11 +13,13 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 
 const Register = () => {
+  document.title = "TechPractica | Register";
+
   const navigate = useNavigate();
 
   type IFormInput = {
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
     name: string;
     userEmail: string;
     userPassword: string;
@@ -55,6 +57,7 @@ const Register = () => {
     return (
       <div className="mb-4">
         <label
+          hidden={name === "lastName" || name === "firstName"}
           htmlFor={label}
           className="block text-sm font-medium text-gray-700 mb-1"
         >
@@ -62,6 +65,8 @@ const Register = () => {
         </label>
         <div className="relative">
           <Inputs
+            hidden={name === "lastName" || name === "firstName"}
+            defaultValue={name === "lastName" || name === "firstName" ? "" : ""}
             id={label}
             type={isPasswordField ? (showPassword ? "text" : "password") : type}
             placeholder={placeholder}

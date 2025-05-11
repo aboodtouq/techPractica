@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { CookiesService } from "../../imports.ts";
 
 const HomePage = () => {
+  document.title = "TechPractica | Home";
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -139,7 +141,7 @@ const HomePage = () => {
             <div className="w-44 h-1 bg-[#42D5AE] mx-auto mt-4 rounded-full" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map(({ Icon, title, description, style }, idx) => (
               <motion.div
                 key={idx}

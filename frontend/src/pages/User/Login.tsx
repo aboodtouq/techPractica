@@ -11,6 +11,8 @@ import { AxiosError } from "axios";
 import { LoginForm } from "../../interfaces";
 
 const Login = () => {
+  document.title = "TechPractica | Login";
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

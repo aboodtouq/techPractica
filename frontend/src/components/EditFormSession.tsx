@@ -137,7 +137,7 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
             Edit Session
           </Button>
           <Button
-            className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
+            className="bg-white border border-gray-300 !text-gray-600    hover:bg-gray-100 font-medium transition-colors duration-200"
             width="w-full"
             type="button"
             onClick={() => {
