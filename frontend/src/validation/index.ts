@@ -72,8 +72,6 @@ export const sessionSchema = yup.object({
     .min(100, "Minimum 100 characters")
     .max(1000, "Maximum 1000 characters"),
 
-  privateSession: yup.string().required("Select session type"),
-
   system: yup.string().required("Select a category"),
 
   categories: yup

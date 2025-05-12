@@ -44,7 +44,7 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
   const onSubmit: SubmitHandler<CreateSession> = async (data) => {
     const formattedData = {
       ...data,
-      privateSession: data.privateSession === "Private Session",
+      privateSession: false,
     };
     console.log(formattedData);
     try {
@@ -122,12 +122,12 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           />
         )}
 
-        <SelectField<string>
+        {/* <SelectField<string>
           label="Sesseion State"
           name="privateSession"
           options={["Public Session", "Private Session"]}
           getLabel={(item) => item}
-        />
+        /> */}
         <div className="flex mt-6 gap-4">
           <Button
             className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"

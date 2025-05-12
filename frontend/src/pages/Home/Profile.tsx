@@ -8,8 +8,8 @@ const ProfilePage = () => {
   const token = CookiesService.get("UserToken");
 
   const socialLinks = [
-    { icon: <FaGithub size={18} />, url: "#" },
-    { icon: <FaLinkedin size={18} />, url: "#" },
+    { icon: <FaGithub size={18} />, url: "/Profile" },
+    { icon: <FaLinkedin size={18} />, url: "/Profile" },
   ];
   const { data: sessionData } = useAuthQuery({
     queryKey: [`SessionData-1`],
@@ -67,7 +67,6 @@ const ProfilePage = () => {
                 <a
                   key={index}
                   href={link.url}
-                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm transition-all"
                 >

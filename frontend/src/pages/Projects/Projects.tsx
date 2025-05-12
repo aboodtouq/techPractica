@@ -170,7 +170,7 @@ const Projects = () => {
           </Button>
         </div>
       </div>
-      <div className="lg:max-h-[900px] lg:min-h-[900px] min-h-screen flex flex-col -mt-5">
+      <div className=" min-h-screen flex flex-col -mt-5">
         <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
             {Data}

@@ -1,7 +1,7 @@
 import { FaUser } from "react-icons/fa";
 import { ISessionRes } from "../../interfaces.ts";
 import { Button, CookiesService } from "../../imports.ts";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
