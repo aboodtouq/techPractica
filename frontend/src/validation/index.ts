@@ -86,3 +86,12 @@ export const sessionSchema = yup.object({
     .min(1, "Select at least one technology")
     .required("Technologies are required"),
 });
+export const ApplySchema = yup.object({
+  brief: yup
+    .string()
+    .required("brief is required")
+    .min(500, "Minimum 500 characters")
+    .max(1000, "Maximum 1000 characters"),
+
+  categoryName: yup.string().required("Select a category"),
+});

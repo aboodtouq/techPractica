@@ -5,6 +5,9 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../config/axios.config";
 import { IErrorResponse } from "../interfaces";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ApplySchema } from "../validation";
+import { InferType } from "yup";
 interface IProps {
   closeModal: () => void;
   SessionDet?: {
@@ -12,19 +15,16 @@ interface IProps {
     categories: string[];
   };
 }
-interface IREQ {
-  brief: string;
-  sessionId: number;
-  categoryName: string | undefined;
-  reqId?: number;
-}
 
 const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
   const token = CookiesService.get("UserToken");
+  type ApplySession = InferType<typeof ApplySchema>;
 
-  const methods = useForm<IREQ>();
+  const methods = useForm<ApplySession>({
+    resolver: yupResolver(ApplySchema),
+  });
   const sessionId = SessionDet?.SessionId;
-  const onSubmit: SubmitHandler<IREQ> = async (data) => {
+  const onSubmit: SubmitHandler<ApplySession> = async (data) => {
     const Data = {
       ...data,
       sessionId: sessionId,
