@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 interface SearchFilterProps {
   onSearch: (query: string) => void;
   onFilterChange: (filter: string) => void;
-  filterOptions: string[]; // Explicitly type as string[]
+  filterOptions: string[];
   activeFilter: string;
   searchQuery: string;
 }

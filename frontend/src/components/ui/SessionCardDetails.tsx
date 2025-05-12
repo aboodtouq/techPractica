@@ -41,11 +41,11 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
       </div>
       {/* Tags */}
       <h4 className="font-semibold text-gray-800 mb-3">Tags</h4>
-      <div className="flex  flex-wrap gap-2 mb-12 sm:mb-0 max-h-7 ">
+      <div className="flex flex-wrap gap-2 mb-12 sm:mb-0">
         {session.technologies.map((tech) => (
           <span
             key={tech}
-            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] rounded-full cursor-pointer whitespace-nowrap"
           >
             {tech}
           </span>
@@ -54,7 +54,7 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
       {/* Buttons */}
       <div className="flex mt-6 gap-4">
         <Button
-          className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200 cursor-pointer"
+          className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed"
           width="w-full"
           onClick={() => {
             token ? openModal() : navigation("/User");

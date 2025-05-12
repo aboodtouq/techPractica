@@ -19,9 +19,13 @@ const SessionCard = ({
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
       {/* Header Section */}
       <div className="flex justify-between items-start gap-2 mb-3">
-        <h2 className="text-md font-semibold text-[#022639] flex-1">
-          {sessionName}
-        </h2>
+        <div className="flex-1">
+          <h2 className="text-md font-semibold text-[#022639]">
+            {sessionName}
+          </h2>
+          <p className="text-xs text-gray-500 mt-1">@{"Arafat"}</p>{" "}
+          {/* Username added here */}
+        </div>
         <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit cursor-pointer">
           {system}
         </span>
@@ -29,7 +33,7 @@ const SessionCard = ({
 
       {/* Description */}
       <p
-        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 break-words"
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-2 break-words"
         dangerouslySetInnerHTML={{ __html: sessionDescription }}
       />
 
@@ -38,13 +42,13 @@ const SessionCard = ({
         {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] rounded-full cursor-pointer"
           >
             {tech}
           </span>
         ))}
         {technologies.length > 4 && (
-          <span className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] rounded-full  cursor-pointer">
+          <span className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] rounded-full cursor-pointer">
             +{technologies.length - 4}
           </span>
         )}
@@ -56,7 +60,7 @@ const SessionCard = ({
           onClick={() => {
             openModal();
           }}
-          className={`absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group`}
+          className="absolute bottom-4 right-4 flex items-center gap-1 text-sm font-medium text-[#022639] hover:text-[#022639] transition-colors group"
         >
           Show More
           <svg

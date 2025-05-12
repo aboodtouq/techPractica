@@ -16,6 +16,7 @@ import { BiPlus } from "react-icons/bi";
 import axiosInstance from "../../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { useSystems } from "../../api.ts";
 
 const Projects = () => {
   document.title = "TechPractica | Sessions";
@@ -29,6 +30,9 @@ const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [filteredSessions, setFilteredSessions] = useState<ISessionRes[]>([]);
+  const { data: SystemData } = useSystems();
+  const systemName: string[] =
+    SystemData?.map((tech: { systemName: string }) => tech.systemName) || [];
 
   const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
@@ -140,16 +144,6 @@ const Projects = () => {
     [filteredSessions]
   );
 
-  const filterOptions = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          sessionData?.sessions?.map((session: any) => session.system) || []
-        )
-      ) as string[],
-    [sessionData]
-  );
-
   return (
     <>
       <Modal isOpen={isOpen} title="ADD A NEW SESSION">
@@ -157,10 +151,12 @@ const Projects = () => {
       </Modal>
 
       <Modal isOpen={isModalEditOpen} title="EDIT SESSION">
-        <EditSessionForm
-          session={selectedSession!}
-          closeModal={closeEditModal}
-        />
+        {selectedSession && (
+          <EditSessionForm
+            session={selectedSession}
+            closeModal={closeEditModal}
+          />
+        )}
       </Modal>
 
       <Modal
@@ -195,13 +191,13 @@ const Projects = () => {
             <SearchFilter
               onSearch={handleSearch}
               onFilterChange={handleFilterChange}
-              filterOptions={filterOptions}
+              filterOptions={systemName}
               activeFilter={activeFilter}
               searchQuery={searchQuery}
             />
           </div>
           <Button
-            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
+            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#42D5AE]0 text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
           >
             <BiPlus size={18} className="mr-2" />

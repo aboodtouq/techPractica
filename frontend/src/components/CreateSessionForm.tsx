@@ -23,9 +23,10 @@ interface IProps {
 const CreateSessionForm = ({ closeModal }: IProps) => {
   const token = CookiesService.get("UserToken");
   /*______SelectData______*/
-  const { data: SystemData } = useSystems();
+
   const { data: DataCategoryies } = useCategories();
   const { data: DataTech } = useTechnologies();
+  const { data: SystemData } = useSystems();
   const systemName = SystemData?.map(
     (tech: { systemName: string }) => tech.systemName
   );

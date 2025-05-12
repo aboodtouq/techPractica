@@ -28,7 +28,6 @@ const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
     const Data = {
       ...data,
       sessionId: sessionId,
-      reqId: 0,
     };
 
     try {

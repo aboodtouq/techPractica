@@ -7,6 +7,7 @@ import SessionCardDetails from "../../components/ui/SessionCardDetails";
 import ApplySessionForm from "../../components/ApplySessionForm";
 import SearchFilter from "../../components/ui/SearchFilter";
 import { ISessionRes } from "../../interfaces";
+import { useSystems } from "../../api";
 
 const Learn = () => {
   document.title = "TechPractica | Learn";
@@ -25,14 +26,17 @@ const Learn = () => {
   const [isApplyOpen, setApplyOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const { data: SystemData } = useSystems();
+  const systemName: string[] =
+    SystemData?.map((tech: { systemName: string }) => tech.systemName) || [];
 
   const sessionsPerPage = 9;
   const fetchPageSize = 9999;
 
-  const Url = category
-    ? `/sessions/system?systemName=${category}&pageNumber=0&pageSize=${fetchPageSize}`
-    : `/sessions/?pageSize=${fetchPageSize}&pageNumber=0`;
-
+  // const Url = category
+  //   ? `/sessions/system?systemName=${category}&pageNumber=0&pageSize=${fetchPageSize}`
+  //   : `/sessions/?pageSize=${fetchPageSize}&pageNumber=0`;
+  const Url = `/sessions/?pageSize=${fetchPageSize}&pageNumber=0`;
   const { data: sessionData } = useAuthQuery({
     queryKey: ["SessionData-All"],
     url: Url,
@@ -115,16 +119,6 @@ const Learn = () => {
     [filteredSessions]
   );
 
-  const filterOptions = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          sessionData?.sessions?.map((session: any) => session.system) || []
-        )
-      ) as string[],
-    [sessionData]
-  );
-
   return (
     <>
       <div className="min-h-screen flex flex-col bg-[#f9fafb]">
@@ -132,7 +126,7 @@ const Learn = () => {
           <SearchFilter
             onSearch={handleSearch}
             onFilterChange={handleFilterChange}
-            filterOptions={filterOptions}
+            filterOptions={systemName}
             activeFilter={activeFilter}
             searchQuery={searchQuery}
           />
