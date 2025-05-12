@@ -7,14 +7,16 @@ import {
   useAuthQuery,
 } from "../../imports.ts";
 import useModal from "../../hooks/useModal.ts";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Paginator from "../../components/ui/Paginator.tsx";
 import { IErrorResponse, ISessionRes } from "../../interfaces.ts";
 import EditSessionForm from "../../components/EditFormSession.tsx";
+import SearchFilter from "../../components/ui/SearchFilter";
 import { BiPlus } from "react-icons/bi";
 import axiosInstance from "../../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+
 const Projects = () => {
   document.title = "TechPractica | Sessions";
 
@@ -22,145 +24,182 @@ const Projects = () => {
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-  const [SessionId, setSessionId] = useState<number>();
-  const [page, setPage] = useState<number>(1);
+  const [sessionId, setSessionId] = useState<number>();
+  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [filteredSessions, setFilteredSessions] = useState<ISessionRes[]>([]);
+
   const sessionsPerPage = 9;
   const token = CookiesService.get("UserToken");
-  const closeDeleteModal = () => {
-    setIsOpenDeleteModal(false);
-  };
-  const openDeleteModal = (sessionId: number) => {
-    setSessionId(sessionId);
-    setIsOpenDeleteModal(true);
-  };
+
   const { data: sessionData } = useAuthQuery({
-    queryKey: [`SessionData-${page}`],
-    url: `/sessions/users?pageSize=${sessionsPerPage}&pageNumber=${page - 1}`,
+    queryKey: ["SessionData-All"],
+    url: `/sessions/users?pageSize=9999&pageNumber=0`,
     config: {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   });
+
+  useEffect(() => {
+    if (sessionData?.sessions) {
+      let result = [...sessionData.sessions];
+
+      if (activeFilter !== "all") {
+        result = result.filter((s) => s.system === activeFilter);
+      }
+
+      if (searchQuery) {
+        result = result.filter(
+          (s) =>
+            s.sessionName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            s.system.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            s.technologies.some((tech: any) =>
+              tech.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+        );
+      }
+
+      const start = (page - 1) * sessionsPerPage;
+      const end = start + sessionsPerPage;
+      setFilteredSessions(result.slice(start, end));
+      setPageCount(Math.ceil(result.length / sessionsPerPage));
+    }
+  }, [sessionData, searchQuery, activeFilter, page]);
+
+  const [pageCount, setPageCount] = useState(1);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setPage(1);
+  };
   const onClickNext = () => {
     setPage((prev) => prev + 1);
   };
+  const onClickPrev = () => {
+    setPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+    setPage(1);
+  };
+
   const openEditModal = (session: ISessionRes) => {
     setSelectedSession(session);
     setIsModalEditOpen(true);
   };
-  const onSubmitRemoveTodo = async () => {
+
+  const closeEditModal = () => {
+    setSelectedSession(undefined);
+    setIsModalEditOpen(false);
+  };
+
+  const openDeleteModal = (id: number) => {
+    setSessionId(id);
+    setIsOpenDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => setIsOpenDeleteModal(false);
+
+  const onSubmitRemoveSession = async () => {
     try {
-      const response = await axiosInstance.delete(`/sessions/${SessionId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await axiosInstance.delete(`/sessions/${sessionId}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
       toast.success(response.data, { position: "top-center" });
       setTimeout(() => {
         closeDeleteModal();
-        window.location.href = window.location.href;
+        window.location.reload();
       }, 500);
     } catch (error) {
-      const ErrorObj = error as AxiosError<IErrorResponse>;
-
-      toast.error(`${ErrorObj.response?.data.message}`, {
+      const err = error as AxiosError<IErrorResponse>;
+      toast.error(`${err.response?.data.message}`, {
         position: "top-center",
         duration: 2000,
       });
     }
   };
-  const closeEditModal = () => {
-    setSelectedSession({
-      system: "Cybersecurity",
-      sessionDescription: "",
-      sessionName: "",
-      technologies: [""],
-      categories: [""],
-      isPrivate: false,
-      id: 4,
-    });
-    setIsModalEditOpen(false);
-  };
 
-  const onClickPrev = () => {
-    setPage((prev) => Math.max(prev - 1, 1));
-  };
-
-  const totalSessions = sessionData?.sessionsCount || 0;
-  const pageCount = Math.ceil(totalSessions / sessionsPerPage);
-  const Data = sessionData?.sessions.map(
-    ({
-      system,
-      sessionDescription,
-      sessionName,
-      technologies,
-      id,
-      categories,
-      isPrivate,
-    }: ISessionRes) => (
-      <SessionCardUser
-        openDeleteModal={() => {
-          openDeleteModal(id);
-        }}
-        openModal={() => {
-          openEditModal({
-            system,
-            sessionDescription,
-            sessionName,
-            technologies,
-            id,
-            categories,
-            isPrivate,
-          });
-        }}
-        system={system}
-        sessionId={id}
-        sessionDescription={sessionDescription}
-        sessionName={sessionName}
-        technologies={technologies}
-        key={id}
-      />
-    )
+  const Data = useMemo(
+    () =>
+      filteredSessions.map((session) => (
+        <SessionCardUser
+          key={session.id}
+          sessionId={session.id}
+          system={session.system}
+          sessionName={session.sessionName}
+          sessionDescription={session.sessionDescription}
+          technologies={session.technologies}
+          openModal={() => openEditModal(session)}
+          openDeleteModal={() => openDeleteModal(session.id)}
+        />
+      )),
+    [filteredSessions]
   );
+
+  const filterOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          sessionData?.sessions?.map((session: any) => session.system) || []
+        )
+      ) as string[],
+    [sessionData]
+  );
+
   return (
     <>
       <Modal isOpen={isOpen} title="ADD A NEW SESSION">
         <CreateSessionForm closeModal={closeModal} />
       </Modal>
+
       <Modal isOpen={isModalEditOpen} title="EDIT SESSION">
         <EditSessionForm
           session={selectedSession!}
           closeModal={closeEditModal}
         />
       </Modal>
+
       <Modal
-        Position="fixed top-10 left-1/2 transform -translate-x-1/2 z-50"
         isOpen={isOpenDeleteModal}
         closeModal={closeDeleteModal}
         title="Are you sure you want to delete this session?"
         description="Deleting this session will remove it permanently from your account. This action cannot be undone. Make sure you no longer need this session or any related data before proceeding."
+        Position="fixed top-10 left-1/2 transform -translate-x-1/2 z-50"
       >
         <div className="flex items-center space-x-3">
           <Button
-            onClick={onSubmitRemoveTodo}
+            onClick={onSubmitRemoveSession}
             className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"
             width="w-full"
           >
             Yes, remove
           </Button>
           <Button
+            onClick={closeDeleteModal}
             className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
             width="w-full"
             type="button"
-            onClick={closeDeleteModal}
           >
             No
           </Button>
         </div>
       </Modal>
+
       <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 flex-wrap">
+          <div className="flex flex-col sm:flex-row gap-4 flex-1">
+            <SearchFilter
+              onSearch={handleSearch}
+              onFilterChange={handleFilterChange}
+              filterOptions={filterOptions}
+              activeFilter={activeFilter}
+              searchQuery={searchQuery}
+            />
+          </div>
           <Button
             className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
@@ -170,11 +209,13 @@ const Projects = () => {
           </Button>
         </div>
       </div>
-      <div className=" min-h-screen flex flex-col -mt-5">
+
+      <div className="min-h-screen flex flex-col -mt-5">
         <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
             {Data}
           </div>
+
           {pageCount > 1 && (
             <div className="flex justify-start">
               <Paginator
