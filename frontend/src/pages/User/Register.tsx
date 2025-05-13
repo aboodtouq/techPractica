@@ -11,7 +11,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../config/axios.config";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-
+import { FaGoogle, FaGithub } from "react-icons/fa";
+import { FiLoader } from "react-icons/fi";
 const Register = () => {
   document.title = "TechPractica | Register";
 
@@ -93,42 +94,26 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+    <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-[#022639]">Create Account</h2>
-        <p className="text-gray-600 mt-2">Join our community today</p>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Create Your Account
+        </h1>
+        <p className="text-gray-500 mt-2">Join our community to get started</p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {RegisterForm.map(renderInputField)}
 
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-colors duration-300 flex items-center justify-center"
+          className="w-full py-3 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+          aria-label={isSubmitting ? "Creating your account" : "Create account"}
         >
           {isSubmitting ? (
             <>
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
+              <FiLoader className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
               Creating account...
             </>
           ) : (
@@ -136,11 +121,40 @@ const Register = () => {
           )}
         </Button>
 
-        <div className="text-center text-sm text-gray-600">
-          Already a member?{" "}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4">
+          <button
+            type="button"
+            className="p-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors shadow-sm  "
+            aria-label="Sign up with Google"
+          >
+            <FaGoogle className="h-5 w-5 text-black" />
+          </button>
+
+          <button
+            type="button"
+            className="p-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors shadow-sm "
+            aria-label="Sign up with GitHub"
+          >
+            <FaGithub className="h-5 w-5 text-gray-800" />
+          </button>
+        </div>
+
+        <div className="text-center text-sm text-gray-500 mt-6">
+          Already have an account?{" "}
           <Link
             to="/User"
-            className="font-medium text-[#42D5AE] hover:text-[#38b28d] transition-colors"
+            className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors focus:outline-none focus:underline"
           >
             Sign in
           </Link>
