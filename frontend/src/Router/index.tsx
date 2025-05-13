@@ -16,7 +16,11 @@ import {
   ProjectsLayout,
   Projects,
   SessionRequests,
+  CookiesService,
 } from "../imports";
+import ProtactedRoute from "../components/ProtactedRoute";
+import ProtactedRouteUser from "../components/ProtactedRouteUser";
+const token = CookiesService.get("UserToken");
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,16 +30,58 @@ export const router = createBrowserRouter(
         <Route path="Learn" element={<Learn />} />
         <Route path="Learn/:category" element={<Learn />} />
         <Route path="Sessions" element={<ProjectsLayout />}>
-          <Route index element={<Projects />} />
+          <Route
+            index
+            element={
+              <ProtactedRoute token={token} redirectPath="/">
+                <Projects />
+              </ProtactedRoute>
+            }
+          />
         </Route>
-        <Route path="/Requests/:id" element={<SessionRequests />} />
-        <Route path="Profile" element={<Profile />} />
+        <Route
+          path="/Requests/:id"
+          element={
+            <ProtactedRoute token={token} redirectPath="/">
+              <SessionRequests />
+            </ProtactedRoute>
+          }
+        />
+        <Route
+          path="Profile"
+          element={
+            <ProtactedRoute token={token} redirectPath="/">
+              <Profile />
+            </ProtactedRoute>
+          }
+        />
       </Route>
 
       <Route path="User" element={<LayoutLogin />}>
-        <Route index element={<Login />} />
-        <Route path="ResetPassword" element={<ResetPass />} />
-        <Route path="Register" element={<Register />} />
+        <Route
+          index
+          element={
+            <ProtactedRouteUser token={token} redirectPath="/">
+              <Login />
+            </ProtactedRouteUser>
+          }
+        />
+        <Route
+          path="ResetPassword"
+          element={
+            <ProtactedRouteUser token={token} redirectPath="/">
+              <ResetPass />
+            </ProtactedRouteUser>
+          }
+        />
+        <Route
+          path="Register"
+          element={
+            <ProtactedRouteUser token={token} redirectPath="/">
+              <Register />
+            </ProtactedRouteUser>
+          }
+        />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

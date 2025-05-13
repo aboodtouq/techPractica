@@ -100,20 +100,6 @@ const Login = () => {
         {renderForm}
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              className="h-4 w-4 text-emerald-500 focus:ring-emerald-500 border-gray-300 rounded"
-            />
-            <label
-              htmlFor="remember-me"
-              className="ml-2 block text-sm text-gray-600"
-            >
-              Remember me
-            </label>
-          </div>
           <Link
             to="/User/ResetPassword"
             className="text-sm font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none focus:underline"
