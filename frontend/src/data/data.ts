@@ -16,7 +16,6 @@ import {
   FaCode,
   FaShieldAlt,
   FaMobileAlt,
-  FaCloud,
   FaTools,
   FaRobot,
   FaGamepad,
@@ -67,13 +66,7 @@ export const features: Feature[] = [
     Icon: FaTools,
     style: "text-yellow-500 w-6 h-6",
   },
-  {
-    title: "Scalable Platform",
-    description:
-      "Support thousands of users with a secure, reliable, and cloud-based system.",
-    Icon: FaCloud,
-    style: "text-sky-500 w-6 h-6",
-  },
+
   {
     title: "Progress Tracking",
     description:
@@ -117,3 +110,14 @@ export type CategoryType =
   | "Artificial Intelligence"
   | "Mobile Development"
   | "FF";
+export const skills = [
+  "Cloud computing",
+  "Data analysis",
+  "DevOps",
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "React",
+  "TypeScript",
+  "Node.js",
+];

@@ -239,7 +239,7 @@ public class SessionService {
                 .filter((r) -> r.getRequirement() != null)
                 .map(r -> UserRequestSession.builder()
                         .brief(r.getBrief())
-                        .username(r.getUser().getUserEmail())
+                        .username(r.getUser().getUserName())
                         .categoryName(r.getRequirement()
                                 .getCategory()
                                 .getCategoryName())

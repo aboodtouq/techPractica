@@ -22,6 +22,7 @@ const TinyMCEWithForm = ({ name }: IProps) => {
             <Editor
               apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
               value={field.value}
+              // initialValue="<p>This is the default text</p>"
               onEditorChange={(content: string) => field.onChange(content)}
               init={{
                 height: 300,
@@ -29,6 +30,11 @@ const TinyMCEWithForm = ({ name }: IProps) => {
                 plugins: ["lists"],
                 toolbar:
                   "undo redo | styleselect | bold italic underline | bullist numlist",
+                content_style: `
+    ul { list-style-type: disc; margin-left: 1.5rem; padding-left: 1rem; }
+    ol { list-style-type: decimal; margin-left: 1.5rem; padding-left: 1rem; }
+    li { margin-bottom: 0.25rem; }
+  `,
               }}
             />
 

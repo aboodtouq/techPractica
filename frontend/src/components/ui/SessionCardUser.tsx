@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { CategoryType } from "../../data/data";
 
 interface SessionUserType {
+  sessionId: number;
   sessionName: string;
   sessionDescription: string;
   technologies: string[];
@@ -8,8 +10,8 @@ interface SessionUserType {
   openModal: () => void;
   openDeleteModal: () => void;
 }
-
 const SessionCardUser = ({
+  sessionId,
   system,
   openModal,
   sessionDescription,
@@ -17,6 +19,8 @@ const SessionCardUser = ({
   technologies,
   openDeleteModal,
 }: SessionUserType) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
       {/* Header Section */}
@@ -24,14 +28,14 @@ const SessionCardUser = ({
         <h2 className="text-md font-semibold text-[#022639] flex-1">
           {sessionName}
         </h2>
-        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit">
+        <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit cursor-pointer">
           {system}
         </span>
       </div>
 
       {/* Description */}
       <div
-        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3"
+        className="text-gray-600 text-sm mb-4 sm:mb-6 line-clamp-3 break-words"
         dangerouslySetInnerHTML={{ __html: sessionDescription }}
       />
 
@@ -40,13 +44,13 @@ const SessionCardUser = ({
         {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md"
+            className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] whitespace-nowrap rounded-full  cursor-pointer"
           >
             {tech}
           </span>
         ))}
         {technologies.length > 4 && (
-          <span className="bg-gray-100 text-[#022639] text-xs font-medium px-2 py-1 rounded-md">
+          <span className="px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] rounded-full  cursor-pointer">
             +{technologies.length - 4}
           </span>
         )}
@@ -69,6 +73,14 @@ const SessionCardUser = ({
           className="text-sm font-medium text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded"
         >
           Delete
+        </button>
+        <button
+          onClick={() => {
+            navigate(`/Requests/${sessionId}`);
+          }}
+          className="text-sm font-medium text-gray-400 hover:text-[#38b28d]  transition-colors px-2 py-1 rounded"
+        >
+          Requests
         </button>
       </div>
     </div>

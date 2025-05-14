@@ -5,7 +5,9 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../config/axios.config";
 import { IErrorResponse } from "../interfaces";
-const token = CookiesService.get("UserToken");
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ApplySchema } from "../validation";
+import { InferType } from "yup";
 interface IProps {
   closeModal: () => void;
   SessionDet?: {
@@ -13,35 +15,39 @@ interface IProps {
     categories: string[];
   };
 }
-interface IREQ {
-  brief: string;
-  sessionId: number;
-  categoryName: string | undefined;
-  reqId: number;
-}
 
 const ApplySessionForm = ({ closeModal, SessionDet }: IProps) => {
-  const methods = useForm<IREQ>();
+  const token = CookiesService.get("UserToken");
+  type ApplySession = InferType<typeof ApplySchema>;
+
+  const methods = useForm<ApplySession>({
+    resolver: yupResolver(ApplySchema),
+  });
   const sessionId = SessionDet?.SessionId;
-  const onSubmit: SubmitHandler<IREQ> = async (data) => {
-    const Data = { ...data, sessionId, reqId: 147 };
-    console.log(Data);
+  const onSubmit: SubmitHandler<ApplySession> = async (data) => {
+    const Data = {
+      ...data,
+      sessionId: sessionId,
+    };
+
     try {
-      const response = await axiosInstance.put(`/sessions/request`, data, {
+      const response = await axiosInstance.put(`/sessions/request`, Data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
       toast.success(response.data, { position: "top-center" });
+      closeModal();
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
-
       toast.error(`${ErrorObj.response?.data.message}`, {
         position: "top-center",
         duration: 2000,
       });
     }
   };
+
   return (
     <>
       <FormProvider {...methods}>

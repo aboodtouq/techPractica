@@ -45,13 +45,12 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
       technologies: session.technologies,
       system: session.system,
       categories: session.categories,
-      privateSession: session.isPrivate ? "Private Session" : "Public Sesssion",
     },
   });
   const onSubmit: SubmitHandler<CreateSession> = async (data) => {
     const formattedData = {
       ...data,
-      privateSession: data.privateSession === "Private Session",
+      privateSession: false,
     };
     try {
       await axiosInstance.put(`/sessions/${session.id}`, formattedData, {
@@ -122,12 +121,12 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
           />
         )}
 
-        <SelectField<string>
+        {/* <SelectField<string>
           label="Sesseion State"
           name="privateSession"
           options={["Public Session", "Private Session"]}
           getLabel={(item) => item}
-        />
+        /> */}
         <div className="flex mt-6 gap-4">
           <Button
             className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"
@@ -137,7 +136,7 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
             Edit Session
           </Button>
           <Button
-            className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200"
+            className="bg-white border border-gray-300 !text-gray-600    hover:bg-gray-100 font-medium transition-colors duration-200"
             width="w-full"
             type="button"
             onClick={() => {
