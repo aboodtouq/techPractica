@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/session/SessionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/dto/session/SessionResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/maper/SessionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/maper/SessionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/mengmentData/AuthenticatedUserSessionManagementData.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/mengmentData/AuthenticatedUserSessionManagementData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/repository/AuthenticatedUserSessioneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/repository/AuthenticatedUserSessioneRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/session/SessionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/service/user/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +313,7 @@
       <workItem from="1745876482388" duration="325000" />
       <workItem from="1746052341096" duration="13950000" />
       <workItem from="1746540405110" duration="12194000" />
-      <workItem from="1747227781026" duration="1927000" />
+      <workItem from="1747227781026" duration="3767000" />
     </task>
     <task id="LOCAL-00001" summary="create folder doc and upload database ERD.png">
       <option name="closed" value="true" />

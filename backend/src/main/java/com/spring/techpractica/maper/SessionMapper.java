@@ -40,7 +40,8 @@ public class SessionMapper {
     public static SessionResponse sessionToSessionResponse(Session session) {
         User userOwner = session.getSessionMembers()
                 .stream()
-                .filter(authenticatedUserSession -> authenticatedUserSession.getScopedRole()
+                .filter(authenticatedUserSession ->
+                        authenticatedUserSession.getScopedRole()
                         .equals(SessionRole.OWNER))
                 .map(AuthenticatedUserSession::getUser)
                 .findFirst().get();
