@@ -79,8 +79,9 @@ public class SessionService {
 
         long totalSession = sessionManagementData.getNumberOfSystemSessions(system);
 
-        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
 
+
+        return SessionMapper.sessionsAndTotalSessionsToSessionsResponses(sessions, totalSession);
     }
 
     public SessionsResponse getUserSessions(String userEmail, int pageSize, int pageNumber) {
@@ -209,7 +210,8 @@ public class SessionService {
 
         request.setRequirement(requirement);
 
-        session.getSessionRequests().add(request);
+        session.getSessionRequests()
+                .add(request);
 
         sessionManagementData.saveSession(session);
     }

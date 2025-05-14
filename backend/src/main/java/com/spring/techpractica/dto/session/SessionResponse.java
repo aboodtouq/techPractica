@@ -27,4 +27,7 @@ public class SessionResponse {
     private List<String> categories;
 
     private boolean privateSession;
+
+    private String ownerName;
+
 }
