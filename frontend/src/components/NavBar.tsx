@@ -28,7 +28,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-[#022639] text-white sticky top-0 z-50 shadow-lg">
+    <nav className="bg-gradient-to-r from-[#022639] to-[#0a3a5a] text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">

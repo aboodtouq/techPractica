@@ -15,19 +15,20 @@ const HomePage = () => {
   const txt = token ? "Start Learning" : "Get Started";
   return (
     <div className="overflow-hidden">
-      {/* HERO SECTION */}
-      <section className="relative bg-gradient-to-br from-[#f8fafc] to-white h-[600px] flex items-center justify-center px-6">
+      {/* HERO SECTION - Enhanced with more vibrant gradient and better imagery */}
+      <section className="relative bg-gradient-to-br from-[#f0fdf9] via-[#f8fafc] to-[#e0f2fe] h-[700px] flex items-center justify-center px-6">
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/src/assets/left-side.png"
             alt="Tech Logos"
-            className="absolute left-0 top-0 h-full opacity-20 lg:opacity-100 object-cover hidden lg:block"
+            className="absolute left-0 top-0 h-full opacity-30 lg:opacity-70 object-cover hidden lg:block mix-blend-multiply"
           />
           <img
             src="/src/assets/right-side.png"
             alt="Tech Logos"
-            className="absolute right-0 top-0 h-full opacity-20 lg:opacity-100 object-cover hidden lg:block"
+            className="absolute right-0 top-0 h-full opacity-30 lg:opacity-70 object-cover hidden lg:block mix-blend-multiply"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-white/60" />
         </div>
 
         <motion.div
@@ -35,13 +36,13 @@ const HomePage = () => {
           animate="visible"
           variants={fadeIn}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-2xl z-10"
+          className="text-center max-w-2xl z-10 px-4"
         >
           {!token && (
             <motion.div
               variants={fadeIn}
               transition={{ delay: 0.2 }}
-              className="mb-4 inline-block rounded-full border border-gray-200 px-4 py-1 text-xs text-gray-600 bg-white/80 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all"
             >
               Start Your Tech Journey Today
             </motion.div>
@@ -49,27 +50,27 @@ const HomePage = () => {
           <motion.h1
             variants={fadeIn}
             transition={{ delay: 0.3 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight"
+            className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight"
           >
-            Turn Knowledge <span className="text-[#42D5AE]"> into Action</span>
+            Turn Knowledge <span className="text-[#42D5AE]">into Action</span>
           </motion.h1>
           <motion.div
             variants={fadeIn}
             transition={{ delay: 0.4 }}
-            className="w-24 h-1 bg-[#42D5AE] mx-auto rounded-full"
+            className="w-32 h-1.5 bg-gradient-to-r from-[#42D5AE] to-[#022639] mx-auto rounded-full mb-8"
           />
           <motion.p
             variants={fadeIn}
             transition={{ delay: 0.5 }}
-            className="mt-6 text-gray-600 text-lg leading-relaxed"
+            className="mt-6 text-gray-700 text-xl leading-relaxed max-w-2xl mx-auto"
           >
-            Build real-world projects and apply your technical skills in a
-            practical, hands-on environment.
+            Build real-world projects and apply your technical skills in our
+            immersive, hands-on learning environment.
           </motion.p>
           <motion.div
             variants={fadeIn}
             transition={{ delay: 0.6 }}
-            className="mt-8"
+            className="mt-12 flex justify-center gap-4"
           >
             <button
               onClick={() => {
@@ -77,7 +78,7 @@ const HomePage = () => {
                   ? navigate("/Learn", { replace: true })
                   : navigate("/User", { replace: true });
               }}
-              className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-gradient-to-r from-[#42D5AE] to-[#38b28d]   hover:from-[#38b28d] hover:to-[#38b28d] text-white font-medium px-8 py-3.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
             >
               {txt}
             </button>
@@ -85,20 +86,21 @@ const HomePage = () => {
         </motion.div>
       </section>
 
-      {/* CATEGORIES SECTION */}
+      {/* CATEGORIES SECTION - More vibrant and interactive */}
       <section className="bg-[#f8fafc] py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Explore Categories
             </h2>
-            <div className="w-44 h-1 bg-[#42D5AE] mx-auto mb-12 rounded-full" />
+
+            <div className="w-44 h-1.5 bg-gradient-to-r from-[#42D5AE] to-[#022639] mx-auto mt-6 rounded-full" />
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
@@ -125,20 +127,21 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
-      <section className="py-20 bg-white">
+      {/* FEATURES SECTION - More elegant cards with gradient accents */}
+      <section className="py-24 bg-gradient-to-b from-white to-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Why Choose Us?
             </h2>
-            <div className="w-44 h-1 bg-[#42D5AE] mx-auto mt-4 rounded-full" />
+
+            <div className="w-44 h-1.5 bg-gradient-to-r from-[#42D5AE] to-[#022639]  mx-auto mt-6 rounded-full" />
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

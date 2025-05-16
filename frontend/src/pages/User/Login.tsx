@@ -112,7 +112,7 @@ const Login = () => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+          className="w-full py-3 px-4  bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
           aria-label={isSubmitting ? "Signing in..." : "Sign in"}
         >
           {isSubmitting ? (
@@ -159,7 +159,7 @@ const Login = () => {
           Don't have an account?{" "}
           <Link
             to="/User/Register"
-            className="font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none focus:underline"
+            className="font-medium text-emerald-600  focus:outline-none focus:underline"
           >
             Sign up
           </Link>

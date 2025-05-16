@@ -197,7 +197,7 @@ const Projects = () => {
             />
           </div>
           <Button
-            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#42D5AE]0 text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
+            className="w-full sm:w-fit  bg-[#42D5AE] hover:bg-[#38b28d] hover:bg-[#42D5AE]0 text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
           >
             <BiPlus size={18} className="mr-2" />

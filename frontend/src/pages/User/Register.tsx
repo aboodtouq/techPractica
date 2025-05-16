@@ -96,7 +96,7 @@ const Register = () => {
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-gray-900 ">
           Create Your Account
         </h1>
         <p className="text-gray-500 mt-2">Join our community to get started</p>
@@ -108,7 +108,7 @@ const Register = () => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+          className="w-full py-3 px-4 bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
           aria-label={isSubmitting ? "Creating your account" : "Create account"}
         >
           {isSubmitting ? (
@@ -154,7 +154,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/User"
-            className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors focus:outline-none focus:underline"
+            className="font-medium text-emerald-600 transition-colors focus:outline-none focus:underline"
           >
             Sign in
           </Link>
