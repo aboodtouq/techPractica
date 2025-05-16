@@ -4,13 +4,14 @@ import {
   MultiSelectField,
   Button,
   ErrorMsg,
+  CookiesService,
 } from "../imports.ts";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { IErrorResponse, ISessionRes, System } from "../interfaces.ts";
 import axiosInstance from "../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { token, useCategories, useSystems, useTechnologies } from "../api.ts";
+import { useCategories, useSystems, useTechnologies } from "../api.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
@@ -21,6 +22,7 @@ interface IProps {
 }
 
 const EditSessionForm = ({ session, closeModal }: IProps) => {
+  const token = CookiesService.get("UserToken");
   /*______SelectData______*/
   const { data: SystemData } = useSystems();
   const { data: DataCategoryies } = useCategories();

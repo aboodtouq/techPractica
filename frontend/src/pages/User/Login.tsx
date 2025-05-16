@@ -41,6 +41,7 @@ const Login = () => {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data.message || "Login failed", {
         position: "top-center",
+        duration: 4000,
       });
     } finally {
       setIsSubmitting(false);

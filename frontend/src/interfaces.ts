@@ -150,4 +150,39 @@ export interface ISessionRes {
   system: CategoryType;
   categories: string[];
   isPrivate: boolean;
+  ownerName: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  avatar: string; // URL or path
+}
+
+export interface Task {
+  id: string;
+  content: string;
+  title: string;
+  priority: "low" | "medium" | "high";
+  dueDate?: string;
+  createdAt?: string;
+  tags?: string[];
+  likes?: number;
+  comments?: number;
+  users?: User[];
+  status?: string;
+  image?: string;
+}
+
+export interface Column {
+  id: string;
+  title: string;
+  tasks: Task[];
+}
+
+export interface KanbanBoarde {
+  columns: {
+    [key: string]: Column;
+  };
+  columnOrder: string[];
 }

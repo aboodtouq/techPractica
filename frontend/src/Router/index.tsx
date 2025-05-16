@@ -18,8 +18,9 @@ import {
   SessionRequests,
   CookiesService,
 } from "../imports";
-import ProtactedRoute from "../components/ProtactedRoute";
 import ProtactedRouteUser from "../components/ProtactedRouteUser";
+import BorderLayout from "../components/Board/BorderLayout";
+import KanbanBoard from "../components/Board/KanbanBoard";
 const token = CookiesService.get("UserToken");
 
 export const router = createBrowserRouter(
@@ -30,31 +31,10 @@ export const router = createBrowserRouter(
         <Route path="Learn" element={<Learn />} />
         <Route path="Learn/:category" element={<Learn />} />
         <Route path="Sessions" element={<ProjectsLayout />}>
-          <Route
-            index
-            element={
-              <ProtactedRoute token={token} redirectPath="/">
-                <Projects />
-              </ProtactedRoute>
-            }
-          />
+          <Route index element={<Projects />} />
         </Route>
-        <Route
-          path="/Requests/:id"
-          element={
-            <ProtactedRoute token={token} redirectPath="/">
-              <SessionRequests />
-            </ProtactedRoute>
-          }
-        />
-        <Route
-          path="Profile"
-          element={
-            <ProtactedRoute token={token} redirectPath="/">
-              <Profile />
-            </ProtactedRoute>
-          }
-        />
+        <Route path="/Requests/:id" element={<SessionRequests />} />
+        <Route path="Profile" element={<Profile />} />
       </Route>
 
       <Route path="User" element={<LayoutLogin />}>
@@ -83,7 +63,9 @@ export const router = createBrowserRouter(
           }
         />
       </Route>
-
+      <Route path="SessionBoard" element={<BorderLayout />}>
+        <Route index element={<KanbanBoard />} />
+      </Route>
       <Route path="*" element={<PageNotFound />} />
     </>
   )

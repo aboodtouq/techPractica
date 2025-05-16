@@ -6,6 +6,7 @@ interface SessionUserType {
   system: CategoryType;
   flag?: boolean;
   openModal: () => void;
+  ownerName: string;
 }
 const SessionCard = ({
   system,
@@ -14,6 +15,7 @@ const SessionCard = ({
   sessionName,
   technologies,
   flag = true,
+  ownerName,
 }: SessionUserType) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col h-full w-full border border-gray-200 hover:shadow-md transition-shadow duration-200 relative">
@@ -23,7 +25,7 @@ const SessionCard = ({
           <h2 className="text-md font-semibold text-[#022639]">
             {sessionName}
           </h2>
-          <p className="text-xs text-gray-500 mt-1">@{"Arafat"}</p>{" "}
+          <p className="text-xs text-gray-500 mt-1">@{ownerName}</p>{" "}
           {/* Username added here */}
         </div>
         <span className="bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap w-fit cursor-pointer">

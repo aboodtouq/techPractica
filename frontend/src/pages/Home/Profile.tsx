@@ -27,8 +27,10 @@ const ProfilePage = () => {
       sessionName,
       technologies,
       id,
+      ownerName,
     }: ISessionRes) => (
       <SessionCard
+        ownerName={ownerName}
         flag={false}
         openModal={() => {}}
         system={system}
@@ -56,7 +58,7 @@ const ProfilePage = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-              Abhiraj K
+              Mohammad Arafat
             </h1>
             <p className="text-xl text-white/90 mb-8">
               Full Stack Developer & JavaScript Expert
