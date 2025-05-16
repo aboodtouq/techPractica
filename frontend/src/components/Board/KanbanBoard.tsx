@@ -5,8 +5,6 @@ import { FaPlus } from "react-icons/fa";
 import KanbanCard from "../Board/KanbanCard";
 import { initialData } from "../Board/kanbanData";
 
-const MAX_VISIBLE_CARDS = 3;
-
 const KanbanBoard = () => {
   const [board, setBoard] = React.useState<KanbanBoarde>(initialData);
 
@@ -46,14 +44,12 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div className="relative  min-h-[860px]  m-5">
+    <div className="relative  min-h-[860px]  ml-5 ">
       {/* Kanban Columns */}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex flex-row gap-4 min-h-[860px] overflow-x-auto pb-4 md:pb-0">
           {board.columnOrder.map((columnId) => {
             const column = board.columns[columnId];
-            const visibleTasks = column.tasks.slice(0, MAX_VISIBLE_CARDS);
-            const hasMore = column.tasks.length > MAX_VISIBLE_CARDS;
             return (
               <div
                 key={column.id}
@@ -87,7 +83,7 @@ const KanbanBoard = () => {
                             : ""
                         }`}
                       >
-                        {visibleTasks.map((task, index) => (
+                        {column.tasks.map((task, index) => (
                           <Draggable
                             key={task.id}
                             draggableId={task.id}
@@ -113,11 +109,6 @@ const KanbanBoard = () => {
                       </div>
                     )}
                   </Droppable>
-                  {hasMore && (
-                    <button className="w-full bg-[#42D5AE] hover:bg-[#38b28d] text-primary py-2 rounded mt-2 font-semibold text-sm ">
-                      View More
-                    </button>
-                  )}
                 </div>
               </div>
             );

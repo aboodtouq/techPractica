@@ -2,69 +2,51 @@ import { FaUserFriends, FaPlus, FaCommentDots } from "react-icons/fa";
 import { MdOutlineSpaceDashboard, MdOutlineViewKanban } from "react-icons/md";
 import userImgg from "../../assets/user.png";
 
-interface SidebarProps {
-  isOpen: boolean;
-  toggleSidebar: () => void;
-}
-
-export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
+export default function Sidebar() {
   return (
-    <aside
-      className={`fixed hidden md:block left-0 top-0 h-screen bg-[#022639] text-gray-200 flex flex-col overflow-y-auto z-40 transition-all duration-300 ${
-        isOpen ? "w-64" : "w-20"
-      }`}
-    >
-      {/* Header with toggle button */}
-      <div
-        className="flex items-center gap-3 px-4 py-5 cursor-pointer  transition"
-        onClick={toggleSidebar}
-      >
-        <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center shrink-0">
+    <div className="sticky top-0 left-0 right-0 h-14 bg-[#022639] text-gray-200 flex items-center overflow-hidden z-40 shadow-md mb-7">
+      {/* User info - always visible but adjusts spacing */}
+      <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 shrink-0 min-w-max">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded overflow-hidden flex items-center justify-center">
           <img
             src={userImgg}
             alt="Anonymous User"
             className="w-full h-full object-cover"
           />
         </div>
-        {isOpen && (
-          <div className="overflow-hidden">
-            <div className="font-semibold leading-tight whitespace-nowrap">
-              Owner Username
-            </div>
-            <div className="text-xs text-gray-400 whitespace-nowrap">
-              Session Name
-            </div>
+        <div className="overflow-hidden">
+          <div className="font-semibold leading-tight whitespace-nowrap text-xs sm:text-sm">
+            Owner Username
           </div>
-        )}
+          <div className="text-xs text-gray-400 whitespace-nowrap">
+            Session Name
+          </div>
+        </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 px-2 py-4 space-y-1">
-        <button className="flex items-center gap-3 w-full px-3 py-2 rounded hover:bg-[#38b28d] transition whitespace-nowrap">
-          <MdOutlineSpaceDashboard className="text-lg shrink-0" />
-          {isOpen && "Dashboard"}
+      {/* Navigation - keeps all labels visible */}
+      <nav className="flex-1 flex items-center px-1 sm:px-2 space-x-1 overflow-x-auto min-w-max">
+        <button className="flex items-center gap-1 sm:gap-2 h-full px-2 sm:px-3 rounded hover:bg-[#38b28d] transition whitespace-nowrap text-xs sm:text-sm">
+          <MdOutlineSpaceDashboard className="text-base sm:text-lg" />
+          Dashboard
         </button>
 
-        <button className="flex items-center gap-3 w-full px-3 py-2 rounded hover:bg-[#38b28d] transition whitespace-nowrap">
-          <MdOutlineViewKanban className="text-lg shrink-0" />
-          {isOpen && "Kanban"}
+        <button className="flex items-center gap-1 sm:gap-2 h-full px-2 sm:px-3 rounded hover:bg-[#38b28d] transition whitespace-nowrap text-xs sm:text-sm">
+          <MdOutlineViewKanban className="text-base sm:text-lg" />
+          Kanban
         </button>
 
-        <button className="flex items-center gap-3 w-full px-3 py-2 rounded hover:bg-[#38b28d] transition whitespace-nowrap">
-          <FaCommentDots className="text-lg shrink-0" />
-          {isOpen && "Chat"}
+        <button className="flex items-center gap-1 sm:gap-2 h-full px-2 sm:px-3 rounded hover:bg-[#38b28d] transition whitespace-nowrap text-xs sm:text-sm">
+          <FaCommentDots className="text-base sm:text-lg" />
+          Chat
         </button>
 
-        <button className="flex items-center gap-3 w-full px-3 py-2 rounded hover:bg-[#38b28d] transition whitespace-nowrap">
-          <FaUserFriends className="text-lg shrink-0" />
-          {isOpen && (
-            <>
-              <span className="flex-1 text-left">Members</span>
-              <FaPlus className="text-xs opacity-60 shrink-0" />
-            </>
-          )}
+        <button className="flex items-center gap-1 sm:gap-2 h-full px-2 sm:px-3 rounded hover:bg-[#38b28d] transition whitespace-nowrap text-xs sm:text-sm">
+          <FaUserFriends className="text-base sm:text-lg" />
+          Members
+          <FaPlus className="text-[0.6rem] sm:text-xs opacity-60 ml-0.5 sm:ml-1" />
         </button>
       </nav>
-    </aside>
+    </div>
   );
 }
