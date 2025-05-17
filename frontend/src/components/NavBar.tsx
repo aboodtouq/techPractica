@@ -22,7 +22,6 @@ function Navbar() {
 
   const handleLogout = () => {
     CookiesService.remove("UserToken");
-    window.location.href = window.location.href;
     navigate("/");
     setIsOpen(false);
   };

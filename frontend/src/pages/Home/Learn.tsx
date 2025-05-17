@@ -8,6 +8,7 @@ import ApplySessionForm from "../../components/ApplySessionForm";
 import SearchFilter from "../../components/ui/SearchFilter";
 import { ISessionRes } from "../../interfaces";
 import { useSystems } from "../../api";
+import { motion } from "framer-motion";
 
 const Learn = () => {
   document.title = "TechPractica | Learn";
@@ -119,40 +120,84 @@ const Learn = () => {
     [filteredSessions]
   );
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 260,
+        damping: 20
+      }
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen flex flex-col bg-[#f9fafb]">
         <main className="container mx-auto px-4 pt-6 pb-12 flex-1 flex flex-col">
-          <SearchFilter
-            onSearch={handleSearch}
-            onFilterChange={handleFilterChange}
-            filterOptions={systemName}
-            activeFilter={activeFilter}
-            searchQuery={searchQuery}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <SearchFilter
+              onSearch={handleSearch}
+              onFilterChange={handleFilterChange}
+              filterOptions={systemName}
+              activeFilter={activeFilter}
+              searchQuery={searchQuery}
+            />
+          </motion.div>
 
           <div className="flex-1 flex flex-col justify-between">
             {Data.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
                 {Data}
-              </div>
+              </motion.div>
             ) : (
-              <div className="flex-1 flex items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="flex-1 flex items-center justify-center"
+              >
                 <p className="text-gray-500 text-center">
                   No sessions found matching your criteria
                 </p>
-              </div>
+              </motion.div>
             )}
 
             {pageCount > 1 && (
-              <div className="mt-10 flex justify-start">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mt-10 flex justify-start"
+              >
                 <Paginator
                   page={page}
                   pageCount={pageCount}
                   onClickNext={() => setPage((p) => p + 1)}
                   onClickPrev={() => setPage((p) => Math.max(p - 1, 1))}
                 />
-              </div>
+              </motion.div>
             )}
           </div>
         </main>

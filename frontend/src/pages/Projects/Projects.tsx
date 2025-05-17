@@ -17,6 +17,7 @@ import axiosInstance from "../../config/axios.config.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { useSystems } from "../../api.ts";
+import { motion } from "framer-motion";
 
 const Projects = () => {
   document.title = "TechPractica | Sessions";
@@ -144,6 +145,16 @@ const Projects = () => {
     [filteredSessions]
   );
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
     <>
       <Modal isOpen={isOpen} title="ADD A NEW SESSION">
@@ -186,7 +197,12 @@ const Projects = () => {
       </Modal>
 
       <div className="container mx-auto pt-10 px-4 sm:px-6 lg:px-11">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 flex-wrap">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 flex-wrap"
+        >
           <div className="flex flex-col sm:flex-row gap-4 flex-1">
             <SearchFilter
               onSearch={handleSearch}
@@ -197,30 +213,53 @@ const Projects = () => {
             />
           </div>
           <Button
-            className="w-full sm:w-fit  bg-[#42D5AE] hover:bg-[#38b28d] hover:bg-[#42D5AE]0 text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
+            className="w-full sm:w-fit bg-[#42D5AE] hover:bg-[#38b28d] hover:bg-[#42D5AE]0 text-white px-6 py-2 font-medium transition-colors duration-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center"
             onClick={openModal}
           >
             <BiPlus size={18} className="mr-2" />
             Add Session
           </Button>
-        </div>
+        </motion.div>
       </div>
 
       <div className="min-h-screen flex flex-col -mt-5">
         <main className="container mx-auto p-10 pb-20 flex-1 flex flex-col justify-between">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
-            {Data}
-          </div>
+          {Data.length > 0 ? (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4"
+            >
+              {Data}
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex-1 flex items-center justify-center"
+            >
+              <p className="text-gray-500 text-center">
+                No sessions found matching your criteria
+              </p>
+            </motion.div>
+          )}
 
           {pageCount > 1 && (
-            <div className="flex justify-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex justify-start"
+            >
               <Paginator
                 page={page}
                 pageCount={pageCount}
                 onClickNext={onClickNext}
                 onClickPrev={onClickPrev}
               />
-            </div>
+            </motion.div>
           )}
         </main>
       </div>

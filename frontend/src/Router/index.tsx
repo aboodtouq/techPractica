@@ -16,12 +16,9 @@ import {
   ProjectsLayout,
   Projects,
   SessionRequests,
-  CookiesService,
 } from "../imports";
-import ProtactedRouteUser from "../components/ProtactedRouteUser";
 import BorderLayout from "../components/Board/BorderLayout";
 import KanbanBoard from "../components/Board/KanbanBoard";
-const token = CookiesService.get("UserToken");
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,30 +35,9 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route path="User" element={<LayoutLogin />}>
-        <Route
-          index
-          element={
-            <ProtactedRouteUser token={token} redirectPath="/">
-              <Login />
-            </ProtactedRouteUser>
-          }
-        />
-        <Route
-          path="ResetPassword"
-          element={
-            <ProtactedRouteUser token={token} redirectPath="/">
-              <ResetPass />
-            </ProtactedRouteUser>
-          }
-        />
-        <Route
-          path="Register"
-          element={
-            <ProtactedRouteUser token={token} redirectPath="/">
-              <Register />
-            </ProtactedRouteUser>
-          }
-        />
+        <Route index element={<Login />} />
+        <Route path="ResetPassword" element={<ResetPass />} />
+        <Route path="Register" element={<Register />} />
       </Route>
       <Route path="SessionBoard" element={<BorderLayout />}>
         <Route index element={<KanbanBoard />} />
