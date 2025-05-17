@@ -49,9 +49,9 @@ const ProfilePage = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -62,9 +62,9 @@ const ProfilePage = () => {
       transition: {
         type: "spring",
         stiffness: 260,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   return (
@@ -75,7 +75,7 @@ const ProfilePage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative h-screen flex items-center justify-center bg-gradient-to-br from-[#42D5AE] to-[#38b28d]"
+          className="relative h-screen flex items-center justify-center bg-gradient-to-br from-[#38b28d] to-[#42D5AE]"
         >
           <div className="absolute inset-0 bg-black/20"></div>
 
@@ -204,7 +204,7 @@ const ProfilePage = () => {
               >
                 {skills.map((skill, index) => (
                   <motion.span
-                    key={skill}
+                    key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05 }}
                     className="px-4 py-2 bg-[#42D5AE]/10 text-[#022639] rounded-full font-medium"
@@ -240,7 +240,7 @@ const ProfilePage = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {Data}
             </motion.div>

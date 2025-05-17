@@ -62,7 +62,7 @@ const SessionCardUser = ({
           onClick={() => {
             openModal();
           }}
-          className="text-sm font-medium text-gray-400 hover:text-[#38b28d] transition-colors px-2 py-1 rounded"
+          className="text-sm font-medium text-gray-400 hover:text-[#38b28d]  transition-colors px-2 py-1 rounded"
         >
           Edit
         </button>

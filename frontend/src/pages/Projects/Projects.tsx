@@ -18,9 +18,11 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { useSystems } from "../../api.ts";
 import { motion } from "framer-motion";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Projects = () => {
   document.title = "TechPractica | Sessions";
+  const queryClient = useQueryClient();
 
   const { isOpen, openModal, closeModal } = useModal();
   const [selectedSession, setSelectedSession] = useState<ISessionRes>();
@@ -117,7 +119,7 @@ const Projects = () => {
       toast.success(response.data, { position: "top-center" });
       setTimeout(() => {
         closeDeleteModal();
-        window.location.reload();
+        queryClient.invalidateQueries({ queryKey: ["SessionData-All"] });
       }, 500);
     } catch (error) {
       const err = error as AxiosError<IErrorResponse>;

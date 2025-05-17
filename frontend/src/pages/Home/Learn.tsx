@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { Modal, useAuthQuery } from "../../imports";
+import { CookiesService, Modal, useAuthQuery } from "../../imports";
 import Paginator from "../../components/ui/Paginator";
 import SessionCard from "../../components/ui/SessionCard";
 import SessionCardDetails from "../../components/ui/SessionCardDetails";
@@ -12,7 +12,11 @@ import { motion } from "framer-motion";
 
 const Learn = () => {
   document.title = "TechPractica | Learn";
-
+  const token = CookiesService.get("UserToken")
+    ? CookiesService.get("UserToken")
+    : null;
+  const payloadBase64 = token == null ? "" : token.split(".")[1];
+  const { username } = token == null ? "" : JSON.parse(atob(payloadBase64));
   const { category } = useParams();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -125,22 +129,9 @@ const Learn = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 260,
-        damping: 20
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   return (
@@ -209,6 +200,7 @@ const Learn = () => {
         title={selectedSession?.sessionName}
       >
         <SessionCardDetails
+          username={username}
           session={selectedSession!}
           openModal={openApply}
           closeModal={closeShowMore}

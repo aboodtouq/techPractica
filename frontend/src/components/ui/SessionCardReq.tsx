@@ -13,24 +13,24 @@ const SessionCardReq = ({ username, categoryName, brief }: IProps) => {
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 20 },
-        visible: { 
-          opacity: 1, 
+        visible: {
+          opacity: 1,
           y: 0,
           transition: {
             type: "spring",
             stiffness: 100,
-            damping: 10
-          }
-        }
+            damping: 10,
+          },
+        },
       }}
-      whileHover={{ 
+      whileHover={{
         scale: 1.01,
-        transition: { duration: 0.15 }
+        transition: { duration: 0.15 },
       }}
       className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow duration-200"
     >
       <div className="flex items-center justify-between mb-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
@@ -45,7 +45,7 @@ const SessionCardReq = ({ username, categoryName, brief }: IProps) => {
             <h3 className="font-semibold text-gray-800">{username}</h3>
           </div>
         </motion.div>
-        <motion.span 
+        <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -54,7 +54,7 @@ const SessionCardReq = ({ username, categoryName, brief }: IProps) => {
           {categoryName}
         </motion.span>
       </div>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -63,7 +63,7 @@ const SessionCardReq = ({ username, categoryName, brief }: IProps) => {
         {cleaned}
       </motion.p>
       <div className="flex justify-end gap-2 mt-4">
-        <button className="px-3 py-1 text-sm text-white bg-[#42D5AE] rounded hover:bg-[#38b28d]">
+        <button className="px-3 py-1 text-sm text-white bg-[#42D5AE] rounded hover:bg-[#38b28d] ">
           Accept
         </button>
         <button className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100">

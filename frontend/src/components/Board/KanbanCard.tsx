@@ -8,7 +8,6 @@ interface KanbanCardProps {
 }
 
 const KanbanCard: React.FC<KanbanCardProps> = ({ task }) => {
-  // Calculate days left if dueDate is present
   let daysLeft = "";
   if (task.dueDate) {
     const due = new Date(task.dueDate);
@@ -32,7 +31,7 @@ const KanbanCard: React.FC<KanbanCardProps> = ({ task }) => {
               <span
                 key={idx}
                 className={
-                  "rounded px-2 py-0.5 text-[11px] font-semibold bg-green-100 "
+                  "px-3 py-1 text-xs bg-[#42D5AE]/10 text-[#022639] border border-[#42D5AE] rounded-md   cursor-pointer"
                 }
               >
                 {tag}

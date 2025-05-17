@@ -3,12 +3,19 @@ import { ISessionRes } from "../../interfaces.ts";
 import { Button, CookiesService } from "../../imports.ts";
 import { useNavigate } from "react-router-dom";
 interface IProps {
+  username: string | null;
+
   session: ISessionRes;
   closeModal: () => void;
   openModal: () => void;
 }
 
-const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
+const SessionCardDetails = ({
+  session,
+  closeModal,
+  openModal,
+  username,
+}: IProps) => {
   const cleaned = session.sessionDescription.replace(/^"(.*)"$/, "$1");
   const navigation = useNavigate();
   const token = CookiesService.get("UserToken");
@@ -56,11 +63,14 @@ const SessionCardDetails = ({ session, closeModal, openModal }: IProps) => {
         <Button
           className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed"
           width="w-full"
+          disabled={username === session.ownerName}
           onClick={() => {
             token ? openModal() : navigation("/User");
           }}
         >
-          Apply now
+          {username === session.ownerName
+            ? "You awn this session"
+            : "Apply now"}
         </Button>
         <Button
           className="bg-white border border-gray-300 !text-[#022639] hover:bg-gray-50 font-medium transition-colors duration-200 cursor-pointer"

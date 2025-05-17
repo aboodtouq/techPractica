@@ -40,14 +40,14 @@ const Register = () => {
     try {
       await axiosInstance.post("/authenticated/registration", data);
       toast.success("Registration successful!", {
-        position: "top-center",
+        position: "top-right",
         duration: 2000,
       });
       setTimeout(() => navigate("/User"), 1500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
       toast.error(`${ErrorObj.response?.data.message}`, {
-        position: "top-center",
+        position: "top-right",
         duration: 2000,
       });
     }

@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { sessionSchema } from "../validation/index.ts";
 import { InferType } from "yup";
 import TinyMCEWithForm from "./ui/RichTextEditor.tsx";
+import { useQueryClient } from "@tanstack/react-query";
 interface IProps {
   session: ISessionRes;
   closeModal: () => void;
@@ -23,6 +24,8 @@ interface IProps {
 
 const EditSessionForm = ({ session, closeModal }: IProps) => {
   const token = CookiesService.get("UserToken");
+  const queryClient = useQueryClient();
+
   /*______SelectData______*/
   const { data: SystemData } = useSystems();
   const { data: DataCategoryies } = useCategories();
@@ -60,13 +63,13 @@ const EditSessionForm = ({ session, closeModal }: IProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success("Edit successful !", {
+      toast.success("Session edited successfully", {
         position: "top-center",
         duration: 1000,
       });
       setTimeout(() => {
         closeModal();
-        window.location.href = window.location.href;
+        queryClient.invalidateQueries({ queryKey: ["SessionData-All"] });
       }, 500);
     } catch (error) {
       const ErrorObj = error as AxiosError<IErrorResponse>;
