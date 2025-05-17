@@ -69,7 +69,7 @@ const SessionCardDetails = ({
           }}
         >
           {username === session.ownerName
-            ? "You awn this session"
+            ? "You own this session"
             : "Apply now"}
         </Button>
         <Button
