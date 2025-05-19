@@ -1,4 +1,6 @@
 import * as yup from "yup";
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
 export const registerSchema = yup
   .object({
     name: yup
@@ -19,7 +21,11 @@ export const registerSchema = yup
       .string()
       .required("Password is required")
       .min(8, "Password should be at least 8 charachters.")
-      .max(100, "Must be 100 characters or less"),
+      .max(100, "Must be 100 characters or less")
+      .matches(
+        passwordRegex,
+        "Must have uppercase, lowercase, digit, and special character"
+      ),
   })
   .required();
 export const loginSchema = yup

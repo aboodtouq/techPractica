@@ -35,7 +35,7 @@ const Learn = () => {
   const systemName: string[] =
     SystemData?.map((tech: { systemName: string }) => tech.systemName) || [];
 
-  const sessionsPerPage = 9;
+  const sessionsPerPage = 12;
   const fetchPageSize = 9999;
 
   // const Url = category

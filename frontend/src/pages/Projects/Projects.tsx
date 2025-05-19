@@ -177,7 +177,6 @@ const Projects = () => {
         closeModal={closeDeleteModal}
         title="Are you sure you want to delete this session?"
         description="Deleting this session will remove it permanently from your account. This action cannot be undone. Make sure you no longer need this session or any related data before proceeding."
-        Position="fixed top-10 left-1/2 transform -translate-x-1/2 z-50"
       >
         <div className="flex items-center space-x-3">
           <Button
