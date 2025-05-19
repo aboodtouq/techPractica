@@ -39,7 +39,7 @@ export const router = createBrowserRouter(
         <Route path="ResetPassword" element={<ResetPass />} />
         <Route path="Register" element={<Register />} />
       </Route>
-      <Route path="SessionBoard" element={<BorderLayout />}>
+      <Route path="SessionKanban" element={<BorderLayout />}>
         <Route index element={<KanbanBoard />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />

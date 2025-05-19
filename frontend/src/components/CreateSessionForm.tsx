@@ -109,14 +109,6 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
           />
         )}
 
-        {technologyName?.length > 0 && (
-          <MultiSelectField<string>
-            label="Technologies"
-            name="technologies"
-            options={technologyName}
-            getLabel={(item) => item}
-          />
-        )}
         {categoryName?.length > 0 && (
           <MultiSelectField<string>
             label="Fields"
@@ -125,13 +117,20 @@ const CreateSessionForm = ({ closeModal }: IProps) => {
             getLabel={(item) => item}
           />
         )}
-
-        {/* <SelectField<string>
+        {technologyName?.length > 0 && (
+          <MultiSelectField<string>
+            label="Technologies"
+            name="technologies"
+            options={technologyName}
+            getLabel={(item) => item}
+          />
+        )}
+        <SelectField<string>
           label="Sesseion State"
           name="privateSession"
           options={["Public Session", "Private Session"]}
           getLabel={(item) => item}
-        /> */}
+        />
         <div className="flex mt-6 gap-4">
           <Button
             className="bg-[#42D5AE] hover:bg-[#38b28d] text-white font-medium transition-colors duration-200"

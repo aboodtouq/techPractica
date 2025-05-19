@@ -56,7 +56,7 @@ const Register = () => {
   const renderInputField = ({ label, name, placeholder, type }: IRegister) => {
     const isPasswordField = type === "password";
     return (
-      <div className="mb-4">
+      <div className="mb-4" key={name}>
         <label
           hidden={name === "lastName" || name === "firstName"}
           htmlFor={label}
