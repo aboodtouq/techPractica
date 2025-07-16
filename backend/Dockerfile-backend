@@ -1,14 +1,27 @@
-# Use OpenJDK 21 for Spring Boot
-FROM openjdk:21-jdk-slim
-
-# Set working directory inside container
+# ========================
+# Stage 1: Build the application
+# ========================
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /app
 
-# Copy JAR from Maven build output
-COPY target/techPractica-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml and source code
+COPY pom.xml .
+COPY src ./src
 
-# Expose the application port
+# Build the Spring Boot application (skip tests for faster build)
+RUN mvn clean package -DskipTests
+
+# ========================
+# Stage 2: Run the application
+# ========================
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+
+# Copy the JAR from the build stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose application port
 EXPOSE 8080
 
-# Run the Spring Boot application
+# Start the Spring Boot app
 ENTRYPOINT ["java", "-jar", "app.jar"]
