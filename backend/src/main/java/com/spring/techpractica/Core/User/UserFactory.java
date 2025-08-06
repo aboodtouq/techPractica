@@ -1,16 +1,16 @@
 package com.spring.techpractica.Core.User;
 
-import com.spring.techpractica.Core.User.Service.PasswordEncryption;
+import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserFactory {
-    private PasswordEncryption passwordEncryption;
+    private PasswordEncryptor passwordEncryptor;
 
     public User create(String name,
                        String email,
                        String password) {
-        String encryptedPassword = passwordEncryption.encryptPassword(password);
+        String encryptedPassword = passwordEncryptor.hash(password);
 
         return User.builder()
                 .name(name)
