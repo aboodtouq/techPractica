@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
+import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,11 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     public User update(User user) {
-        return null;
+        UUID userId = user.getId();
+        if (jpaUser.existsById(userId)) {
+            return jpaUser.save(user);
+        }
+        throw new ResourcesNotFoundException(userId);
     }
 
     @Override

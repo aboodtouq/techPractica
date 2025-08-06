@@ -24,7 +24,6 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-
     private final JwtExtracting jwtExtracting;
     private final JwtValidationChain jwtValidation;
     private final UserRepository userRepository;
