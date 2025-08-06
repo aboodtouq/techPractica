@@ -8,16 +8,12 @@ public class UserFactory {
     private PasswordEncryption passwordEncryption;
 
     public User create(String name,
-                       String firstName,
-                       String lastName,
                        String email,
                        String password) {
         String encryptedPassword = passwordEncryption.encryptPassword(password);
 
         return User.builder()
                 .name(name)
-                .firstName(firstName)
-                .lastName(lastName)
                 .email(email)
                 .password(encryptedPassword)
                 .build();
