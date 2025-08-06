@@ -11,14 +11,12 @@ import java.util.function.Function;
 @Component
 @AllArgsConstructor
 public class JwtExtracting {
-
     private final JwtGeneration generation;
 
     public Claims parseToken(String token) {
         return Jwts.parser().verifyWith(generation.getSecretKey())
                 .build().parseSignedClaims(token).getPayload();
     }
-
 
     private <T> T extractClaim(String token,
                                Function<Claims, T> claimsResolver) {

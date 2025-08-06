@@ -13,7 +13,6 @@ import java.util.UUID;
 @Component
 @Getter
 public class JwtGeneration {
-
     private final SecretKey secretKey;
 
     public JwtGeneration() {
@@ -22,7 +21,6 @@ public class JwtGeneration {
                 (Decoders.BASE64.decode(key));
 
     }
-
 
     public String generateToken(UUID id,String email) {
 
@@ -36,6 +34,4 @@ public class JwtGeneration {
                 .issuer(email)
                 .compact();
     }
-
-
 }
