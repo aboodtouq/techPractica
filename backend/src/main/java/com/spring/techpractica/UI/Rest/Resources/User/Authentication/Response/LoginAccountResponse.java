@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.Request.User.Authentication.Response;
+package com.spring.techpractica.UI.Rest.Resources.User.Authentication.Response;
 
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;

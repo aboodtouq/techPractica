@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @AllArgsConstructor
-public class UserAuthentication {
+public class UserAuthenticationController {
     private final RegisterAccountUseCase registerAccountUseCase;
     private final LoginAccountUseCase loginAccountUseCase;
     private final JwtGeneration jwtGeneration;
