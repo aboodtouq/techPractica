@@ -1,34 +1,44 @@
 package com.spring.techpractica.UI.Rest.Shared;
 
+import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ResourcesNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleResourcesNotFoundException(ResourcesNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(ex.getMessage())
+                        .status(HttpStatus.NOT_FOUND.value())
+                        .code("RESOURCE_NOT_FOUND")
+                        .build());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        Map<String, Object> response = new HashMap<>();
-        Map<String, String> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
-                .collect(Collectors.toMap(
-                        FieldError::getField,
-                        fieldError ->
-                                Optional.ofNullable(fieldError.getDefaultMessage()).orElse("Invalid value"),
-                        (existing, replacement) -> existing
-                ));
+    public ResponseEntity<ApiErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
+        String fieldMessages = ex.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> fieldError.getField() + ": " +
+                                   Optional.ofNullable(fieldError.getDefaultMessage()).orElse("Invalid value"))
+                .collect(Collectors.joining(", "));
 
-        response.put("message", "Validation failed");
-        response.put("fieldErrors", fieldErrors);
+        ApiErrorResponse response = ApiErrorResponse.builder()
+                .timestamp(Instant.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message("Validation failed: " + fieldMessages)
+                .code("VALIDATION_ERROR")
+                .build();
 
-        return ResponseEntity.
-                badRequest().body(response);
+        return ResponseEntity.badRequest().body(response);
     }
 }
