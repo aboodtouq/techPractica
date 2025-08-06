@@ -1,13 +1,13 @@
-package com.spring.techpractica.UI.Rest.Controller.User;
+package com.spring.techpractica.UI.Rest.Controller.User.Auth;
 
 import com.spring.techpractica.Application.User.LoginAccount.LoginAccountCommand;
 import com.spring.techpractica.Application.User.LoginAccount.LoginAccountUseCase;
 import com.spring.techpractica.Application.User.RegisterAccount.RegisterAccountCommand;
 import com.spring.techpractica.Application.User.RegisterAccount.RegisterAccountUseCase;
 import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.UI.Rest.Request.User.Authentication.Request.LoginAccountRequest;
-import com.spring.techpractica.UI.Rest.Request.User.Authentication.Request.RegisterAccountRequest;
-import com.spring.techpractica.UI.Rest.Request.User.Authentication.Response.LoginAccountResponse;
+import com.spring.techpractica.UI.Rest.Resources.User.Authentication.Request.LoginAccountRequest;
+import com.spring.techpractica.UI.Rest.Resources.User.Authentication.Request.RegisterAccountRequest;
+import com.spring.techpractica.UI.Rest.Resources.User.Authentication.Response.LoginAccountResponse;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardResponse;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;

@@ -1,14 +1,11 @@
 package com.spring.techpractica.UI.Rest.Request.User.Authentication.Response;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import lombok.Getter;
 
 @Getter
 public class LoginAccountResponse {
-
-    @JsonValue
     private final UserResources user;
 
     private final String token;
