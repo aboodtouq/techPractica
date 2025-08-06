@@ -1,5 +1,6 @@
 package com.spring.techpractica.Core.Shared;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface BaseRepository<T> {
@@ -7,5 +8,5 @@ public interface BaseRepository<T> {
 
     T update(T t);
 
-    T findById(UUID id);
+    Optional<T> findById(UUID id);
 }

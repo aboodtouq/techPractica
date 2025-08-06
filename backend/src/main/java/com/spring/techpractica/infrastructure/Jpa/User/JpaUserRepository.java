@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -25,8 +26,8 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User findById(UUID id) {
-        return null;
+    public Optional<User> findById(UUID id) {
+        return jpaUser.findById(id);
     }
 
     @Override
