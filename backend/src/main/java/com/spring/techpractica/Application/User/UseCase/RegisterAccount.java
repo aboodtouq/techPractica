@@ -1,11 +1,13 @@
 package com.spring.techpractica.Application.User.UseCase;
 
 import com.spring.techpractica.Application.User.Command.RegisterAccountCommand;
+import com.spring.techpractica.Core.User.Event.UserRegistrationEvent;
 import com.spring.techpractica.Core.User.Exception.EmailAlreadyUsedException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserFactory;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class RegisterAccount {
     private final UserFactory userFactory;
     private final UserRepository userRepository;
+    private final ApplicationEventPublisher publisher;
 
     public User execute(RegisterAccountCommand command) {
         String email = command.email();
@@ -21,7 +24,7 @@ public class RegisterAccount {
         }
         User user = userFactory.create(command.name(), email, command.password());
         User userSaved = userRepository.save(user);
-
+        publisher.publishEvent(new UserRegistrationEvent(userSaved.getId(), userSaved.getEmail()));
         return userSaved;
     }
 }
