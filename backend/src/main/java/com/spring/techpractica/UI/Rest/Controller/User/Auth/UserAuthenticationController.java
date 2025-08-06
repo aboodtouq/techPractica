@@ -13,6 +13,7 @@ import com.spring.techpractica.UI.Rest.Shared.StandardResponse;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +32,13 @@ public class UserAuthenticationController {
     public ResponseEntity<StandardResponse<UserResources>> registerAccount(@RequestBody @Valid RegisterAccountRequest request) {
         User user = registerAccountUseCase.execute(new RegisterAccountCommand(request.name(), request.email(), request.password()));
 
-        return ResponseEntity.ok(StandardResponse.<UserResources>builder()
+        StandardResponse<UserResources> response = StandardResponse.<UserResources>builder()
                 .data(new UserResources(user))
                 .message("Register account successful")
-                .build());
+                .status(HttpStatus.CREATED.value())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
@@ -45,6 +49,7 @@ public class UserAuthenticationController {
         return ResponseEntity.ok(StandardResponse.<LoginAccountResponse>builder()
                 .data(new LoginAccountResponse(user, token))
                 .message("Login account successful")
+                .status(HttpStatus.OK.value())
                 .build());
     }
 }

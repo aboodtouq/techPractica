@@ -17,7 +17,6 @@ public class AuthenticationExceptionHandler {
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.CONFLICT.value())
-                .error("Email Already Used")
                 .message(ex.getMessage())
                 .code("EMAIL_ALREADY_USED")
                 .build();
@@ -30,7 +29,6 @@ public class AuthenticationExceptionHandler {
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
-                .error("Unauthorized")
                 .message(ex.getMessage())
                 .code("AUTH_FAILED")
                 .build();
