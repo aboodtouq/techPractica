@@ -1,4 +1,4 @@
-package com.spring.techpractica.infrastructure.Security.Config;
+package com.spring.techpractica.infrastructure.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

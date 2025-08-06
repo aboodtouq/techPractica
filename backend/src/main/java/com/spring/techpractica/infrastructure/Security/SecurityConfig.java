@@ -1,4 +1,4 @@
-package com.spring.techpractica.infrastructure.Security.Config;
+package com.spring.techpractica.infrastructure.Security;
 
 
 import com.spring.techpractica.infrastructure.Security.Filter.JwtFilter;

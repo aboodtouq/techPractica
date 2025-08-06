@@ -1,7 +1,6 @@
 package com.spring.techpractica.infrastructure.Cor;
 
 public abstract class AbstractHandler<T> implements Handler<T> {
-
     private Handler<T> nextHandler;
 
     @Override
@@ -15,6 +14,5 @@ public abstract class AbstractHandler<T> implements Handler<T> {
             nextHandler.handle(request);
         }
     }
-
     public abstract void process(T request);
 }
