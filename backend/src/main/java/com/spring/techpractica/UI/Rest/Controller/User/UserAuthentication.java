@@ -22,10 +22,12 @@ public class UserAuthentication {
 
     @PostMapping("/register")
     public ResponseEntity<StandardResponse<UserResources>> registerAccount(@RequestBody @Valid RegisterAccountRequest request) {
-        User user = registerAccount.execute(new RegisterAccountCommand(request.email(), request.password(), request.name()));
+        User user = registerAccount.execute(new RegisterAccountCommand(request.name(), request.email(), request.password()));
 
         return ResponseEntity.ok(StandardResponse.<UserResources>builder()
                 .data(new UserResources(user))
-                .state("successful").build());
+                .state("successful")
+                .message("Register account successful")
+                .build());
     }
 }

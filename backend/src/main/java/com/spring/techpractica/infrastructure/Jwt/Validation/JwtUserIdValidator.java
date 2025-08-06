@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.Jwt.Validation;
 
-import com.example.trackride.Infrastructures.DesginPatterns.Cor.AbstractHandler;
-import com.example.trackride.Infrastructures.Jwt.Exception.JwtValidationException;
-import com.example.trackride.Infrastructures.Jwt.JwtExtracting;
+import com.spring.techpractica.infrastructure.Cor.AbstractHandler;
+import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
+import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

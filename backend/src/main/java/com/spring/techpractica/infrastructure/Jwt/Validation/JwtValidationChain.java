@@ -1,11 +1,10 @@
 package com.spring.techpractica.infrastructure.Jwt.Validation;
 
-import com.example.trackride.Infrastructures.DesginPatterns.Cor.Handler;
+import com.spring.techpractica.infrastructure.Cor.Handler;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtValidationChain {
-
     private final JwtExpireDateValidator expireDateValidator;
     private final JwtUserIdValidator userIdValidator;
 
