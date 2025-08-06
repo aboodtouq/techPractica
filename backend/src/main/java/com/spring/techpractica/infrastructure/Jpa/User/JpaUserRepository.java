@@ -39,4 +39,9 @@ public class JpaUserRepository implements UserRepository {
     public boolean existsByEmail(String email) {
         return jpaUser.existsByEmail(email);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return jpaUser.findByEmail(email);
+    }
 }

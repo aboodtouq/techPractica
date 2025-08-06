@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.shared;
+package com.spring.techpractica.UI.Rest.Shared;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

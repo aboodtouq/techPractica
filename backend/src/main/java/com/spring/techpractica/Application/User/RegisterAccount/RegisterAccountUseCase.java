@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-public class RegisterAccount {
+public class RegisterAccountUseCase {
     private final UserFactory userFactory;
     private final UserRepository userRepository;
     private final ApplicationEventPublisher publisher;
