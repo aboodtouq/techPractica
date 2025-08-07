@@ -1,10 +1,9 @@
-package com.spring.techpractica.UI.Rest.Controller.User.Auth;
+package com.spring.techpractica.UI.Rest.Controller.User.Auth.LoginAccount;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
-import com.spring.techpractica.UI.Rest.Resources.User.Authentication.Request.LoginAccountRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserAuthenticationControllerTest {
-
+class LoginAccountControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

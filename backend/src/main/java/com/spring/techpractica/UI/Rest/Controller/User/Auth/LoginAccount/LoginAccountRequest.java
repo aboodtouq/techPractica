@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.Resources.User.Authentication.Request;
+package com.spring.techpractica.UI.Rest.Controller.User.Auth.LoginAccount;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
