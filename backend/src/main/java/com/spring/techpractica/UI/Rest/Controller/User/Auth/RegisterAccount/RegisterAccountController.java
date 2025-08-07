@@ -2,8 +2,11 @@ package com.spring.techpractica.UI.Rest.Controller.User.Auth.RegisterAccount;
 
 import com.spring.techpractica.Application.User.RegisterAccount.RegisterAccountCommand;
 import com.spring.techpractica.Application.User.RegisterAccount.RegisterAccountUseCase;
+import com.spring.techpractica.Core.User.Exception.EmailAlreadyUsedException;
+import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
+import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -37,15 +42,27 @@ public class RegisterAccountController {
                     content = @Content)
     })
     @PostMapping("/register")
-    public ResponseEntity<StandardSuccessResponse<UserResources>> registerAccount(@RequestBody @Valid RegisterAccountRequest request) {
-        User user = registerAccountUseCase.execute(new RegisterAccountCommand(request.name(), request.email(), request.password()));
+    public ResponseEntity<?> registerAccount(@RequestBody @Valid RegisterAccountRequest request) {
+        try {
+            User user = registerAccountUseCase.execute(new RegisterAccountCommand(request.name(),
+                    request.email(),
+                    request.password()));
 
-        StandardSuccessResponse<UserResources> response = StandardSuccessResponse.<UserResources>builder()
-                .data(new UserResources(user))
-                .message("Register account successful")
-                .status(HttpStatus.CREATED.value())
-                .build();
+            StandardSuccessResponse<UserResources> response = StandardSuccessResponse.<UserResources>builder()
+                    .data(new UserResources(user))
+                    .message("Register account successful")
+                    .status(HttpStatus.CREATED.value())
+                    .build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (EmailAlreadyUsedException ex) {
+            StandardErrorResponse response = StandardErrorResponse.builder()
+                    .timestamp(Instant.now())
+                    .status(HttpStatus.CONFLICT.value())
+                    .message(ex.getMessage())
+                    .code("EMAIL_ALREADY_USED")
+                    .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        }
     }
 }

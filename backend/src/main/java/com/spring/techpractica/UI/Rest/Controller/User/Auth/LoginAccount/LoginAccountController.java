@@ -2,7 +2,9 @@ package com.spring.techpractica.UI.Rest.Controller.User.Auth.LoginAccount;
 
 import com.spring.techpractica.Application.User.LoginAccount.LoginAccountCommand;
 import com.spring.techpractica.Application.User.LoginAccount.LoginAccountUseCase;
+import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
 import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 @AllArgsConstructor
@@ -36,14 +40,24 @@ public class LoginAccountController {
                     content = @Content)
     })
     @PostMapping("/login")
-    public ResponseEntity<StandardSuccessResponse<LoginAccountResponse>> loginAccount(@RequestBody @Valid LoginAccountRequest request) {
-        User user = loginAccountUseCase.execute(new LoginAccountCommand(request.email(), request.password()));
-        String token = jwtGeneration.generateToken(user.getId(), user.getName());
+    public ResponseEntity<?> loginAccount(@RequestBody @Valid LoginAccountRequest request) {
+        try {
+            User user = loginAccountUseCase.execute(new LoginAccountCommand(request.email(), request.password()));
+            String token = jwtGeneration.generateToken(user.getId(), user.getName());
+            return ResponseEntity.ok(StandardSuccessResponse.<LoginAccountResponse>builder()
+                    .data(new LoginAccountResponse(user, token))
+                    .message("Login account successful")
+                    .status(HttpStatus.OK.value())
+                    .build());
+        } catch (UserAuthenticationException ex) {
+            StandardErrorResponse response = StandardErrorResponse.builder()
+                    .timestamp(Instant.now())
+                    .status(HttpStatus.UNAUTHORIZED.value())
+                    .message(ex.getMessage())
+                    .code("AUTH_FAILED")
+                    .build();
 
-        return ResponseEntity.ok(StandardSuccessResponse.<LoginAccountResponse>builder()
-                .data(new LoginAccountResponse(user, token))
-                .message("Login account successful")
-                .status(HttpStatus.OK.value())
-                .build());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
     }
 }
