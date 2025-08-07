@@ -60,8 +60,8 @@ class UserAuthenticationControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Login account successful"))
                 .andExpect(jsonPath("$.data.token").isNotEmpty())
-                .andExpect(jsonPath("$.data.name").value("Test User"))
-                .andExpect(jsonPath("$.data.email").value("email@example.com"));
+                .andExpect(jsonPath("$.data.user.name").value("Test User"))
+                .andExpect(jsonPath("$.data.user.email").value("email@example.com"));
     }
 
     @Test
