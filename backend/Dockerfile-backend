@@ -9,7 +9,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the Spring Boot application (skip tests for faster build)
-RUN mvn clean package -DskipTests
+RUN mvn clean package
 
 # ========================
 # Stage 2: Run the application
