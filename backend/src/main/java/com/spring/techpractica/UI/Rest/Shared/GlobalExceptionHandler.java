@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourcesNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleResourcesNotFoundException(ResourcesNotFoundException ex) {
+    public ResponseEntity<StandardErrorResponse> handleResourcesNotFoundException(ResourcesNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ApiErrorResponse.builder()
+                .body(StandardErrorResponse.builder()
                         .timestamp(Instant.now())
                         .message(ex.getMessage())
                         .status(HttpStatus.NOT_FOUND.value())
@@ -26,13 +26,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<StandardErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
         String fieldMessages = ex.getBindingResult().getFieldErrors().stream()
                 .map(fieldError -> fieldError.getField() + ": " +
                                    Optional.ofNullable(fieldError.getDefaultMessage()).orElse("Invalid value"))
                 .collect(Collectors.joining(", "));
 
-        ApiErrorResponse response = ApiErrorResponse.builder()
+        StandardErrorResponse response = StandardErrorResponse.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message("Validation failed: " + fieldMessages)

@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.User.Auth;
 
 import com.spring.techpractica.Core.User.Exception.EmailAlreadyUsedException;
 import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
-import com.spring.techpractica.UI.Rest.Shared.ApiErrorResponse;
+import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,8 +13,8 @@ import java.time.Instant;
 @ControllerAdvice(assignableTypes = UserAuthenticationController.class)
 public class AuthenticationExceptionHandler {
     @ExceptionHandler(EmailAlreadyUsedException.class)
-    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyUsedException(EmailAlreadyUsedException ex) {
-        ApiErrorResponse response = ApiErrorResponse.builder()
+    public ResponseEntity<StandardErrorResponse> handleEmailAlreadyUsedException(EmailAlreadyUsedException ex) {
+        StandardErrorResponse response = StandardErrorResponse.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.CONFLICT.value())
                 .message(ex.getMessage())
@@ -25,8 +25,8 @@ public class AuthenticationExceptionHandler {
     }
 
     @ExceptionHandler(UserAuthenticationException.class)
-    public ResponseEntity<ApiErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex) {
-        ApiErrorResponse response = ApiErrorResponse.builder()
+    public ResponseEntity<StandardErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex) {
+        StandardErrorResponse response = StandardErrorResponse.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
                 .message(ex.getMessage())
