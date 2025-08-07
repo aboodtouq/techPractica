@@ -77,17 +77,11 @@ class UserAuthenticationControllerIntegrationTest {
 
     @Test
     void should_return_400_when_request_is_invalid() throws Exception {
-        // Missing email and password
-        String invalidJson = """
-                {
-                  "email": "",
-                  "password": ""
-                }
-                """;
+        LoginAccountRequest request = new LoginAccountRequest("email.com", "");
 
         mockMvc.perform(post(LOGIN_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidJson))
+                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
     }
 }
