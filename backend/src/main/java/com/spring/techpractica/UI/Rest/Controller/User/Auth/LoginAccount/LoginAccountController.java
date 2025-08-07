@@ -37,7 +37,10 @@ public class LoginAccountController {
             @ApiResponse(responseCode = "200", description = "Login successful",
                     content = @Content(schema = @Schema(implementation = LoginAccountResponse.class))),
             @ApiResponse(responseCode = "401", description = "Invalid credentials",
-                    content = @Content)
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid request payload",
+                    content = @Content),
+
     })
     @PostMapping("/login")
     public ResponseEntity<?> loginAccount(@RequestBody @Valid LoginAccountRequest request) {
