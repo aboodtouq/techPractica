@@ -21,24 +21,23 @@ Please refer to the following detailed guides in the backend documentation folde
 Before starting development or building the project, make sure your branch is up to date:
 
 ```bash
-# Commit or stash your changes
-git add .
-git commit -m "WIP: Save progress"  # or use git stash if not ready to commit
+# Fetch the latest updates from remote without changing your files
+git fetch origin
 
-# Switch to master and pull latest updates
-git checkout master
+# Switch to the master branch
+git switch master
+
+# Pull the latest changes from the remote master
 git pull origin master
 
-# Switch back to your branch
-git checkout your-branch-name
+# Switch back to your feature branch
+git switch your-branch-name
 
-# Merge master into your branch
+# Merge the updated master into your branch
 git merge master
 
 # Resolve conflicts if any, then commit
 ```
-
----
 
 ### 2. Running with Docker
 
