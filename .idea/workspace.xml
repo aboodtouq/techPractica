@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e5a2051-ccee-49a0-9145-9c86f4f829b4" name="Changes" comment="create system architecture for a session.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/infrastructure/Security/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/spring/techpractica/infrastructure/Security/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +381,8 @@
       <workItem from="1754730575155" duration="772000" />
       <workItem from="1754845544910" duration="4716000" />
       <workItem from="1754900086840" duration="14176000" />
-      <workItem from="1754980153472" duration="102000" />
+      <workItem from="1754980153472" duration="1247000" />
+      <workItem from="1755000019236" duration="8771000" />
     </task>
     <task id="LOCAL-00001" summary="create folder doc and upload database ERD.png">
       <option name="closed" value="true" />
