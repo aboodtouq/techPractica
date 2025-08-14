@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class MailSenderImpl implements MailSender {
+public class JavaMailSenderAdapter implements MailSender {
 
     private final JavaMailSender mailSender;
 
