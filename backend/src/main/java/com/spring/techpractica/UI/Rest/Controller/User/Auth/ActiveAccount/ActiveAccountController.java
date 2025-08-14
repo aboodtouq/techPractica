@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.Controller.User.Auth;
+package com.spring.techpractica.UI.Rest.Controller.User.Auth.ActiveAccount;
 
 import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountCommand;
 import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountUseCase;
