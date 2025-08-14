@@ -1,4 +1,4 @@
-package com.spring.techpractica.infrastructure.Config;
+package com.spring.techpractica.infrastructure.MailSender;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
