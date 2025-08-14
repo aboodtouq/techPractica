@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class JavaMailSenderAdapter implements MailSender {
-
     private final JavaMailSender mailSender;
 
     @Async
@@ -26,6 +25,5 @@ public class JavaMailSenderAdapter implements MailSender {
         helper.setText(message, true);
 
         mailSender.send(messageHtml);
-
     }
 }
