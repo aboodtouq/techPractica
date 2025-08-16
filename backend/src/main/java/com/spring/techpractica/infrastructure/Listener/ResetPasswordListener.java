@@ -1,39 +1,28 @@
-package com.spring.techpractica.infrastructure.Event;
+package com.spring.techpractica.infrastructure.Listener;
 
-import com.spring.techpractica.Core.User.Event.UserRegistrationEvent;
-import com.spring.techpractica.infrastructure.MailSender.MailSender;
+import com.spring.techpractica.Core.User.Event.ResetPasswordEvent;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
+import com.spring.techpractica.infrastructure.MailSender.MailSender;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
-@Slf4j
 @Component
 @AllArgsConstructor
-public class UserRegistration {
-    private final JwtGeneration jwtGeneration;
+public class ResetPasswordListener {
     private final MailSender mailSender;
+    private final JwtGeneration jwtGeneration;
 
     @EventListener
-    public void handleUserRegistrationEvent(UserRegistrationEvent event) throws MessagingException {
-        log.info("UserRegistrationEvent received");
-        log.info("Saved User {}", event.userId());
-
-        String emailReceiver = event.email();
-        UUID id = event.userId();
-        String token = jwtGeneration.generateToken(id, emailReceiver);
-
-        mailSender.sendMail(emailReceiver, createHtmlPage(event, token));
-
-        log.info("Sent verification email with HTML button to {}", event.email());
+    public void sendEmail(ResetPasswordEvent event) throws MessagingException {
+        String email = event.email();
+        String token = jwtGeneration.generateToken(event.id(), email);
+        mailSender.sendMail(email, createHtmlPage(event, token));
     }
 
-    private static String createHtmlPage(UserRegistrationEvent event, String token) {
-        String url = String.format("http://localhost:8080/api/v1/auth?token=%s", token);
+    private static String createHtmlPage(ResetPasswordEvent event, String token) {
+        String url = String.format("http://localhost:3000/submit-password?token=%s", token);
 
         return String.format("""
                     <html>
@@ -47,14 +36,14 @@ public class UserRegistration {
                                     <!-- Logo -->
                                     <img src="https://yourdomain.com/logo.png" alt="Logo" style="width:120px; margin-bottom:20px;" />
                 
-                                    <h2 style="color:#333; margin-bottom:10px;">Welcome, %s!</h2>
+                                    <h2 style="color:#333; margin-bottom:10px;">Hello, %s</h2>
                                     <p style="color:#555; font-size:16px; line-height:1.5; margin-bottom:30px;">
-                                      Thank you for registering. Please verify your account by clicking the button below.
+                                      We received a request to reset your password. Click the button below to set a new password.
                                     </p>
                 
                                     <!-- Button -->
                                     <a href="%s" style="
-                                        background-color:#4CAF50;
+                                        background-color:#e74c3c;
                                         color:#ffffff;
                                         padding:14px 28px;
                                         text-decoration:none;
@@ -62,19 +51,19 @@ public class UserRegistration {
                                         font-size:16px;
                                         display:inline-block;
                                         font-weight:bold;">
-                                      ✅ Verify Account
+                                      🔒 Reset Password
                                     </a>
                 
                                     <!-- Fallback link -->
                                     <p style="color:#999; font-size:14px; margin-top:30px;">
                                       If the button above doesn’t work, copy and paste this link into your browser:
                                     </p>
-                                    <p style="word-break:break-all; font-size:14px; color:#4CAF50;">
-                                      <a href="%s" style="color:#4CAF50; text-decoration:none;">%s</a>
+                                    <p style="word-break:break-all; font-size:14px; color:#e74c3c;">
+                                      <a href="%s" style="color:#e74c3c; text-decoration:none;">%s</a>
                                     </p>
                 
                                     <p style="color:#aaa; font-size:12px; margin-top:20px;">
-                                      If you didn’t request this, you can safely ignore this email.
+                                      If you didn’t request a password reset, you can safely ignore this email.
                                     </p>
                                   </td>
                                 </tr>
