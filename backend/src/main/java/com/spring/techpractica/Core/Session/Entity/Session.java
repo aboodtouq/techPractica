@@ -1,7 +1,7 @@
 package com.spring.techpractica.Core.Session.Entity;
 
 import com.spring.techpractica.Core.AuthenticatedUserSession.Entity.AuthenticatedUserSession;
-import com.spring.techpractica.Core.Category.Entity.Category;
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
 import com.spring.techpractica.Core.Shared.BaseEntity;
@@ -83,5 +83,5 @@ public class Session extends BaseEntity {
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "session_id", referencedColumnName = "id")
     )
-    private List<Category> sessionCategories = new ArrayList<>();
+    private List<Field> sessionCategories = new ArrayList<>();
 }

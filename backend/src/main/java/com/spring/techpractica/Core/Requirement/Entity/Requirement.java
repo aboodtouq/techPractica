@@ -1,6 +1,6 @@
 package com.spring.techpractica.Core.Requirement.Entity;
 
-import com.spring.techpractica.Core.Category.Entity.Category;
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import jakarta.persistence.*;
@@ -22,5 +22,5 @@ public class Requirement extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+    private Field field;
 }

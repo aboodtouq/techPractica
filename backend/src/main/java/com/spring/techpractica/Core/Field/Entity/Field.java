@@ -1,4 +1,4 @@
-package com.spring.techpractica.Core.Category.Entity;
+package com.spring.techpractica.Core.Field.Entity;
 
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import jakarta.persistence.Entity;
@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Category extends BaseEntity {
+public class Field extends BaseEntity {
     private String name;
 }
