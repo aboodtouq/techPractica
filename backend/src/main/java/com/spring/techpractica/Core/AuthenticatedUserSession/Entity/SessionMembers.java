@@ -1,9 +1,9 @@
 package com.spring.techpractica.Core.AuthenticatedUserSession.Entity;
 
+import com.spring.techpractica.Core.AuthenticatedUserSession.model.Role;
+import com.spring.techpractica.Core.AuthenticatedUserSession.model.UserSessionId;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.AuthenticatedUserSession.model.SessionRole;
-import com.spring.techpractica.Core.AuthenticatedUserSession.model.UserSessionId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "AUTHENTICATED_USER_SESSION")
+@Table(name = "SESSION_MEMBERS")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticatedUserSession {
+public class SessionMembers {
     @EmbeddedId
     private UserSessionId userSessionId;
 
@@ -31,6 +31,6 @@ public class AuthenticatedUserSession {
     private Session session;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "socoped_role")
-    private SessionRole scopedRole;
+    @Column(name = "role")
+    private Role role;
 }

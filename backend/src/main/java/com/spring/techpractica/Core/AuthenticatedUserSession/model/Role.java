@@ -1,5 +1,5 @@
 package com.spring.techpractica.Core.AuthenticatedUserSession.model;
 
-public enum SessionRole {
+public enum Role {
     OWNER, PARTICIPATE
 }

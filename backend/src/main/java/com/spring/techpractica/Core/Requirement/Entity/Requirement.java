@@ -21,6 +21,6 @@ public class Requirement extends BaseEntity {
     private Session session;
 
     @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "field_id", referencedColumnName = "id")
     private Field field;
 }
