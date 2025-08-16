@@ -19,7 +19,6 @@ public class JavaMailSenderAdapter implements MailSender {
         MimeMessage messageHtml = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(messageHtml, true, "UTF-8");
 
-
         helper.setTo(emailReceiver);
         helper.setSubject("Verify Your Account");
         helper.setText(message, true);
