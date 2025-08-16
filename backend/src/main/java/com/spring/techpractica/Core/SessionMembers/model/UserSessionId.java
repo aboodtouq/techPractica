@@ -1,4 +1,4 @@
-package com.spring.techpractica.Core.AuthenticatedUserSession.model;
+package com.spring.techpractica.Core.SessionMembers.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

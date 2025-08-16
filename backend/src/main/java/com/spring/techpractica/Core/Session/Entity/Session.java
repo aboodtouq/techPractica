@@ -1,6 +1,6 @@
 package com.spring.techpractica.Core.Session.Entity;
 
-import com.spring.techpractica.Core.AuthenticatedUserSession.Entity.SessionMembers;
+import com.spring.techpractica.Core.SessionMembers.Entity.SessionMembers;
 import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;

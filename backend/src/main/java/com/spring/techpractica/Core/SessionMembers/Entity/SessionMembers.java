@@ -1,7 +1,7 @@
-package com.spring.techpractica.Core.AuthenticatedUserSession.Entity;
+package com.spring.techpractica.Core.SessionMembers.Entity;
 
-import com.spring.techpractica.Core.AuthenticatedUserSession.model.Role;
-import com.spring.techpractica.Core.AuthenticatedUserSession.model.UserSessionId;
+import com.spring.techpractica.Core.SessionMembers.model.Role;
+import com.spring.techpractica.Core.SessionMembers.model.UserSessionId;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.User;
 import jakarta.persistence.*;
