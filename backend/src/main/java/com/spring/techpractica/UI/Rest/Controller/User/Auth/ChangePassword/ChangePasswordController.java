@@ -7,6 +7,12 @@ import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +28,26 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
+@Tag(name = "Authentication", description = "Authentication related endpoints")
 public class ChangePasswordController {
     private final ChangePasswordUseCase useCase;
 
+    @Operation(
+            summary = "Change password",
+            description = "Allows an authenticated user to change their password.",
+            tags = {"Authentication"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Password changed successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardSuccessResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Password does not match",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardErrorResponse.class)))
+    })
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request,
                                             @AuthenticationPrincipal UserAuthentication authentication) {

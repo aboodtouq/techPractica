@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 @Tag(name = "Authentication", description = "Authentication related endpoints")
 public class ResetPasswordController {
-
     private final ResetPasswordUseCase useCase;
 
     public ResetPasswordController(ResetPasswordUseCase useCase) {
