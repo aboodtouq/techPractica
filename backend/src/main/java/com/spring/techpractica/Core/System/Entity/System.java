@@ -19,6 +19,6 @@ import java.util.List;
 public class System extends BaseEntity {
     private String name;
     
-    @ManyToMany(mappedBy = "sessionSystems", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "systems", fetch = FetchType.LAZY)
     private List<Session> sessions;
 }
