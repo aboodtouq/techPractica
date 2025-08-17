@@ -18,7 +18,7 @@ public class ActiveAccountController {
     private final JwtExtracting jwtExtracting;
     private final ActiveAccountUseCase useCase;
 
-    @PostMapping("/api/v1/auth")
+    @PostMapping("/api/v1/auth/active-account")
     public void verifyToken(@RequestParam String token,
                             HttpServletResponse response) throws IOException {
         UUID id = jwtExtracting.extractId(token);

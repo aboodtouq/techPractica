@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/auth")
 @Tag(name = "Authentication", description = "Authentication related endpoints")
 public class ResetPasswordController {
     private final ResetPasswordUseCase useCase;
@@ -42,9 +43,10 @@ public class ResetPasswordController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
+    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordRequest request) {
         useCase.execute(new ResetPasswordCommand(request.email()));
         return ResponseEntity.accepted().body(StandardSuccessResponse.builder()
+                .data(request.email())
                 .message("Send email successfully!")
                 .status(HttpStatus.ACCEPTED.value())
                 .build());
