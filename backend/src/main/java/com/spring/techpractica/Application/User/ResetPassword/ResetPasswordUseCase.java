@@ -22,6 +22,6 @@ public class ResetPasswordUseCase {
             return;
         }
         User user = optionalUser.get();
-        applicationEventPublisher.publishEvent(new ResetPasswordEvent(user.getId(), command.email()));
+        applicationEventPublisher.publishEvent(new ResetPasswordEvent(user.getId(), user.getEmail(), user.getName()));
     }
 }
