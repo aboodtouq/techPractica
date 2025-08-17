@@ -47,7 +47,7 @@ public class ResetPasswordController {
         useCase.execute(new ResetPasswordCommand(request.email()));
         return ResponseEntity.accepted().body(StandardSuccessResponse.builder()
                 .data(request.email())
-                .message("Send email successfully!")
+                .message("If this email exists, a reset link has been sent!")
                 .status(HttpStatus.ACCEPTED.value())
                 .build());
     }
