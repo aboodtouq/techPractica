@@ -18,7 +18,7 @@ public class ResetPasswordListener {
     public void sendEmail(ResetPasswordEvent event) throws MessagingException {
         String email = event.email();
         String token = jwtGeneration.generateToken(event.id(), email);
-        mailSender.sendMail(email, createHtmlPage(event, token));
+        mailSender.sendMail(email,"Reset Password", createHtmlPage(event, token));
     }
 
     private static String createHtmlPage(ResetPasswordEvent event, String token) {

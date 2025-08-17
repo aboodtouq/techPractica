@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.Listener;
 
 import com.spring.techpractica.Core.User.Event.UserRegistrationEvent;
-import com.spring.techpractica.infrastructure.MailSender.MailSender;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
+import com.spring.techpractica.infrastructure.MailSender.MailSender;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,13 +27,13 @@ public class UserRegistration {
         UUID id = event.userId();
         String token = jwtGeneration.generateToken(id, emailReceiver);
 
-        mailSender.sendMail(emailReceiver, createHtmlPage(event, token));
+        mailSender.sendMail(emailReceiver, "Verify Your Account", createHtmlPage(event, token));
 
         log.info("Sent verification email with HTML button to {}", event.email());
     }
 
     private static String createHtmlPage(UserRegistrationEvent event, String token) {
-        String url = String.format("http://localhost:8080/api/v1/auth?token=%s", token);
+        String url = String.format("http://localhost:3030/active-account?token=%s", token);
 
         return String.format("""
                     <html>
