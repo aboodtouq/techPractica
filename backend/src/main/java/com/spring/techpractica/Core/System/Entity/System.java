@@ -21,6 +21,6 @@ public class System extends BaseEntity {
     private String name;
 
     @ManyToMany(mappedBy = "systems", fetch = FetchType.LAZY)
-    private List<Session> sessions = new ArrayList<>();
+    private List<Session> sessions;
 
 }
