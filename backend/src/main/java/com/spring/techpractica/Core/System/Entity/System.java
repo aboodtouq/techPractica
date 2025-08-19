@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "SYSTEMS")
@@ -18,7 +19,8 @@ import java.util.List;
 @Builder
 public class System extends BaseEntity {
     private String name;
-    
+
     @ManyToMany(mappedBy = "systems", fetch = FetchType.LAZY)
     private List<Session> sessions;
+
 }
