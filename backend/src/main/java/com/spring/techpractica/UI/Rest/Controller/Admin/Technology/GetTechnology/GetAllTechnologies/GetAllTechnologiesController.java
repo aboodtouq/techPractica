@@ -51,7 +51,7 @@ public class GetAllTechnologiesController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     StandardSuccessResponse.<TechnologyCollection>builder()
                             .data(responseDataList)
-                            .message("Technology created successfully")
+                            .message("Technology returned successfully")
                             .status(HttpStatus.OK.value())
                             .build()
             );
