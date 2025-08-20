@@ -32,25 +32,22 @@ import java.util.List;
 @Tag(name = "Admin - Field")
 @Validated
 public class GetAllFieldsController {
-    private final GetAllFieldsUseCase getAllFieldsUseCase;
 
-    @Operation(summary = "Create new Technology", description = "Admin creates a new Technology and optionally links existing Fields")
+    @Operation(summary = "Get all fields", description = "Return all fields available in the system.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Technology created",
+            @ApiResponse(responseCode = "200", description = "Fields returned",
                     content = @Content(schema = @Schema(implementation = FieldCollection.class))),
-            @ApiResponse(responseCode = "409", description = "Field name already exists", content = @Content),
-            @ApiResponse(responseCode = "404", description = "One or more Fields not found", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid request payload", content = @Content)
+            @ApiResponse(responseCode = "404", description = "No fields found", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content)
     })
     @GetMapping("/")
-   // @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getSystems(@RequestBody @Validated GetAllFieldsRequest request) {
+    public ResponseEntity<?> getAllSystems() {
         try {
             List<Field> fields = getAllFieldsUseCase.execute(new GetAllFieldsCommand());
 
             FieldCollection responseDataList = new FieldCollection(fields);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(
+            return ResponseEntity.status(HttpStatus.OK).body(
                     StandardSuccessResponse.builder()
                             .data(responseDataList)
                             .message("Fields returned successfully")
@@ -68,4 +65,6 @@ public class GetAllFieldsController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+
+    private final GetAllFieldsUseCase getAllFieldsUseCase;
 }

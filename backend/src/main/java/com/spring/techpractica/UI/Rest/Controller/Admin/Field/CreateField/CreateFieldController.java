@@ -32,18 +32,15 @@ public class CreateFieldController {
 
     private final CreateFieldUseCase createFieldUseCase;
 
-    @Operation(summary = "Admin create field", description = "Admin create field and returns the data")
+    @Operation(summary = "Create new Field", description = "Admin creates a new Field and returns the created resource.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Login successful",
+            @ApiResponse(responseCode = "201", description = "Field created successfully",
                     content = @Content(schema = @Schema(implementation = FieldResources.class))),
-            @ApiResponse(responseCode = "401", description = "Invalid credentials",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid request payload",
-                    content = @Content),
-
+            @ApiResponse(responseCode = "400", description = "Invalid request payload", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized (invalid credentials)", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Field with the same name already exists", content = @Content)
     })
     @PostMapping("/")
- //   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createField(@RequestBody @Valid CreateFieldRequest request) {
         try {
             Field field =createFieldUseCase.execute(new CreateFieldCommand(request.name()));
@@ -57,17 +54,17 @@ public class CreateFieldController {
             return ResponseEntity.ok(StandardSuccessResponse.<FieldResources>builder()
                     .data(responseData)
                     .message("Field created successfully")
-                    .status(HttpStatus.OK.value())
+                    .status(HttpStatus.CREATED.value())
                     .build());
         } catch (ResourcesDuplicateException ex) {
             StandardErrorResponse response = StandardErrorResponse.builder()
                     .timestamp(Instant.now())
-                    .status(HttpStatus.UNAUTHORIZED.value())
+                    .status(HttpStatus.CONFLICT.value())
                     .message(ex.getMessage())
-                    .code("Exists_FIELD")
+                    .code("FIELD_ALREADY_EXISTS")
                     .build();
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }
     }
 }

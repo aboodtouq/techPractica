@@ -29,7 +29,7 @@ public class CreateTechnologyUseCase {
         List<Field>fields = fieldRepository.findAllByNameIn(command.fieldNames());
 
         if (fields.size() != command.fieldNames().size()) {
-          throw new ResourcesNotFoundException("One Or More Fields not found");
+          throw new ResourcesNotFoundException(command.fieldNames());
         }
 
         Technology technology = technologyFactory.create(name);
