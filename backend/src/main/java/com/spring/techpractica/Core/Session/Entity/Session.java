@@ -61,13 +61,15 @@ public class Session extends BaseEntity {
                     CascadeType.REMOVE, CascadeType.MERGE})
     private List<Request> requests = new ArrayList<>();
 
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "SYSTEMS_SESSIONS"
-            , joinColumns = @JoinColumn(name = "system_id",referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "session_id",referencedColumnName = "id")
+            name = "SYSTEMS_SESSIONS",
+            joinColumns = @JoinColumn(name = "session_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "system_id", referencedColumnName = "id")
     )
     private List<System> systems = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(
