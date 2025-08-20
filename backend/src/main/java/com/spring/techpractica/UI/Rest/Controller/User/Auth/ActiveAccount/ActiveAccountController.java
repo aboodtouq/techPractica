@@ -5,7 +5,7 @@ import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountUseC
 import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +18,10 @@ public class ActiveAccountController {
     private final JwtExtracting jwtExtracting;
     private final ActiveAccountUseCase useCase;
 
-    @GetMapping("/api/v1/auth")
+    @PostMapping("/api/v1/auth/active-account")
     public void verifyToken(@RequestParam String token,
                             HttpServletResponse response) throws IOException {
-        UUID id = UUID.fromString(jwtExtracting.extractId(token));
+        UUID id = jwtExtracting.extractId(token);
         useCase.execute(new ActiveAccountCommand(id));
         try {
             response.sendRedirect("http://localhost:3000/User");
