@@ -5,20 +5,19 @@ import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountUseC
 import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/auth")
 @AllArgsConstructor
 public class ActiveAccountController {
     private final JwtExtracting jwtExtracting;
     private final ActiveAccountUseCase useCase;
 
-    @GetMapping("/api/v1/auth")
+    @GetMapping("/active-account")
     public void verifyToken(@RequestParam String token,
                             HttpServletResponse response) throws IOException {
         UUID id = UUID.fromString(jwtExtracting.extractId(token));
@@ -30,3 +29,4 @@ public class ActiveAccountController {
         }
     }
 }
+
