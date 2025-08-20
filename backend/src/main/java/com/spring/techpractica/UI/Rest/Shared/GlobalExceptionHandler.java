@@ -1,5 +1,6 @@
 package com.spring.techpractica.UI.Rest.Shared;
 
+import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,17 @@ public class GlobalExceptionHandler {
                         .code("RESOURCE_NOT_FOUND")
                         .build());
     }
+    @ExceptionHandler(ResourcesDuplicateException.class)
+    public ResponseEntity<StandardErrorResponse> handleResourcesDuplicateException(ResourcesDuplicateException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .status(HttpStatus.CONFLICT.value())
+                        .message(ex.getMessage())
+                        .code("RESOURCE_ALREADY_EXISTS")
+                        .build());
+    }
+
 
     @ExceptionHandler(UserAuthenticationException.class)
     public ResponseEntity<StandardErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex) {

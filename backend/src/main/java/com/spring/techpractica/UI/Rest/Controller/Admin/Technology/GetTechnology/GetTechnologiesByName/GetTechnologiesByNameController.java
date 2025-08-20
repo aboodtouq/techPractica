@@ -46,8 +46,6 @@ public class GetTechnologiesByNameController {
             @RequestParam(name = "names") @NotEmpty @Size(min = 1) List<@NotBlank String> names) {
 
 
-
-        try {
             List<Technology> technologies = getTechnologiesByNameUseCase.execute(
                     new GetTechnologiesByNameCommand(names));
 
@@ -68,16 +66,6 @@ public class GetTechnologiesByNameController {
                             .build()
             );
 
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("TECHNOLOGY_NOT_FOUND")
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 }
 

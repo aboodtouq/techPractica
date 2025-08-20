@@ -43,7 +43,7 @@ public class CreateSystemController {
     })
     @PostMapping("/")
     public ResponseEntity<?> createSystem(@RequestBody @Valid CreateSystemRequest request) {
-        try {
+
             System system = createSystemUseCase.execute(new CreateSystemCommand(request.name()));
 
             SystemResources responseData = SystemResources.builder()
@@ -55,15 +55,6 @@ public class CreateSystemController {
                     .message("Created System successfully")
                     .status(HttpStatus.CREATED.value())
                     .build());
-        } catch (ResourcesDuplicateException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.CONFLICT.value())
-                    .message(ex.getMessage())
-                    .code("EXISTS_SYSTEM")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-        }
     }
 }

@@ -49,7 +49,6 @@ public class GetFieldsByNameController {
     public ResponseEntity<?> getFieldsByName(
             @RequestParam(name = "names") @NotEmpty @Size(min = 1) List<@NotBlank String> names) {
 
-            try {
             List<Field> fields = getFieldsByNameUseCase.execute(new GetFieldsByNameCommand(names));
             FieldCollection responseDataList = new FieldCollection(fields);
 
@@ -61,15 +60,6 @@ public class GetFieldsByNameController {
                                 .build()
                 );
 
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_NOT_FOUND")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 }

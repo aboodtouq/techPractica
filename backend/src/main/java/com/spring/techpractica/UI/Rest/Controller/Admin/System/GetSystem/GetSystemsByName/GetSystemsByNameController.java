@@ -46,7 +46,6 @@ public class GetSystemsByNameController {
             @RequestParam(name = "names") @NotEmpty @Size(min = 1) List<@NotBlank String> names) {
 
 
-        try {
             List<System> systems = getSystemsByNameUseCase.execute(new GetSystemsByNameCommand(names));
 
             SystemCollection responseDataList = new SystemCollection(systems);
@@ -59,16 +58,7 @@ public class GetSystemsByNameController {
                             .build()
             );
 
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("SYSTEM_NOT_FOUND")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 }
 

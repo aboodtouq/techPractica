@@ -43,7 +43,7 @@ public class GetAllSystemsController {
     })
     @GetMapping("/")
     public ResponseEntity<?> getAllSystems() {
-        try {
+
             List<System> systems = getAllSystemsUseCase.execute(new GetAllSystemsCommand());
 
             SystemCollection responseDataList = new SystemCollection(systems);
@@ -55,15 +55,6 @@ public class GetAllSystemsController {
                             .status(HttpStatus.OK.value())
                             .build()
             );
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_NOT_FOUND")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 }

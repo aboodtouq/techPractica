@@ -32,7 +32,7 @@ import java.util.List;
 @Tag(name = "Admin - Field")
 @Validated
 public class GetAllFieldsController {
-
+    private final GetAllFieldsUseCase getAllFieldsUseCase;
     @Operation(summary = "Get all fields", description = "Return all fields available in the system.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fields returned",
@@ -42,7 +42,7 @@ public class GetAllFieldsController {
     })
     @GetMapping("/")
     public ResponseEntity<?> getAllSystems() {
-        try {
+
             List<Field> fields = getAllFieldsUseCase.execute(new GetAllFieldsCommand());
 
             FieldCollection responseDataList = new FieldCollection(fields);
@@ -54,17 +54,8 @@ public class GetAllFieldsController {
                             .status(HttpStatus.OK.value())
                             .build()
             );
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_NOT_FOUND")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 
-    private final GetAllFieldsUseCase getAllFieldsUseCase;
+
 }

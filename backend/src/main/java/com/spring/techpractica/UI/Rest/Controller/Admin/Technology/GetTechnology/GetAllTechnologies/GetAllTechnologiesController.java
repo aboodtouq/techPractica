@@ -43,7 +43,7 @@ public class GetAllTechnologiesController {
     })
     @GetMapping("/")
     public ResponseEntity<?> getTechnologies() {
-        try {
+
             List<Technology> technologies = getAllTechnologiesUseCase.execute(new GetAllTechnologiesCommand());
 
             TechnologyCollection responseDataList = new TechnologyCollection(technologies);
@@ -55,15 +55,6 @@ public class GetAllTechnologiesController {
                             .status(HttpStatus.OK.value())
                             .build()
             );
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_NOT_FOUND")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
     }
 }

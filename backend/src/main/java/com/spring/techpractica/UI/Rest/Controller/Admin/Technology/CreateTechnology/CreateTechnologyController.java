@@ -44,7 +44,7 @@ public class CreateTechnologyController {
     })
     @PostMapping("/")
     public ResponseEntity<?> createTechnology(@RequestBody @Validated CreateTechnologyRequest request) {
-        try {
+
             Technology technology = createTechnologyUseCase.execute(
                     new CreateTechnologyCommand(request.name(), request.fieldNames()));
 
@@ -61,25 +61,6 @@ public class CreateTechnologyController {
                             .status(HttpStatus.CREATED.value())
                             .build()
             );
-        } catch (ResourcesDuplicateException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.CONFLICT.value())
-                    .message(ex.getMessage())
-                    .code("TECHNOLOGY_EXISTS")
-                    .build();
 
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-        } catch (ResourcesNotFoundException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_NOT_FOUND")
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
-        }
     }
 }

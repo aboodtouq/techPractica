@@ -42,29 +42,20 @@ public class CreateFieldController {
     })
     @PostMapping("/")
     public ResponseEntity<?> createField(@RequestBody @Valid CreateFieldRequest request) {
-        try {
-            Field field =createFieldUseCase.execute(new CreateFieldCommand(request.name()));
+        Field field = createFieldUseCase.execute(new CreateFieldCommand(request.name()));
 
-            FieldResources responseData = FieldResources
-                    .builder()
-                    .id(field.getId())
-                    .name(field.getName())
-                    .build();
+        FieldResources responseData = FieldResources.builder()
+                .id(field.getId())
+                .name(field.getName())
+                .build();
 
-            return ResponseEntity.ok(StandardSuccessResponse.<FieldResources>builder()
-                    .data(responseData)
-                    .message("Field created successfully")
-                    .status(HttpStatus.CREATED.value())
-                    .build());
-        } catch (ResourcesDuplicateException ex) {
-            StandardErrorResponse response = StandardErrorResponse.builder()
-                    .timestamp(Instant.now())
-                    .status(HttpStatus.CONFLICT.value())
-                    .message(ex.getMessage())
-                    .code("FIELD_ALREADY_EXISTS")
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                StandardSuccessResponse.<FieldResources>builder()
+                        .data(responseData)
+                        .message("Field created successfully")
+                        .status(HttpStatus.CREATED.value())
+                        .build()
+        );
     }
 }
+
