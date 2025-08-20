@@ -15,12 +15,12 @@ public class JavaMailSenderAdapter implements MailSender {
 
     @Async
     @Override
-    public void sendMail(String emailReceiver, String message) throws MessagingException {
+    public void sendMail(String emailReceiver, String emailSubject, String message) throws MessagingException {
         MimeMessage messageHtml = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(messageHtml, true, "UTF-8");
 
         helper.setTo(emailReceiver);
-        helper.setSubject("Verify Your Account");
+        helper.setSubject(emailSubject);
         helper.setText(message, true);
 
         mailSender.send(messageHtml);

@@ -26,7 +26,7 @@ public class ActiveAccountController {
 
     @GetMapping("/active-account")
     public ResponseEntity<?> verifyToken(@RequestParam String token) {
-        UUID id = UUID.fromString(jwtExtracting.extractId(token));
+        UUID id = jwtExtracting.extractId(token);
         User user = useCase.execute(new ActiveAccountCommand(id));
 
         return ResponseEntity.status(HttpStatus.ACCEPTED.value())
