@@ -3,6 +3,7 @@ package com.spring.techpractica.Core.User;
 import com.spring.techpractica.Core.Notification.Entity.Notification;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.Task.Entity.Task;
@@ -13,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -66,4 +68,7 @@ public class User extends BaseEntity {
     @JoinTable(joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
+
+    @ManyToMany(mappedBy = "sessionMembers")
+    private List<Session> sessions = new ArrayList<>();
 }

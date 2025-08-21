@@ -1,6 +1,6 @@
 package com.spring.techpractica.Core.Session.Entity;
 
-import com.spring.techpractica.Core.SessionMembers.Entity.SessionMembers;
+import com.spring.techpractica.Core.SessionMembers.Entity.SessionMember;
 import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
@@ -37,7 +37,7 @@ public class Session extends BaseEntity {
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<SessionMembers> members = new ArrayList<>();
+    private List<SessionMember> members = new ArrayList<>();
 
     @Column(name = "is_running")
     private boolean sessionIsRunning;
@@ -86,4 +86,12 @@ public class Session extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "session_id", referencedColumnName = "id")
     )
     private List<Field> fields = new ArrayList<>();
+
+
+    public void addMember(SessionMember sessionMember) {
+        if (members == null) {
+            members = new ArrayList<>();
+        }
+        members.add(sessionMember);
+    }
 }

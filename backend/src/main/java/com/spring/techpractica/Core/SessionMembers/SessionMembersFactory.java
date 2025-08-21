@@ -1,0 +1,19 @@
+package com.spring.techpractica.Core.SessionMembers;
+
+import com.spring.techpractica.Core.Session.Entity.Session;
+import com.spring.techpractica.Core.SessionMembers.Entity.SessionMember;
+import com.spring.techpractica.Core.SessionMembers.model.Role;
+import com.spring.techpractica.Core.User.User;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SessionMembersFactory {
+
+    public SessionMember createSessionMembers(Session session, User owner, Role role) {
+        return SessionMember.builder()
+                .user(owner)
+                .session(session)
+                .role(role)
+                .build();
+    }
+}

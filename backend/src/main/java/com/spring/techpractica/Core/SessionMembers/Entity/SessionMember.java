@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionMembers {
+public class SessionMember {
     @EmbeddedId
     private UserSessionId userSessionId;
 
