@@ -25,11 +25,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Session extends BaseEntity {
     @Column(name = "session_name")
-    private String sessionName;
+    private String name;
 
     @Column(name = "session_description",
             length = 1000)
-    private String sessionDescription;
+    private String description;
 
     @Column(name = "is_private")
     private boolean isPrivate;
@@ -40,7 +40,7 @@ public class Session extends BaseEntity {
     private List<SessionMember> members = new ArrayList<>();
 
     @Column(name = "is_running")
-    private boolean sessionIsRunning;
+    private boolean isRunning;
 
 
     @OneToMany(mappedBy = "session",
@@ -61,7 +61,6 @@ public class Session extends BaseEntity {
                     CascadeType.REMOVE, CascadeType.MERGE})
     private List<Request> requests = new ArrayList<>();
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "SYSTEMS_SESSIONS",
@@ -69,24 +68,6 @@ public class Session extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "system_id", referencedColumnName = "id")
     )
     private List<System> systems = new ArrayList<>();
-
-
-    @ManyToMany
-    @JoinTable(
-            name = "TECHNOLOGIES_SESSIONS"
-            , joinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "session_id", referencedColumnName = "id")
-    )
-    private List<Technology> technologies = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "CATEGORIES_SESSIONS",
-            joinColumns = @JoinColumn(name = "field_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "session_id", referencedColumnName = "id")
-    )
-    private List<Field> fields = new ArrayList<>();
-
 
     public void addMember(SessionMember sessionMember) {
         if (members == null) {
@@ -102,17 +83,10 @@ public class Session extends BaseEntity {
         systems.add(system);
     }
 
-    public void addField(Field field) {
-        if (fields == null) {
-            fields = new ArrayList<>();
+    public void addField(Requirement requirement) {
+        if (requirements == null) {
+            requirements = new ArrayList<>();
         }
-        fields.add(field);
-    }
-
-    public void addTechnology(Technology technology) {
-        if (technologies == null) {
-            technologies = new ArrayList<>();
-        }
-        technologies.add(technology);
+        requirements.add(requirement);
     }
 }

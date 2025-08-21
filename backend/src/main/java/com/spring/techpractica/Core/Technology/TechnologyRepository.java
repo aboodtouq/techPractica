@@ -1,5 +1,6 @@
-package com.spring.techpractica.Core.Technology.Entity;
+package com.spring.techpractica.Core.Technology;
 
+import com.spring.techpractica.Core.Technology.Entity.Technology;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

@@ -16,5 +16,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Field extends BaseEntity {
     private String name;
-}
 
+}

@@ -1,9 +1,8 @@
-package com.spring.techpractica.Core.Field.Entity;
+package com.spring.techpractica.Core.Field;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 @Component
 @AllArgsConstructor

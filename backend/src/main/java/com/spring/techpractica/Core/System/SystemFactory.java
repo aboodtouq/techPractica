@@ -1,5 +1,6 @@
-package com.spring.techpractica.Core.System.Entity;
+package com.spring.techpractica.Core.System;
 
+import com.spring.techpractica.Core.System.Entity.System;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class SystemFactory {
 
-    public System create(String name) {
+    public com.spring.techpractica.Core.System.Entity.System create(String name) {
 
 
         return System.builder()

@@ -1,4 +1,5 @@
-package com.spring.techpractica.Core.Technology.Entity;
+package com.spring.techpractica.Core.Technology;
+import com.spring.techpractica.Core.Technology.Entity.Technology;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

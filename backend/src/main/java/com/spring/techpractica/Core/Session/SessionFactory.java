@@ -10,10 +10,10 @@ public class SessionFactory {
     public Session create(CreateSessionCommand command) {
 
         return Session.builder()
-                .sessionName(command.name())
-                .sessionDescription(command.description())
+                .name(command.name())
+                .description(command.description())
                 .isPrivate(command.isPrivate())
-                .sessionIsRunning(false)
+                .isRunning(false)
                 .build();
     }
 }
