@@ -13,12 +13,13 @@ import java.util.UUID;
 public class ActiveAccountUseCase {
     private UserRepository userRepository;
 
-    public void execute(ActiveAccountCommand activeAccountCommand) {
+    public User execute(ActiveAccountCommand activeAccountCommand) {
         UUID id = activeAccountCommand.id();
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourcesNotFoundException(id));
 
         user.activate();
         userRepository.update(user);
+        return user;
     }
 }
