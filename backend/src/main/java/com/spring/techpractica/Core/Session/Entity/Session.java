@@ -94,4 +94,25 @@ public class Session extends BaseEntity {
         }
         members.add(sessionMember);
     }
+
+    public void addSystem(System system) {
+        if (systems == null) {
+            systems = new ArrayList<>();
+        }
+        systems.add(system);
+    }
+
+    public void addField(Field field) {
+        if (fields == null) {
+            fields = new ArrayList<>();
+        }
+        fields.add(field);
+    }
+
+    public void addTechnology(Technology technology) {
+        if (technologies == null) {
+            technologies = new ArrayList<>();
+        }
+        technologies.add(technology);
+    }
 }
