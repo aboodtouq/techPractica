@@ -30,4 +30,11 @@ public class Requirement extends BaseEntity {
 
     @OneToMany(mappedBy = "requirement")
     private List<RequirementTechnology> requirementTechnologies = new ArrayList<>();
+
+    public void addRequirementTechnology(RequirementTechnology requirementTechnology) {
+        if (requirementTechnologies == null) {
+            requirementTechnologies = new ArrayList<>();
+        }
+        requirementTechnologies.add(requirementTechnology);
+    }
 }

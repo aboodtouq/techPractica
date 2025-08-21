@@ -83,7 +83,7 @@ public class Session extends BaseEntity {
         systems.add(system);
     }
 
-    public void addField(Requirement requirement) {
+    public void addRequirement(Requirement requirement) {
         if (requirements == null) {
             requirements = new ArrayList<>();
         }

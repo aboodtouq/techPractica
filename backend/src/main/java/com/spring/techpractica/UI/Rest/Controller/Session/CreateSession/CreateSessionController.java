@@ -2,11 +2,15 @@ package com.spring.techpractica.UI.Rest.Controller.Session.CreateSession;
 
 import com.spring.techpractica.Application.Session.CreateSession.CreateSessionCommand;
 import com.spring.techpractica.Application.Session.CreateSession.CreateSessionUseCase;
+import com.spring.techpractica.Core.Request.Model.RequirementRequest;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
+import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,17 +35,30 @@ public class CreateSessionController {
                 request.description(),
                 request.isPrivate(),
                 request.system(),
-                request.field(),
-                request.technology()
+                new RequirementRequest(
+                        request.field(),
+                        request.technologies()
+                )
         ));
 
         SessionResources responseData = SessionResources.builder()
                 .id(session.getId())
-                .name(session.getSessionName())
-                .description(session.getSessionDescription())
+                .name(session.getName())
+                .description(session.getDescription())
                 .isPrivate(session.isPrivate())
-                .isRunning(session.isSessionIsRunning())
+                .isRunning(session.isRunning())
                 .system(session.getSystems().toString())
+                .requirementCollection(new RequirementCollection(session.getRequirements()))
                 .build();
+
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(
+                        StandardSuccessResponse.<SessionResources>builder()
+                                .data(responseData)
+                                .message("Session created successfully")
+                                .status(HttpStatus.CREATED.value())
+                                .build()
+                );
     }
 }

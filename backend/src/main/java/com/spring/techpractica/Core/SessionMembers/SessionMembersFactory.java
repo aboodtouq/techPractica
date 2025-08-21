@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SessionMembersFactory {
 
-    public SessionMember createSessionMembers(Session session, User owner, Role role) {
+    public SessionMember create(Session session, User owner, Role role) {
         return SessionMember.builder()
                 .user(owner)
                 .session(session)

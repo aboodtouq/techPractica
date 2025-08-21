@@ -1,6 +1,10 @@
 package com.spring.techpractica.Application.Session.CreateSession;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Field.FieldRepository;
+import com.spring.techpractica.Core.Requirement.Entity.Requirement;
+import com.spring.techpractica.Core.Requirement.RequirementFactory;
+import com.spring.techpractica.Core.RequirementTechnology.RequirementTechnologyFactory;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionFactory;
 import com.spring.techpractica.Core.Session.SessionRepository;
@@ -10,6 +14,7 @@ import com.spring.techpractica.Core.SessionMembers.model.Role;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.Core.System.SystemRepository;
+import com.spring.techpractica.Core.Technology.TechnologyRepository;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
@@ -23,9 +28,11 @@ public class CreateSessionUseCase {
     private final UserRepository userRepository;
     private final SessionFactory sessionFactory;
     private final SessionMembersFactory sessionMembersFactory;
-
     private final SystemRepository systemRepository;
     private final FieldRepository fieldRepository;
+    private final RequirementFactory requirementFactory;
+    private final TechnologyRepository technologyRepository;
+    private final RequirementTechnologyFactory requirementTechnologyFactory;
 
     @Transactional
     public Session execute(CreateSessionCommand command) {
@@ -35,7 +42,7 @@ public class CreateSessionUseCase {
         Session session = sessionFactory.create(command);
 
         SessionMember sessionMember = sessionMembersFactory
-                .createSessionMembers(session,owner, Role.OWNER);
+                .create(session,owner, Role.OWNER);
 
         session.addMember(sessionMember);
 
@@ -43,6 +50,17 @@ public class CreateSessionUseCase {
                         .orElseThrow(() -> new ResourcesNotFoundException(command.system()));
         session.addSystem(system);
 
+        Field field = fieldRepository.findFieldByName(command.requirement().getFieldName())
+                .orElseThrow(() -> new ResourcesNotFoundException(command.requirement().getFieldName()));
+
+        Requirement requirement = requirementFactory.create(session, field);
+        session.addRequirement(requirement);
+
+        command.requirement().getTechnologies().stream().map(
+                technologyName -> technologyRepository.findTechnologyByName(technologyName)
+                        .orElseThrow(() -> new ResourcesNotFoundException(technologyName)))
+                .map(technology -> requirementTechnologyFactory.create(requirement, technology))
+                .forEach(requirement::addRequirementTechnology);
 
         return sessionRepository.save(session);
     }

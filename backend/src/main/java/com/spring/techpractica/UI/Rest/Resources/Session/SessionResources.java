@@ -1,7 +1,8 @@
 package com.spring.techpractica.UI.Rest.Resources.Session;
 
+import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
+import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementResources;
 import com.spring.techpractica.UI.Rest.Resources.SessionMember.SessionMemberCollection;
-import com.spring.techpractica.UI.Rest.Resources.SessionMember.SessionMemberResources;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +20,6 @@ public class SessionResources {
     private boolean isPrivate;
     private boolean isRunning;
     private String system;
-    private String field;
-    private String technology;
+    private RequirementCollection requirementCollection;
     private SessionMemberCollection members;
-
 }
