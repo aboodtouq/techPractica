@@ -68,7 +68,4 @@ public class User extends BaseEntity {
     @JoinTable(joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
-
-    @ManyToMany(mappedBy = "sessionMembers")
-    private List<Session> sessions = new ArrayList<>();
 }

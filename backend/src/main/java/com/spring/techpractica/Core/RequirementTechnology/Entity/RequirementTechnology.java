@@ -21,11 +21,12 @@ public class RequirementTechnology {
     private RequirementTechnologyId id;
 
     @ManyToOne
+    @MapsId("requirementId")
     @JoinColumn(name = "requirement_id")
     private Requirement requirement;
 
     @ManyToOne
+    @MapsId("technologyId")
     @JoinColumn(name = "technology_id")
     private Technology technology;
-
 }
