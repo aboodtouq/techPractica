@@ -28,7 +28,6 @@ public class CreateSessionController {
     @PostMapping("/")
     public ResponseEntity<?> createSession(@RequestBody @Valid CreateSessionRequest request,
                                            @AuthenticationPrincipal UserAuthentication userAuthentication) {
-
         Session session = createSessionUseCase.execute(new CreateSessionCommand(
                 userAuthentication.getUserId(),
                 request.name(),
@@ -50,7 +49,6 @@ public class CreateSessionController {
                 .system(session.getSystems().toString())
                 .requirementCollection(new RequirementCollection(session.getRequirements()))
                 .build();
-
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
