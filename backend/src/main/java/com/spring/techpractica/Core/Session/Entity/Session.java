@@ -9,16 +9,14 @@ import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @Table(name = "SESSIONS")

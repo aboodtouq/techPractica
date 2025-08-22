@@ -53,7 +53,6 @@ public class CreateSessionUseCase {
         session.addSystem(system);
 
         for (var reqRequest : command.requirements()) {
-
             Field field = fieldRepository.findFieldByName(reqRequest.getFieldName())
                     .orElseThrow(() -> new ResourcesNotFoundException(reqRequest.getFieldName()));
 
@@ -66,7 +65,6 @@ public class CreateSessionUseCase {
                     .map(tech -> requirementTechnologyFactory.create(requirement, tech))
                     .forEach(requirement::addRequirementTechnology);
         }
-
         return sessionRepository.save(session);
     }
 }

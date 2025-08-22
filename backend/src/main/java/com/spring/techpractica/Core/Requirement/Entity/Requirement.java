@@ -24,7 +24,7 @@ public class Requirement extends BaseEntity {
     @JoinColumn(name = "session_id", referencedColumnName = "id")
     private Session session;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
     private Field field;
 
@@ -36,5 +36,6 @@ public class Requirement extends BaseEntity {
             requirementTechnologies = new ArrayList<>();
         }
         requirementTechnologies.add(requirementTechnology);
+        requirementTechnology.setRequirement(this);
     }
 }
