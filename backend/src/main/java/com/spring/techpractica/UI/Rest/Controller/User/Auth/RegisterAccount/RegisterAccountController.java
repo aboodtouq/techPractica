@@ -30,12 +30,10 @@ public class RegisterAccountController {
 
     @Operation(summary = "Register a new user account", description = "Creates a new user account with name, email, and password")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully registered",
+            @ApiResponse(responseCode = "201", description = "Registration successful.Please check your email to verify your account",
                     content = @Content(schema = @Schema(implementation = UserResources.class))),
             @ApiResponse(responseCode = "400", description = "Invalid request payload",
                     content = @Content),
-            @ApiResponse(responseCode = "409", description = "Email already in use",
-                    content = @Content)
     })
     @PostMapping("/register")
     public ResponseEntity<?> registerAccount(@RequestBody @Valid RegisterAccountRequest request) {
