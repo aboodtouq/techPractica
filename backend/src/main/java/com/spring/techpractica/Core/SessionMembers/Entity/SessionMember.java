@@ -17,20 +17,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SessionMember {
+
     @EmbeddedId
     private UserSessionId userSessionId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("sessionId")
-    @JoinColumn(name = "session_id", referencedColumnName = "id")
+    @JoinColumn(name = "session_id", referencedColumnName = "id", nullable = false)
     private Session session;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    public void setUserAndSession(User user, Session session) {
+        this.user = user;
+        this.session = session;
+        this.userSessionId = new UserSessionId(user.getId(), session.getId());
+    }
 }

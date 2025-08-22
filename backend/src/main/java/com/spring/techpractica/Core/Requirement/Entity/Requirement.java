@@ -28,7 +28,7 @@ public class Requirement extends BaseEntity {
     @JoinColumn(name = "field_id", referencedColumnName = "id")
     private Field field;
 
-    @OneToMany(mappedBy = "requirement")
+    @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RequirementTechnology> requirementTechnologies = new ArrayList<>();
 
     public void addRequirementTechnology(RequirementTechnology requirementTechnology) {

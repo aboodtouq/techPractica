@@ -25,6 +25,7 @@ public class CreateSessionController {
 
     private final CreateSessionUseCase createSessionUseCase;
 
+
     @PostMapping("/")
     public ResponseEntity<?> createSession(@RequestBody @Valid CreateSessionRequest request,
                                            @AuthenticationPrincipal UserAuthentication userAuthentication) {

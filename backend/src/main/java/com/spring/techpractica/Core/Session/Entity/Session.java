@@ -36,7 +36,8 @@ public class Session extends BaseEntity {
 
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true)
     private List<SessionMember> members = new ArrayList<>();
 
     @Column(name = "is_running")
