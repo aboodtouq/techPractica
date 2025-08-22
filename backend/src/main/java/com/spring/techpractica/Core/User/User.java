@@ -40,7 +40,7 @@ public class User extends BaseEntity {
     private String email;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = false;
 
     public void activate() {
         isActive = true;

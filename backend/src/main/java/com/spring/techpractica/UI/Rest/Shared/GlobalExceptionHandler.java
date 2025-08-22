@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
                         .code("RESOURCE_NOT_FOUND")
                         .build());
     }
+
     @ExceptionHandler(ResourcesDuplicateException.class)
     public ResponseEntity<StandardErrorResponse> handleResourcesDuplicateException(ResourcesDuplicateException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -34,18 +35,6 @@ public class GlobalExceptionHandler {
                         .status(HttpStatus.CONFLICT.value())
                         .message(ex.getMessage())
                         .code("RESOURCE_ALREADY_EXISTS")
-                        .build());
-    }
-
-
-    @ExceptionHandler(UserAuthenticationException.class)
-    public ResponseEntity<StandardErrorResponse> handleUserAuthenticationException(UserAuthenticationException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(StandardErrorResponse.builder()
-                        .timestamp(Instant.now())
-                        .message(ex.getMessage())
-                        .status(HttpStatus.UNAUTHORIZED.value())
-                        .code("AUTHENTICATION_FAILED")
                         .build());
     }
 
