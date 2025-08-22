@@ -4,7 +4,6 @@ import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Field.FieldRepository;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
 import com.spring.techpractica.Core.Requirement.RequirementFactory;
-import com.spring.techpractica.Core.Requirement.RequirementRepository;
 import com.spring.techpractica.Core.RequirementTechnology.RequirementTechnologyFactory;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionFactory;
@@ -25,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class CreateSessionUseCase {
+
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
     private final SessionFactory sessionFactory;
@@ -34,7 +34,6 @@ public class CreateSessionUseCase {
     private final RequirementFactory requirementFactory;
     private final TechnologyRepository technologyRepository;
     private final RequirementTechnologyFactory requirementTechnologyFactory;
-    private final RequirementRepository requirementRepository;
 
     @Transactional
     public Session execute(CreateSessionCommand command) {
@@ -47,26 +46,26 @@ public class CreateSessionUseCase {
 
         SessionMember sessionMember = sessionMembersFactory.create(session, owner, Role.OWNER);
         sessionMember.setUserAndSession(owner, session);
-
         session.addMember(sessionMember);
 
         System system = systemRepository.findSystemByName(command.system())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.system()));
         session.addSystem(system);
 
-        Field field = fieldRepository.findFieldByName(command.requirement().getFieldName())
-                .orElseThrow(() -> new ResourcesNotFoundException(command.requirement().getFieldName()));
+        for (var reqRequest : command.requirements()) {
 
-        Requirement requirement = requirementFactory.create(session, field);
-        requirementRepository.save(requirement);
+            Field field = fieldRepository.findFieldByName(reqRequest.getFieldName())
+                    .orElseThrow(() -> new ResourcesNotFoundException(reqRequest.getFieldName()));
 
-        session.addRequirement(requirement);
+            Requirement requirement = requirementFactory.create(session, field);
+            session.addRequirement(requirement);
 
-        command.requirement().getTechnologies().stream()
-                .map(technologyName -> technologyRepository.findTechnologyByName(technologyName)
-                        .orElseThrow(() -> new ResourcesNotFoundException(technologyName)))
-                .map(technology -> requirementTechnologyFactory.create(requirement, technology))
-                .forEach(requirement::addRequirementTechnology);
+            reqRequest.getTechnologies().stream()
+                    .map(techName -> technologyRepository.findTechnologyByName(techName)
+                            .orElseThrow(() -> new ResourcesNotFoundException(techName)))
+                    .map(tech -> requirementTechnologyFactory.create(requirement, tech))
+                    .forEach(requirement::addRequirementTechnology);
+        }
 
         return sessionRepository.save(session);
     }

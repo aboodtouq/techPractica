@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Session.CreateSession;
 
 import com.spring.techpractica.Application.Session.CreateSession.CreateSessionCommand;
 import com.spring.techpractica.Application.Session.CreateSession.CreateSessionUseCase;
-import com.spring.techpractica.Core.Request.Model.RequirementRequest;
+import com.spring.techpractica.Core.Requirement.Model.RequirementRequest;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
@@ -35,10 +35,10 @@ public class CreateSessionController {
                 request.description(),
                 request.isPrivate(),
                 request.system(),
-                new RequirementRequest(
-                        request.field(),
-                        request.technologies()
-                )
+                request.requirements().stream().map(
+                        requirementRequest -> new RequirementRequest(requirementRequest.getFieldName()
+                                ,requirementRequest.getTechnologies())
+                ).toList()
         ));
 
         SessionResources responseData = SessionResources.builder()

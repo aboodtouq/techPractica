@@ -9,12 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "CATEGORIES")
+@Table(name = "FIELDS")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Field extends BaseEntity {
     private String name;
-
 }
