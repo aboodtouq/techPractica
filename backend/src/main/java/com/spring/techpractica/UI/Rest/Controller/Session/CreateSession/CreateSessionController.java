@@ -32,30 +32,17 @@ public class CreateSessionController {
 
     @Operation(
             summary = "Create new Session",
-            description = "Creates a new Session for the authenticated " +
-                          "user and returns the created resource."
+            description = "Creates a new Session for the authenticated user and returns the created resource."
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
                     description = "Session created successfully",
-                    content = @Content(schema = @Schema(implementation = SessionResources.class))
+                    content = @Content(schema = @Schema(implementation = StandardSuccessResponse.class))
             ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Invalid request payload",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "401",
-                    description = "Unauthorized (invalid credentials)",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "409",
-                    description = "A Session with the same name already exists",
-                    content = @Content
-            )
+            @ApiResponse(responseCode = "400", description = "Invalid request payload", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized (invalid credentials)", content = @Content),
+            @ApiResponse(responseCode = "409", description = "A Session with the same name already exists", content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<?> createSession(@RequestBody @Valid CreateSessionRequest request,
