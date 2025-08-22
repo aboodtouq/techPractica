@@ -8,6 +8,11 @@ import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +30,33 @@ public class CreateSessionController {
 
     private final CreateSessionUseCase createSessionUseCase;
 
-
+    @Operation(
+            summary = "Create new Session",
+            description = "Creates a new Session for the authenticated " +
+                          "user and returns the created resource."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Session created successfully",
+                    content = @Content(schema = @Schema(implementation = SessionResources.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid request payload",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized (invalid credentials)",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "A Session with the same name already exists",
+                    content = @Content
+            )
+    })
     @PostMapping("/")
     public ResponseEntity<?> createSession(@RequestBody @Valid CreateSessionRequest request,
                                            @AuthenticationPrincipal UserAuthentication userAuthentication) {
