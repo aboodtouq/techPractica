@@ -41,15 +41,7 @@ public class CreateSessionController {
                 ).toList()
         ));
 
-        SessionResources responseData = SessionResources.builder()
-                .id(session.getId())
-                .name(session.getName())
-                .description(session.getDescription())
-                .isPrivate(session.isPrivate())
-                .isRunning(session.isRunning())
-                .system(session.getSystems().toString())
-                .requirementCollection(new RequirementCollection(session.getRequirements()))
-                .build();
+        SessionResources responseData = new SessionResources(session);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(

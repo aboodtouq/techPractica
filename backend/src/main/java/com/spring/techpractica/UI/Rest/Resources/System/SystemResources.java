@@ -9,7 +9,6 @@ import java.util.UUID;
 @Setter
 @Builder
 public class SystemResources {
-
     private UUID id;
     private String name;
 }

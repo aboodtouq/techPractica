@@ -11,8 +11,8 @@ public class RequirementCollection {
     private final List<RequirementResources> requirements;
 
     public RequirementCollection(List<Requirement> requirements) {
-        this.requirements = requirements.stream().map(
-                requirement -> new RequirementResources(requirement.getId())
-        ).toList();
+        this.requirements = requirements.stream()
+                .map(RequirementResources::new)
+                .toList();
     }
 }
