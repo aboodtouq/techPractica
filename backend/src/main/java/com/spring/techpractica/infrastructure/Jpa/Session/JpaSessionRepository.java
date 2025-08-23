@@ -1,0 +1,34 @@
+package com.spring.techpractica.infrastructure.Jpa.Session;
+
+import com.spring.techpractica.Core.Session.Entity.Session;
+import com.spring.techpractica.Core.Session.SessionRepository;
+import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+@AllArgsConstructor
+public class JpaSessionRepository implements SessionRepository {
+
+    private final JpaSession jpaSession;
+
+    @Override
+    public Session save(Session session) {return jpaSession.save(session);}
+
+    @Override
+    public Session update(Session session) {
+        UUID sessionId = session.getId();
+        if (jpaSession.existsById(sessionId)) {
+            jpaSession.save(session);
+        }
+        throw new ResourcesNotFoundException(sessionId);
+    }
+
+    @Override
+    public Optional<Session> findById(UUID id) {
+        return jpaSession.findById(id);
+    }
+}

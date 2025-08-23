@@ -5,29 +5,28 @@ import com.spring.techpractica.Core.SessionMembers.model.UserSessionId;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "SESSION_MEMBERS")
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionMembers {
+public class SessionMember {
+
     @EmbeddedId
     private UserSessionId userSessionId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("sessionId")
-    @JoinColumn(name = "session_id", referencedColumnName = "id")
+    @JoinColumn(name = "session_id", referencedColumnName = "id", nullable = false)
     private Session session;
 
     @Enumerated(EnumType.STRING)

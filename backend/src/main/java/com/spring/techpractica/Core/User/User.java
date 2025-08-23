@@ -3,22 +3,22 @@ package com.spring.techpractica.Core.User;
 import com.spring.techpractica.Core.Notification.Entity.Notification;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Table(name = "USERS")
 public class User extends BaseEntity {
