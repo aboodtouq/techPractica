@@ -26,9 +26,9 @@ public class ExploreSessionsUseCase {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourcesNotFoundException(userId));
 
-        if (user.getUserTechnologies().isEmpty()) {
-            return sessionRepository.exploreSessions(PageRequest.of(command.number(), command.size()));
+        if (user.isProfileComplete()) {
+            throw new UnsupportedOperationException("For User complete account set up soon  ");
         }
-        throw new UnsupportedOperationException("For User complete account set up soon  ");
+        return sessionRepository.exploreSessions(PageRequest.of(command.number(), command.size()));
     }
 }

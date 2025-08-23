@@ -39,6 +39,10 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus = AccountStatus.UNACTIVE_ACCOUNT;
 
+    public boolean isProfileComplete() {
+        return accountStatus.equals(AccountStatus.COMPLETE_PROFILE);
+    }
+
     public void activate() {
         accountStatus = AccountStatus.ACTIVE_ACCOUNT;
     }
