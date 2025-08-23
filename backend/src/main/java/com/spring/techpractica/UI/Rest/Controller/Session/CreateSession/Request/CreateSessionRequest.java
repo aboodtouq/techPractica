@@ -1,7 +1,5 @@
-package com.spring.techpractica.UI.Rest.Controller.Session.CreateSession;
+package com.spring.techpractica.UI.Rest.Controller.Session.CreateSession.Request;
 
-
-import com.spring.techpractica.UI.Rest.Controller.Session.CreateSession.Dto.RequirementRequest;
 
 import java.util.List;
 

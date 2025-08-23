@@ -1,5 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.SessionMember;
 
+import com.spring.techpractica.Core.SessionMembers.Entity.SessionMember;
 import lombok.Getter;
 
 import java.util.List;
@@ -8,14 +9,9 @@ import java.util.List;
 public class SessionMemberCollection {
     private final List<SessionMemberResources> members;
 
-
-    public SessionMemberCollection(List<SessionMemberResources> members) {
+    public SessionMemberCollection(List<SessionMember> members) {
         this.members = members.stream().map(
-                member -> new SessionMemberResources(
-                        member.getId(),
-                        member.getUser(),
-                        member.getRole()
-                )
+                SessionMemberResources::new
         ).toList();
     }
 }

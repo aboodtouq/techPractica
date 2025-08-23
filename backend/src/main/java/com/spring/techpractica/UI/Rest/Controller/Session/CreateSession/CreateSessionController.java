@@ -5,7 +5,7 @@ import com.spring.techpractica.Application.Session.CreateSession.CreateSessionUs
 import com.spring.techpractica.Core.Requirement.Model.RequirementRequest;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
+import com.spring.techpractica.UI.Rest.Controller.Session.CreateSession.Request.CreateSessionRequest;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +42,6 @@ public class CreateSessionController {
             ),
             @ApiResponse(responseCode = "400", description = "Invalid request payload", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized (invalid credentials)", content = @Content),
-            @ApiResponse(responseCode = "409", description = "A Session with the same name already exists", content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<?> createSession(@RequestBody @Valid CreateSessionRequest request,

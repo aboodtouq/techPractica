@@ -45,24 +45,23 @@ public class CreateSessionUseCase {
         session = sessionRepository.save(session);
 
         SessionMember sessionMember = sessionMembersFactory.create(session, owner, Role.OWNER);
-        sessionMember.setUserAndSession(owner, session);
         session.addMember(sessionMember);
 
         System system = systemRepository.findSystemByName(command.system())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.system()));
         session.addSystem(system);
 
-        for (var reqRequest : command.requirements()) {
-            Field field = fieldRepository.findFieldByName(reqRequest.getFieldName())
-                    .orElseThrow(() -> new ResourcesNotFoundException(reqRequest.getFieldName()));
+        for (var requirementRequest : command.requirements()) {
+            Field field = fieldRepository.findFieldByName(requirementRequest.getFieldName())
+                    .orElseThrow(() -> new ResourcesNotFoundException(requirementRequest.getFieldName()));
 
             Requirement requirement = requirementFactory.create(session, field);
             session.addRequirement(requirement);
 
-            reqRequest.getTechnologies().stream()
-                    .map(techName -> technologyRepository.findTechnologyByName(techName)
-                            .orElseThrow(() -> new ResourcesNotFoundException(techName)))
-                    .map(tech -> requirementTechnologyFactory.create(requirement, tech))
+            requirementRequest.getTechnologies().stream()
+                    .map(techName -> requirementTechnologyFactory.create(requirement,
+                            technologyRepository.findTechnologyByName(techName)
+                            .orElseThrow(() -> new ResourcesNotFoundException(techName))))
                     .forEach(requirement::addRequirementTechnology);
         }
         return sessionRepository.save(session);

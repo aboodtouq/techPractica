@@ -19,7 +19,7 @@ public class SessionResources {
     private boolean isPrivate;
     private boolean isRunning;
     private SystemResources system;
-    private RequirementCollection requirementCollection;
+    private RequirementCollection requirements;
 
     public SessionResources(Session session) {
         this.id = session.getId();
@@ -29,14 +29,11 @@ public class SessionResources {
         this.isRunning = session.isRunning();
 
         if (session.getSystems() != null) {
-            this.system = SystemResources.builder()
-                    .id(session.getSystems().getLast().getId())
-                    .name(session.getSystems().getLast().getName())
-                    .build();
+            this.system = new SystemResources(session.getSystems().getLast());
         }
 
         if (session.getRequirements() != null) {
-            this.requirementCollection = new RequirementCollection(session.getRequirements());
+            this.requirements = new RequirementCollection(session.getRequirements());
         }
     }
 }
