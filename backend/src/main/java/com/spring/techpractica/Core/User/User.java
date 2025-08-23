@@ -3,7 +3,6 @@ package com.spring.techpractica.Core.User;
 import com.spring.techpractica.Core.Notification.Entity.Notification;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Role.Entity.Role;
-import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.Task.Entity.Task;
@@ -11,7 +10,6 @@ import com.spring.techpractica.Core.Technology.Entity.Technology;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,11 +35,16 @@ public class User extends BaseEntity {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "is_active")
-    private boolean isActive = false;
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus = AccountStatus.UNACTIVE_ACCOUNT;
+
+    public boolean isProfileComplete() {
+        return accountStatus.equals(AccountStatus.COMPLETE_PROFILE);
+    }
 
     public void activate() {
-        isActive = true;
+        accountStatus = AccountStatus.ACTIVE_ACCOUNT;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)

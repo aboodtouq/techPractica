@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Shared;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
+import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +15,17 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(InvalidPageRequestException.class)
+    public ResponseEntity<StandardErrorResponse> handleInvalidPageRequestException(InvalidPageRequestException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(e.getMessage())
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .code("BAD_REQUEST")
+                        .build());
+    }
 
     @ExceptionHandler(ResourcesNotFoundException.class)
     public ResponseEntity<StandardErrorResponse> handleResourcesNotFoundException(ResourcesNotFoundException ex) {
