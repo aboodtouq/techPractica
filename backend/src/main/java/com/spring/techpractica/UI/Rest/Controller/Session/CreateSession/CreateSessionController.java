@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/session")
 @AllArgsConstructor
+@Tag(name = "Session")
 public class CreateSessionController {
 
     private final CreateSessionUseCase createSessionUseCase;
@@ -54,7 +56,7 @@ public class CreateSessionController {
                 request.system(),
                 request.requirements().stream().map(
                         requirementRequest -> new RequirementRequest(requirementRequest.getFieldName()
-                                ,requirementRequest.getTechnologies())
+                                , requirementRequest.getTechnologies())
                 ).toList()
         ));
 
