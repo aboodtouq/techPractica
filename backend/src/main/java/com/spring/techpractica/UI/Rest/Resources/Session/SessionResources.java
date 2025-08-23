@@ -1,5 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.Session;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class SessionResources {
+
     private UUID id;
     private String name;
     private String description;

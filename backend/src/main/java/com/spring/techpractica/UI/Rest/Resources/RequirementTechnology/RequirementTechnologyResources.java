@@ -1,15 +1,13 @@
 package com.spring.techpractica.UI.Rest.Resources.RequirementTechnology;
 
-import lombok.AllArgsConstructor;
+import com.spring.techpractica.Core.RequirementTechnology.Entity.RequirementTechnology;
 import lombok.Getter;
 
-import java.util.UUID;
-
-@AllArgsConstructor
 @Getter
 public class RequirementTechnologyResources {
+    private final String name;
 
-    private UUID id;
-    private String technologyName;
-
+    public RequirementTechnologyResources(RequirementTechnology requirement) {
+        this.name = requirement.getTechnology().getName();
+    }
 }
