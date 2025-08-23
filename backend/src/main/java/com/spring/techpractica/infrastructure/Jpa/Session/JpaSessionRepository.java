@@ -4,8 +4,10 @@ import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,7 +18,9 @@ public class JpaSessionRepository implements SessionRepository {
     private final JpaSession jpaSession;
 
     @Override
-    public Session save(Session session) {return jpaSession.save(session);}
+    public Session save(Session session) {
+        return jpaSession.save(session);
+    }
 
     @Override
     public Session update(Session session) {
@@ -30,5 +34,10 @@ public class JpaSessionRepository implements SessionRepository {
     @Override
     public Optional<Session> findById(UUID id) {
         return jpaSession.findById(id);
+    }
+
+    @Override
+    public List<Session> exploreSessions(Pageable pageable) {
+        return jpaSession.findAll(pageable).getContent();
     }
 }
