@@ -32,10 +32,4 @@ public class SessionMember {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
-
-    public void setUserAndSession(User user, Session session) {
-        this.user = user;
-        this.session = session;
-        this.userSessionId = new UserSessionId(user.getId(), session.getId());
-    }
 }
