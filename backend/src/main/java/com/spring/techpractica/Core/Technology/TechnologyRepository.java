@@ -3,6 +3,7 @@ package com.spring.techpractica.Core.Technology;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.lang.ScopedValue;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -14,4 +15,6 @@ public interface TechnologyRepository extends JpaRepository<Technology, UUID> {
     List<Technology> findAllByNameIn(Collection<String> names);
 
     Optional<Technology> findTechnologyByName(String technology);
+
+    <T> ScopedValue<T> findTechnologyById(UUID id);
 }

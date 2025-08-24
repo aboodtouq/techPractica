@@ -11,7 +11,7 @@ public record CompleteAccountCommand(UUID userId
         , String firstName
         , String lastName
         , String brief
-        ,  List<String> skillsNames
+        ,  List<UUID> skillsIds
         , List<SocialAccountRequest> socialAccountRequests) {
 
 }
