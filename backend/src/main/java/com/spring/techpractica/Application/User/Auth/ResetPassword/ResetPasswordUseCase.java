@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.User.ResetPassword;
+package com.spring.techpractica.Application.User.Auth.ResetPassword;
 
 import com.spring.techpractica.Core.User.Event.ResetPasswordEvent;
 import com.spring.techpractica.Core.User.User;

@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.User.AcvtiveAccount;
+package com.spring.techpractica.Application.User.Auth.AcvtiveAccount;
 
 import java.util.UUID;
 

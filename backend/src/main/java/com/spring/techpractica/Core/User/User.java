@@ -10,6 +10,7 @@ import com.spring.techpractica.Core.Technology.Entity.Technology;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,9 @@ public class User extends BaseEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "brief")
+    private String brief;
+
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus = AccountStatus.UNACTIVE_ACCOUNT;
@@ -47,14 +51,23 @@ public class User extends BaseEntity {
         accountStatus = AccountStatus.ACTIVE_ACCOUNT;
     }
 
+    public void deactivate() {
+        accountStatus = AccountStatus.UNACTIVE_ACCOUNT;
+    }
+
+    public void completed() {
+        accountStatus = AccountStatus.COMPLETE_PROFILE;
+    }
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_SKILLS",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
-    private List<Technology> userTechnologies;
+    private List<Technology> userTechnologies=new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<SocialAccount> socialAccounts;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    private List<SocialAccount> socialAccounts=new ArrayList<>();
+
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Request> requests;
