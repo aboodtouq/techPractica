@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,38 +34,31 @@ public class CompleteAccountUseCase {
         User user = userRepository.findById(command.userId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.userId()));
 
-        List<Technology> technologies = command.skillsNames().stream()
-                .map(technologyName -> technologyRepository.findTechnologyByName(technologyName)
-                        .orElseThrow(() -> new ResourcesNotFoundException(technologyName)))
-                .collect(Collectors.toCollection(ArrayList::new));
+        Set<Technology> technologies = command.skillsIds().stream()
+                .map(id -> technologyRepository.findById(id)
+                        .orElseThrow(() -> new ResourcesNotFoundException(id)))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
 
-        List<SocialAccount> socialAccounts = command.socialAccountRequests().stream().map(request -> {
 
-            PlatformName platform;
-            try {
-                platform = PlatformName.valueOf(request.platformName().trim().toUpperCase());
-            } catch (IllegalArgumentException ex) {
+        List<SocialAccount> socialAccounts = command.socialAccountRequests().stream().map(
+                request -> {
 
-                throw new ResourcesNotFoundException("Invalid social platform: " + request.platformName());
-            }
-
-            SocialAccount created = socialAccountFactory.create(platform, request.profileUrl(), user);
+            SocialAccount created = socialAccountFactory
+                    .create(request.platformName(), request.profileUrl(), user);
             created.setUser(user);
 
             return created;
-        }).collect(Collectors.toCollection(ArrayList::new));
-
-        if (!socialAccounts.isEmpty()) {
-            socialAccountRepository.saveAll(socialAccounts);
         }
-        user.getUserTechnologies() .addAll(technologies);
-        user.getUserTechnologies().addAll(technologies);
-        user.setFirstName(command.firstName());
-        user.setLastName(command.lastName());
-        user.setBrief(command.brief());
+        ).collect(Collectors.toCollection(ArrayList::new));
+
+        user.addSkills();
+
+        user.addSocialAccounts(socialAccounts);
+
+        user.addInfo(command.firstName(),command.lastName(),command.brief());
 
         user.completed();
-        userRepository.save(user);
+        userRepository.update(user);
     }
 }

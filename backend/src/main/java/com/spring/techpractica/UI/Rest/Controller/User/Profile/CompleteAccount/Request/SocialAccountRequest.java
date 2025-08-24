@@ -15,5 +15,5 @@ public class SocialAccountRequest {
     @NotBlank
     private String profileUrl;
     @NotBlank
-    private String platformName;
+    private PlatformName platformName;
 }

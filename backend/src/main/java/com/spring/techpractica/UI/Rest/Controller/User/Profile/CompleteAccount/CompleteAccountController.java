@@ -48,7 +48,7 @@ public class CompleteAccountController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardErrorResponse.class)))
     })
-    @PostMapping("/complete-account")
+    @PostMapping("/")
     public ResponseEntity<?> completeAccount(@RequestBody @Valid CompleteAccountRequest request
     , @AuthenticationPrincipal UserAuthentication userAuthentication) {
 
@@ -56,7 +56,7 @@ public class CompleteAccountController {
                 request.firstName(),
                 request.lastName(),
                 request.brief(),
-                request.skillsNames(),
+                request.skillsIds(),
                 request.socialAccountRequests().stream().map(
                         socialAccountRequest -> new SocialAccountRequest(socialAccountRequest.getPlatformName()
                                 ,socialAccountRequest.getProfileUrl())

@@ -4,6 +4,7 @@ import com.spring.techpractica.Core.Notification.Entity.Notification;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Role.Entity.Role;
 import com.spring.techpractica.Core.Shared.BaseEntity;
+import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
@@ -11,7 +12,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -33,11 +36,15 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "brief")
     private String brief;
+    public void addInfo(String firstName, String lastName, String brief) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.brief = brief;
+    }
+    @Column(name = "email")
+    private String email;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -63,10 +70,30 @@ public class User extends BaseEntity {
     @JoinTable(name = "USERS_SKILLS",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
-    private List<Technology> userTechnologies=new ArrayList<>();
+    private Set<Technology> skills=new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    public void addSkills(List<Technology> skills) {
+        if (this.skills == null) {
+            this.skills = new LinkedHashSet<>();
+        }
+        if (skills == null) {
+            throw new IllegalArgumentException("socialAccounts is null");
+        }
+        this.skills.addAll(skills);
+    }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<SocialAccount> socialAccounts=new ArrayList<>();
+
+    public void addSocialAccounts(List<SocialAccount> socialAccounts) {
+        if (this.socialAccounts == null) {
+            this.socialAccounts = new ArrayList<>();
+        }
+        if (socialAccounts == null) {
+            throw new IllegalArgumentException("socialAccounts is null");
+        }
+        this.socialAccounts.addAll(socialAccounts);
+    }
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
