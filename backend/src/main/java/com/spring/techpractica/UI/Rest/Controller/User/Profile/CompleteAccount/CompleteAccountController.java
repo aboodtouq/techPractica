@@ -33,15 +33,18 @@ public class CompleteAccountController {
 
 
     @Operation(
-            summary = "Request password reset",
-            description = "Sends a reset password email to the user with a secure reset link.",
-            tags = {"Authentication"}
+            summary = "Complete user account",
+            description = "Allows an authenticated user to complete their account by adding first name, last name, brief, skills, and social accounts.",
+            tags = {"Profile"}
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "If this email exists, a reset link has been sent!",
+            @ApiResponse(responseCode = "202", description = "Account completed successfully",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardSuccessResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Validation failed",
+            @ApiResponse(responseCode = "400", description = "Validation failed (invalid data provided)",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized (missing or invalid JWT token)",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardErrorResponse.class)))
     })
@@ -62,7 +65,7 @@ public class CompleteAccountController {
 
         return ResponseEntity.accepted().body(StandardSuccessResponse.builder()
                 .data(request)
-                .message("If this email exists, a reset link has been sent!")
+                .message("Account completed successfully")
                 .status(HttpStatus.ACCEPTED.value())
                 .build());
     }
