@@ -1,8 +1,11 @@
-package com.spring.techpractica.UI.Rest.Controller.User.Auth.ResetPassword;
+package com.spring.techpractica.UI.Rest.Controller.User.Profile.CompleteAccount;
 
-import com.spring.techpractica.Application.User.Auth.ResetPassword.ResetPasswordCommand;
-import com.spring.techpractica.Application.User.Auth.ResetPassword.ResetPasswordUseCase;
+import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountCommand;
+import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountUseCase;
+import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
+import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
+import com.spring.techpractica.UI.Rest.Controller.User.Profile.CompleteAccount.Request.CompleteAccountRequest;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,23 +14,23 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
-@Tag(name = "Authentication", description = "Authentication related endpoints")
-public class ResetPasswordController {
+@AllArgsConstructor
+@RequestMapping("/api/v1/profile")
+@Tag(name = "Profile", description = "Profile related endpoints")
+public class CompleteAccountController {
 
-    private final ResetPasswordUseCase useCase;
+    private final CompleteAccountUseCase completeAccountUseCase;
 
-    public ResetPasswordController(ResetPasswordUseCase useCase) {
-        this.useCase = useCase;
-    }
 
     @Operation(
             summary = "Request password reset",
@@ -42,11 +45,23 @@ public class ResetPasswordController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardErrorResponse.class)))
     })
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordRequest request) {
-        useCase.execute(new ResetPasswordCommand(request.email()));
+    @PostMapping("/complete-account")
+    public ResponseEntity<?> completeAccount(@RequestBody @Valid CompleteAccountRequest request
+    , @AuthenticationPrincipal UserAuthentication userAuthentication) {
+
+        completeAccountUseCase.execute(new CompleteAccountCommand(userAuthentication.getUserId(),
+                request.firstName(),
+                request.lastName(),
+                request.brief(),
+                request.skillsNames(),
+                request.socialAccountRequests().stream().map(
+                        socialAccountRequest -> new SocialAccountRequest(socialAccountRequest.getPlatformName()
+                                ,socialAccountRequest.getProfileUrl())
+                ).toList()
+        ));
+
         return ResponseEntity.accepted().body(StandardSuccessResponse.builder()
-                .data(request.email())
+                .data(request)
                 .message("If this email exists, a reset link has been sent!")
                 .status(HttpStatus.ACCEPTED.value())
                 .build());

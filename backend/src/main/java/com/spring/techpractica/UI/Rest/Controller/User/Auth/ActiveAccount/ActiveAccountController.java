@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Auth.ActiveAccount;
 
-import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountCommand;
-import com.spring.techpractica.Application.User.AcvtiveAccount.ActiveAccountUseCase;
+import com.spring.techpractica.Application.User.Auth.AcvtiveAccount.ActiveAccountCommand;
+import com.spring.techpractica.Application.User.Auth.AcvtiveAccount.ActiveAccountUseCase;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
