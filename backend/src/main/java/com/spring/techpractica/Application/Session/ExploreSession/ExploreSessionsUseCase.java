@@ -29,6 +29,7 @@ public class ExploreSessionsUseCase {
         if (user.isProfileComplete()) {
             throw new UnsupportedOperationException("For User complete account set up soon  ");
         }
+
         return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
     }
 }

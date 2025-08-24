@@ -10,7 +10,7 @@ import java.util.List;
 public class SessionCollection {
 
     @JsonValue
-    private List<SessionResources> sessions;
+    private final List<SessionResources> sessions;
 
     public SessionCollection(List<Session> sessions) {
         this.sessions = sessions.stream().map(SessionResources::new)
