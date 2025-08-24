@@ -20,8 +20,8 @@ public class GetSessionsBySystemUseCase {
     private final SystemRepository systemRepository;
 
     public List<Session> execute(GetSessionsBySystemCommand command) {
-        System system = systemRepository.findSystemByName(command.systemName())
-                .orElseThrow(() -> new ResourcesNotFoundException(command.systemName()));
+        System system = systemRepository.findById(command.systemId())
+                .orElseThrow(() -> new ResourcesNotFoundException(command.systemId()));
 
         return sessionRepository.getSessionsBySystems(
                 List.of(system),

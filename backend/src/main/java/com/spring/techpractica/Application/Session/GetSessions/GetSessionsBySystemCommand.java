@@ -1,6 +1,8 @@
 package com.spring.techpractica.Application.Session.GetSessions;
 
-public record GetSessionsBySystemCommand(String systemName,
+import java.util.UUID;
+
+public record GetSessionsBySystemCommand(UUID systemId,
                                          int sizeOfPage,
                                          int pageNumber) {
 }

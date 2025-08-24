@@ -1,6 +1,5 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions;
 
-import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsCommand;
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionsBySystemCommand;
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionsBySystemUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.UUID;
 
 import java.time.Instant;
 
@@ -45,7 +45,7 @@ public class GetSessionsBySystemController {
                     content = @Content)
     })
     @GetMapping("/by-system")
-    public ResponseEntity<?> getSessionsBySystem(@RequestParam String systemName,
+    public ResponseEntity<?> getSessionsBySystem(@RequestParam UUID systemId,
                                                  @RequestParam int sizeOfPage,
                                                  @RequestParam int pageNumber) {
         if (pageNumber < 0 || sizeOfPage < 1) {
@@ -55,7 +55,7 @@ public class GetSessionsBySystemController {
         try {
             SessionCollection response = new SessionCollection(
                     getSessionsBySystemUseCase.execute(
-                            new GetSessionsBySystemCommand(systemName, pageNumber, sizeOfPage)
+                            new GetSessionsBySystemCommand(systemId, pageNumber, sizeOfPage)
                     )
             );
 
