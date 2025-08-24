@@ -46,16 +46,16 @@ public class GetSessionsBySystemController {
     })
     @GetMapping("/by-system")
     public ResponseEntity<?> getSessionsBySystem(@RequestParam UUID systemId,
-                                                 @RequestParam int sizeOfPage,
-                                                 @RequestParam int pageNumber) {
-        if (pageNumber < 0 || sizeOfPage < 1) {
-            throw new InvalidPageRequestException(pageNumber, sizeOfPage);
+                                                 @RequestParam int size,
+                                                 @RequestParam int page) {
+        if (page < 0 || size < 1) {
+            throw new InvalidPageRequestException(page, size);
         }
 
         try {
             SessionCollection response = new SessionCollection(
                     getSessionsBySystemUseCase.execute(
-                            new GetSessionsBySystemCommand(systemId, pageNumber, sizeOfPage)
+                            new GetSessionsBySystemCommand(systemId, page, size)
                     )
             );
 
