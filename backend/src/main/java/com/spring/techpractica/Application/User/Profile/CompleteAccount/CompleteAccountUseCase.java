@@ -2,8 +2,6 @@ package com.spring.techpractica.Application.User.Profile.CompleteAccount;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
-import com.spring.techpractica.Core.SocialAccount.SocialAccountRepository;
-import com.spring.techpractica.Core.SocialAccount.model.PlatformName;
 import com.spring.techpractica.Core.SocialAccount.SocialAccountFactory;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import com.spring.techpractica.Core.Technology.TechnologyRepository;
@@ -26,7 +24,6 @@ public class CompleteAccountUseCase {
     private final UserRepository userRepository;
     private final TechnologyRepository technologyRepository;
     private final SocialAccountFactory socialAccountFactory;
-    private final SocialAccountRepository socialAccountRepository;
 
     @Transactional
     public void execute(CompleteAccountCommand command) {
@@ -46,13 +43,14 @@ public class CompleteAccountUseCase {
 
             SocialAccount created = socialAccountFactory
                     .create(request.platformName(), request.profileUrl(), user);
+
             created.setUser(user);
 
             return created;
         }
         ).collect(Collectors.toCollection(ArrayList::new));
 
-        user.addSkills();
+        user.addSkills(technologies);
 
         user.addSocialAccounts(socialAccounts);
 
