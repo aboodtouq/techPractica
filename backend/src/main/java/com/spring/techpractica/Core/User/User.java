@@ -72,7 +72,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
     private Set<Technology> skills=new LinkedHashSet<>();
 
-    public void addSkills(List<Technology> skills) {
+    public void addSkills(Set<Technology> skills) {
         if (this.skills == null) {
             this.skills = new LinkedHashSet<>();
         }
