@@ -44,7 +44,7 @@ public class GetSessionsBySystemController {
             @ApiResponse(responseCode = "501", description = "Operation not supported",
                     content = @Content)
     })
-    @GetMapping("")
+    @GetMapping("/by-system")
     public ResponseEntity<?> getSessionsBySystem(@RequestParam String systemName,
                                                  @RequestParam int sizeOfPage,
                                                  @RequestParam int pageNumber) {

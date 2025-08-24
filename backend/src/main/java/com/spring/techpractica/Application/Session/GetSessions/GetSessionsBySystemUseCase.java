@@ -25,7 +25,7 @@ public class GetSessionsBySystemUseCase {
 
         return sessionRepository.getSessionsBySystems(
                 List.of(system),
-                PageRequest.of(command.pageNumber(), command.sizeOfPage())
+                PageRequest.of(command.sizeOfPage(), command.pageNumber())
         );
     }
 }
