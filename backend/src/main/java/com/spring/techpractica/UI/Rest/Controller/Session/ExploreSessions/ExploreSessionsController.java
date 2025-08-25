@@ -45,7 +45,7 @@ public class ExploreSessionsController {
             )})
     @GetMapping("/explore")
     public ResponseEntity<?> exploreSessions(
-            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "Authorization") Optional<String> authHeader,
             @RequestParam int size,
             @RequestParam int page) {
 
@@ -54,13 +54,10 @@ public class ExploreSessionsController {
         }
 
         try {
-            Optional<String> tokenOpt = Optional.ofNullable(authHeader)
+            Optional<String> tokenOpt = authHeader
                     .map(header -> header.replaceFirst("Bearer ", ""));
 
-            Optional<UUID> uuid = tokenOpt
-                    .map(header -> header.replaceFirst("Bearer ", ""))
-                    .filter(t -> !t.isBlank())
-                    .map(jwtExtracting::extractId);
+            Optional<UUID> uuid = jwtExtracting.extractId(tokenOpt);
 
             SessionCollection response = new SessionCollection(
                     exploreSessionsUseCase.execute(

@@ -1,11 +1,13 @@
 package com.spring.techpractica.infrastructure.Jwt;
 
+import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -24,6 +26,21 @@ public class JwtExtracting {
         final Claims claims = parseToken(token);
         return claimsResolver.apply(claims);
     }
+
+    public Optional<UUID> extractId(Optional<String> tokenOpt) {
+        return tokenOpt
+                .map(header -> header.replaceFirst("^Bearer\\s+", ""))
+                .filter(t -> !t.isBlank())
+                .map(t -> {
+                    try {
+                        String subject = extractClaim(t, Claims::getSubject);
+                        return UUID.fromString(subject);
+                    } catch (Exception e) {
+                        throw new JwtValidationException("Token invalid");
+                    }
+                });
+    }
+
 
     public UUID extractId(String token) {
         if (token == null || token.isEmpty()) {
