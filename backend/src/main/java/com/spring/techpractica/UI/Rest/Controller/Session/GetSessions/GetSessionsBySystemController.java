@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,9 @@ import java.util.UUID;
 import java.time.Instant;
 
 @RestController
-@RequestMapping("/api/v1/session")
+@RequestMapping("/api/v1/sessions")
 @AllArgsConstructor
+@Tag(name = "Session")
 public class GetSessionsBySystemController {
 
     private final GetSessionsBySystemUseCase getSessionsBySystemUseCase;
@@ -44,7 +46,7 @@ public class GetSessionsBySystemController {
             @ApiResponse(responseCode = "501", description = "Operation not supported",
                     content = @Content)
     })
-    @GetMapping("/by-system")
+    @GetMapping("/")
     public ResponseEntity<?> getSessionsBySystem(@RequestParam UUID systemId,
                                                  @RequestParam int size,
                                                  @RequestParam int page) {

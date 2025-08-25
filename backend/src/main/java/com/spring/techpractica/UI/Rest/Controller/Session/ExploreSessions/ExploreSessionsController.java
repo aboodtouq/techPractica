@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Instant;
 
 @RestController
-@RequestMapping("/api/v1/session")
+@RequestMapping("/api/v1/sessions")
 @AllArgsConstructor
-@Tag(name = "Explore Sessions", description = "Operations for exploring available sessions")
+@Tag(name = "Session")
 public class ExploreSessionsController {
 
     private final ExploreSessionsUseCase exploreSessionsUseCase;
