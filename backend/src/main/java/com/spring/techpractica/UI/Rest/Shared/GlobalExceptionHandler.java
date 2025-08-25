@@ -3,6 +3,7 @@ package com.spring.techpractica.UI.Rest.Shared;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
+import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -75,5 +76,16 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(JwtValidationException.class)
+    public ResponseEntity<StandardErrorResponse> handleJwtValidationException(JwtValidationException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)  // 401 for invalid token
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(e.getMessage())
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .code("JWT_INVALID")
+                        .build());
     }
 }

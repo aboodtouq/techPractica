@@ -36,11 +36,10 @@ public class JwtExtracting {
                         String subject = extractClaim(t, Claims::getSubject);
                         return UUID.fromString(subject);
                     } catch (Exception e) {
-                        throw new JwtValidationException("Token invalid");
+                        throw new JwtValidationException("JWT token validation failed");
                     }
                 });
     }
-
 
     public UUID extractId(String token) {
         if (token == null || token.isEmpty()) {
