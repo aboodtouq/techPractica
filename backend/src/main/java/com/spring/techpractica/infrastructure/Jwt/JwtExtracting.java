@@ -43,14 +43,10 @@ public class JwtExtracting {
 
     public UUID extractId(String token) {
         if (token == null || token.isEmpty()) {
-            throw new IllegalArgumentException("token can't  be null or empty");
+            throw new JwtValidationException("JWT token validation failed");
         }
         String id = extractClaim(token, Claims::getSubject);
         return UUID.fromString(id);
-    }
-
-    public String extractEmail(String token) {
-        return extractClaim(token, Claims::getIssuer);
     }
 
     public Date extractExpireDate(String token) {
