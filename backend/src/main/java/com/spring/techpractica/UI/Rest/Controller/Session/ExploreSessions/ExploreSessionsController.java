@@ -43,7 +43,7 @@ public class ExploreSessionsController {
                     responseCode = "501", description = "Operation not supported",
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )})
-    @GetMapping("/explore")
+    @GetMapping("/")
     public ResponseEntity<?> exploreSessions(
             @RequestHeader(value = "Authorization") Optional<String> authHeader,
             @RequestParam int size,
