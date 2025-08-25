@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,12 +23,21 @@ public class ExploreSessionsUseCase {
 
     @Transactional
     public List<Session> execute(ExploreSessionsCommand command) {
-        UUID userId = command.userId();
+
+        Optional<UUID> uuidOptional = command.userId();
+
+        if (uuidOptional.isEmpty()) {
+            return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
+        }
+
+        UUID userId = uuidOptional.get();
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourcesNotFoundException(userId));
 
         if (user.isProfileComplete()) {
-            throw new UnsupportedOperationException("For User complete account set up soon  ");
+            throw new UnsupportedOperationException(
+                    "Session exploration for users with completed profiles is not implemented yet"
+            );
         }
 
         return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
