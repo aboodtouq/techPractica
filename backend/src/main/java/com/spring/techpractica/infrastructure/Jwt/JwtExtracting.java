@@ -26,6 +26,9 @@ public class JwtExtracting {
     }
 
     public UUID extractId(String token) {
+        if (token == null || token.isEmpty()) {
+            throw new IllegalArgumentException("token can't  be null or empty");
+        }
         String id = extractClaim(token, Claims::getSubject);
         return UUID.fromString(id);
     }

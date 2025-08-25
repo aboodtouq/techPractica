@@ -16,10 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -48,7 +45,7 @@ public class ExploreSessionsController {
             )})
     @GetMapping("/explore")
     public ResponseEntity<?> exploreSessions(
-            @RequestParam Optional<String> token,
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
             @RequestParam int size,
             @RequestParam int page) {
 
@@ -57,7 +54,13 @@ public class ExploreSessionsController {
         }
 
         try {
-            Optional<UUID> uuid = token.map(jwtExtracting::extractId);
+            Optional<String> tokenOpt = Optional.ofNullable(authHeader)
+                    .map(header -> header.replaceFirst("Bearer ", ""));
+
+            Optional<UUID> uuid = tokenOpt
+                    .map(header -> header.replaceFirst("Bearer ", ""))
+                    .filter(t -> !t.isBlank())
+                    .map(jwtExtracting::extractId);
 
             SessionCollection response = new SessionCollection(
                     exploreSessionsUseCase.execute(
