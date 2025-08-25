@@ -16,6 +16,17 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(e.getMessage())
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .code("ILLEGAL_ARGUMENT")
+                        .build());
+    }
+
     @ExceptionHandler(InvalidPageRequestException.class)
     public ResponseEntity<StandardErrorResponse> handleInvalidPageRequestException(InvalidPageRequestException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
