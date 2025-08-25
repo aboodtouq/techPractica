@@ -2,11 +2,11 @@ package com.spring.techpractica.UI.Rest.Controller.Session.ExploreSessions;
 
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsCommand;
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsUseCase;
-import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,13 +16,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/sessions")
@@ -31,6 +29,7 @@ import java.time.Instant;
 public class ExploreSessionsController {
 
     private final ExploreSessionsUseCase exploreSessionsUseCase;
+    private final JwtExtracting jwtExtracting;
 
     @Operation(summary = "Explore sessions", description = "Retrieves a paginated list of sessions for exploration")
     @ApiResponses(value = {
@@ -44,9 +43,9 @@ public class ExploreSessionsController {
                     responseCode = "501", description = "Operation not supported",
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )})
-    @GetMapping("/explore")
+    @GetMapping("/")
     public ResponseEntity<?> exploreSessions(
-            @AuthenticationPrincipal UserAuthentication authentication,
+            @RequestHeader(value = "Authorization") Optional<String> authHeader,
             @RequestParam int size,
             @RequestParam int page) {
 
@@ -55,9 +54,14 @@ public class ExploreSessionsController {
         }
 
         try {
+            Optional<String> tokenOpt = authHeader
+                    .map(header -> header.replaceFirst("Bearer ", ""));
+
+            Optional<UUID> uuid = jwtExtracting.extractId(tokenOpt);
+
             SessionCollection response = new SessionCollection(
                     exploreSessionsUseCase.execute(
-                            new ExploreSessionsCommand(authentication.getUserId(), page, size)
+                            new ExploreSessionsCommand(uuid, page, size)
                     )
             );
 

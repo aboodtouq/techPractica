@@ -3,6 +3,7 @@ package com.spring.techpractica.UI.Rest.Shared;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
+import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +16,17 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(e.getMessage())
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .code("ILLEGAL_ARGUMENT")
+                        .build());
+    }
 
     @ExceptionHandler(InvalidPageRequestException.class)
     public ResponseEntity<StandardErrorResponse> handleInvalidPageRequestException(InvalidPageRequestException e) {
@@ -64,5 +76,16 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(JwtValidationException.class)
+    public ResponseEntity<StandardErrorResponse> handleJwtValidationException(JwtValidationException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .message(e.getMessage())
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .code("JWT_INVALID")
+                        .build());
     }
 }
