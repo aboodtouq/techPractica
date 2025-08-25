@@ -80,7 +80,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(JwtValidationException.class)
     public ResponseEntity<StandardErrorResponse> handleJwtValidationException(JwtValidationException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)  // 401 for invalid token
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(StandardErrorResponse.builder()
                         .timestamp(Instant.now())
                         .message(e.getMessage())
