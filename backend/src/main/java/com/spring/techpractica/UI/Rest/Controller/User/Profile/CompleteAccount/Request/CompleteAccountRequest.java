@@ -13,7 +13,7 @@ public record CompleteAccountRequest(
         @Size(min = 3) @NotBlank String firstName,
         @Size(min = 3) @NotBlank String lastName,
         String brief,
-        @UniqueElements @NotNull List<UUID> skillsIds,
+        @Size(min = 3) @UniqueElements @NotNull List<UUID> skillsIds,
         @Size(min = 1, max = 4) List<@Valid SocialAccountRequest> socialAccountRequests
 ) {
 }
