@@ -21,7 +21,7 @@ public class UserResources {
     private final String name;
     private final String email;
     private final Set<UUID> skillsIds;
-    private final List<SocialAccountId> socialAccountsIds;
+    private final List<SocialAccountId> socialAccounts;
     private final String brief;
 
 
@@ -32,7 +32,7 @@ public class UserResources {
         this.name = user.getName();
         this.email = user.getEmail();
         this.skillsIds = user.getSkills().stream().map(BaseEntity::getId).collect(Collectors.toSet());
-        this.socialAccountsIds = user.getSocialAccounts().stream().map(SocialAccount::getId).collect(Collectors.toList());
+        this.socialAccounts = user.getSocialAccounts().stream().map(SocialAccount::getId).collect(Collectors.toList());
         this.brief = user.getBrief();
     }
 }
