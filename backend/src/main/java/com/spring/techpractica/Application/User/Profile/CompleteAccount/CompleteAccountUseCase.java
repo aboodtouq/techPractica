@@ -26,7 +26,7 @@ public class CompleteAccountUseCase {
     private final SocialAccountFactory socialAccountFactory;
 
     @Transactional
-    public void execute(CompleteAccountCommand command) {
+    public User execute(CompleteAccountCommand command) {
 
         User user = userRepository.findById(command.userId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.userId()));
@@ -57,6 +57,6 @@ public class CompleteAccountUseCase {
         user.addInfo(command.firstName(),command.lastName(),command.brief());
 
         user.completed();
-        userRepository.update(user);
+       return userRepository.update(user);
     }
 }
