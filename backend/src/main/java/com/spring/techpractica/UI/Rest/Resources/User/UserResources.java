@@ -1,16 +1,10 @@
 package com.spring.techpractica.UI.Rest.Resources.User;
 
-import com.spring.techpractica.Core.Shared.BaseEntity;
-import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
-import com.spring.techpractica.Core.SocialAccount.model.SocialAccountId;
 import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologySummaryCollection;
+import com.spring.techpractica.UI.Rest.Resources.SocailAccount.SocialAccountCollection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -20,8 +14,8 @@ public class UserResources {
     private final String lastName;
     private final String name;
     private final String email;
-    private final Set<UUID> skillsIds;
-    private final List<SocialAccountId> socialAccounts;
+    private TechnologySummaryCollection skills;
+    private SocialAccountCollection socialAccounts;
     private final String brief;
 
 
@@ -31,8 +25,12 @@ public class UserResources {
         this.lastName = user.getLastName();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.skillsIds = user.getSkills().stream().map(BaseEntity::getId).collect(Collectors.toSet());
-        this.socialAccounts = user.getSocialAccounts().stream().map(SocialAccount::getId).collect(Collectors.toList());
+        if (user.getSocialAccounts() != null) {
+            this.skills = new TechnologySummaryCollection(user.getSkills().stream().toList());
+        }
+        if (user.getSocialAccounts() != null) {
+            this.socialAccounts = new SocialAccountCollection(user.getSocialAccounts());
+        }
         this.brief = user.getBrief();
-    }
+        }
 }
