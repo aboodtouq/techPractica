@@ -23,6 +23,7 @@ import java.util.Set;
 @Builder
 @Table(name = "USERS")
 public class User extends BaseEntity {
+
     @Column(name = "name")
     private String name;
 
@@ -38,18 +39,41 @@ public class User extends BaseEntity {
     @Column(name = "brief")
     private String brief;
 
-    public void addInfo(String firstName, String lastName, String brief) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.brief = brief;
-    }
-
     @Column(name = "email")
     private String email;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus = AccountStatus.UNACTIVE_ACCOUNT;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<Request> requests;
+
+    @ManyToMany(mappedBy = "usersAssigned", fetch = FetchType.LAZY)
+    private List<Task> tasksAssigned;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Notification> notifications;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "USERS_SKILLS",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
+    private Set<Technology> skills = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<SocialAccount> socialAccounts = new ArrayList<>();
+
+    public void addInfo(String firstName, String lastName, String brief) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.brief = brief;
+    }
 
     public boolean isProfileComplete() {
         return accountStatus.equals(AccountStatus.COMPLETE_PROFILE);
@@ -67,12 +91,6 @@ public class User extends BaseEntity {
         accountStatus = AccountStatus.COMPLETE_PROFILE;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USERS_SKILLS",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
-    private Set<Technology> skills = new LinkedHashSet<>();
-
     public void addSkills(Set<Technology> skills) {
         if (this.skills == null) {
             this.skills = new LinkedHashSet<>();
@@ -83,9 +101,6 @@ public class User extends BaseEntity {
         this.skills.addAll(skills);
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<SocialAccount> socialAccounts = new ArrayList<>();
-
     public void addSocialAccounts(List<SocialAccount> socialAccounts) {
         if (this.socialAccounts == null) {
             this.socialAccounts = new ArrayList<>();
@@ -95,19 +110,4 @@ public class User extends BaseEntity {
         }
         this.socialAccounts.addAll(socialAccounts);
     }
-
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<Request> requests;
-
-    @ManyToMany(mappedBy = "usersAssigned", fetch = FetchType.LAZY)
-    private List<Task> tasksAssigned;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Notification> notifications;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
 }
