@@ -3,9 +3,11 @@ package com.spring.techpractica.UI.Rest.Controller.User.Profile.CompleteAccount;
 import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountCommand;
 import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountUseCase;
 import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
+import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Controller.User.Profile.CompleteAccount.Request.CompleteAccountRequest;
+import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
+import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -50,21 +52,23 @@ public class CompleteAccountController {
     })
     @PostMapping("/")
     public ResponseEntity<?> completeAccount(@RequestBody @Valid CompleteAccountRequest request
-    , @AuthenticationPrincipal UserAuthentication userAuthentication) {
+            , @AuthenticationPrincipal UserAuthentication userAuthentication) {
 
-        completeAccountUseCase.execute(new CompleteAccountCommand(userAuthentication.getUserId(),
+
+        User user = completeAccountUseCase.execute(new CompleteAccountCommand(userAuthentication.getUserId(),
                 request.firstName(),
                 request.lastName(),
                 request.brief(),
                 request.skillsIds(),
                 request.socialAccountRequests().stream().map(
                         socialAccountRequest -> new SocialAccountRequest(socialAccountRequest.getPlatformName()
-                                ,socialAccountRequest.getProfileUrl())
+                                , socialAccountRequest.getProfileUrl())
                 ).toList()
         ));
+        UserResources response = new UserResources(user);
 
         return ResponseEntity.accepted().body(StandardSuccessResponse.builder()
-                .data(request)
+                .data(response)
                 .message("Account completed successfully")
                 .status(HttpStatus.ACCEPTED.value())
                 .build());

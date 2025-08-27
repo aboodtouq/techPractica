@@ -4,7 +4,6 @@ import com.spring.techpractica.Core.Notification.Entity.Notification;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Role.Entity.Role;
 import com.spring.techpractica.Core.Shared.BaseEntity;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
@@ -38,11 +37,13 @@ public class User extends BaseEntity {
 
     @Column(name = "brief")
     private String brief;
+
     public void addInfo(String firstName, String lastName, String brief) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.brief = brief;
     }
+
     @Column(name = "email")
     private String email;
 
@@ -70,7 +71,7 @@ public class User extends BaseEntity {
     @JoinTable(name = "USERS_SKILLS",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
-    private Set<Technology> skills=new LinkedHashSet<>();
+    private Set<Technology> skills = new LinkedHashSet<>();
 
     public void addSkills(Set<Technology> skills) {
         if (this.skills == null) {
@@ -82,8 +83,8 @@ public class User extends BaseEntity {
         this.skills.addAll(skills);
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
-    private List<SocialAccount> socialAccounts=new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<SocialAccount> socialAccounts = new ArrayList<>();
 
     public void addSocialAccounts(List<SocialAccount> socialAccounts) {
         if (this.socialAccounts == null) {

@@ -1,5 +1,6 @@
 package com.spring.techpractica.Application.User.Profile.CompleteAccount;
 
+import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.SocialAccount.SocialAccountFactory;
@@ -26,10 +27,14 @@ public class CompleteAccountUseCase {
     private final SocialAccountFactory socialAccountFactory;
 
     @Transactional
-    public void execute(CompleteAccountCommand command) {
+    public User execute(CompleteAccountCommand command) {
 
         User user = userRepository.findById(command.userId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.userId()));
+
+        if(user.isProfileComplete()){
+            throw new ResourcesDuplicateException(user.getName());
+        }
 
         Set<Technology> technologies = command.skillsIds().stream()
                 .map(id -> technologyRepository.findById(id)
@@ -57,6 +62,6 @@ public class CompleteAccountUseCase {
         user.addInfo(command.firstName(),command.lastName(),command.brief());
 
         user.completed();
-        userRepository.update(user);
+       return userRepository.update(user);
     }
 }
