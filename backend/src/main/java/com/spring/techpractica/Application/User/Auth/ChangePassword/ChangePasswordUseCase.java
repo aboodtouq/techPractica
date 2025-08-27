@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.User.ChangePassword;
+package com.spring.techpractica.Application.User.Auth.ChangePassword;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.Service.UserService;

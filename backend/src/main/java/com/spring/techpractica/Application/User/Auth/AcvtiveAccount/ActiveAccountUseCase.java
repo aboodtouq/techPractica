@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.User.AcvtiveAccount;
+package com.spring.techpractica.Application.User.Auth.AcvtiveAccount;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;

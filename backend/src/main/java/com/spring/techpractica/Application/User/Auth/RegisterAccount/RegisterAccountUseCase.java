@@ -1,7 +1,6 @@
-package com.spring.techpractica.Application.User.RegisterAccount;
+package com.spring.techpractica.Application.User.Auth.RegisterAccount;
 
 import com.spring.techpractica.Core.User.Event.UserRegistrationEvent;
-import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserFactory;
 import com.spring.techpractica.Core.User.UserRepository;

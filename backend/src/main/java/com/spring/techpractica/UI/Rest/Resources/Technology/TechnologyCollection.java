@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 public class TechnologyCollection {
+
     private final List<TechnologyResources> technologies;
 
     public TechnologyCollection(List<Technology> technologies) {
