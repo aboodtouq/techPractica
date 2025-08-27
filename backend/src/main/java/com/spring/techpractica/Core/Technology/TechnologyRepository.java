@@ -14,6 +14,4 @@ public interface TechnologyRepository extends JpaRepository<Technology, UUID> {
     List<Technology> findAllByNameIn(Collection<String> names);
 
     Optional<Technology> findTechnologyByName(String technology);
-
-
 }
