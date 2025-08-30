@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface TechnologyRepository extends BaseRepository<Technology> {
     boolean existsByName(String name);
 
-    List<Technology> findAllByNameIn(Collection<String> names);
+    List<Technology> findAllByNames(Collection<String> names);
 
     Optional<Technology> findTechnologyByName(String technology);
 

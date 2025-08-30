@@ -19,7 +19,7 @@ import java.util.UUID;
 public class JpaSystemRepository implements SystemRepository {
     private final JpaSystem jpaSystem;
 
-    @Transactional
+
     @Override
     public System save(System system) {
         return jpaSystem.save(system);
@@ -41,7 +41,7 @@ public class JpaSystemRepository implements SystemRepository {
     }
 
     @Override
-    public List<System> findAllByNameIn(Collection<String> names) {
+    public List<System> findAllByNames(Collection<String> names) {
         return jpaSystem.findAllByNameIn(names);
     }
 

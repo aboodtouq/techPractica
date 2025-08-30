@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface FieldRepository extends BaseRepository<Field> {
     boolean existsByName(String name);
 
-    List<Field> findAllByNameIn(Collection<String> names);
+    List<Field> findAllByNames(Collection<String> names);
 
     Optional<Field> findFieldByName(String fieldName);
 

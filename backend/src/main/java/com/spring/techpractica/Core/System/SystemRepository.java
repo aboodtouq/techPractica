@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface SystemRepository extends BaseRepository<System> {
     boolean existsByName(String name);
 
-    List<System> findAllByNameIn(Collection<String> names);
+    List<System> findAllByNames(Collection<String> names);
 
     Optional<System> findSystemByName(String system);
 

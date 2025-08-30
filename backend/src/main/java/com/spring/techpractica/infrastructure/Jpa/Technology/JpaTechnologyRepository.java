@@ -18,7 +18,6 @@ public class JpaTechnologyRepository implements TechnologyRepository {
     private final JpaTechnology jpaTechnology;
 
     @Override
-    @Transactional
     public Technology save(Technology technology) {
         return jpaTechnology.save(technology);
     }
@@ -49,7 +48,7 @@ public class JpaTechnologyRepository implements TechnologyRepository {
     }
 
     @Override
-    public List<Technology> findAllByNameIn(Collection<String> names) {
+    public List<Technology> findAllByNames(Collection<String> names) {
         return jpaTechnology.findAllByNameIn(names);
     }
 

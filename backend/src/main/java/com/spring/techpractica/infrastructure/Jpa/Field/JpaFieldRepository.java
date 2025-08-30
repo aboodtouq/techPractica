@@ -18,7 +18,6 @@ public class JpaFieldRepository implements FieldRepository {
     private final JpaField jpaField;
 
     @Override
-    @Transactional
     public Field save(Field field) {
         return jpaField.save(field);
     }
@@ -44,7 +43,7 @@ public class JpaFieldRepository implements FieldRepository {
     }
 
     @Override
-    public List<Field> findAllByNameIn(Collection<String> names) {
+    public List<Field> findAllByNames(Collection<String> names) {
         return jpaField.findAllByNameIn(names);
     }
 
