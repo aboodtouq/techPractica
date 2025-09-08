@@ -1,6 +1,5 @@
 package com.spring.techpractica.Application.User.Profile.UpdateProfile;
 
-import com.spring.techpractica.Core.Shared.Exception.OperationDuplicateException;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
 import com.spring.techpractica.Core.SocialAccount.SocialAccountFactory;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,46 +25,48 @@ public class UpdateProfileUseCase {
 
     @Transactional
     public User execute(UpdateProfileCommand command) {
-        User user = userRepository.findById(command.userId())
-                .orElseThrow(() -> new ResourcesNotFoundException(command.userId()));
+        User user = userRepository.getOrThrowByID(command.userId());
 
-		Set<Technology> technologies = command.skillsIds()
-				.stream()
-				.map(id -> technologyRepository.findById(id)
-						.orElseThrow(() -> new ResourcesNotFoundException(id)))
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+        Set<Technology> technologies =
+                new HashSet<>(technologyRepository.findAllByIds(command.skillsIds()));
 
-		List<SocialAccountRequest> requests = command.socialAccountRequests();
-		Map<PlatformName, String> requestByPlatform = new LinkedHashMap<>();
-		for (SocialAccountRequest req : requests) {
-			requestByPlatform.put(req.platformName(), req.profileUrl());
-		}
+        if (technologies.size() != command.skillsIds().size()) {
+            throw new ResourcesNotFoundException(command.skillsIds().toString());
+        }
 
-		List<SocialAccount> existingAccounts = user.getSocialAccounts();
-		List<SocialAccount> mergedAccounts = new ArrayList<>();
+        List<SocialAccountRequest> requests = command.socialAccountRequests();
 
-		for (SocialAccount account : existingAccounts) {
-			PlatformName platform = account.getId().getPlatformName();
-			if (requestByPlatform.containsKey(platform)) {
-				account.setProfileUrl(requestByPlatform.get(platform));
-				requestByPlatform.remove(platform);
-			}
-			mergedAccounts.add(account);
-		}
+        Map<PlatformName, String> requestByPlatform = new LinkedHashMap<>();
 
-		requestByPlatform.forEach((platform, url) -> {
-			SocialAccount created = socialAccountFactory.create(platform, url, user);
-			created.setUser(user);
-			mergedAccounts.add(created);
-		});
+        for (SocialAccountRequest req : requests) {
+            requestByPlatform.put(req.platformName(), req.profileUrl());
+        }
+
+        List<SocialAccount> existingAccounts = user.getSocialAccounts();
+        List<SocialAccount> mergedAccounts = new ArrayList<>();
+
+        for (SocialAccount account : existingAccounts) {
+            PlatformName platform = account.getId().getPlatformName();
+            if (requestByPlatform.containsKey(platform)) {
+                account.setProfileUrl(requestByPlatform.get(platform));
+                requestByPlatform.remove(platform);
+            }
+            mergedAccounts.add(account);
+        }
+
+        requestByPlatform.forEach((platform, url) -> {
+            SocialAccount created = socialAccountFactory.create(platform, url, user);
+            created.setUser(user);
+            mergedAccounts.add(created);
+        });
 
 
-		user.setSocialAccounts(mergedAccounts);
+        user.setSocialAccounts(mergedAccounts);
 
-		user.addSkills(technologies);
+        user.addSkills(technologies);
 
-		user.addInfo(command.firstName(), command.lastName(), command.brief());
+        user.addInfo(command.firstName(), command.lastName(), command.brief());
 
-		return userRepository.update(user);
+        return userRepository.update(user);
     }
 }
