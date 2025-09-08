@@ -43,3 +43,5 @@ build
 *.iml
 .gradle*
 .gradle
+../.idea
+../.idea*
