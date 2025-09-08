@@ -60,7 +60,6 @@ public class UpdateProfileUseCase {
             mergedAccounts.add(created);
         });
 
-
         user.setSocialAccounts(mergedAccounts);
 
         user.addSkills(technologies);
