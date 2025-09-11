@@ -1,5 +1,6 @@
 package com.spring.techpractica.Application.Session.update;
 
+import com.spring.techpractica.Application.Session.create.CreateSessionCommand;
 import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Field.FieldRepository;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
@@ -7,6 +8,7 @@ import com.spring.techpractica.Core.Requirement.RequirementFactory;
 import com.spring.techpractica.Core.RequirementTechnology.RequirementTechnologyFactory;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
+import com.spring.techpractica.Core.Session.service.AddRequirementsForSessionService;
 import com.spring.techpractica.Core.SessionMembers.model.Role;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.Shared.Exception.UnauthorizedActionException;
@@ -31,14 +33,12 @@ public class UpdateSessionUseCase {
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
     private final SystemRepository systemRepository;
-    private final FieldRepository fieldRepository;
-    private final RequirementFactory requirementFactory;
-    private final TechnologyRepository technologyRepository;
-    private final RequirementTechnologyFactory requirementTechnologyFactory;
+    private final AddRequirementsForSessionService requirementsForSessionService;
 
     @Transactional
     public Session execute(UpdateSessionCommand command) {
         User user = userRepository.getOrThrowByID(command.userId());
+
         Session session = sessionRepository.getOrThrowByID(command.sessionId());
 
         validateSessionOwner(session, user);
@@ -51,9 +51,7 @@ public class UpdateSessionUseCase {
     }
 
     private void validateSessionOwner(Session session, User user) {
-        boolean isOwner = session.getMembers().stream()
-                .anyMatch(member -> member.getUser().getId().equals(user.getId())
-                        && member.getRole() == Role.OWNER);
+        boolean isOwner = session.isOwner(user.getId());
 
         if (!isOwner) {
             throw new UnauthorizedActionException("User must be the session owner to update it");
@@ -67,24 +65,15 @@ public class UpdateSessionUseCase {
 
     private void updateRequirementsForSession(Session session, UpdateSessionCommand command) {
 
-        session.getRequirements().clear();
+        session.clearRequirements();
 
-        for (var requirementRequest : command.requirements()) {
-            Field field = fieldRepository.getOrThrowByID(requirementRequest.getFieldId());
-
-            Requirement requirement = requirementFactory.create(session, field);
-            session.addRequirement(requirement);
-
-            List<Technology> technologies = technologyRepository
-                    .findAllByIds(new HashSet<>(requirementRequest.getTechnologies()));
-
-            if (technologies.size() != requirementRequest.getTechnologies().size()) {
-                throw new ResourcesNotFoundException(requirementRequest.getTechnologies().toString());
-            }
-
-            technologies.stream()
-                    .map(tech -> requirementTechnologyFactory.create(requirement, tech))
-                    .forEach(requirement::addRequirementTechnology);
-        }
+        requirementsForSessionService.addRequirementsForSession(session, new CreateSessionCommand(
+                command.userId(),
+                command.name(),
+                command.description(),
+                command.isPrivate(),
+                command.system(),
+                command.requirements()
+        ));
     }
 }
