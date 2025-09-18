@@ -6,6 +6,8 @@ import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.System.Entity.System;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,4 +48,10 @@ public class JpaSessionRepository implements SessionRepository {
     public List<Session> getSessionsBySystems(List<System> systems, Pageable pageable) {
         return jpaSession.findAllBySystems(systems, pageable);
     }
+
+    @Override
+    public List<Session> findAllWithSpecification(Specification<Session> specification, Pageable pageable) {
+        return jpaSession.findAll(specification, pageable).getContent();
+    }
+
 }

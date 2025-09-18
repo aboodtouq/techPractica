@@ -4,6 +4,8 @@ import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseRepository;
 import com.spring.techpractica.Core.System.Entity.System;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -12,4 +14,6 @@ public interface SessionRepository extends BaseRepository<Session> {
 
     List<Session> getSessionsBySystems(List<System> systems, Pageable pageable);
 
+
+    List<Session> findAllWithSpecification(Specification<Session> specification, Pageable pageable);
 }
