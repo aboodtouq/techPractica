@@ -24,6 +24,23 @@ import java.util.List;
 public class GetSessionsBySpecificationsController {
 
     private final GetSessionsBySpecificationsUseCase useCase;
+    @Operation(
+            summary = "Get sessions by specification",
+            description = "Retrieves a paginated list of sessions filtered by optional field and session names with optional sorting."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Sessions retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = StandardSuccessResponse.class)
+                    )
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid page, size, or sort parameters", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No sessions found for the given filters", content = @Content),
+            @ApiResponse(responseCode = "501", description = "Operation not supported", content = @Content)
+    })
 
     @GetMapping("/spec")
     public ResponseEntity<?> getSessionsBySpecification(
