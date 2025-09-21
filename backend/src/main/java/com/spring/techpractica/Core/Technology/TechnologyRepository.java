@@ -1,7 +1,10 @@
 package com.spring.techpractica.Core.Technology;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Shared.BaseRepository;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.*;
 
@@ -15,4 +18,7 @@ public interface TechnologyRepository extends BaseRepository<Technology> {
     List<Technology> findAll();
 
     List<Technology> findAllByIds(Set<UUID> ids);
+
+    List<Technology> findAllByFieldId(UUID fieldId);
 }
+
