@@ -15,7 +15,9 @@ public class GetTechnologiesByFieldUseCase {
 
     public List<Technology> execute(GetTechnologiesByFieldCommand command) {
         List<Technology> technologies = technologyRepository.findAllByFieldId(command.fieldId());
-
+        if (technologies.isEmpty() || technologies == null) {
+            throw new ResourcesNotFoundException("No technologies found for field id " + command.fieldId());
+        }
         return technologies;
     }
 }
