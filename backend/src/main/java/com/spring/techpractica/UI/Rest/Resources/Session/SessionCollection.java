@@ -9,11 +9,20 @@ import java.util.List;
 @Getter
 public class SessionCollection {
 
-    @JsonValue
     private final List<SessionResources> sessions;
+
+    private final int totalItems;
+
+    private final int totalPages;
+
+    private final int pageSize=6;
 
     public SessionCollection(List<Session> sessions) {
         this.sessions = sessions.stream().map(SessionResources::new)
                 .toList();
+        this.totalItems = sessions.size();
+
+        this.totalPages = (int) Math.ceil((double) sessions.size() /pageSize);
     }
+
 }
