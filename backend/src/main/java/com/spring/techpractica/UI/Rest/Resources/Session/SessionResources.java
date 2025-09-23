@@ -24,6 +24,7 @@ public class SessionResources {
     private RequirementCollection requirements;
     private String ownerFullName;
 
+
     public SessionResources(Session session) {
         this.id = session.getId();
         this.name = session.getName();

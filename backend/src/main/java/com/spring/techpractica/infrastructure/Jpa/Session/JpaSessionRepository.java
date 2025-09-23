@@ -7,6 +7,8 @@ import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.Core.User.User;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -49,6 +51,10 @@ public class JpaSessionRepository implements SessionRepository {
     }
 
     @Override
+    public List<Session> findAllWithSpecification(Specification<Session> specification, Pageable pageable) {
+        return jpaSession.findAll(specification, pageable).getContent();
+    }
+
     public List<Session> getSessionsByUser(UUID userId) {
         return jpaSession.findAllByUserId(userId);
     }
