@@ -22,7 +22,7 @@ public class SessionCollection {
                 .toList();
         this.totalItems = totalItems;
 
-        this.totalPages = (int) Math.ceil((double) sessions.size() /pageSize);
+        this.totalPages = (int) Math.ceil((double) totalItems /pageSize);
     }
 
 }
