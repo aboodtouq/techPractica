@@ -2,6 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.GetSessio
 
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsCommand;
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
+import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,9 @@ import java.util.List;
 public class GetSessionsBySpecificationsController {
 
     private final GetSessionsBySpecificationsUseCase useCase;
+
+    private final GetSessionsCountUseCase getSessionsCountUseCase;
+
     @Operation(
             summary = "Get sessions by specification",
             description = "Retrieves a paginated list of sessions filtered by optional field and session names with optional sorting."
@@ -51,7 +55,7 @@ public class GetSessionsBySpecificationsController {
             @RequestParam(defaultValue = "10") int size) {
 
         var response = new SessionCollection(
-                useCase.execute(new GetSessionsBySpecificationsCommand(sort, fieldName, sessionName, page, size))
+                useCase.execute(new GetSessionsBySpecificationsCommand(sort, fieldName, sessionName, page, size)),getSessionsCountUseCase.execute()
         );
 
         return ResponseEntity.ok(StandardSuccessResponse.<SessionCollection>builder()

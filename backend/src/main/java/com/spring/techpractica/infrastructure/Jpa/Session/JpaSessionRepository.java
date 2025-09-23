@@ -58,4 +58,9 @@ public class JpaSessionRepository implements SessionRepository {
     public List<Session> getSessionsByUser(UUID userId) {
         return jpaSession.findAllByUserId(userId);
     }
+
+    @Override
+    public long getSessionsCount() {
+        return jpaSession.getAllSessionsCount();
+    }
 }

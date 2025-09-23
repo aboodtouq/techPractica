@@ -25,4 +25,7 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
             "JOIN s.members m " +
             "WHERE m.user.id = :userId")
     List<Session> findAllByUserId(@Param("userId") UUID userId);
+
+    @Query("SELECT COUNT(s) FROM Session s")
+    long getAllSessionsCount();
 }

@@ -2,6 +2,8 @@ package com.spring.techpractica.UI.Rest.Controller.Session.ExploreSessions;
 
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsCommand;
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsUseCase;
+import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
+import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
@@ -30,6 +32,7 @@ import java.util.UUID;
 public class ExploreSessionsController {
 
     private final ExploreSessionsUseCase exploreSessionsUseCase;
+    private final GetSessionsCountUseCase getSessionsCountUseCase;
     private final JwtExtracting jwtExtracting;
     private final JwtValidationChain jwtValidation;
 
@@ -66,7 +69,7 @@ public class ExploreSessionsController {
             SessionCollection response = new SessionCollection(
                     exploreSessionsUseCase.execute(
                             new ExploreSessionsCommand(uuid, page, size)
-                    )
+                    ),getSessionsCountUseCase.execute()
             );
 
             return ResponseEntity.ok(StandardSuccessResponse.<SessionCollection>builder()
