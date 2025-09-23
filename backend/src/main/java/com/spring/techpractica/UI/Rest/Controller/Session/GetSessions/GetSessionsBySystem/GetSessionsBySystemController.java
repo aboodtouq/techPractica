@@ -2,6 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.GetSessio
 
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionsBySystem.GetSessionsBySystemCommand;
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionsBySystem.GetSessionsBySystemUseCase;
+import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -25,6 +26,9 @@ import java.util.UUID;
 public class GetSessionsBySystemController {
 
     private final GetSessionsBySystemUseCase getSessionsBySystemUseCase;
+
+
+    private final GetSessionsCountUseCase getSessionsCountUseCase;
 
     @Operation(
             summary = "Get sessions by system",
@@ -51,7 +55,9 @@ public class GetSessionsBySystemController {
 
         SessionCollection response = new SessionCollection(
                 getSessionsBySystemUseCase.execute(
-                        new GetSessionsBySystemCommand(systemId, page, size)));
+                        new GetSessionsBySystemCommand(systemId, page, size)),
+                getSessionsCountUseCase.execute()
+        );
 
         return ResponseEntity.ok(StandardSuccessResponse.<SessionCollection>builder()
                 .data(response)

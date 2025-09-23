@@ -1,5 +1,6 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.UserSessions;
 
+import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.Application.Session.GetSessions.UserSessions.GetUserSessionsUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
@@ -28,6 +29,9 @@ public class GetUserSessionsController {
 
     private final GetUserSessionsUseCase getUserSessionsUseCase;
 
+
+    private final GetSessionsCountUseCase getSessionsCountUseCase;
+
     @Operation(
             summary = "Get user sessions",
             description = "Retrieves all sessions that belong to the currently authenticated user"
@@ -46,7 +50,7 @@ public class GetUserSessionsController {
 
         List<Session> userSessions = getUserSessionsUseCase.execute(userId);
 
-        SessionCollection sessionCollection = new SessionCollection(userSessions);
+        SessionCollection sessionCollection = new SessionCollection(userSessions,getSessionsCountUseCase.execute());
 
         return ResponseEntity.ok(StandardSuccessResponse.<SessionCollection>builder()
                 .data(sessionCollection)
