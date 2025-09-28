@@ -2,6 +2,7 @@ package com.spring.techpractica.Application.Session.ExploreSession;
 
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
@@ -39,6 +40,9 @@ public class ExploreSessionsUseCase {
             );
         }
 
-        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
+        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size())).stream()
+                .filter(session -> session.getStatus() != SessionStatus.DELETED
+                        && session.getStatus() != SessionStatus.ENDED)
+                .toList();
     }
 }

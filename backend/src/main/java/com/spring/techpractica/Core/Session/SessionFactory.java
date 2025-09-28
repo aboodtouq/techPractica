@@ -13,7 +13,7 @@ public class SessionFactory {
                 .name(command.name())
                 .description(command.description())
                 .isPrivate(command.isPrivate())
-                .isRunning(false)
+                .status(SessionStatus.WAITING)
                 .build();
     }
 }

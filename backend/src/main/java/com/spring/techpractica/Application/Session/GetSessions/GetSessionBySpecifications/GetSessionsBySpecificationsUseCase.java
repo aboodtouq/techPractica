@@ -2,6 +2,7 @@ package com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpec
 
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.infrastructure.Jpa.Session.SessionSpecifications;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,11 @@ public class GetSessionsBySpecificationsUseCase {
 
         Pageable pageable = buildPageable(command.page(), command.size(), command.sort());
 
-        return sessionRepository.findAllWithSpecification(specification, pageable);
+        return sessionRepository.findAllWithSpecification(specification, pageable)
+                .stream()
+                .filter(session -> session.getStatus() != SessionStatus.DELETED
+                        && session.getStatus() != SessionStatus.ENDED)
+                .toList();
     }
 
     private Pageable buildPageable(int page, int size, String sort) {
