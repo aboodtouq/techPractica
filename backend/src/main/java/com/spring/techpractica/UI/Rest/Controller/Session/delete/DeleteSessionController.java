@@ -58,7 +58,7 @@ public class DeleteSessionController {
                     content = @Content
             )
     })
-    @PutMapping("/delete/{sessionId}")
+    @DeleteMapping("/{sessionId}")
     public ResponseEntity<?> deleteSession(
             @AuthenticationPrincipal UserAuthentication userAuthentication,
             @PathVariable UUID sessionId) {
