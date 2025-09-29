@@ -27,9 +27,6 @@ public class GetSessionsBySystemUseCase {
         return sessionRepository.getSessionsBySystems(
                 List.of(system),
                 PageRequest.of(command.size(), command.page())
-        ).stream()
-                .filter(session -> session.getStatus() != SessionStatus.DELETED
-                        && session.getStatus() != SessionStatus.ENDED)
-                .toList();
+        );
     }
 }

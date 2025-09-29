@@ -39,10 +39,6 @@ public class ExploreSessionsUseCase {
                     "Session exploration for users with completed profiles is not implemented yet"
             );
         }
-
-        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size())).stream()
-                .filter(session -> session.getStatus() != SessionStatus.DELETED
-                        && session.getStatus() != SessionStatus.ENDED)
-                .toList();
+        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
     }
 }

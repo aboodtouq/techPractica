@@ -2,6 +2,7 @@ package com.spring.techpractica.infrastructure.Jpa.Session;
 
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.System.Entity.System;
 import lombok.AllArgsConstructor;
@@ -41,12 +42,13 @@ public class JpaSessionRepository implements SessionRepository {
 
     @Override
     public List<Session> exploreSessions(Pageable pageable) {
-        return jpaSession.findAll(pageable).getContent();
+        return jpaSession.findAllExcludeStatuses(List.of(SessionStatus.DELETED, SessionStatus.ENDED), pageable).getContent();
+
     }
 
     @Override
     public List<Session> getSessionsBySystems(List<System> systems, Pageable pageable) {
-        return jpaSession.findAllBySystems(systems, pageable);
+        return jpaSession.findAllBySystemsExcludeStatuses(systems,List.of(SessionStatus.DELETED, SessionStatus.ENDED), pageable).getContent();
     }
 
     @Override
