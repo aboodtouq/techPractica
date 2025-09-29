@@ -2,8 +2,11 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.System.CreateSystem;
 
 import com.spring.techpractica.Application.Admin.System.CreateSystem.CreateSystemCommand;
 import com.spring.techpractica.Application.Admin.System.CreateSystem.CreateSystemUseCase;
+import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
+import com.spring.techpractica.Core.Shared.Exception.UnauthorizedActionException;
 import com.spring.techpractica.Core.System.Entity.System;
+import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -17,6 +20,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,14 +48,15 @@ public class CreateSystemController {
     @PostMapping("/")
     public ResponseEntity<?> createSystem(@RequestBody @Valid CreateSystemRequest request) {
 
-            System system = createSystemUseCase.execute(new CreateSystemCommand(request.name()));
 
-            SystemResources responseData = new SystemResources(system);
-            return ResponseEntity.ok(StandardSuccessResponse.<SystemResources>builder()
-                    .data(responseData)
-                    .message("Created System successfully")
-                    .status(HttpStatus.CREATED.value())
-                    .build());
+        System system = createSystemUseCase.execute(new CreateSystemCommand(request.name()));
+
+        SystemResources responseData = new SystemResources(system);
+        return ResponseEntity.ok(StandardSuccessResponse.<SystemResources>builder()
+                .data(responseData)
+                .message("Created System successfully")
+                .status(HttpStatus.CREATED.value())
+                .build());
 
     }
 }
