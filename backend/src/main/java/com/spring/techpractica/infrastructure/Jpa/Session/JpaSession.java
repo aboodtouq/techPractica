@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,18 +22,13 @@ import java.util.UUID;
 public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificationExecutor<Session> {
 
 
-    @Query("SELECT DISTINCT s FROM Session s JOIN s.systems sys " +
-            "WHERE sys IN :systems AND s.status NOT IN :excludedStatuses")
-    Page<Session> findAllBySystemsExcludeStatuses(
-            @Param("systems") List<System> systems,
-            @Param("excludedStatuses") List<SessionStatus> excludedStatuses,
+    Page<Session> findAllBySystemsAndStatusNotIn(
+             List<System> systems,
+            List<SessionStatus> excludedStatuses,
             Pageable pageable
     );
 
-    @Query("SELECT s FROM Session s WHERE s.status NOT IN :excludedStatuses")
-    Page<Session> findAllExcludeStatuses(@Param("excludedStatuses") List<SessionStatus> excludedStatuses, Pageable pageable);
-
-
+    Page<Session> findAllByStatusNotIn(List<SessionStatus> statuses, Pageable pageable);
 
     @Query("SELECT s FROM Session s " +
             "JOIN s.members m " +
