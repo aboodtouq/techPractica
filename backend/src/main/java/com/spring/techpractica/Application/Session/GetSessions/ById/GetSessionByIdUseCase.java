@@ -13,7 +13,7 @@ public class GetSessionByIdUseCase {
 
     private final SessionRepository sessionRepository;
 
-    public Session getSessionById(UUID sessionId) {
+    public Session execute(UUID sessionId) {
         return sessionRepository.getOrThrowByID(sessionId);
     }
 }
