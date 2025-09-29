@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.Session;
 
 import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.SessionMembers.model.Role;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ public class SessionResources {
     private String name;
     private String description;
     private boolean isPrivate;
-    private boolean isRunning;
+    private SessionStatus status;
     private SystemResources system;
     private RequirementCollection requirements;
     private String ownerFullName;
@@ -30,7 +30,7 @@ public class SessionResources {
         this.name = session.getName();
         this.description = session.getDescription();
         this.isPrivate = session.isPrivate();
-        this.isRunning = session.isRunning();
+        this.status = session.getStatus();
         this.ownerFullName = session.getOwnerFullName();
 
         if (session.getSystems() != null && !session.getSystems().isEmpty()) {

@@ -1,6 +1,7 @@
 package com.spring.techpractica.Core.Session.Entity;
 
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.Core.SessionMembers.Entity.SessionMember;
 import com.spring.techpractica.Core.SessionMembers.model.Role;
 import com.spring.techpractica.Core.Shared.BaseEntity;
@@ -38,8 +39,8 @@ public class Session extends BaseEntity {
             orphanRemoval = true)
     private List<SessionMember> members = new ArrayList<>();
 
-    @Column(name = "is_running")
-    private boolean isRunning;
+    @Column(name = "status")
+    private SessionStatus status;
 
 
     @OneToMany(mappedBy = "session",
