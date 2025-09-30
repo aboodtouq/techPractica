@@ -57,7 +57,7 @@ public class JpaSessionRepository implements SessionRepository {
     }
 
     public Page<Session> getSessionsByUser(UUID userId, Pageable pageable) {
-        return jpaSession.findAllByUserId(userId, pageable);
+        return jpaSession.findAllByUserIdAndStatusNotIn(userId,List.of(SessionStatus.DELETED), pageable);
     }
 
     @Override

@@ -32,8 +32,12 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
 
     @Query("SELECT s FROM Session s " +
             "JOIN s.members m " +
-            "WHERE m.user.id = :userId")
-    Page<Session> findAllByUserId(@Param("userId") UUID userId, Pageable pageable);
+            "WHERE m.user.id = :userId " +
+            "AND s.status NOT IN :statuses")
+    Page<Session> findAllByUserIdAndStatusNotIn(@Param("userId") UUID userId,
+                                                @Param("statuses") List<SessionStatus> statuses,
+                                                Pageable pageable);
+
 
     @Query("SELECT COUNT(s) FROM Session s")
     long getAllSessionsCount();
