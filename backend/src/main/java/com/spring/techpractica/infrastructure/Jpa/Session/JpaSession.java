@@ -39,6 +39,6 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
                                                 Pageable pageable);
 
 
-    @Query("SELECT COUNT(s) FROM Session s")
-    long getAllSessionsCount();
+    @Query("SELECT COUNT(s) FROM Session s WHERE s.status NOT IN :statuses ")
+    long getAllSessionsCount(@Param("statuses") List<SessionStatus> statuses);
 }

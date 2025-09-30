@@ -62,6 +62,6 @@ public class JpaSessionRepository implements SessionRepository {
 
     @Override
     public long getSessionsCount() {
-        return jpaSession.getAllSessionsCount();
+        return jpaSession.getAllSessionsCount(List.of(SessionStatus.DELETED));
     }
 }
