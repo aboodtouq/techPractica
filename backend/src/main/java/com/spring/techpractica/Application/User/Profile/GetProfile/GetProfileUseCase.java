@@ -25,7 +25,7 @@ public class GetProfileUseCase {
     public User execute(GetProfileCommand command) {
         User user = userRepository.getOrThrowByID(command.userId());
 
-        if (user.isProfileComplete()) {
+        if (!user.isProfileComplete()) {
             throw new UnsupportedOperationException(
                     "user profile is not implemented yet"
             );
