@@ -64,4 +64,9 @@ public class JpaSessionRepository implements SessionRepository {
     public long getSessionsCount() {
         return jpaSession.getAllSessionsCount(List.of(SessionStatus.DELETED));
     }
+
+    @Override
+    public long getUserSessionsCount(UUID userID) {
+        return jpaSession.getAllSessionsCountByUser(List.of(SessionStatus.DELETED),userID);
+    }
 }
