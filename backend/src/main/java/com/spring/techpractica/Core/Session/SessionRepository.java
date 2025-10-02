@@ -21,4 +21,6 @@ public interface SessionRepository extends BaseRepository<Session> {
     Page<Session> getSessionsByUser(UUID userID, Pageable pageable);
 
     long getSessionsCount();
+
+    long getUserSessionsCount(UUID userID);
 }
