@@ -28,7 +28,7 @@ public class GetSessionsRequestsUseCase {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
-    private final RequestRepository requestRepository;
+
 
     public List<Request> execute(GetSessionsRequestsCommand command) {
 
@@ -42,7 +42,7 @@ public class GetSessionsRequestsUseCase {
             throw new UserAuthenticationException("You are not owner of this session");
         }
 
-        List<Request> requests = requestRepository.findBySessionId(command.sessionId());
+        List<Request> requests = sessionRepository.getRequestsBySession(command.sessionId());
 
         if(requests.isEmpty()){
             requests = new ArrayList<>();

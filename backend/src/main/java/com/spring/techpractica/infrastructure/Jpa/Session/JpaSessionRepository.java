@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
+import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
 import com.spring.techpractica.Core.Session.SessionStatus;
@@ -58,6 +59,11 @@ public class JpaSessionRepository implements SessionRepository {
 
     public Page<Session> getSessionsByUser(UUID userId, Pageable pageable) {
         return jpaSession.findAllByUserIdAndStatusNotIn(userId,List.of(SessionStatus.DELETED), pageable);
+    }
+
+    @Override
+    public List<Request> getRequestsBySession(UUID sessionID) {
+        return jpaSession.getRequestsBySession(sessionID);
     }
 
     @Override

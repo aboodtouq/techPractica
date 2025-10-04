@@ -8,5 +8,4 @@ import java.util.UUID;
 
 public interface RequestRepository extends BaseRepository<Request> {
     boolean existsByUserIdAndRequirementId(UUID id, UUID requirementId);
-    List<Request> findBySessionId(UUID sessionId);
 }
