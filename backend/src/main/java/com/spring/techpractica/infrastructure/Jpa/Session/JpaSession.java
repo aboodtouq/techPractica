@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionStatus;
@@ -48,4 +49,23 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
 
     @Query("SELECT Request FROM Session s where s.id =:sessionId")
     List<Request> getRequestsBySession(@Param("sessionId") UUID sessionId);
+    @Query("SELECT s FROM Session s " +
+            "JOIN s.requirements r " +
+            "WHERE r.field.id = :fieldId " +
+            "AND s.status NOT IN :statuses")
+    List<Session> getSessionsByField_Id(@Param("fieldId") UUID fieldId,@Param("statuses") List<SessionStatus> statuses);
+
+    @Query("SELECT s FROM Session s " +
+            "JOIN s.systems sy " +
+            "WHERE sy.id = :systemId " +
+            "AND s.status NOT IN :statuses")
+    List<Session> getSessionsBySystem_Id(@Param("systemId") UUID systemId,@Param("statuses") List<SessionStatus> statuses);
+
+    @Query("SELECT s FROM Session s " +
+            "JOIN s.requirements r " +
+            "JOIN r.requirementTechnologies rt " +
+            "WHERE rt.technology.id = :technologyId " +
+            "AND (:statuses IS NULL OR s.status NOT IN :statuses)")
+    List<Session> getSessionsByTechnology_Id(@Param("technologyId") UUID technologyId,@Param("statuses") List<SessionStatus> statuses);
+
 }

@@ -1,5 +1,6 @@
 package com.spring.techpractica.Core.Session;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Shared.BaseRepository;
@@ -16,6 +17,12 @@ public interface SessionRepository extends BaseRepository<Session> {
     List<Session> exploreSessions(Pageable pageable);
 
     List<Session> getSessionsBySystems(List<System> systems, Pageable pageable);
+
+    List<Session> getSessionsByFieldId(UUID fieldId);
+
+    List<Session> getSessionsBySystemId(UUID systemId);
+
+    List<Session> getSessionsByTechnologyId(UUID technologyId);
 
     List<Session> findAllWithSpecification(Specification<Session> specification, Pageable pageable);
 
