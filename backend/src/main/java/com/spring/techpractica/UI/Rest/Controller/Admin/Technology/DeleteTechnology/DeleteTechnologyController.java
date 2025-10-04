@@ -24,7 +24,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/admin/technologies")
 @AllArgsConstructor
-@Tag(name = "Admin - Field")
+@Tag(name = "Admin - Technology")
 public class DeleteTechnologyController {
 
     private final DeleteTechnologyUseCase deleteTechnologyUseCase;
