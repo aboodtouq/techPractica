@@ -22,7 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/admin/systems")
 @AllArgsConstructor
-@Tag(name = "Admin - Field")
+@Tag(name = "Admin - System")
 public class UpdateSystemController {
 
     private final UpdateSystemUseCase updateSystemUseCase;
