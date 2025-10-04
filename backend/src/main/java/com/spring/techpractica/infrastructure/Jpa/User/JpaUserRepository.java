@@ -4,6 +4,7 @@ import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +54,8 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> findAllBySpecifications(Specification<User> specification) {
-        return jpaUser.findAll(specification);
+    public List<User> findAllBySpecifications(Specification<User> specification, Pageable pageable) {
+        return jpaUser.findAll(specification, pageable).getContent();
     }
 
 }

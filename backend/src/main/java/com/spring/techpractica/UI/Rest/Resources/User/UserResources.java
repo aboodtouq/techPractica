@@ -6,6 +6,8 @@ import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologySummaryCol
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class UserResources {
@@ -18,6 +20,7 @@ public class UserResources {
     private TechnologySummaryCollection skills;
     private SocialAccountCollection socialAccounts;
     private final String brief;
+    private final List<String> roles;
 
     public UserResources(User user) {
         this.id = user.getId().toString();
@@ -32,5 +35,8 @@ public class UserResources {
             this.socialAccounts = new SocialAccountCollection(user.getSocialAccounts());
         }
         this.brief = user.getBrief();
+        this.roles = user.getRoles().stream()
+                .map(role -> role.getRoleType().toString())
+                .toList();
     }
 }

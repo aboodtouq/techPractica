@@ -1,6 +1,7 @@
 package com.spring.techpractica.Core.User;
 
 import com.spring.techpractica.Core.Shared.BaseRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface UserRepository extends BaseRepository<User> {
 
     void deleteAll();
 
-    List<User> findAllBySpecifications(Specification<User> specification);
+    List<User> findAllBySpecifications(Specification<User> specification, Pageable pageable);
 }
