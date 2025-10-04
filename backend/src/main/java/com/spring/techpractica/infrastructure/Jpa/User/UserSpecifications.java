@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserSpecifications {
 
-    public static Specification<User> buildDynamicSpecification (String userName, String role){
+    public  Specification<User> buildDynamicSpecification (String userName, String role){
         return (root, query, criteriaBuilder) ->{
             query.distinct(true);
 
