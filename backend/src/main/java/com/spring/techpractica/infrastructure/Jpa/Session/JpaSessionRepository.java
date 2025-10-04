@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;
@@ -50,6 +51,23 @@ public class JpaSessionRepository implements SessionRepository {
     @Override
     public List<Session> getSessionsBySystems(List<System> systems, Pageable pageable) {
         return jpaSession.findAllBySystemsAndStatusNotIn(systems,List.of(SessionStatus.DELETED, SessionStatus.ENDED), pageable).getContent();
+    }
+
+
+    @Override
+    public List<Session> getSessionsByFieldId(UUID fieldId) {
+        return jpaSession.getSessionsByField_Id(fieldId, List.of(SessionStatus.DELETED, SessionStatus.ENDED));
+    }
+
+    @Override
+    public List<Session> getSessionsBySystemId(UUID systemId) {
+        return jpaSession.getSessionsBySystem_Id(systemId, List.of(SessionStatus.DELETED, SessionStatus.ENDED));
+    }
+
+    @Override
+    public List<Session> getSessionsByTechnologyId(UUID technologyId) {
+        return jpaSession.getSessionsByTechnology_Id(technologyId, List.of(SessionStatus.DELETED, SessionStatus.ENDED));
+
     }
 
     @Override
