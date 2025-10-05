@@ -20,9 +20,9 @@ public class UserSpecifications {
             boolean hasUserName = userName != null && !userName.trim().isEmpty();
 
             if (hasRole) {
-                Path<String> rolePath = root.get("role");
+                var joinRole = root.join("roles");
                 Predicate rolePredicate = criteriaBuilder.equal(
-                        criteriaBuilder.lower(rolePath),
+                        criteriaBuilder.lower(joinRole.get("name")),
                         role.trim().toLowerCase()
                 );
                 predicates.add(rolePredicate);
