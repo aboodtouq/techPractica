@@ -22,7 +22,7 @@ public class UserSpecifications {
             if (hasRole) {
                 var joinRole = root.join("roles");
                 Predicate rolePredicate = criteriaBuilder.equal(
-                        criteriaBuilder.lower(joinRole.get("name")),
+                        criteriaBuilder.lower(joinRole.get("roleType").as(String.class)),
                         role.trim().toLowerCase()
                 );
                 predicates.add(rolePredicate);
