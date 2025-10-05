@@ -15,10 +15,10 @@ import java.util.List;
 public class GetUserBySpecificationsUseCase {
 
     private final UserRepository userRepository;
-    private final UserSpecifications  userSpecifications;
+
 
     public List<User> execute(GetUserBySpecificationsCommand command){
-        Specification<User> specification = userSpecifications
+        Specification<User> specification = UserSpecifications
                 .buildDynamicSpecification(command.userName(), command.role());
 
         return userRepository.findAllBySpecifications(specification,
