@@ -1,7 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.AccountStatus;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
