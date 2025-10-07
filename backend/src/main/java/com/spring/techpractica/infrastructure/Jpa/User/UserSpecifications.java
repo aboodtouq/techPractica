@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
+import com.spring.techpractica.Core.User.AccountStatus;
 import com.spring.techpractica.Core.User.User;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
@@ -18,6 +19,11 @@ public class UserSpecifications {
 
             boolean hasRole = role != null && !role.trim().isEmpty();
             boolean hasUserName = userName != null && !userName.trim().isEmpty();
+
+            Predicate statusPredicate = criteriaBuilder.equal(
+                    root.get("accountStatus"), AccountStatus.COMPLETE_PROFILE
+            );
+            predicates.add(statusPredicate);
 
             if (hasRole) {
                 var joinRole = root.join("roles");

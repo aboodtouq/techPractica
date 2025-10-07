@@ -1,7 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.AccountStatus;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;
@@ -56,6 +55,6 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     public List<User> findAllBySpecifications(Specification<User> specification, Pageable pageable) {
-        return jpaUser.findByAccountStatus(AccountStatus.COMPLETE_PROFILE, pageable, specification);
+        return jpaUser.findAll(specification, pageable).getContent();
     }
 }
