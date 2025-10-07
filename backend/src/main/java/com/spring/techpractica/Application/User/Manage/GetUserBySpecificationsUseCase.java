@@ -16,7 +16,6 @@ public class GetUserBySpecificationsUseCase {
 
     private final UserRepository userRepository;
 
-
     public List<User> execute(GetUserBySpecificationsCommand command){
         Specification<User> specification = UserSpecifications
                 .buildDynamicSpecification(command.userName(), command.role());

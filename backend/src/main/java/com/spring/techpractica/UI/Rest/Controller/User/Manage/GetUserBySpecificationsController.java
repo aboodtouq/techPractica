@@ -7,7 +7,6 @@ import com.spring.techpractica.UI.Rest.Resources.User.UserCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -45,8 +44,8 @@ public class GetUserBySpecificationsController {
     @GetMapping("/")
     public ResponseEntity<?> getUserBySpecifications(@RequestParam(required = false) String userName,
                                                      @RequestParam(required = false) String role,
-                                                     @RequestParam int page,
-                                                     @RequestParam int size) {
+                                                     @RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "10") int size) {
         if (page < 0 || size < 1) {
             throw new InvalidPageRequestException(page, size);
         }

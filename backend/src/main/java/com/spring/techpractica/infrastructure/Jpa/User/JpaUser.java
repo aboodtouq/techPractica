@@ -18,6 +18,4 @@ public interface JpaUser extends JpaRepository<User, UUID>, JpaSpecificationExec
 
     Optional<User> findByEmail(String email);
 
-    List<User> findByAccountStatus(AccountStatus accountStatus,
-                                   Pageable pageable, Specification<User> specification);
 }
