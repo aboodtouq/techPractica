@@ -1,7 +1,6 @@
 package com.spring.techpractica.Application.User.Auth.AcvtiveAccount;
 
 import com.spring.techpractica.Core.Shared.Exception.OperationDuplicateException;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import lombok.AllArgsConstructor;

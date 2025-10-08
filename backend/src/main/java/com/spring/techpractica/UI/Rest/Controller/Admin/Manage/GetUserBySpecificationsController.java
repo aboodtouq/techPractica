@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.Controller.User.Manage;
+package com.spring.techpractica.UI.Rest.Controller.Admin.Manage;
 
 import com.spring.techpractica.Application.User.Manage.GetUserBySpecificationsCommand;
 import com.spring.techpractica.Application.User.Manage.GetUserBySpecificationsUseCase;
