@@ -1,8 +1,12 @@
 package com.spring.techpractica.Core.User;
 
+import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -18,6 +22,7 @@ public class UserFactory {
                 .name(name)
                 .email(email)
                 .password(encryptedPassword)
+                .roles(List.of(new Role(RoleType.ROLE_USER)))
                 .build();
     }
 }
