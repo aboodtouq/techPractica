@@ -41,6 +41,4 @@ public class JpaRoleRepository implements RoleRepository {
     public List<Role> findAll() {
         return jpaRole.findAll();
     }
-
-
 }
