@@ -11,7 +11,7 @@ public class RoleResources {
     private final UUID id;
     private final String type;
 
-    RoleResources(Role role) {
+    public RoleResources(Role role) {
         this.id = role.getId();
         this.type = role.getRoleType().toString();
     }
