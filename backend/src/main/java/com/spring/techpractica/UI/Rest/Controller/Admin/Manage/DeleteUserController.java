@@ -3,6 +3,11 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Manage;
 import com.spring.techpractica.Application.Admin.Manage.DeleteUser.DeleteUserCommand;
 import com.spring.techpractica.Application.Admin.Manage.DeleteUser.DeleteUserUseCase;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +25,18 @@ public class DeleteUserController {
 
     private final DeleteUserUseCase  deleteUserUseCase;
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
+    @Operation(
+            summary = "Delete a user",
+            description = "Deletes a user by their unique UUID. Only accessible by administrators."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User deleted successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardSuccessResponse.class))),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content)
+    })
+    @DeleteMapping("/delete/{userId}")    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
         String result = deleteUserUseCase.execute(new DeleteUserCommand(userId));
 
         return ResponseEntity.ok(StandardSuccessResponse.<String>builder()
