@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("api/v1/sessions/requirements/**").authenticated()
                         .requestMatchers("api/v1/profile/").authenticated()
                         .requestMatchers("api/v1/auth/active-account", "api/v1/auth/change-password").authenticated()
+                        .requestMatchers("/api/v1/roles/**").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

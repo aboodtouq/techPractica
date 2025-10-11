@@ -6,6 +6,7 @@ import com.spring.techpractica.Core.Role.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,5 +35,10 @@ public class JpaRoleRepository implements RoleRepository {
     @Override
     public Optional<Role> findByRoleType(RoleType roleType) {
         return jpaRole.findByRoleType(roleType);
+    }
+
+    @Override
+    public List<Role> findAll() {
+        return jpaRole.findAll();
     }
 }
