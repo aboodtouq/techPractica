@@ -1,7 +1,7 @@
-package com.spring.techpractica.UI.Rest.Controller.User.Manage;
+package com.spring.techpractica.UI.Rest.Controller.Admin.Manage;
 
-import com.spring.techpractica.Application.User.Manage.GetUserBySpecificationsCommand;
-import com.spring.techpractica.Application.User.Manage.GetUserBySpecificationsUseCase;
+import com.spring.techpractica.Application.Admin.Manage.GetUerBySpecification.GetUserBySpecificationsCommand;
+import com.spring.techpractica.Application.Admin.Manage.GetUerBySpecification.GetUserBySpecificationsUseCase;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
