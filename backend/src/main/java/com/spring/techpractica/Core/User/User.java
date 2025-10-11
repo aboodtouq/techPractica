@@ -118,4 +118,8 @@ public class User extends BaseEntity {
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
+
+    public void setDeleted(){
+        this.accountStatus = AccountStatus.IS_DELETED;
+    }
 }

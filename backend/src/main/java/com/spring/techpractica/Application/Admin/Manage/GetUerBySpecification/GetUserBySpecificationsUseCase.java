@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.User.Manage;
+package com.spring.techpractica.Application.Admin.Manage.GetUerBySpecification;
 
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
