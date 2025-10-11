@@ -1,5 +1,5 @@
 package com.spring.techpractica.Core.Role.Model;
 
 public enum RoleType {
-    ROLE_USERS, ROLE_ADMIN
+    ROLE_USER, ROLE_ADMIN
 }
