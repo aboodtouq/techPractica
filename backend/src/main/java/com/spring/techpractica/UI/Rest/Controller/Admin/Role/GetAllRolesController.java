@@ -4,6 +4,11 @@ import com.spring.techpractica.Application.Admin.Role.GetAllRolesUseCase;
 import com.spring.techpractica.Core.Role.Entity.Role;
 import com.spring.techpractica.UI.Rest.Resources.Role.RoleCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +25,14 @@ public class GetAllRolesController {
 
     private final GetAllRolesUseCase getAllRolesUseCase;
 
+    @Operation(
+            summary = "Get all roles",
+            description = "Fetch all available roles in the system."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Roles fetched successfully",
+                    content = @Content(schema = @Schema(implementation = StandardSuccessResponse.class))),
+    })
     @GetMapping("/")
     public ResponseEntity<?> getAllRoles(){
         List<Role> roles = getAllRolesUseCase.getAllRoles();
