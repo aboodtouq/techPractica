@@ -1,6 +1,5 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
-import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.Session.SessionRepository;

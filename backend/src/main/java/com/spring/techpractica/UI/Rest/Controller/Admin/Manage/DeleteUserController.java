@@ -36,7 +36,7 @@ public class DeleteUserController {
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content)
     })
-    @DeleteMapping("/delete/{userId}")    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
+    @DeleteMapping("/delete/{userId}") public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
         String result = deleteUserUseCase.execute(new DeleteUserCommand(userId));
 
         return ResponseEntity.ok(StandardSuccessResponse.<String>builder()

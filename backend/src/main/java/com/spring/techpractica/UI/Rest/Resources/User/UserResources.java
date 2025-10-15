@@ -22,6 +22,8 @@ public class UserResources {
     private final String brief;
     private final List<String> roles;
 
+    //Count of Sessions
+
     public UserResources(User user) {
         this.id = user.getId().toString();
         this.firstName = user.getFirstName();

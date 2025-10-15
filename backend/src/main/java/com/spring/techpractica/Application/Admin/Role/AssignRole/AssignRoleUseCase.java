@@ -21,6 +21,7 @@ public class AssignRoleUseCase {
         User user = userRepository.getOrThrowByID(command.id());
 
 
+        //use findAll
         List<Role> roles = command.roles().stream()
                 .map(roleType -> roleRepository.findByRoleType(roleType)
                         .orElseThrow(() -> new ResourcesNotFoundException("Role not found: " + roleType)))

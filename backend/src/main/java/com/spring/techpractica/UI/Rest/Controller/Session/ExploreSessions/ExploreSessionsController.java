@@ -2,7 +2,6 @@ package com.spring.techpractica.UI.Rest.Controller.Session.ExploreSessions;
 
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsCommand;
 import com.spring.techpractica.Application.Session.ExploreSession.ExploreSessionsUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
 import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
