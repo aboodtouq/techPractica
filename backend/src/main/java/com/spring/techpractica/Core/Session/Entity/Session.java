@@ -1,7 +1,9 @@
 package com.spring.techpractica.Core.Session.Entity;
 
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;
+import com.spring.techpractica.Core.Session.SessionStatus;
 import com.spring.techpractica.Core.SessionMembers.Entity.SessionMember;
+import com.spring.techpractica.Core.SessionMembers.model.Role;
 import com.spring.techpractica.Core.Shared.BaseEntity;
 import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.Core.Task.Entity.Task;
@@ -10,6 +12,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
@@ -36,8 +39,8 @@ public class Session extends BaseEntity {
             orphanRemoval = true)
     private List<SessionMember> members = new ArrayList<>();
 
-    @Column(name = "is_running")
-    private boolean isRunning;
+    @Column(name = "status")
+    private SessionStatus status;
 
 
     @OneToMany(mappedBy = "session",
@@ -85,5 +88,23 @@ public class Session extends BaseEntity {
         this.name = name;
         this.description = description;
         this.isPrivate = isPrivate;
+    }
+
+    public boolean isOwner(UUID userId){
+        return members.stream()
+                .anyMatch(member -> member.getUser().getId().equals(userId)
+                        && member.getRole() == Role.OWNER);
+    }
+
+    public void clearRequirements() {
+        requirements.clear();
+    }
+
+    public String getOwnerFullName() {
+        return members.stream()
+                .filter(member -> isOwner(member.getUser().getId()))
+                .map(member -> member.getUser().getFullName())
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Technology;
 
+import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import com.spring.techpractica.Core.Technology.TechnologyRepository;
@@ -41,6 +42,16 @@ public class JpaTechnologyRepository implements TechnologyRepository {
     @Override
     public List<Technology> findAllByIds(Set<UUID> ids) {
         return jpaTechnology.findAllById(ids);
+    }
+
+    @Override
+    public List<Technology> findAllByFieldId(UUID fieldId) {
+        return jpaTechnology.findAllByFieldId(fieldId);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        jpaTechnology.deleteById(id);
     }
 
     @Override
