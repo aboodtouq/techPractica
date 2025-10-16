@@ -1,5 +1,6 @@
 package com.spring.techpractica.Application.Admin.Manage.GetUerBySpecification;
 
+import com.spring.techpractica.Core.User.AccountStatus;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import com.spring.techpractica.infrastructure.Jpa.User.UserSpecifications;
@@ -18,7 +19,7 @@ public class GetUserBySpecificationsUseCase {
 
     public List<User> execute(GetUserBySpecificationsCommand command){
         Specification<User> specification = UserSpecifications
-                .buildDynamicSpecification(command.userName(), command.role());
+                .buildDynamicSpecification(command.userName(), command.role(), AccountStatus.COMPLETE_PROFILE);
 
         return userRepository.findAllBySpecifications(specification,
                 PageRequest.of(command.page(), command.size()));
