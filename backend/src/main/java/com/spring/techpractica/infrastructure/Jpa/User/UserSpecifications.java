@@ -1,5 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
+import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.User.AccountStatus;
 import com.spring.techpractica.Core.User.User;
 import jakarta.persistence.criteria.Path;
@@ -11,7 +12,8 @@ import java.util.List;
 
 public class UserSpecifications {
 
-    public static Specification<User> buildDynamicSpecification (String userName, String role){
+    public static Specification<User> buildDynamicSpecification
+            (String userName, String role, AccountStatus  accountStatus) {
         return (root, query, criteriaBuilder) ->{
             query.distinct(true);
 
@@ -21,7 +23,7 @@ public class UserSpecifications {
             boolean hasUserName = userName != null && !userName.trim().isEmpty();
 
             Predicate statusPredicate = criteriaBuilder.equal(
-                    root.get("accountStatus"), AccountStatus.COMPLETE_PROFILE
+                    root.get("accountStatus"), accountStatus
             );
             predicates.add(statusPredicate);
 

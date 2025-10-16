@@ -19,11 +19,12 @@ public class UserFactory {
 
     public User create(String name,
                        String email,
-                       String password) {
+                       String password,
+                       RoleType role) {
         String encryptedPassword = passwordEncryptor.hash(password);
 
-        Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER)
-                .orElseThrow(() -> new ResourcesNotFoundException(RoleType.ROLE_USER.toString()));
+        Role userRole = roleRepository.findByRoleType(role)
+                .orElseThrow(() -> new ResourcesNotFoundException(role.toString()));
 
         return User.builder()
                 .name(name)

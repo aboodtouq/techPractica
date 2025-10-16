@@ -1,6 +1,7 @@
 package com.spring.techpractica.Application.Admin.Role.AssignRole;
 
 import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.Role.RoleRepository;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.User.User;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -20,12 +22,21 @@ public class AssignRoleUseCase {
     public String execute(AssignRoleCommand command){
         User user = userRepository.getOrThrowByID(command.id());
 
+        List<UUID> roleIds = command.roleIds();
 
-        //use findAll
-        List<Role> roles = command.roles().stream()
-                .map(roleType -> roleRepository.findByRoleType(roleType)
-                        .orElseThrow(() -> new ResourcesNotFoundException("Role not found: " + roleType)))
-                .toList();
+        List<Role> roles = roleRepository.findAllByIds(roleIds);
+
+        if (roles.size() != roleIds.size()) {
+            List<UUID> foundIds = roles.stream()
+                    .map(Role::getId)
+                    .toList();
+
+            List<UUID> missingIds = roleIds.stream()
+                    .filter(id -> !foundIds.contains(id))
+                    .toList();
+
+            throw new ResourcesNotFoundException("Roles not found for IDs: " + missingIds);
+        }
 
         user.updateRoles(roles);
 

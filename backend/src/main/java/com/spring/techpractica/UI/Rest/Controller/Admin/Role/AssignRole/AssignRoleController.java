@@ -53,8 +53,8 @@ public class AssignRoleController {
             }
     )
     @PutMapping("/assign")
-    public ResponseEntity<?> assignRole(@org.springframework.web.bind.annotation.RequestBody AssignRoleRequest request) {
-        String result = assignRoleUseCase.execute(new AssignRoleCommand(request.id(), request.roles()));
+    public ResponseEntity<?> assignRole(@RequestBody AssignRoleRequest request) {
+        String result = assignRoleUseCase.execute(new AssignRoleCommand(request.id(), request.roleIds()));
 
         return ResponseEntity.ok(StandardSuccessResponse.<String>builder()
                 .data(result)

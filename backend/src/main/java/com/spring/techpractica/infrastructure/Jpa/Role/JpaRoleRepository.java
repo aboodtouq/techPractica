@@ -41,4 +41,9 @@ public class JpaRoleRepository implements RoleRepository {
     public List<Role> findAll() {
         return jpaRole.findAll();
     }
+
+    @Override
+    public List<Role> findAllByIds(List<UUID> roleIds) {
+        return jpaRole.findAllById(roleIds);
+    }
 }
