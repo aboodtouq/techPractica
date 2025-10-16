@@ -2,6 +2,7 @@ package com.spring.techpractica.Application.User.RegisterAccount;
 
 import com.spring.techpractica.Application.User.Auth.RegisterAccount.RegisterAccountCommand;
 import com.spring.techpractica.Application.User.Auth.RegisterAccount.RegisterAccountUseCase;
+import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserFactory;
 import com.spring.techpractica.Core.User.UserRepository;
@@ -41,7 +42,7 @@ public class RegisterAccountUseCaseTest {
                 .build();
 
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(false);
-        when(userFactory.create(request.name(), request.email(), request.password())).thenReturn(user);
+        when(userFactory.create(request.name(), request.email(), request.password(), RoleType.ROLE_USER)).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
 
         assertDoesNotThrow(() -> {
@@ -52,7 +53,7 @@ public class RegisterAccountUseCaseTest {
             assertEquals("password", result.getPassword());
         });
 
-        verify(userFactory).create(request.name(), request.email(), request.password());
+        verify(userFactory).create(request.name(), request.email(), request.password(), RoleType.ROLE_USER);
         verify(userRepository).existsByEmail(user.getEmail());
         verify(userRepository).save(user);
     }
