@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Repository
@@ -56,5 +57,10 @@ public class JpaUserRepository implements UserRepository {
     @Override
     public List<User> findAllBySpecifications(Specification<User> specification, Pageable pageable) {
         return jpaUser.findAll(specification, pageable).getContent();
+    }
+
+    @Override
+    public List<User> findAllByIds(Set<UUID> ids) {
+        return jpaUser.findAllById(ids);
     }
 }
