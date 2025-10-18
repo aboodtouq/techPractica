@@ -7,7 +7,9 @@ import com.spring.techpractica.Core.Session.SessionRepository;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.Shared.Exception.UnauthorizedActionException;
 import com.spring.techpractica.Core.Task.Entity.Task;
+import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ public class CreateTaskUseCase {
     private final SessionRepository sessionRepository;
     private final FieldRepository fieldRepository;
 
+    @Transactional
     public Task execute(CreateTaskCommand command) {
         Session session = sessionRepository.getOrThrowByID(command.sessionId());
 
@@ -40,18 +43,25 @@ public class CreateTaskUseCase {
             throw new ResourcesNotFoundException(tags.stream().toList());
         }
 
+        User owner = userRepository.getOrThrowByID(command.ownerId());
+
         Set<UUID> assigneesUsersIds = command.assignees();
 
+        List<User> users = userRepository.findAllByIds(assigneesUsersIds);
 
+        if (users.size() != assigneesUsersIds.size()) {
+            throw new ResourcesNotFoundException("assigneesUsersIds not found");
+        }
 
-//        Task task = Task.builder()
-//                .fields(fields)
-//                .type(command.type())
-//                .tittle(command.title())
-//                .description(command.description())
-//                .dueDate(command.dueDate())
-//                .userOwnerId(command.ownerId())
-//
-        return null;
+        Task task = Task.builder()
+                .fields(fields)
+                .type(command.type())
+                .tittle(command.title())
+                .description(command.description())
+                .dueDate(command.dueDate())
+                .userOwnerId(owner)
+                .usersAssigned(users)
+                .build();
+
     }
 }
