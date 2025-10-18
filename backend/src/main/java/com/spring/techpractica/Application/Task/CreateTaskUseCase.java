@@ -7,6 +7,7 @@ import com.spring.techpractica.Core.Session.SessionRepository;
 import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.Core.Shared.Exception.UnauthorizedActionException;
 import com.spring.techpractica.Core.Task.Entity.Task;
+import com.spring.techpractica.Core.Task.TaskRepository;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserRepository;
 import jakarta.transaction.Transactional;
@@ -24,6 +25,8 @@ public class CreateTaskUseCase {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final FieldRepository fieldRepository;
+    private final TaskRepository taskRepository;
+
 
     @Transactional
     public Task execute(CreateTaskCommand command) {
@@ -63,5 +66,6 @@ public class CreateTaskUseCase {
                 .usersAssigned(users)
                 .build();
 
+        return taskRepository.save(task);
     }
 }
