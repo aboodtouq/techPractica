@@ -6,6 +6,8 @@ import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Task.Model.TaskType;
 import com.spring.techpractica.Core.Task.TaskRepository;
 import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.UI.Rest.Resources.Task.TaskResources;
+import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,14 @@ public class CreateTaskController {
                 )
         );
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(task);
-    }
+        TaskResources data = new TaskResources(task);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                StandardSuccessResponse.<TaskResources>builder()
+                        .data(data)
+                        .message("Task created successfully")
+                        .status(HttpStatus.CREATED.value())
+                        .build()
+        );
+    }
 }
