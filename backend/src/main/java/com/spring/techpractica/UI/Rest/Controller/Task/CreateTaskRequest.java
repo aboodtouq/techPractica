@@ -1,10 +1,10 @@
 package com.spring.techpractica.UI.Rest.Controller.Task;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-public record CreateTaskRequest(String title, String description,
+public record CreateTaskRequest(UUID sessionId, String title, String description,
                                 String type, LocalDateTime dueDate,
-                                List<UUID> assignees, List<String> tags) {
+                                Set<UUID> assignees, Set<String> tags) {
 }
