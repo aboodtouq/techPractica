@@ -303,15 +303,6 @@ export type CategoryType =
   | "Game Development"
   | "Artificial Intelligence"
   | "Mobile Development";
-
-interface ICategory {
-  title: CategoryType;
-  Icon: IconType;
-  color: string;
-  bgColor: string;
-  hoverBg: string;
-}
-
 export const categoriess = [
   {
     title: "Web ",
