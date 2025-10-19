@@ -4,7 +4,6 @@ import com.spring.techpractica.Application.Task.CreateTaskCommand;
 import com.spring.techpractica.Application.Task.CreateTaskUseCase;
 import com.spring.techpractica.Core.Task.Entity.Task;
 import com.spring.techpractica.Core.Task.Model.TaskType;
-import com.spring.techpractica.Core.Task.TaskRepository;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Task.TaskResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
 import java.util.UUID;
 
 @RestController
