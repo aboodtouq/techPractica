@@ -12,11 +12,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class JpaTaskRepository implements TaskRepository {
 
-    private final TaskRepository taskRepository;
+    private final JpaTask jpaTask;
 
     @Override
     public Task save(Task task) {
-        return taskRepository.save(task);
+        return jpaTask.save(task);
     }
 
     @Override
