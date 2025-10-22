@@ -33,8 +33,8 @@ public class RejectSessionsRequestsController {
     private final RejectSessionsRequestsUseCase rejectSessionsRequestsUseCase;
 
     @Operation(
-            summary = "reject requests for a specific session",
-            description = "reject the requests for a specific session. Requires authentication."
+            summary = "Reject requests for a specific session",
+            description = "Reject the requests for a specific session. Requires authentication."
     )
     @ApiResponses(value = {
             @ApiResponse(
