@@ -1,12 +1,9 @@
-package com.spring.techpractica.UI.Rest.Controller.Session.Request.ApproveRequest;
+package com.spring.techpractica.UI.Rest.Controller.Session.Request.ApproveSessionRequest;
 
 import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsCommand;
 import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsUseCase;
-import com.spring.techpractica.Application.Session.Request.GetSessionsRequests.GetSessionsRequestsCommand;
-import com.spring.techpractica.Application.Session.Request.GetSessionsRequests.GetSessionsRequestsUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.UI.Rest.Resources.Request.RequestCollection;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -22,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
