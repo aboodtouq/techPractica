@@ -39,7 +39,7 @@ public class ApproveSessionsRequestsController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
+                    responseCode = "200",
                     description = "Request approved successfully",
                     content = @Content(schema = @Schema(implementation = RequestResources.class))
             ),
