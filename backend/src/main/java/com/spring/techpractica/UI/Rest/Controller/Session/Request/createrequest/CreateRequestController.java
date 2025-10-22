@@ -1,14 +1,10 @@
-package com.spring.techpractica.UI.Rest.Controller.Session.GetSessionsRequests;
+package com.spring.techpractica.UI.Rest.Controller.Session.Request.createrequest;
 
-import com.spring.techpractica.Application.Session.GetSessionsRequests.GetSessionsRequestsCommand;
-import com.spring.techpractica.Application.Session.GetSessionsRequests.GetSessionsRequestsUseCase;
-import com.spring.techpractica.Application.Session.createrequest.CreateRequestCommand;
-import com.spring.techpractica.Application.Session.createrequest.CreateRequestUseCase;
+import com.spring.techpractica.Application.Session.Request.createrequest.CreateRequestCommand;
+import com.spring.techpractica.Application.Session.Request.createrequest.CreateRequestUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.UI.Rest.Resources.Request.RequestCollection;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;
-import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,26 +19,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/sessions/requests")
+@RequestMapping("/api/v1/sessions/requirements")
 @AllArgsConstructor
 @Tag(name = "Session", description = "Operations related to session requirements and requests")
-public class GetSessionsRequestsController {
+public class CreateRequestController {
 
-    private final GetSessionsRequestsUseCase getSessionsRequestsUseCase;
+    private final CreateRequestUseCase useCase;
 
     @Operation(
-            summary = "return requests for a specific session",
-            description = "retuern the requests for a specific session. Requires authentication."
+            summary = "Create a new request for a requirement",
+            description = "Creates a new request under a specific requirement. Requires authentication."
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200",
-                    description = "Request returned successfully",
+                    responseCode = "201",
+                    description = "Request created successfully",
                     content = @Content(schema = @Schema(implementation = RequestResources.class))
             ),
             @ApiResponse(
@@ -61,27 +55,26 @@ public class GetSessionsRequestsController {
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )
     })
-    @GetMapping("/{sessionId}/")
-    public ResponseEntity<?> getSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
-            , @PathVariable("sessionId") UUID sessionId) {
+    @PostMapping("/{requirementId}/requests")
+    public ResponseEntity<StandardSuccessResponse<RequestResources>> invoke(
+            @PathVariable UUID requirementId,
+            @AuthenticationPrincipal UserAuthentication userAuthentication,
+            @RequestBody CreateRequestDto createRequestDto) {
 
-        List<Request> requests = getSessionsRequestsUseCase.execute(
-                new GetSessionsRequestsCommand(
+        Request request = useCase.execute(
+                new CreateRequestCommand(
                         userAuthentication.getUserId(),
-                        sessionId
+                        requirementId,
+                        createRequestDto.getBrief()
                 )
         );
 
+        StandardSuccessResponse<RequestResources> response = StandardSuccessResponse.<RequestResources>builder()
+                .data(new RequestResources(request))
+                .message("Request created successfully")
+                .status(HttpStatus.CREATED.value())
+                .build();
 
-        RequestCollection responseData = new RequestCollection(requests);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(
-                        StandardSuccessResponse.<RequestCollection>builder()
-                                .data(responseData)
-                                .message("Requests returned successfully")
-                                .status(HttpStatus.OK.value())
-                                .build()
-                );
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

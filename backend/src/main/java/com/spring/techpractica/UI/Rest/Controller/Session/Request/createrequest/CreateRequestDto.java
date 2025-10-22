@@ -1,4 +1,4 @@
-package com.spring.techpractica.UI.Rest.Controller.Session.createrequest;
+package com.spring.techpractica.UI.Rest.Controller.Session.Request.createrequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
