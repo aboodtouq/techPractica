@@ -77,7 +77,7 @@ public class RejectSessionsRequestsController {
                 .body(
                         StandardSuccessResponse.<RequestResources>builder()
                                 .data(responseData)
-                                .message("Requests approved successfully")
+                                .message("Request rejected successfully")
                                 .status(HttpStatus.OK.value())
                                 .build()
                 );
