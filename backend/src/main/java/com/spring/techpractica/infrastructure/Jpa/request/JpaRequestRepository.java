@@ -39,4 +39,9 @@ public class JpaRequestRepository implements RequestRepository {
     return jpaRequest.existsRequestByUser_IdAndRequirement_Id(id, requirementId);
     }
 
+    @Override
+    public Optional<Request> findByIdAndSessionId(UUID requestId, UUID sessionId) {
+        return jpaRequest.findByIdAndSessionId(requestId, sessionId);
+    }
+
 }
