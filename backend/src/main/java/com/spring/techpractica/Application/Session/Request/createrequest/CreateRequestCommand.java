@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.Session.createrequest;
+package com.spring.techpractica.Application.Session.Request.createrequest;
 
 import java.util.UUID;
 

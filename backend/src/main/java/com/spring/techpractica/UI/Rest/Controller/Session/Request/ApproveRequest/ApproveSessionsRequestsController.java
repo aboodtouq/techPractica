@@ -1,9 +1,12 @@
-package com.spring.techpractica.UI.Rest.Controller.Session.createrequest;
+package com.spring.techpractica.UI.Rest.Controller.Session.Request.ApproveRequest;
 
-import com.spring.techpractica.Application.Session.createrequest.CreateRequestCommand;
-import com.spring.techpractica.Application.Session.createrequest.CreateRequestUseCase;
+import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsCommand;
+import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsUseCase;
+import com.spring.techpractica.Application.Session.Request.GetSessionsRequests.GetSessionsRequestsCommand;
+import com.spring.techpractica.Application.Session.Request.GetSessionsRequests.GetSessionsRequestsUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.UI.Rest.Resources.Request.RequestCollection;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -19,24 +22,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/sessions/requirements")
+@RequestMapping("/api/v1/sessions/requests")
 @AllArgsConstructor
 @Tag(name = "Session", description = "Operations related to session requirements and requests")
-public class CreateRequestController {
+public class ApproveSessionsRequestsController {
 
-    private final CreateRequestUseCase useCase;
+    private final ApproveSessionsRequestsUseCase approveSessionsRequestsUseCase;
 
     @Operation(
-            summary = "Create a new request for a requirement",
-            description = "Creates a new request under a specific requirement. Requires authentication."
+            summary = "approve requests for a specific session",
+            description = "approve the requests for a specific session. Requires authentication."
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
-                    description = "Request created successfully",
+                    responseCode = "200",
+                    description = "Request approved successfully",
                     content = @Content(schema = @Schema(implementation = RequestResources.class))
             ),
             @ApiResponse(
@@ -55,26 +59,28 @@ public class CreateRequestController {
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )
     })
-    @PostMapping("/{requirementId}/requests")
-    public ResponseEntity<StandardSuccessResponse<RequestResources>> invoke(
-            @PathVariable UUID requirementId,
-            @AuthenticationPrincipal UserAuthentication userAuthentication,
-            @RequestBody CreateRequestDto createRequestDto) {
+    @PutMapping("/{sessionId}/{requestId}")
+    public ResponseEntity<?> ApproveSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
+            , @PathVariable("sessionId") UUID sessionId, @PathVariable("requestId") UUID requestId) {
 
-        Request request = useCase.execute(
-                new CreateRequestCommand(
+        Request request = approveSessionsRequestsUseCase.execute(
+                new ApproveSessionsRequestsCommand(
                         userAuthentication.getUserId(),
-                        requirementId,
-                        createRequestDto.getBrief()
+                        sessionId,
+                        requestId
                 )
         );
 
-        StandardSuccessResponse<RequestResources> response = StandardSuccessResponse.<RequestResources>builder()
-                .data(new RequestResources(request))
-                .message("Request created successfully")
-                .status(HttpStatus.CREATED.value())
-                .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        RequestResources responseData = new RequestResources(request);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        StandardSuccessResponse.<RequestResources>builder()
+                                .data(responseData)
+                                .message("Requests approved successfully")
+                                .status(HttpStatus.OK.value())
+                                .build()
+                );
     }
 }
