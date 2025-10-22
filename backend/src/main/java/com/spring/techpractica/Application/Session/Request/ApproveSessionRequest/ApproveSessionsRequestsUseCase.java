@@ -30,7 +30,7 @@ public class ApproveSessionsRequestsUseCase {
         Session session = sessionRepository.findById(command.sessionId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.sessionId()));
 
-        if(!session.isOwner(user.getId())){
+        if (!session.isOwner(user.getId())) {
             throw new UserAuthenticationException("You are not owner of this session");
         }
 
