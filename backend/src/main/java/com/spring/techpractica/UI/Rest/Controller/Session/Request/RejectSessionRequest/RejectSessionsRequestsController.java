@@ -1,7 +1,5 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.Request.RejectSessionRequest;
 
-import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsCommand;
-import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsUseCase;
 import com.spring.techpractica.Application.Session.Request.RejectSessionRequest.RejectSessionsRequestsCommand;
 import com.spring.techpractica.Application.Session.Request.RejectSessionRequest.RejectSessionsRequestsUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
