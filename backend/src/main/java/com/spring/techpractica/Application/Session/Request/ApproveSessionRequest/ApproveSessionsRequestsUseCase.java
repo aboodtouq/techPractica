@@ -34,12 +34,7 @@ public class ApproveSessionsRequestsUseCase {
             throw new UserAuthenticationException("You are not owner of this session");
         }
 
-        List<Request> requests = sessionRepository.getRequestsBySession(command.sessionId());
-
-
-        Request request = requests.stream()
-                .filter(r -> r.getId().equals(command.requestId()))
-                .findFirst()
+        Request request = requestRepository.findByIdAndSessionId(command.requestId(), command.sessionId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.requestId()));
 
         request.approve();
