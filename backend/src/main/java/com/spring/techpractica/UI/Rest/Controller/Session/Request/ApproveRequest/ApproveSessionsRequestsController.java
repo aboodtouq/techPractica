@@ -61,7 +61,7 @@ public class ApproveSessionsRequestsController {
     })
     @PutMapping("/{sessionId}/{requestId}")
     public ResponseEntity<?> ApproveSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
-            , @PathVariable("sessionId") UUID sessionId,@PathVariable("requestId") UUID requestId) {
+            , @PathVariable("sessionId") UUID sessionId, @PathVariable("requestId") UUID requestId) {
 
         Request request = approveSessionsRequestsUseCase.execute(
                 new ApproveSessionsRequestsCommand(
