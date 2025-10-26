@@ -1,9 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.UserSessions;
 
-import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
-import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
-import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionCommand;
-import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionsUseCase;
+import com.spring.techpractica.application.session.get.user.sessions.count.GetUserSessionsCountCommand;
+import com.spring.techpractica.application.session.get.user.sessions.count.GetUserSessionsCountUseCase;
+import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionCommand;
+import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionsUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;

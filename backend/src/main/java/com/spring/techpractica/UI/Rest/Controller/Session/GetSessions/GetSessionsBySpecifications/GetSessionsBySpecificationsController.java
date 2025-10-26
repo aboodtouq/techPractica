@@ -1,8 +1,8 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.GetSessionsBySpecifications;
 
-import com.spring.techpractica.application.session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsCommand;
-import com.spring.techpractica.application.session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
-import com.spring.techpractica.application.session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
+import com.spring.techpractica.application.session.get.by.specifications.GetSessionsBySpecificationsCommand;
+import com.spring.techpractica.application.session.get.by.specifications.GetSessionsBySpecificationsUseCase;
+import com.spring.techpractica.application.session.get.sessions.count.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

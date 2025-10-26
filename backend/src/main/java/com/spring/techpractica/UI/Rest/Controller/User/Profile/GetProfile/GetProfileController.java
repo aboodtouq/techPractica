@@ -1,11 +1,11 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Profile.GetProfile;
 
-import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
-import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
-import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionCommand;
-import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionsUseCase;
-import com.spring.techpractica.application.user.Profile.GetProfile.GetProfileCommand;
-import com.spring.techpractica.application.user.Profile.GetProfile.GetProfileUseCase;
+import com.spring.techpractica.application.session.get.user.sessions.count.GetUserSessionsCountCommand;
+import com.spring.techpractica.application.session.get.user.sessions.count.GetUserSessionsCountUseCase;
+import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionCommand;
+import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionsUseCase;
+import com.spring.techpractica.application.user.profile.get.GetProfileCommand;
+import com.spring.techpractica.application.user.profile.get.GetProfileUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;

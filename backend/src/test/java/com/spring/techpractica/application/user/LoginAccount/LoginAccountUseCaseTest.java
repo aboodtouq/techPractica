@@ -1,7 +1,7 @@
 package com.spring.techpractica.application.user.LoginAccount;
 
-import com.spring.techpractica.application.user.Auth.LoginAccount.LoginAccountCommand;
-import com.spring.techpractica.application.user.Auth.LoginAccount.LoginAccountUseCase;
+import com.spring.techpractica.application.user.auth.login.LoginAccountCommand;
+import com.spring.techpractica.application.user.auth.login.LoginAccountUseCase;
 import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
 import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
 import com.spring.techpractica.Core.User.User;

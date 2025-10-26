@@ -1,7 +1,7 @@
 package com.spring.techpractica.application.user.RegisterAccount;
 
-import com.spring.techpractica.application.user.Auth.RegisterAccount.RegisterAccountCommand;
-import com.spring.techpractica.application.user.Auth.RegisterAccount.RegisterAccountUseCase;
+import com.spring.techpractica.application.user.auth.register.RegisterAccountCommand;
+import com.spring.techpractica.application.user.auth.register.RegisterAccountUseCase;
 import com.spring.techpractica.Core.Role.Model.RoleType;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserFactory;

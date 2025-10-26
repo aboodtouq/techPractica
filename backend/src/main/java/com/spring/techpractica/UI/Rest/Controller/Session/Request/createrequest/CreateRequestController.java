@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.Request.createrequest;
 
-import com.spring.techpractica.application.session.Request.createrequest.CreateRequestCommand;
-import com.spring.techpractica.application.session.Request.createrequest.CreateRequestUseCase;
+import com.spring.techpractica.application.session.request.create.CreateRequestCommand;
+import com.spring.techpractica.application.session.request.create.CreateRequestUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;

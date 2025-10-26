@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Auth.ActiveAccount;
 
-import com.spring.techpractica.application.user.Auth.AcvtiveAccount.ActiveAccountCommand;
-import com.spring.techpractica.application.user.Auth.AcvtiveAccount.ActiveAccountUseCase;
+import com.spring.techpractica.application.user.auth.active.account.ActiveAccountCommand;
+import com.spring.techpractica.application.user.auth.active.account.ActiveAccountUseCase;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;

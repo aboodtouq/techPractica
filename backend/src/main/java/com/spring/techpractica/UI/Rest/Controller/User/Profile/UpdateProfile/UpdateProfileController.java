@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Profile.UpdateProfile;
 
-import com.spring.techpractica.application.user.Profile.UpdateProfile.UpdateProfileCommand;
-import com.spring.techpractica.application.user.Profile.UpdateProfile.UpdateProfileUseCase;
+import com.spring.techpractica.application.user.profile.update.UpdateProfileCommand;
+import com.spring.techpractica.application.user.profile.update.UpdateProfileUseCase;
 import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;

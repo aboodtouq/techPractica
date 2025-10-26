@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.Request.GetSessionsRequests;
 
-import com.spring.techpractica.application.session.Request.GetSessionsRequests.GetSessionsRequestsCommand;
-import com.spring.techpractica.application.session.Request.GetSessionsRequests.GetSessionsRequestsUseCase;
+import com.spring.techpractica.application.session.request.get.sessions.requests.GetSessionsRequestsCommand;
+import com.spring.techpractica.application.session.request.get.sessions.requests.GetSessionsRequestsUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestCollection;
