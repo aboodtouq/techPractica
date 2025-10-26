@@ -1,9 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Field.UpdateField;
 
-import com.spring.techpractica.Application.Admin.Field.CreateField.CreateFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.CreateField.CreateFieldUseCase;
-import com.spring.techpractica.Application.Admin.Field.UpdateField.UpdateFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.UpdateField.UpdateFieldUseCase;
+import com.spring.techpractica.application.admin.field.update.UpdateFieldCommand;
+import com.spring.techpractica.application.admin.field.update.UpdateFieldUseCase;
 import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

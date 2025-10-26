@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.System.UpdateSystem;
 
-import com.spring.techpractica.Application.Admin.System.UpdateSystem.UpdateSystemCommand;
-import com.spring.techpractica.Application.Admin.System.UpdateSystem.UpdateSystemUseCase;
+import com.spring.techpractica.application.admin.system.update.UpdateSystemCommand;
+import com.spring.techpractica.application.admin.system.update.UpdateSystemUseCase;
 import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

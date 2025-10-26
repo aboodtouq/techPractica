@@ -1,12 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Field.GetField.GetAllFields;
 
-import com.spring.techpractica.Application.Admin.Field.GetField.GetAllFields.GetAllFieldsCommand;
-import com.spring.techpractica.Application.Admin.Field.GetField.GetAllFields.GetAllFieldsUseCase;
+import com.spring.techpractica.application.admin.field.get.all.GetAllFieldsCommand;
+import com.spring.techpractica.application.admin.field.get.all.GetAllFieldsUseCase;
 import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,11 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.List;
 
 @RestController

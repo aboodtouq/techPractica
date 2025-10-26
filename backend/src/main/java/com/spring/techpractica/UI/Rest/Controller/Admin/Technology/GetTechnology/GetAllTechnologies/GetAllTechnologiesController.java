@@ -1,12 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.GetTechnology.GetAllTechnologies;
 
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetAllTechnologies.GetAllTechnologiesCommand;
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetAllTechnologies.GetAllTechnologiesUseCase;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.application.admin.technology.get.all.GetAllTechnologiesCommand;
+import com.spring.techpractica.application.admin.technology.get.all.GetAllTechnologiesUseCase;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyCollection;
-import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,11 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.List;
 
 @RestController

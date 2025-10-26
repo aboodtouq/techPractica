@@ -1,13 +1,10 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Field.GetField.GetFieldsByName;
 
 
-import com.spring.techpractica.Application.Admin.Field.GetField.GetFieldsByName.GetFieldsByNameCommand;
-import com.spring.techpractica.Application.Admin.Field.GetField.GetFieldsByName.GetFieldsByNameUseCase;
+import com.spring.techpractica.application.admin.field.get.by.name.GetFieldsByNameCommand;
+import com.spring.techpractica.application.admin.field.get.by.name.GetFieldsByNameUseCase;
 import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.List;
 
 @RestController

@@ -1,9 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.GetTechnology.GetTechnologyByField;
 
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByField.GetTechnologiesByFieldCommand;
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByField.GetTechnologiesByFieldUseCase;
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByName.GetTechnologiesByNameCommand;
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByName.GetTechnologiesByNameUseCase;
+import com.spring.techpractica.application.admin.technology.get.by.field.GetTechnologiesByFieldCommand;
+import com.spring.techpractica.application.admin.technology.get.by.field.GetTechnologiesByFieldUseCase;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
@@ -13,9 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

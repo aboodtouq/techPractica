@@ -1,9 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.DeleteTechnology;
 
-import com.spring.techpractica.Application.Admin.System.DeleteSystem.DeleteSystemCommand;
-import com.spring.techpractica.Application.Admin.System.DeleteSystem.DeleteSystemUseCase;
-import com.spring.techpractica.Application.Admin.Technology.DeleteTechnology.DeleteTechnologyCommand;
-import com.spring.techpractica.Application.Admin.Technology.DeleteTechnology.DeleteTechnologyUseCase;
+import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyCommand;
+import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyUseCase;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

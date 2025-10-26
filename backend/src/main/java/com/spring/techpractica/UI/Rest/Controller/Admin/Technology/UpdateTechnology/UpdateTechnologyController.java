@@ -1,9 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.UpdateTechnology;
 
-import com.spring.techpractica.Application.Admin.Technology.CreateTechnology.CreateTechnologyCommand;
-import com.spring.techpractica.Application.Admin.Technology.CreateTechnology.CreateTechnologyUseCase;
-import com.spring.techpractica.Application.Admin.Technology.UpdateTechnology.UpdateTechnologyCommand;
-import com.spring.techpractica.Application.Admin.Technology.UpdateTechnology.UpdateTechnologyUseCase;
+import com.spring.techpractica.application.admin.technology.update.UpdateTechnologyCommand;
+import com.spring.techpractica.application.admin.technology.update.UpdateTechnologyUseCase;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

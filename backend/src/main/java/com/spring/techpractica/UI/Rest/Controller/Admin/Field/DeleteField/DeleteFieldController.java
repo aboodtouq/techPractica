@@ -1,11 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Field.DeleteField;
 
-import com.spring.techpractica.Application.Admin.Field.DeleteField.DeleteFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.DeleteField.DeleteFieldUseCase;
-import com.spring.techpractica.Application.Admin.Field.UpdateField.UpdateFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.UpdateField.UpdateFieldUseCase;
-import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
+import com.spring.techpractica.application.admin.field.delete.DeleteFieldCommand;
+import com.spring.techpractica.application.admin.field.delete.DeleteFieldUseCase;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

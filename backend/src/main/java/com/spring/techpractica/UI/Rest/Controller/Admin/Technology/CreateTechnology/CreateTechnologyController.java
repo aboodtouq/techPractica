@@ -1,13 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.CreateTechnology;
 
-import com.spring.techpractica.Application.Admin.Technology.CreateTechnology.CreateTechnologyCommand;
-import com.spring.techpractica.Application.Admin.Technology.CreateTechnology.CreateTechnologyUseCase;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.application.admin.technology.create.CreateTechnologyCommand;
+import com.spring.techpractica.application.admin.technology.create.CreateTechnologyUseCase;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,8 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/v1/admin/technologies")

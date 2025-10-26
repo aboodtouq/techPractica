@@ -1,10 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.System.DeleteSystem;
 
-import com.spring.techpractica.Application.Admin.Field.DeleteField.DeleteFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.DeleteField.DeleteFieldUseCase;
-import com.spring.techpractica.Application.Admin.System.DeleteSystem.DeleteSystemCommand;
-import com.spring.techpractica.Application.Admin.System.DeleteSystem.DeleteSystemUseCase;
-import com.spring.techpractica.Application.Session.delete.DeleteSessionUseCase;
+import com.spring.techpractica.application.admin.system.delete.DeleteSystemCommand;
+import com.spring.techpractica.application.admin.system.delete.DeleteSystemUseCase;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

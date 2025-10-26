@@ -1,8 +1,8 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.GetSessionsBySpecifications;
 
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsCommand;
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
+import com.spring.techpractica.application.session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsCommand;
+import com.spring.techpractica.application.session.GetSessions.GetSessionBySpecifications.GetSessionsBySpecificationsUseCase;
+import com.spring.techpractica.application.session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,8 +15,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/sessions")

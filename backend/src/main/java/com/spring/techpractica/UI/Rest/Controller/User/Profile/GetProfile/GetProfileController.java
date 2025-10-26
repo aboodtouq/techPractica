@@ -1,19 +1,14 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Profile.GetProfile;
 
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
-import com.spring.techpractica.Application.Session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.UserSessions.GetUserSessionCommand;
-import com.spring.techpractica.Application.Session.GetSessions.UserSessions.GetUserSessionsUseCase;
-import com.spring.techpractica.Application.User.Profile.GetProfile.GetProfileCommand;
-import com.spring.techpractica.Application.User.Profile.GetProfile.GetProfileUseCase;
-import com.spring.techpractica.Application.User.Profile.UpdateProfile.UpdateProfileCommand;
-import com.spring.techpractica.Application.User.Profile.UpdateProfile.UpdateProfileUseCase;
+import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
+import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
+import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionCommand;
+import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionsUseCase;
+import com.spring.techpractica.application.user.Profile.GetProfile.GetProfileCommand;
+import com.spring.techpractica.application.user.Profile.GetProfile.GetProfileUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.UI.Rest.Controller.User.Profile.Request.ProfileRequest;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Resources.User.ProfileResources;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
@@ -25,14 +20,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 @RestController

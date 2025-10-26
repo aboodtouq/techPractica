@@ -1,11 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Field.CreateField;
 
-import com.spring.techpractica.Application.Admin.Field.CreateField.CreateFieldCommand;
-import com.spring.techpractica.Application.Admin.Field.CreateField.CreateFieldUseCase;
+import com.spring.techpractica.application.admin.field.create.CreateFieldCommand;
+import com.spring.techpractica.application.admin.field.create.CreateFieldUseCase;
 import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,13 +15,10 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/v1/admin/fields")

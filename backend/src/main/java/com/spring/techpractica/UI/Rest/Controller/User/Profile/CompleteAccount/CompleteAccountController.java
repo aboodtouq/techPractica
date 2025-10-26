@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Profile.CompleteAccount;
 
-import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountCommand;
-import com.spring.techpractica.Application.User.Profile.CompleteAccount.CompleteAccountUseCase;
+import com.spring.techpractica.application.user.Profile.CompleteAccount.CompleteAccountCommand;
+import com.spring.techpractica.application.user.Profile.CompleteAccount.CompleteAccountUseCase;
 import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;

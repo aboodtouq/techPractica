@@ -1,13 +1,12 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Auth.ChangePassword;
 
-import com.spring.techpractica.Application.User.Auth.ChangePassword.ChangePasswordCommand;
-import com.spring.techpractica.Application.User.Auth.ChangePassword.ChangePasswordUseCase;
+import com.spring.techpractica.application.user.Auth.ChangePassword.ChangePasswordCommand;
+import com.spring.techpractica.application.user.Auth.ChangePassword.ChangePasswordUseCase;
 import com.spring.techpractica.Core.User.User;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
-import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

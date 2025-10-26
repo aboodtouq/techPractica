@@ -1,6 +1,6 @@
 package com.spring.techpractica.Core.Session.service;
 
-import com.spring.techpractica.Application.Session.create.CreateSessionCommand;
+import com.spring.techpractica.application.session.create.CreateSessionCommand;
 import com.spring.techpractica.Core.Field.Entity.Field;
 import com.spring.techpractica.Core.Field.FieldRepository;
 import com.spring.techpractica.Core.Requirement.Entity.Requirement;

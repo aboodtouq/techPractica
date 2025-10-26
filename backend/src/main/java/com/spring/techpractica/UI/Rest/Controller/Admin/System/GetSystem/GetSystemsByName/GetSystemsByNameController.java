@@ -1,12 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.System.GetSystem.GetSystemsByName;
 
-import com.spring.techpractica.Application.Admin.System.GetSystem.GetSystemsByName.GetSystemsByNameCommand;
-import com.spring.techpractica.Application.Admin.System.GetSystem.GetSystemsByName.GetSystemsByNameUseCase;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.application.admin.system.get.by.name.GetSystemsByNameCommand;
+import com.spring.techpractica.application.admin.system.get.by.name.GetSystemsByNameUseCase;
 import com.spring.techpractica.Core.System.Entity.System;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemCollection;
-import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import java.time.Instant;
+
 import java.util.List;
 
 @RestController

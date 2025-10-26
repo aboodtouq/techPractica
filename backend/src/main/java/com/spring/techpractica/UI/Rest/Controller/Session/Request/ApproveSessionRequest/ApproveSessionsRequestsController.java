@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.Request.ApproveSessionRequest;
 
-import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsCommand;
-import com.spring.techpractica.Application.Session.Request.ApproveSessionRequest.ApproveSessionsRequestsUseCase;
+import com.spring.techpractica.application.session.Request.ApproveSessionRequest.ApproveSessionsRequestsCommand;
+import com.spring.techpractica.application.session.Request.ApproveSessionRequest.ApproveSessionsRequestsUseCase;
 import com.spring.techpractica.Core.Request.Entity.Request;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;

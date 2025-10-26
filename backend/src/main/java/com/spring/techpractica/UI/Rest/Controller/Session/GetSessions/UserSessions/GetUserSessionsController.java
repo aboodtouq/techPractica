@@ -1,10 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.UserSessions;
 
-import com.spring.techpractica.Application.Session.GetSessions.GetSessionsCount.GetSessionsCountUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
-import com.spring.techpractica.Application.Session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
-import com.spring.techpractica.Application.Session.GetSessions.UserSessions.GetUserSessionCommand;
-import com.spring.techpractica.Application.Session.GetSessions.UserSessions.GetUserSessionsUseCase;
+import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountCommand;
+import com.spring.techpractica.application.session.GetSessions.GetUserSessionsCount.GetUserSessionsCountUseCase;
+import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionCommand;
+import com.spring.techpractica.application.session.GetSessions.UserSessions.GetUserSessionsUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController

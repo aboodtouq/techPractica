@@ -1,12 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.GetTechnology.GetTechnologiesByName;
 
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByName.GetTechnologiesByNameCommand;
-import com.spring.techpractica.Application.Admin.Technology.GetTechnology.GetTechnologiesByName.GetTechnologiesByNameUseCase;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.application.admin.technology.get.by.name.GetTechnologiesByNameCommand;
+import com.spring.techpractica.application.admin.technology.get.by.name.GetTechnologiesByNameUseCase;
 import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
-import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import java.time.Instant;
+
 import java.util.List;
 
 @RestController

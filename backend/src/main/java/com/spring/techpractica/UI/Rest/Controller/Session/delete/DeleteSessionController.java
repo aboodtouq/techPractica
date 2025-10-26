@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.delete;
 
-import com.spring.techpractica.Application.Session.delete.DeleteSessionCommand;
-import com.spring.techpractica.Application.Session.delete.DeleteSessionUseCase;
+import com.spring.techpractica.application.session.delete.DeleteSessionCommand;
+import com.spring.techpractica.application.session.delete.DeleteSessionUseCase;
 import com.spring.techpractica.Core.Session.Entity.Session;
 import com.spring.techpractica.Core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
