@@ -55,7 +55,7 @@ public class ApproveSessionsRequestsController {
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )
     })
-    @PutMapping("/{sessionId}/{requestId}")
+    @PutMapping("/approve/{sessionId}/{requestId}")
     public ResponseEntity<?> ApproveSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
             , @PathVariable("sessionId") UUID sessionId, @PathVariable("requestId") UUID requestId) {
 
