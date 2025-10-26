@@ -1,0 +1,85 @@
+package com.spring.techpractica.UI.Rest.Controller.Session.Request.RejectSessionRequest;
+
+import com.spring.techpractica.Application.Session.Request.RejectSessionRequest.RejectSessionsRequestsCommand;
+import com.spring.techpractica.Application.Session.Request.RejectSessionRequest.RejectSessionsRequestsUseCase;
+import com.spring.techpractica.Core.Request.Entity.Request;
+import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;
+import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
+import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/v1/sessions/requests")
+@AllArgsConstructor
+@Tag(name = "Session", description = "Operations related to session requirements and requests")
+public class RejectSessionsRequestsController {
+
+    private final RejectSessionsRequestsUseCase rejectSessionsRequestsUseCase;
+
+    @Operation(
+            summary = "Reject requests for a specific session",
+            description = "Reject the requests for a specific session. Requires authentication."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Request rejected successfully",
+                    content = @Content(schema = @Schema(implementation = RequestResources.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid input data",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized access",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resources not found",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
+            )
+    })
+    @PutMapping("/{sessionId}/{requestId}")
+    public ResponseEntity<?> rejectSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
+            , @PathVariable("sessionId") UUID sessionId, @PathVariable("requestId") UUID requestId) {
+
+        Request request = rejectSessionsRequestsUseCase.execute(
+                new RejectSessionsRequestsCommand(
+                        userAuthentication.getUserId(),
+                        sessionId,
+                        requestId
+                )
+        );
+
+
+        RequestResources responseData = new RequestResources(request);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        StandardSuccessResponse.<RequestResources>builder()
+                                .data(responseData)
+                                .message("Request rejected successfully")
+                                .status(HttpStatus.OK.value())
+                                .build()
+                );
+    }
+}

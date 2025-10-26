@@ -36,4 +36,10 @@ public class Request extends BaseEntity {
     public Request() {
         requestStatus = RequestState.PENDING;
     }
+    public void approve() {
+        requestStatus = RequestState.APPROVE;
+    }
+    public void reject() {
+        requestStatus = RequestState.REJECTED;
+    }
 }
