@@ -53,7 +53,6 @@ public class CompleteAccountController {
     public ResponseEntity<?> completeAccount(@RequestBody @Valid ProfileRequest request
             , @AuthenticationPrincipal UserAuthentication userAuthentication) {
 
-
         User user = completeAccountUseCase.execute(new CompleteAccountCommand(userAuthentication.getUserId(),
                 request.firstName(),
                 request.lastName(),
