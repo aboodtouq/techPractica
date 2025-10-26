@@ -58,7 +58,7 @@ public class RejectSessionsRequestsController {
                     content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))
             )
     })
-    @PutMapping("/{sessionId}/{requestId}")
+    @PutMapping("/reject/{sessionId}/{requestId}")
     public ResponseEntity<?> rejectSessionRequests(@AuthenticationPrincipal UserAuthentication userAuthentication
             , @PathVariable("sessionId") UUID sessionId, @PathVariable("requestId") UUID requestId) {
 
