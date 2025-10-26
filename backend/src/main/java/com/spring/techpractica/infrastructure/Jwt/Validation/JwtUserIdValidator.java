@@ -1,7 +1,7 @@
 package com.spring.techpractica.infrastructure.Jwt.Validation;
 
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import com.spring.techpractica.infrastructure.Cor.AbstractHandler;
 import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;

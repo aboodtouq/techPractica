@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Auth.LoginAccount;
 
-import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import lombok.Getter;
 

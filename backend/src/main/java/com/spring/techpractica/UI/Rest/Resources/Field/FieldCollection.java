@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.Field;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.spring.techpractica.Core.Field.Entity.Field;
+import com.spring.techpractica.core.Field.Entity.Field;
 import lombok.*;
 
 import java.util.List;

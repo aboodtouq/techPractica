@@ -1,10 +1,10 @@
 package com.spring.techpractica.application.admin.role.assign;
 
-import com.spring.techpractica.Core.Role.Entity.Role;
-import com.spring.techpractica.Core.Role.RoleRepository;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.Role.Entity.Role;
+import com.spring.techpractica.core.Role.RoleRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.spring.techpractica.application.session.get.by.specifications;
 
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.Session.SessionRepository;
-import com.spring.techpractica.Core.Session.SessionStatus;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.Session.SessionRepository;
+import com.spring.techpractica.core.Session.SessionStatus;
 import com.spring.techpractica.infrastructure.Jpa.Session.SessionSpecifications;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;

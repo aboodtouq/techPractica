@@ -2,10 +2,10 @@ package com.spring.techpractica.application.user.LoginAccount;
 
 import com.spring.techpractica.application.user.auth.login.LoginAccountCommand;
 import com.spring.techpractica.application.user.auth.login.LoginAccountUseCase;
-import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
-import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.User.Exception.UserAuthenticationException;
+import com.spring.techpractica.core.User.Service.PasswordEncryptor;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

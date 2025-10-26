@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Listener;
 
-import com.spring.techpractica.Core.User.Event.ResetPasswordEvent;
+import com.spring.techpractica.core.User.Event.ResetPasswordEvent;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
 import com.spring.techpractica.infrastructure.MailSender.MailSender;
 import jakarta.mail.MessagingException;

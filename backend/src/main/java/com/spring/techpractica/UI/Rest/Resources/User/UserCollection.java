@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.User;
 
-import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.core.User.User;
 import lombok.Getter;
 
 import java.util.List;

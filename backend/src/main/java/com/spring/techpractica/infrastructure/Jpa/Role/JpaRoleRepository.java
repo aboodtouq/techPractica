@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.Jpa.Role;
 
-import com.spring.techpractica.Core.Role.Entity.Role;
-import com.spring.techpractica.Core.Role.Model.RoleType;
-import com.spring.techpractica.Core.Role.RoleRepository;
+import com.spring.techpractica.core.Role.Entity.Role;
+import com.spring.techpractica.core.Role.Model.RoleType;
+import com.spring.techpractica.core.Role.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

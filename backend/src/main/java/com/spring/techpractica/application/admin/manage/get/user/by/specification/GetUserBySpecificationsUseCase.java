@@ -1,8 +1,8 @@
 package com.spring.techpractica.application.admin.manage.get.user.by.specification;
 
-import com.spring.techpractica.Core.User.AccountStatus;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.User.AccountStatus;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import com.spring.techpractica.infrastructure.Jpa.User.UserSpecifications;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;

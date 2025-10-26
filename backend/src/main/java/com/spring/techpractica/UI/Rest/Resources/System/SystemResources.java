@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.System;
 
-import com.spring.techpractica.Core.System.Entity.System;
+import com.spring.techpractica.core.System.Entity.System;
 import lombok.*;
 
 import java.util.UUID;

@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Controller.Admin.Role;
 
 import com.spring.techpractica.application.admin.role.get.all.GetAllRolesUseCase;
-import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.core.Role.Entity.Role;
 import com.spring.techpractica.UI.Rest.Resources.Role.RoleCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

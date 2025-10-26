@@ -1,6 +1,6 @@
 package com.spring.techpractica.application.session.create;
 
-import com.spring.techpractica.Core.Requirement.Model.RequirementRequest;
+import com.spring.techpractica.core.Requirement.Model.RequirementRequest;
 
 import java.util.List;
 import java.util.UUID;

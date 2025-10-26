@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jwt;
 
-import com.spring.techpractica.Core.Role.Entity.Role;
+import com.spring.techpractica.core.Role.Entity.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

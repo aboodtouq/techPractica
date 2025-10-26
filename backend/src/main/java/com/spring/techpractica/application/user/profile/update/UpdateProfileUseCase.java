@@ -1,14 +1,14 @@
 package com.spring.techpractica.application.user.profile.update;
 
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.SocialAccount.Entity.SocialAccount;
-import com.spring.techpractica.Core.SocialAccount.SocialAccountFactory;
-import com.spring.techpractica.Core.SocialAccount.model.PlatformName;
-import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
-import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.Core.Technology.TechnologyRepository;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.SocialAccount.Entity.SocialAccount;
+import com.spring.techpractica.core.SocialAccount.SocialAccountFactory;
+import com.spring.techpractica.core.SocialAccount.model.PlatformName;
+import com.spring.techpractica.core.SocialAccount.model.SocialAccountRequest;
+import com.spring.techpractica.core.Technology.Entity.Technology;
+import com.spring.techpractica.core.Technology.TechnologyRepository;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

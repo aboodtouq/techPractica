@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Profile.Request;
 
-import com.spring.techpractica.Core.SocialAccount.model.PlatformName;
+import com.spring.techpractica.core.SocialAccount.model.PlatformName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

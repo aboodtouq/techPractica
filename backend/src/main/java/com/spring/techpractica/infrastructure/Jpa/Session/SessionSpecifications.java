@@ -1,7 +1,7 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
-import com.spring.techpractica.Core.Requirement.Entity.Requirement;
-import com.spring.techpractica.Core.Session.Entity.Session;
+import com.spring.techpractica.core.Requirement.Entity.Requirement;
+import com.spring.techpractica.core.Session.Entity.Session;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Path;

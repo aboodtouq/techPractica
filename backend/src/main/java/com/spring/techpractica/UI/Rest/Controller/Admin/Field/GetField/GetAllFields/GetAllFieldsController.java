@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Field.GetField.GetAllFi
 
 import com.spring.techpractica.application.admin.field.get.all.GetAllFieldsCommand;
 import com.spring.techpractica.application.admin.field.get.all.GetAllFieldsUseCase;
-import com.spring.techpractica.Core.Field.Entity.Field;
+import com.spring.techpractica.core.Field.Entity.Field;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

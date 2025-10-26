@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.UpdateTechno
 
 import com.spring.techpractica.application.admin.technology.update.UpdateTechnologyCommand;
 import com.spring.techpractica.application.admin.technology.update.UpdateTechnologyUseCase;
-import com.spring.techpractica.Core.Technology.Entity.Technology;
+import com.spring.techpractica.core.Technology.Entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

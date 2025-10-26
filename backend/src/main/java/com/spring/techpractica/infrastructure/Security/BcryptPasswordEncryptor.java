@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Security;
 
-import com.spring.techpractica.Core.User.Service.PasswordEncryptor;
+import com.spring.techpractica.core.User.Service.PasswordEncryptor;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,12 +1,11 @@
 package com.spring.techpractica.infrastructure.Jpa.request;
 
-import com.spring.techpractica.Core.Request.Entity.Request;
-import com.spring.techpractica.Core.Request.RequestRepository;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.Request.RequestRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

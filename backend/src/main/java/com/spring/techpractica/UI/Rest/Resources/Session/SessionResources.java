@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.Session;
 
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.Session.SessionStatus;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.Session.SessionStatus;
 import com.spring.techpractica.UI.Rest.Resources.Requirment.RequirementCollection;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import lombok.AllArgsConstructor;

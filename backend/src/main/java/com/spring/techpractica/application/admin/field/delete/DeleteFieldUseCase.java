@@ -2,11 +2,11 @@ package com.spring.techpractica.application.admin.field.delete;
 
 import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyCommand;
 import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyUseCase;
-import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.Core.Field.FieldRepository;
-import com.spring.techpractica.Core.Session.SessionRepository;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesDuplicateException;
-import com.spring.techpractica.Core.Technology.TechnologyRepository;
+import com.spring.techpractica.core.Field.Entity.Field;
+import com.spring.techpractica.core.Field.FieldRepository;
+import com.spring.techpractica.core.Session.SessionRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesDuplicateException;
+import com.spring.techpractica.core.Technology.TechnologyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

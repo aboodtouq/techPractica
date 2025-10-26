@@ -2,8 +2,8 @@ package com.spring.techpractica.UI.Rest.Controller.Session.Request.RejectSession
 
 import com.spring.techpractica.application.session.request.reject.RejectSessionsRequestsCommand;
 import com.spring.techpractica.application.session.request.reject.RejectSessionsRequestsUseCase;
-import com.spring.techpractica.Core.Request.Entity.Request;
-import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Request.RequestResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

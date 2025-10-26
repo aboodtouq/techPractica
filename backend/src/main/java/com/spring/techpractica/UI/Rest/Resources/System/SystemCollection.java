@@ -1,9 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.System;
 
-import com.spring.techpractica.Core.System.Entity.System;
-import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
-import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
+import com.spring.techpractica.core.System.Entity.System;
 import lombok.Getter;
 
 import java.util.List;

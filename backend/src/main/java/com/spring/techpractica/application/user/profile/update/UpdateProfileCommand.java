@@ -1,6 +1,6 @@
 package com.spring.techpractica.application.user.profile.update;
 
-import com.spring.techpractica.Core.SocialAccount.model.SocialAccountRequest;
+import com.spring.techpractica.core.SocialAccount.model.SocialAccountRequest;
 
 import java.util.List;
 import java.util.Set;

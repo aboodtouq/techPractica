@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.Security.Filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.techpractica.Core.User.UserAuthentication;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.User.UserAuthentication;
+import com.spring.techpractica.core.User.UserRepository;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import com.spring.techpractica.infrastructure.Jwt.JwtExtracting;

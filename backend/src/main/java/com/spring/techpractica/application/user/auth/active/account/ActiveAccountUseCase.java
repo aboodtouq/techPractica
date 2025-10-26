@@ -1,8 +1,8 @@
 package com.spring.techpractica.application.user.auth.active.account;
 
-import com.spring.techpractica.Core.Shared.Exception.OperationDuplicateException;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.Shared.Exception.OperationDuplicateException;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

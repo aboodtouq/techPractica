@@ -1,8 +1,8 @@
 package com.spring.techpractica.application.user.auth.password.reset;
 
-import com.spring.techpractica.Core.User.Event.ResetPasswordEvent;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.User.Event.ResetPasswordEvent;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

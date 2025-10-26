@@ -2,9 +2,9 @@ package com.spring.techpractica.UI.Rest.Controller.Session.create;
 
 import com.spring.techpractica.application.session.create.CreateSessionCommand;
 import com.spring.techpractica.application.session.create.CreateSessionUseCase;
-import com.spring.techpractica.Core.Requirement.Model.RequirementRequest;
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.core.Requirement.Model.RequirementRequest;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Controller.Session.create.Request.CreateSessionRequest;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

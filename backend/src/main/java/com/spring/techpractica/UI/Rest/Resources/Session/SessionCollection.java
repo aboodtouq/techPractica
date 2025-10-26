@@ -1,7 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.Session;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.spring.techpractica.Core.Session.Entity.Session;
+import com.spring.techpractica.core.Session.Entity.Session;
 import lombok.Getter;
 
 import java.util.List;

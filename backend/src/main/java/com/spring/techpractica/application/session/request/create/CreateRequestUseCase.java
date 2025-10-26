@@ -1,15 +1,15 @@
 package com.spring.techpractica.application.session.request.create;
 
-import com.spring.techpractica.Core.Request.Entity.Request;
-import com.spring.techpractica.Core.Request.RequestFactory;
-import com.spring.techpractica.Core.Request.RequestRepository;
-import com.spring.techpractica.Core.Requirement.Entity.Requirement;
-import com.spring.techpractica.Core.Requirement.RequirementRepository;
-import com.spring.techpractica.Core.Shared.Exception.OperationDuplicateException;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.Exception.IncompleteAccountException;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.Request.RequestFactory;
+import com.spring.techpractica.core.Request.RequestRepository;
+import com.spring.techpractica.core.Requirement.Entity.Requirement;
+import com.spring.techpractica.core.Requirement.RequirementRepository;
+import com.spring.techpractica.core.Shared.Exception.OperationDuplicateException;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.User.Exception.IncompleteAccountException;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

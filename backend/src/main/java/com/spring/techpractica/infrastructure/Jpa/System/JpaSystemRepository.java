@@ -1,10 +1,8 @@
 package com.spring.techpractica.infrastructure.Jpa.System;
 
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.System.Entity.System;
-import com.spring.techpractica.Core.System.SystemRepository;
-import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.Core.Technology.TechnologyRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.System.Entity.System;
+import com.spring.techpractica.core.System.SystemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

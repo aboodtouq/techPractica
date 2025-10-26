@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.User;
 
-import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.core.User.User;
 import com.spring.techpractica.UI.Rest.Resources.SocailAccount.SocialAccountCollection;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologySummaryCollection;
 import lombok.AllArgsConstructor;

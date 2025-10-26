@@ -6,9 +6,9 @@ import com.spring.techpractica.application.session.get.user.sessions.GetUserSess
 import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionsUseCase;
 import com.spring.techpractica.application.user.profile.get.GetProfileCommand;
 import com.spring.techpractica.application.user.profile.get.GetProfileUseCase;
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Resources.User.ProfileResources;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;

@@ -1,12 +1,12 @@
 package com.spring.techpractica.application.session.request.get.sessions.requests;
 
-import com.spring.techpractica.Core.Request.Entity.Request;
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.Session.SessionRepository;
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.User.Exception.UserAuthenticationException;
-import com.spring.techpractica.Core.User.User;
-import com.spring.techpractica.Core.User.UserRepository;
+import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.Session.SessionRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.User.Exception.UserAuthenticationException;
+import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

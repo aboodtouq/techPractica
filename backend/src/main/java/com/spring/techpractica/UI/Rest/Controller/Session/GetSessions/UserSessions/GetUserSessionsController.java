@@ -4,8 +4,8 @@ import com.spring.techpractica.application.session.get.user.sessions.count.GetUs
 import com.spring.techpractica.application.session.get.user.sessions.count.GetUserSessionsCountUseCase;
 import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionCommand;
 import com.spring.techpractica.application.session.get.user.sessions.GetUserSessionsUseCase;
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.User.UserAuthentication;
+import com.spring.techpractica.core.Session.Entity.Session;
+import com.spring.techpractica.core.User.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionCollection;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

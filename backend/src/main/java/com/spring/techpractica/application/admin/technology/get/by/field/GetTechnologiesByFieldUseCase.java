@@ -1,8 +1,8 @@
 package com.spring.techpractica.application.admin.technology.get.by.field;
 
-import com.spring.techpractica.Core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.Core.Technology.Entity.Technology;
-import com.spring.techpractica.Core.Technology.TechnologyRepository;
+import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.Technology.Entity.Technology;
+import com.spring.techpractica.core.Technology.TechnologyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

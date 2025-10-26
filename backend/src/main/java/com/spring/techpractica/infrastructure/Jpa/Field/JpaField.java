@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Field;
 
-import com.spring.techpractica.Core.Field.Entity.Field;
+import com.spring.techpractica.core.Field.Entity.Field;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

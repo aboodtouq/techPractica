@@ -1,7 +1,7 @@
 package com.spring.techpractica.application.admin.role.get.all;
 
-import com.spring.techpractica.Core.Role.Entity.Role;
-import com.spring.techpractica.Core.Role.RoleRepository;
+import com.spring.techpractica.core.Role.Entity.Role;
+import com.spring.techpractica.core.Role.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

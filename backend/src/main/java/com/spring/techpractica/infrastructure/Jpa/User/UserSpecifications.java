@@ -1,8 +1,7 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
-import com.spring.techpractica.Core.Role.Model.RoleType;
-import com.spring.techpractica.Core.User.AccountStatus;
-import com.spring.techpractica.Core.User.User;
+import com.spring.techpractica.core.User.AccountStatus;
+import com.spring.techpractica.core.User.User;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
