@@ -24,7 +24,7 @@ public class StartSessionController {
 
     private final StartSessionUseCase startSessionUseCase;
 
-    @PutMapping("/start")
+    @PutMapping("/start/{sessionId}")
     public ResponseEntity<?> invoke(@AuthenticationPrincipal UserAuthentication userAuthentication,
                                     @PathVariable UUID sessionId) {
         Session session = startSessionUseCase.execute(
