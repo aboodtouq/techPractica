@@ -1,8 +1,8 @@
 package com.spring.techpractica.UI.Rest.Controller.Session.GetSessions.ById;
 
 import com.spring.techpractica.application.session.get.by.id.GetSessionByIdUseCase;
-import com.spring.techpractica.core.Session.Entity.Session;
-import com.spring.techpractica.core.User.UserAuthentication;
+import com.spring.techpractica.core.session.entity.Session;
+import com.spring.techpractica.core.user.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.Session.SessionResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

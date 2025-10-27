@@ -2,10 +2,10 @@ package com.spring.techpractica.application.user.RegisterAccount;
 
 import com.spring.techpractica.application.user.auth.register.RegisterAccountCommand;
 import com.spring.techpractica.application.user.auth.register.RegisterAccountUseCase;
-import com.spring.techpractica.core.Role.Model.RoleType;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserFactory;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.role.model.RoleType;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserFactory;
+import com.spring.techpractica.core.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

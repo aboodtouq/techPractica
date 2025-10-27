@@ -1,9 +1,9 @@
 package com.spring.techpractica.UI.Rest.Controller.User.Auth.LoginAccount;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.techpractica.core.User.Service.PasswordEncryptor;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.user.service.PasswordEncryptor;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

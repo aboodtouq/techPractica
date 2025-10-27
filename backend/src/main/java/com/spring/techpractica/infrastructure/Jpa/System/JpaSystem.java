@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.System;
 
-import com.spring.techpractica.core.System.Entity.System;
+import com.spring.techpractica.core.system.entity.System;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

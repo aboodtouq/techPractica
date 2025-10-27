@@ -3,7 +3,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Field.GetField.GetField
 
 import com.spring.techpractica.application.admin.field.get.by.name.GetFieldsByNameCommand;
 import com.spring.techpractica.application.admin.field.get.by.name.GetFieldsByNameUseCase;
-import com.spring.techpractica.core.Field.Entity.Field;
+import com.spring.techpractica.core.field.entity.Field;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldCollection;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

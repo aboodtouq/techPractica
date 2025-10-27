@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.Jpa.Requirement;
 
-import com.spring.techpractica.core.Requirement.Entity.Requirement;
-import com.spring.techpractica.core.Requirement.RequirementRepository;
-import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.requirement.entity.Requirement;
+import com.spring.techpractica.core.requirement.RequirementRepository;
+import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

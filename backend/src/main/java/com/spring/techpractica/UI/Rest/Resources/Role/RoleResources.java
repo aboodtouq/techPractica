@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.Role;
 
-import com.spring.techpractica.core.Role.Entity.Role;
+import com.spring.techpractica.core.role.entity.Role;
 import lombok.Getter;
 
 import java.util.UUID;

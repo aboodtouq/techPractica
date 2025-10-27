@@ -1,7 +1,7 @@
 package com.spring.techpractica.infrastructure.Jpa.Role;
 
-import com.spring.techpractica.core.Role.Entity.Role;
-import com.spring.techpractica.core.Role.Model.RoleType;
+import com.spring.techpractica.core.role.entity.Role;
+import com.spring.techpractica.core.role.model.RoleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

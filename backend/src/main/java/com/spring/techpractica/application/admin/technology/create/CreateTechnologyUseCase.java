@@ -1,12 +1,12 @@
 package com.spring.techpractica.application.admin.technology.create;
 
-import com.spring.techpractica.core.Field.Entity.Field;
-import com.spring.techpractica.core.Field.FieldRepository;
-import com.spring.techpractica.core.Shared.Exception.ResourcesDuplicateException;
-import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.core.Technology.Entity.Technology;
-import com.spring.techpractica.core.Technology.TechnologyFactory;
-import com.spring.techpractica.core.Technology.TechnologyRepository;
+import com.spring.techpractica.core.field.entity.Field;
+import com.spring.techpractica.core.field.FieldRepository;
+import com.spring.techpractica.core.shared.Exception.ResourcesDuplicateException;
+import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.technology.entity.Technology;
+import com.spring.techpractica.core.technology.TechnologyFactory;
+import com.spring.techpractica.core.technology.TechnologyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,9 @@
 package com.spring.techpractica.application.user.auth.login;
 
-import com.spring.techpractica.core.User.Exception.UserAuthenticationException;
-import com.spring.techpractica.core.User.Service.PasswordEncryptor;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.user.exception.UserAuthenticationException;
+import com.spring.techpractica.core.user.service.PasswordEncryptor;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.RequirementTechnology;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.spring.techpractica.core.RequirementTechnology.Entity.RequirementTechnology;
+import com.spring.techpractica.core.requirement.technology.Entity.RequirementTechnology;
 import lombok.Getter;
 
 @Getter

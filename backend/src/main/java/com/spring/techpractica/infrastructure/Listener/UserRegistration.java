@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Listener;
 
-import com.spring.techpractica.core.User.Event.UserRegistrationEvent;
+import com.spring.techpractica.core.user.event.UserRegistrationEvent;
 import com.spring.techpractica.infrastructure.Jwt.JwtGeneration;
 import com.spring.techpractica.infrastructure.MailSender.MailSender;
 import jakarta.mail.MessagingException;

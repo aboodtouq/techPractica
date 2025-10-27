@@ -1,11 +1,11 @@
 package com.spring.techpractica.infrastructure.Jpa.Session;
 
-import com.spring.techpractica.core.Request.Entity.Request;
-import com.spring.techpractica.core.Session.Entity.Session;
-import com.spring.techpractica.core.Session.SessionRepository;
-import com.spring.techpractica.core.Session.SessionStatus;
-import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.core.System.Entity.System;
+import com.spring.techpractica.core.request.entity.Request;
+import com.spring.techpractica.core.session.entity.Session;
+import com.spring.techpractica.core.session.SessionRepository;
+import com.spring.techpractica.core.session.SessionStatus;
+import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.system.entity.System;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

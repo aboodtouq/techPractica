@@ -24,7 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 ```
 

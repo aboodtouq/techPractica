@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.System.UpdateSystem;
 
 import com.spring.techpractica.application.admin.system.update.UpdateSystemCommand;
 import com.spring.techpractica.application.admin.system.update.UpdateSystemUseCase;
-import com.spring.techpractica.core.System.Entity.System;
+import com.spring.techpractica.core.system.entity.System;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.SocailAccount;
 
-import com.spring.techpractica.core.SocialAccount.Entity.SocialAccount;
-import com.spring.techpractica.core.SocialAccount.model.PlatformName;
+import com.spring.techpractica.core.social.account.entity.SocialAccount;
+import com.spring.techpractica.core.social.account.model.PlatformName;
 import lombok.Getter;
 import lombok.Setter;
 

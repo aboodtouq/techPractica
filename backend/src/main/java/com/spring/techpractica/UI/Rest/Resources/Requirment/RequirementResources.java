@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.Requirment;
 
-import com.spring.techpractica.core.Requirement.Entity.Requirement;
+import com.spring.techpractica.core.requirement.entity.Requirement;
 import com.spring.techpractica.UI.Rest.Resources.RequirementTechnology.RequirementTechnologyCollection;
 import lombok.Getter;
 

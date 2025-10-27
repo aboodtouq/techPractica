@@ -2,8 +2,8 @@ package com.spring.techpractica.UI.Rest.Controller.User.Auth.ChangePassword;
 
 import com.spring.techpractica.application.user.auth.password.change.ChangePasswordCommand;
 import com.spring.techpractica.application.user.auth.password.change.ChangePasswordUseCase;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserAuthentication;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserAuthentication;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardErrorResponse;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;

@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.System.CreateSystem;
 
 import com.spring.techpractica.application.admin.system.create.CreateSystemCommand;
 import com.spring.techpractica.application.admin.system.create.CreateSystemUseCase;
-import com.spring.techpractica.core.System.Entity.System;
+import com.spring.techpractica.core.system.entity.System;
 import com.spring.techpractica.UI.Rest.Resources.System.SystemResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,6 +1,6 @@
 package com.spring.techpractica.UI.Rest.Resources.SessionMember;
 
-import com.spring.techpractica.core.SessionMembers.Entity.SessionMember;
+import com.spring.techpractica.core.session.members.Entity.SessionMember;
 import lombok.Getter;
 
 import java.util.List;

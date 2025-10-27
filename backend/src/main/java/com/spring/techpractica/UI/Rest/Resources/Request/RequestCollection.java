@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.Request;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.request.entity.Request;
 import lombok.Getter;
 
 import java.util.List;

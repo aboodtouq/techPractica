@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.User.Auth.RegisterAccount;
 
 import com.spring.techpractica.application.user.auth.register.RegisterAccountCommand;
 import com.spring.techpractica.application.user.auth.register.RegisterAccountUseCase;
-import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

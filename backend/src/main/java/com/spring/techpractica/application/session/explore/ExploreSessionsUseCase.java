@@ -1,9 +1,9 @@
 package com.spring.techpractica.application.session.explore;
 
-import com.spring.techpractica.core.Session.Entity.Session;
-import com.spring.techpractica.core.Session.SessionRepository;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.session.entity.Session;
+import com.spring.techpractica.core.session.SessionRepository;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

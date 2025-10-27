@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.Request;
 
-import com.spring.techpractica.core.Request.Entity.Request;
-import com.spring.techpractica.core.Request.model.RequestState;
+import com.spring.techpractica.core.request.entity.Request;
+import com.spring.techpractica.core.request.model.RequestState;
 import lombok.Getter;
 
 import java.util.UUID;

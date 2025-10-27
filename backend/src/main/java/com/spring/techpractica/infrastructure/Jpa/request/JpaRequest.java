@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.request;
 
-import com.spring.techpractica.core.Request.Entity.Request;
+import com.spring.techpractica.core.request.entity.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

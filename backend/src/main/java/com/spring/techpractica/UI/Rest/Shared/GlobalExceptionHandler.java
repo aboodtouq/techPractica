@@ -1,9 +1,9 @@
 package com.spring.techpractica.UI.Rest.Shared;
 
-import com.spring.techpractica.core.Shared.Exception.OperationDuplicateException;
-import com.spring.techpractica.core.Shared.Exception.ResourcesDuplicateException;
-import com.spring.techpractica.core.Shared.Exception.ResourcesNotFoundException;
-import com.spring.techpractica.core.User.Exception.IncompleteAccountException;
+import com.spring.techpractica.core.shared.Exception.OperationDuplicateException;
+import com.spring.techpractica.core.shared.Exception.ResourcesDuplicateException;
+import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.user.exception.IncompleteAccountException;
 import com.spring.techpractica.UI.Rest.Shared.Exception.InvalidPageRequestException;
 import com.spring.techpractica.infrastructure.Jwt.Exception.JwtValidationException;
 import org.springframework.http.HttpStatus;

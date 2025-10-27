@@ -1,7 +1,7 @@
 package com.spring.techpractica.application.user.profile.get;
 
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

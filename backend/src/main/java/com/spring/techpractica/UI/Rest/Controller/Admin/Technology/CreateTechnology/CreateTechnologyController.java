@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.CreateTechno
 
 import com.spring.techpractica.application.admin.technology.create.CreateTechnologyCommand;
 import com.spring.techpractica.application.admin.technology.create.CreateTechnologyUseCase;
-import com.spring.techpractica.core.Technology.Entity.Technology;
+import com.spring.techpractica.core.technology.entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 

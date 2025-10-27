@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Technology.GetTechnolog
 
 import com.spring.techpractica.application.admin.technology.get.by.name.GetTechnologiesByNameCommand;
 import com.spring.techpractica.application.admin.technology.get.by.name.GetTechnologiesByNameUseCase;
-import com.spring.techpractica.core.Technology.Entity.Technology;
+import com.spring.techpractica.core.technology.entity.Technology;
 import com.spring.techpractica.UI.Rest.Resources.Technology.TechnologyResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

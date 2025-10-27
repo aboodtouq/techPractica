@@ -2,7 +2,7 @@ package com.spring.techpractica.UI.Rest.Controller.Admin.Field.UpdateField;
 
 import com.spring.techpractica.application.admin.field.update.UpdateFieldCommand;
 import com.spring.techpractica.application.admin.field.update.UpdateFieldUseCase;
-import com.spring.techpractica.core.Field.Entity.Field;
+import com.spring.techpractica.core.field.entity.Field;
 import com.spring.techpractica.UI.Rest.Resources.Field.FieldResources;
 import com.spring.techpractica.UI.Rest.Shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;

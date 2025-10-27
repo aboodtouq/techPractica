@@ -1,10 +1,10 @@
 package com.spring.techpractica.application.user.auth.register;
 
-import com.spring.techpractica.core.Role.Model.RoleType;
-import com.spring.techpractica.core.User.Event.UserRegistrationEvent;
-import com.spring.techpractica.core.User.User;
-import com.spring.techpractica.core.User.UserFactory;
-import com.spring.techpractica.core.User.UserRepository;
+import com.spring.techpractica.core.role.model.RoleType;
+import com.spring.techpractica.core.user.event.UserRegistrationEvent;
+import com.spring.techpractica.core.user.User;
+import com.spring.techpractica.core.user.UserFactory;
+import com.spring.techpractica.core.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

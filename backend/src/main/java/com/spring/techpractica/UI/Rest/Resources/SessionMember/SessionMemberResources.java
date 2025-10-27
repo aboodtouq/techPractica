@@ -1,7 +1,7 @@
 package com.spring.techpractica.UI.Rest.Resources.SessionMember;
 
-import com.spring.techpractica.core.SessionMembers.Entity.SessionMember;
-import com.spring.techpractica.core.SessionMembers.model.Role;
+import com.spring.techpractica.core.session.members.Entity.SessionMember;
+import com.spring.techpractica.core.session.members.model.Role;
 import com.spring.techpractica.UI.Rest.Resources.User.UserResources;
 import lombok.Getter;
 

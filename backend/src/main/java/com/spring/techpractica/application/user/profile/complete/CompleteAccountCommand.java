@@ -1,6 +1,6 @@
 package com.spring.techpractica.application.user.profile.complete;
 
-import com.spring.techpractica.core.SocialAccount.model.SocialAccountRequest;
+import com.spring.techpractica.core.social.account.model.SocialAccountRequest;
 
 import java.util.List;
 import java.util.UUID;

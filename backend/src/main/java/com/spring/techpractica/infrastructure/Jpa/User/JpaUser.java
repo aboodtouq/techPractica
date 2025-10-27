@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.User;
 
-import com.spring.techpractica.core.User.User;
+import com.spring.techpractica.core.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
