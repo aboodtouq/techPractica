@@ -3,7 +3,7 @@ package com.spring.techpractica.application.admin.manage.get.user.by.specificati
 import com.spring.techpractica.core.user.AccountStatus;
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
-import com.spring.techpractica.infrastructure.Jpa.User.UserSpecifications;
+import com.spring.techpractica.infrastructure.jpa.user.UserSpecifications;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
