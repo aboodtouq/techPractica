@@ -1,4 +1,4 @@
-package com.spring.techpractica.Application.Session.start;
+package com.spring.techpractica.application.session.start;
 
 import java.util.UUID;
 

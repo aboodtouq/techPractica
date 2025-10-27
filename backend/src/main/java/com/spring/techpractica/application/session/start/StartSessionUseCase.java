@@ -1,8 +1,7 @@
-package com.spring.techpractica.Application.Session.start;
+package com.spring.techpractica.application.session.start;
 
-import com.spring.techpractica.Core.Session.Entity.Session;
-import com.spring.techpractica.Core.Session.SessionRepository;
-import com.spring.techpractica.Core.Session.SessionStatus;
+import com.spring.techpractica.core.session.SessionRepository;
+import com.spring.techpractica.core.session.entity.Session;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,6 @@ public class StartSessionUseCase {
 
         session.runSession();
 
-
+        return sessionRepository.update(session);
     }
 }
