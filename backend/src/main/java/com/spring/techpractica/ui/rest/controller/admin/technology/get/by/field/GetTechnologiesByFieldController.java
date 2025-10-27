@@ -3,8 +3,8 @@ package com.spring.techpractica.ui.rest.controller.admin.technology.get.by.field
 import com.spring.techpractica.application.admin.technology.get.by.field.GetTechnologiesByFieldCommand;
 import com.spring.techpractica.application.admin.technology.get.by.field.GetTechnologiesByFieldUseCase;
 import com.spring.techpractica.core.technology.entity.Technology;
-import com.spring.techpractica.ui.rest.Resources.Technology.TechnologyResources;
-import com.spring.techpractica.ui.rest.Shared.StandardSuccessResponse;
+import com.spring.techpractica.ui.rest.resources.technology.TechnologyResources;
+import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

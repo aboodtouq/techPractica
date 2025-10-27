@@ -2,7 +2,7 @@ package com.spring.techpractica.ui.rest.controller.admin.role.assign;
 
 import com.spring.techpractica.application.admin.role.assign.AssignRoleCommand;
 import com.spring.techpractica.application.admin.role.assign.AssignRoleUseCase;
-import com.spring.techpractica.ui.rest.Shared.StandardSuccessResponse;
+import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

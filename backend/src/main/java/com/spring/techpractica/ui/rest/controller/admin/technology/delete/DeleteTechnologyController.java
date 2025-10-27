@@ -2,7 +2,7 @@ package com.spring.techpractica.ui.rest.controller.admin.technology.delete;
 
 import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyCommand;
 import com.spring.techpractica.application.admin.technology.delete.DeleteTechnologyUseCase;
-import com.spring.techpractica.ui.rest.Shared.StandardSuccessResponse;
+import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -2,7 +2,7 @@ package com.spring.techpractica.ui.rest.controller.admin.manage;
 
 import com.spring.techpractica.application.admin.manage.delete.user.DeleteUserCommand;
 import com.spring.techpractica.application.admin.manage.delete.user.DeleteUserUseCase;
-import com.spring.techpractica.ui.rest.Shared.StandardSuccessResponse;
+import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
