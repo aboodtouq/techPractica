@@ -107,4 +107,8 @@ public class Session extends BaseEntity {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void runSession(){
+        this.status = SessionStatus.RUNNING;
+    }
 }
