@@ -1,4 +1,4 @@
-package com.spring.techpractica.application.user.LoginAccount;
+package com.spring.techpractica.application.user.login;
 
 import com.spring.techpractica.application.user.auth.login.LoginAccountCommand;
 import com.spring.techpractica.application.user.auth.login.LoginAccountUseCase;
