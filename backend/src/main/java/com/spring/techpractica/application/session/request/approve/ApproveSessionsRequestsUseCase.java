@@ -39,7 +39,7 @@ public class ApproveSessionsRequestsUseCase {
         Request request = requestRepository.findByIdAndSessionId(command.requestId(), command.sessionId())
                 .orElseThrow(() -> new ResourcesNotFoundException(command.requestId()));
 
-        User user =request.getUser();
+        User user = request.getUser();
 
         request.approve();
 
