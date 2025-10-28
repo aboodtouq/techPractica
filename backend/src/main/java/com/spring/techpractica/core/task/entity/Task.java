@@ -1,6 +1,5 @@
 package com.spring.techpractica.core.task.entity;
 
-import com.spring.techpractica.core.session.SessionStatus;
 import com.spring.techpractica.core.task.model.TaskStatus;
 import com.spring.techpractica.core.task.model.TaskType;
 import com.spring.techpractica.core.field.entity.Field;
