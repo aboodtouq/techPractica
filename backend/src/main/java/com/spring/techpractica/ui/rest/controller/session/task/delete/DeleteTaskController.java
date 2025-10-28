@@ -75,7 +75,7 @@ public class DeleteTaskController {
                 .body(
                         StandardSuccessResponse.<TaskResources>builder()
                                 .data(responseData)
-                                .message("Session deleted successfully")
+                                .message("Task deleted successfully")
                                 .status(HttpStatus.OK.value())
                                 .build()
                 );
