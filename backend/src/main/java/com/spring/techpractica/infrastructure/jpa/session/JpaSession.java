@@ -26,7 +26,9 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
             Pageable pageable
     );
 
-    Page<Session> findAllByStatusNotIn(List<SessionStatus> statuses, Pageable pageable);
+    Page<Session> findAllByStatusNotInAndIsPrivateFalse(
+            List<SessionStatus> statuses, boolean isPrivate, Pageable pageable
+    );
 
     @Query("SELECT s FROM Session s " +
             "JOIN s.members m " +
