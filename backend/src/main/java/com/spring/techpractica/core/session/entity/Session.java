@@ -42,7 +42,6 @@ public class Session extends BaseEntity {
     @Column(name = "status")
     private SessionStatus status;
 
-
     @OneToMany(mappedBy = "session",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.REMOVE,
