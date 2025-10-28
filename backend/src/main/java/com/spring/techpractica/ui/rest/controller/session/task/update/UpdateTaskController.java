@@ -1,11 +1,11 @@
-package com.spring.techpractica.ui.rest.controller.session.task;
+package com.spring.techpractica.ui.rest.controller.session.task.update;
 
-import com.spring.techpractica.application.session.task.CreateTaskCommand;
-import com.spring.techpractica.application.session.task.CreateTaskUseCase;
+import com.spring.techpractica.application.session.task.update.UpdateTaskCommand;
+import com.spring.techpractica.application.session.task.update.UpdateTaskUseCase;
 import com.spring.techpractica.core.task.entity.Task;
 import com.spring.techpractica.core.task.model.TaskType;
-import com.spring.techpractica.ui.rest.resources.task.TaskResources;
 import com.spring.techpractica.core.user.UserAuthentication;
+import com.spring.techpractica.ui.rest.resources.task.TaskResources;
 import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,40 +16,38 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/sessions/tasks")
 @AllArgsConstructor
-public class CreateTaskController {
+public class UpdateTaskController {
 
-    private final CreateTaskUseCase createTaskUseCase;
+    private final UpdateTaskUseCase updateTaskUseCase;
 
     @Operation(
-            summary = "Create a new task for a session",
-            description = "Creates a new task in a specific session. The user must be authenticated."
+            summary = "Update an old task for a session",
+            description = "update an old task in a specific session. The user must be authenticated."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Task created successfully",
+            @ApiResponse(responseCode = "201", description = "Task Updated successfully",
                     content = @Content(schema = @Schema(implementation = StandardSuccessResponse.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "404", description = "Session not found", content = @Content)
     })
-    @PostMapping("/")
-    public ResponseEntity<?> createTask(@RequestBody CreateTaskRequest request,
+    @PutMapping("/")
+    public ResponseEntity<?> updateTask(@RequestBody UpdateTaskRequest request,
                                         @AuthenticationPrincipal UserAuthentication userAuthentication) {
         UUID ownerId = userAuthentication.getUserId();
 
-        Task task = createTaskUseCase.execute(
-                new CreateTaskCommand(
+        Task task = updateTaskUseCase.execute(
+                new UpdateTaskCommand(
                         ownerId,
                         request.sessionId(),
+                        request.taskId(),
                         request.title(),
                         request.description(),
                         TaskType.valueOf(request.type().toUpperCase()),
@@ -64,7 +62,7 @@ public class CreateTaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 StandardSuccessResponse.<TaskResources>builder()
                         .data(data)
-                        .message("Task created successfully")
+                        .message("Task updated successfully")
                         .status(HttpStatus.CREATED.value())
                         .build()
         );
