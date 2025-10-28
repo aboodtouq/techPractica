@@ -20,13 +20,15 @@ import java.util.UUID;
 
 @Repository
 public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificationExecutor<Session> {
-    Page<Session> findAllBySystemsAndStatusNotIn(
+    Page<Session> findAllBySystemsAndStatusNotInInAndIsPrivateFalse(
              List<System> systems,
             List<SessionStatus> excludedStatuses,
             Pageable pageable
     );
 
-    Page<Session> findAllByStatusNotIn(List<SessionStatus> statuses, Pageable pageable);
+    Page<Session> findAllByStatusNotInAndIsPrivateFalse(
+            List<SessionStatus> statuses, Pageable pageable
+    );
 
     @Query("SELECT s FROM Session s " +
             "JOIN s.members m " +
