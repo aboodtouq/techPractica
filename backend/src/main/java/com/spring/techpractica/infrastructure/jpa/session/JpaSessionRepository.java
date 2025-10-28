@@ -48,7 +48,7 @@ public class JpaSessionRepository implements SessionRepository {
 
     @Override
     public List<Session> getSessionsBySystems(List<System> systems, Pageable pageable) {
-        return jpaSession.findAllBySystemsAndStatusNotIn(systems,List.of(SessionStatus.DELETED, SessionStatus.ENDED), pageable).getContent();
+        return jpaSession.findAllBySystemsAndStatusNotInInAndIsPrivateFalse(systems,List.of(SessionStatus.DELETED, SessionStatus.ENDED), pageable).getContent();
     }
 
     @Override

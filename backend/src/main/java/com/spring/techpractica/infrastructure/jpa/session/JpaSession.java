@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Repository
 public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificationExecutor<Session> {
-    Page<Session> findAllBySystemsAndStatusNotIn(
+    Page<Session> findAllBySystemsAndStatusNotInInAndIsPrivateFalse(
              List<System> systems,
             List<SessionStatus> excludedStatuses,
             Pageable pageable
