@@ -1,5 +1,6 @@
 package com.spring.techpractica.core.task.entity;
 
+import com.spring.techpractica.core.task.model.TaskStatus;
 import com.spring.techpractica.core.task.model.TaskType;
 import com.spring.techpractica.core.field.entity.Field;
 import com.spring.techpractica.core.session.entity.Session;
@@ -43,6 +44,9 @@ public class Task extends BaseEntity {
     private List<User> usersAssigned;
 
     private LocalDateTime dueDate;
+
+    @Column(name = "status")
+    private TaskStatus status = TaskStatus.RUNNING;
 
     @Column(name = "Task_Type")
     private TaskType type;
