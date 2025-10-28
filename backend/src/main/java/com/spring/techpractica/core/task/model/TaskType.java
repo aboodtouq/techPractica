@@ -1,4 +1,4 @@
-package com.spring.techpractica.Core.Task.Model;
+package com.spring.techpractica.core.task.model;
 
 public enum TaskType {
     TASK,

@@ -1,5 +1,7 @@
 package com.spring.techpractica.core.task.entity;
 
+import com.spring.techpractica.core.task.model.TaskType;
+import com.spring.techpractica.core.field.entity.Field;
 import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.shared.BaseEntity;
 import com.spring.techpractica.core.user.User;
@@ -9,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor

@@ -1,14 +1,14 @@
-package com.spring.techpractica.UI.Rest.Resources.Task;
+package com.spring.techpractica.ui.rest.resources.task;
 
-import com.spring.techpractica.Core.Field.Entity.Field;
-import com.spring.techpractica.Core.Shared.BaseEntity;
-import com.spring.techpractica.Core.Task.Entity.Task;
+
+import com.spring.techpractica.core.field.entity.Field;
+import com.spring.techpractica.core.shared.BaseEntity;
+import com.spring.techpractica.core.task.entity.Task;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Getter
 public class TaskResources {

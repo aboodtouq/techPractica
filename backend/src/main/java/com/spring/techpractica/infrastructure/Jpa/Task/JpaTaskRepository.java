@@ -1,7 +1,7 @@
 package com.spring.techpractica.infrastructure.Jpa.Task;
 
-import com.spring.techpractica.Core.Task.Entity.Task;
-import com.spring.techpractica.Core.Task.TaskRepository;
+import com.spring.techpractica.core.task.TaskRepository;
+import com.spring.techpractica.core.task.entity.Task;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

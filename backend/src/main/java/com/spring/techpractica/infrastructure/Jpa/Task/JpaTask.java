@@ -1,6 +1,6 @@
 package com.spring.techpractica.infrastructure.Jpa.Task;
 
-import com.spring.techpractica.Core.Task.Entity.Task;
+import com.spring.techpractica.core.task.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

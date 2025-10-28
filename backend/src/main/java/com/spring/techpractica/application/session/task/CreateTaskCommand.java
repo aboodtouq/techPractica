@@ -1,9 +1,8 @@
-package com.spring.techpractica.Application.Task;
+package com.spring.techpractica.application.session.task;
 
-import com.spring.techpractica.Core.Task.Model.TaskType;
+import com.spring.techpractica.core.task.model.TaskType;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
