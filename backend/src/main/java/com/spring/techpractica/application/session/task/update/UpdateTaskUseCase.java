@@ -33,7 +33,6 @@ public class UpdateTaskUseCase {
         validateSessionOwnership(session, command.ownerId());
 
         List<Field> fields = validateAndGetFields(command.tags());
-        User owner = userRepository.getOrThrowByID(command.ownerId());
         List<User> assignees = validateAndGetAssignees(command.assignees());
         Task task = taskRepository.getOrThrowByID(command.taskId());
 
