@@ -8,6 +8,7 @@ import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.core.shared.Exception.UnauthorizedActionException;
 import com.spring.techpractica.core.task.TaskRepository;
 import com.spring.techpractica.core.task.entity.Task;
+import com.spring.techpractica.core.task.model.TaskStatus;
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -43,6 +44,7 @@ public class CreateTaskUseCase {
                 session,
                 assignees,
                 command.dueDate(),
+                TaskStatus.RUNNING,
                 command.type(),
                 fields
         );
