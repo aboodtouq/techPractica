@@ -43,7 +43,7 @@ public class ApproveSessionsRequestsUseCase {
 
         request.approve();
 
-        SessionMember sessionMember = sessionMembersFactory.create(session,user, Role.PARTICIPATE);
+        SessionMember sessionMember = sessionMembersFactory.create(session, user, Role.PARTICIPATE);
 
         session.addMember(sessionMember);
         sessionRepository.save(session);
