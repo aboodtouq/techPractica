@@ -30,7 +30,7 @@ public class DeleteTaskController {
 
     @Operation(
             summary = "Delete existing Task",
-            description = "Deletes an existing Task in an session. "
+            description = "Deletes an existing Task in a session. "
                     + "The user must be the session owner. Returns the deleted Task resource (after deletion)."
     )
     @ApiResponses(value = {
