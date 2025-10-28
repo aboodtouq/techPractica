@@ -8,5 +8,4 @@ import java.util.UUID;
 
 public record UpdateTaskCommand(UUID ownerId, UUID sessionId, UUID taskId, String title,
                                 String description, TaskType type, LocalDateTime dueDate,
-                                Set<UUID> assignees, Set<String> tags){
-}
+                                Set<UUID> assignees, Set<String> tags) { }
