@@ -1,7 +1,5 @@
 package com.spring.techpractica.ui.rest.controller.session.task.delete;
 
-import com.spring.techpractica.application.session.delete.DeleteSessionCommand;
-import com.spring.techpractica.application.session.delete.DeleteSessionUseCase;
 import com.spring.techpractica.application.session.task.delete.DeleteTaskCommand;
 import com.spring.techpractica.application.session.task.delete.DeleteTaskUseCase;
 import com.spring.techpractica.core.session.entity.Session;
