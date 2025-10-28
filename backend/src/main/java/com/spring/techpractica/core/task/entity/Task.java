@@ -46,7 +46,7 @@ public class Task extends BaseEntity {
     private LocalDateTime dueDate;
 
     @Column(name = "status")
-    private TaskStatus status=TaskStatus.RUNNING;
+    private TaskStatus status = TaskStatus.RUNNING;
 
     @Column(name = "Task_Type")
     private TaskType type;
