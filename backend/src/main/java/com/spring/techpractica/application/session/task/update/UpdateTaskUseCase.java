@@ -50,7 +50,7 @@ public class UpdateTaskUseCase {
 
     private void validateSessionOwnership(Session session, UUID ownerId) {
         if (!session.isOwner(ownerId)) {
-            throw new UnauthorizedActionException("User must be the session owner to assign tasks.");
+            throw new UnauthorizedActionException("User must be the session owner to update tasks.");
         }
     }
 
