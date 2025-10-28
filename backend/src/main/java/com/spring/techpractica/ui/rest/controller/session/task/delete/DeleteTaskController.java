@@ -8,6 +8,7 @@ import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.task.entity.Task;
 import com.spring.techpractica.core.user.UserAuthentication;
 import com.spring.techpractica.ui.rest.resources.session.SessionResources;
+import com.spring.techpractica.ui.rest.resources.task.TaskResources;
 import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -70,11 +71,11 @@ public class DeleteTaskController {
                 userAuthentication.getUserId(),
                 request.sessionId(),request.taskId()));
 
-        SessionResources responseData = new SessionResources(session);
+        TaskResources responseData = new TaskResources(task);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(
-                        StandardSuccessResponse.<SessionResources>builder()
+                        StandardSuccessResponse.<TaskResources>builder()
                                 .data(responseData)
                                 .message("Session deleted successfully")
                                 .status(HttpStatus.OK.value())
