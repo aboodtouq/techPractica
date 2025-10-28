@@ -28,8 +28,8 @@ public class UpdateTaskController {
     private final UpdateTaskUseCase updateTaskUseCase;
 
     @Operation(
-            summary = "Update an old task for a session",
-            description = "update an old task in a specific session. The user must be authenticated."
+            summary = "Updates a task for a session",
+            description = "Updates a task in a specific session. The user must be authenticated."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Task Updated successfully",
