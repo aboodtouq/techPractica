@@ -22,7 +22,7 @@ public class TaskService {
 
     public void validateSessionOwnership(Session session, UUID ownerId) {
         if (!session.isOwner(ownerId)) {
-            throw new UnauthorizedActionException("User must be the session owner to update tasks.");
+            throw new UnauthorizedActionException("User must be the session owner to perform this action.");
         }
     }
 
