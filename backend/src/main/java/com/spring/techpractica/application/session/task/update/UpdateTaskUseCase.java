@@ -7,6 +7,7 @@ import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
 import com.spring.techpractica.core.shared.Exception.UnauthorizedActionException;
 import com.spring.techpractica.core.task.TaskRepository;
+import com.spring.techpractica.core.task.TaskService;
 import com.spring.techpractica.core.task.entity.Task;
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
@@ -22,18 +23,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UpdateTaskUseCase {
 
-    private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
-    private final FieldRepository fieldRepository;
     private final TaskRepository taskRepository;
-
+    private final TaskService taskService;
     @Transactional
     public Task execute(UpdateTaskCommand command) {
         Session session = sessionRepository.getOrThrowByID(command.sessionId());
-        validateSessionOwnership(session, command.ownerId());
+        taskService.validateSessionOwnership(session, command.ownerId());
 
-        List<Field> fields = validateAndGetFields(command.tags());
-        List<User> assignees = validateAndGetAssignees(command.assignees());
+        List<Field> fields = taskService.validateAndGetFields(command.tags());
+        List<User> assignees = taskService.validateAndGetAssignees(command.assignees());
         Task task = taskRepository.getOrThrowByID(command.taskId());
 
         task.setDescription(command.description());
@@ -43,29 +42,6 @@ public class UpdateTaskUseCase {
         task.setDueDate(command.dueDate());
         task.setFields(fields);
 
-
         return taskRepository.save(task);
-    }
-
-    private void validateSessionOwnership(Session session, UUID ownerId) {
-        if (!session.isOwner(ownerId)) {
-            throw new UnauthorizedActionException("User must be the session owner to update tasks.");
-        }
-    }
-
-    private List<Field> validateAndGetFields(Set<String> tagNames) {
-        List<Field> fields = fieldRepository.findAllByNames(tagNames);
-        if (fields.size() != tagNames.size()) {
-            throw new ResourcesNotFoundException(tagNames.stream().toList());
-        }
-        return fields;
-    }
-
-    private List<User> validateAndGetAssignees(Set<UUID> assigneeIds) {
-        List<User> users = userRepository.findAllByIds(assigneeIds);
-        if (users.size() != assigneeIds.size()) {
-            throw new ResourcesNotFoundException("Some assignees were not found.");
-        }
-        return users;
     }
 }
