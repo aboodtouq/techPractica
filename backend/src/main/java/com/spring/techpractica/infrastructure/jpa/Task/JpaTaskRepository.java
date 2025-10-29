@@ -1,4 +1,4 @@
-package com.spring.techpractica.infrastructure.Jpa.Task;
+package com.spring.techpractica.infrastructure.jpa.Task;
 
 import com.spring.techpractica.core.task.TaskRepository;
 import com.spring.techpractica.core.task.entity.Task;
