@@ -26,6 +26,6 @@ public class JpaTaskRepository implements TaskRepository {
 
     @Override
     public Optional<Task> findById(UUID id) {
-        return Optional.empty();
+        return jpaTask.findById(id);
     }
 }
