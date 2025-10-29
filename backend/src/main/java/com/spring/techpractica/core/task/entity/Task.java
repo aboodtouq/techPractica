@@ -23,8 +23,8 @@ import java.util.List;
 @Table(name = "TASKS")
 public class Task extends BaseEntity {
 
-    @Column(name = "task_tittle")
-    private String tittle;
+    @Column(name = "task_title")
+    private String title;
 
     @Column(name = "task_description")
     private String description;
