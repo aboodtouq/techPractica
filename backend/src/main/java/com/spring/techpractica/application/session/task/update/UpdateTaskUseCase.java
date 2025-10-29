@@ -36,7 +36,7 @@ public class UpdateTaskUseCase {
         Task task = taskRepository.getOrThrowByID(command.taskId());
 
         task.setDescription(command.description());
-        task.setTittle(command.title());
+        task.setTitle(command.title());
         task.setUsersAssigned(assignees);
         task.setType(command.type());
         task.setDueDate(command.dueDate());

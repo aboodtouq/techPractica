@@ -23,7 +23,7 @@ public class TaskResources {
 
     public TaskResources(Task task) {
         this.id = task.getId();
-        this.title = task.getTittle();
+        this.title = task.getTitle();
         this.description = task.getDescription();
         this.type = task.getType().name();
         this.dueDate = task.getDueDate();
