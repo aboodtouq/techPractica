@@ -100,28 +100,22 @@ public class Session extends BaseEntity {
         requirements.clear();
     }
 
-    public String getOwnerFullName() {
-        return members.stream()
-                .filter(member -> isOwner(member.getUser().getId()))
-                .map(member -> member.getUser().getFullName())
-                .findFirst()
-                .orElse(null);
-    }
-
-    public UUID getOwnerId(){
-        return members.stream()
-                .filter(member -> isOwner(member.getUser().getId()))
-                .map(member -> member.getUser().getId())
-                .findFirst()
-                .orElse(null);
-    }
-
     public User getOwner(){
         return members.stream()
                 .map(SessionMember::getUser)
                 .filter(user -> isOwner(user.getId()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public String getOwnerFullName() {
+        User owner = getOwner();
+        return owner != null ? owner.getFullName() : null;
+    }
+
+    public UUID getOwnerId() {
+        User owner = getOwner();
+        return owner != null ? owner.getId() : null;
     }
 
     public void runSession(){
