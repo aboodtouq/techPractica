@@ -107,6 +107,14 @@ public class Session extends BaseEntity {
                 .orElse(null);
     }
 
+    private UUID getOwnerId(){
+        return members.stream()
+                .filter(member -> isOwner(member.getUser().getId()))
+                .map(member -> member.getUser().getId())
+                .findFirst()
+                .orElse(null);
+    }
+
     public void runSession(){
         this.status = SessionStatus.RUNNING;
     }
