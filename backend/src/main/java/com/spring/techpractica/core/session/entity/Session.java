@@ -7,6 +7,7 @@ import com.spring.techpractica.core.session.members.model.Role;
 import com.spring.techpractica.core.shared.BaseEntity;
 import com.spring.techpractica.core.system.entity.System;
 import com.spring.techpractica.core.task.entity.Task;
+import com.spring.techpractica.core.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -111,6 +112,14 @@ public class Session extends BaseEntity {
         return members.stream()
                 .filter(member -> isOwner(member.getUser().getId()))
                 .map(member -> member.getUser().getId())
+                .findFirst()
+                .orElse(null);
+    }
+
+    public User getOwner(){
+        return members.stream()
+                .map(SessionMember::getUser)
+                .filter(user -> isOwner(user.getId()))
                 .findFirst()
                 .orElse(null);
     }
