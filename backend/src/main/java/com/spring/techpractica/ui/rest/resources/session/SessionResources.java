@@ -22,6 +22,7 @@ public class SessionResources {
     private SessionStatus status;
     private SystemResources system;
     private RequirementCollection requirements;
+    private UUID ownerId;
     private String ownerFullName;
 
 
@@ -31,6 +32,7 @@ public class SessionResources {
         this.description = session.getDescription();
         this.isPrivate = session.isPrivate();
         this.status = session.getStatus();
+        this.ownerId = session.getOwnerId();
         this.ownerFullName = session.getOwnerFullName();
 
         if (session.getSystems() != null && !session.getSystems().isEmpty()) {
