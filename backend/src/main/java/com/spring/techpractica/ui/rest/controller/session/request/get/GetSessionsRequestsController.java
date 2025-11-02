@@ -69,7 +69,7 @@ public class GetSessionsRequestsController {
                 )
         );
 
-        FullRequestCollection responseData = new FullRequestCollection(requests,getUserSessionsCountUseCase);
+        FullRequestCollection responseData = new FullRequestCollection(requests, getUserSessionsCountUseCase);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(
