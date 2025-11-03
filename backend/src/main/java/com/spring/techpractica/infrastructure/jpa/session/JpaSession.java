@@ -46,7 +46,7 @@ public interface JpaSession extends JpaRepository<Session, UUID>, JpaSpecificati
     long getAllSessionsCountByUser(@Param("statuses") List<SessionStatus> statuses,@Param("userId") UUID userId);
 
     @Query("SELECT Request FROM Session s where s.id =:sessionId")
-    List<Request> getRequestsBySession(@Param("sessionId") UUID sessionId);
+    List<Request> getRequestsBySessionId(@Param("sessionId") UUID sessionId);
     @Query("SELECT s FROM Session s " +
             "JOIN s.requirements r " +
             "WHERE r.field.id = :fieldId " +

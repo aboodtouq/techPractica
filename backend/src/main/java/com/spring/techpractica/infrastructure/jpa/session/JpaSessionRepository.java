@@ -77,8 +77,8 @@ public class JpaSessionRepository implements SessionRepository {
     }
 
     @Override
-    public List<Request> getRequestsBySession(UUID sessionID) {
-        return jpaSession.getRequestsBySession(sessionID);
+    public List<Request> getRequestsBySessionId(UUID sessionID) {
+        return jpaSession.getRequestsBySessionId(sessionID);
     }
 
     @Override
