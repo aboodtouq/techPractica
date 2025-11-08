@@ -33,7 +33,7 @@ public class UserManageResources {
         this.name = user.getName();
         this.email = user.getEmail();
         this.totalSessions = totalSessions;
-        if (user.getSocialAccounts() != null) {
+        if (user.getSkills() != null) {
             this.skills = new TechnologySummaryCollection(user.getSkills().stream().toList());
         }
         if (user.getSocialAccounts() != null) {
