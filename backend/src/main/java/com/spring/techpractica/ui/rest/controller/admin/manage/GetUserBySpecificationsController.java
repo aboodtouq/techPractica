@@ -55,7 +55,7 @@ public class GetUserBySpecificationsController {
         List<User> users = getUserBySpecificationsUseCase
                 .execute(new GetUserBySpecificationsCommand(userName, role, page, size));
 
-        UserManageCollection responseData = new UserManageCollection(users,getUserSessionsCountUseCase);
+        UserManageCollection responseData = new UserManageCollection(users, getUserSessionsCountUseCase);
 
         return ResponseEntity.ok(StandardSuccessResponse.<UserManageCollection>builder()
                 .data(responseData)
