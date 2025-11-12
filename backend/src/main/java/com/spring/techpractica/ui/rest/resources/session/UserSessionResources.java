@@ -1,7 +1,7 @@
 package com.spring.techpractica.ui.rest.resources.session;
 
-import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.session.SessionStatus;
+import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.session.members.model.Role;
 import com.spring.techpractica.ui.rest.resources.requirement.RequirementCollection;
 import com.spring.techpractica.ui.rest.resources.system.SystemResources;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class SessionResources {
+public class UserSessionResources {
 
     private UUID id;
     private String name;
@@ -25,9 +25,10 @@ public class SessionResources {
     private RequirementCollection requirements;
     private UUID ownerId;
     private String ownerFullName;
+    private Role role;
 
 
-    public SessionResources(Session session) {
+    public UserSessionResources(Session session,Role role) {
         this.id = session.getId();
         this.name = session.getName();
         this.description = session.getDescription();
@@ -35,6 +36,7 @@ public class SessionResources {
         this.status = session.getStatus();
         this.ownerId = session.getOwnerId();
         this.ownerFullName = session.getOwnerFullName();
+        this.role = role;
 
         if (session.getSystems() != null && !session.getSystems().isEmpty()) {
             this.system = new SystemResources(session.getSystems().getLast());
