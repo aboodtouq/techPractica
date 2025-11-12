@@ -18,7 +18,7 @@ public class UserSessionCollection {
 
     private final int totalPages;
 
-    private final int pageSize=6;
+    private final int pageSize = 6;
 
 
     public UserSessionCollection(List<Session> sessions, long totalItems, UUID userId) {
