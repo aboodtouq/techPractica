@@ -28,7 +28,7 @@ public class UserSessionResources {
     private Role role;
 
 
-    public UserSessionResources(Session session,Role role) {
+    public UserSessionResources(Session session, Role role) {
         this.id = session.getId();
         this.name = session.getName();
         this.description = session.getDescription();
