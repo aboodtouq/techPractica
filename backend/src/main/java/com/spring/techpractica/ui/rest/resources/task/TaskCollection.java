@@ -1,6 +1,5 @@
 package com.spring.techpractica.ui.rest.resources.task;
 
-import com.spring.techpractica.core.task.TaskService;
 import com.spring.techpractica.core.task.entity.Task;
 import lombok.Getter;
 
