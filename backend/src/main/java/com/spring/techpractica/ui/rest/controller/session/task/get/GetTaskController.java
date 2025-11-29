@@ -75,7 +75,7 @@ public class GetTaskController {
                 .body(
                         StandardSuccessResponse.<TaskCollection>builder()
                                 .data(responseData)
-                                .message("Tasks Get successfully")
+                                .message("Tasks returned successfully")
                                 .status(HttpStatus.OK.value())
                                 .build()
                 );
