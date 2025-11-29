@@ -1,13 +1,10 @@
 package com.spring.techpractica.ui.rest.controller.session.task.get;
 
-import com.spring.techpractica.application.session.task.delete.DeleteTaskCommand;
-import com.spring.techpractica.application.session.task.delete.DeleteTaskUseCase;
 import com.spring.techpractica.application.session.task.get.GetTaskCommand;
 import com.spring.techpractica.application.session.task.get.GetTaskUseCase;
 import com.spring.techpractica.core.task.entity.Task;
 import com.spring.techpractica.core.user.UserAuthentication;
 import com.spring.techpractica.ui.rest.resources.task.TaskCollection;
-import com.spring.techpractica.ui.rest.resources.task.TaskResources;
 import com.spring.techpractica.ui.rest.shared.StandardSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -53,12 +50,12 @@ public class GetTaskController {
             ),
             @ApiResponse(
                     responseCode = "403",
-                    description = "Forbidden (user is not the owner of the session)",
+                    description = "Forbidden (user is not a participant of the session)",
                     content = @Content
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Task not found",
+                    description = "Session not found",
                     content = @Content
             )
     })
@@ -77,7 +74,7 @@ public class GetTaskController {
                 .body(
                         StandardSuccessResponse.<TaskCollection>builder()
                                 .data(responseData)
-                                .message("Tasks Get successfully")
+                                .message("Tasks returned successfully")
                                 .status(HttpStatus.OK.value())
                                 .build()
                 );
