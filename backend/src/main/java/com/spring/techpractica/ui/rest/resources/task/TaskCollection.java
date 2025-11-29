@@ -3,7 +3,6 @@ package com.spring.techpractica.ui.rest.resources.task;
 import com.spring.techpractica.core.task.entity.Task;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
