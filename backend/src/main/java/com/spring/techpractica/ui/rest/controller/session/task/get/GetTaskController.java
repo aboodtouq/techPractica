@@ -56,7 +56,7 @@ public class GetTaskController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Task not found",
+                    description = "Session not found",
                     content = @Content
             )
     })
