@@ -51,7 +51,7 @@ public class GetTaskController {
             ),
             @ApiResponse(
                     responseCode = "403",
-                    description = "Forbidden (user is not the owner of the session)",
+                    description = "Forbidden (user is not a participant of the session)",
                     content = @Content
             ),
             @ApiResponse(
