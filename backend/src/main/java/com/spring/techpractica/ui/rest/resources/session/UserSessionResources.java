@@ -5,6 +5,7 @@ import com.spring.techpractica.core.session.entity.Session;
 import com.spring.techpractica.core.session.members.model.Role;
 import com.spring.techpractica.ui.rest.resources.requirement.RequirementCollection;
 import com.spring.techpractica.ui.rest.resources.system.SystemResources;
+import com.spring.techpractica.ui.rest.resources.user.UserResources;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class UserSessionResources {
     private UUID ownerId;
     private String ownerFullName;
     private Role role;
-
+    private UserResources user;
 
     public UserSessionResources(Session session, Role role) {
         this.id = session.getId();
