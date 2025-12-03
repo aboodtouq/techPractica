@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 public class CreateNotificationUseCase {
 
 
-    public Notification execute(User user, String title, String body) {
+
+    public Notification execute(User user, String title, String content) {
+        Notification notification = new Notification(title, content, user, false);
 
     }
 }
