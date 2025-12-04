@@ -68,9 +68,7 @@ public class ApproveSessionsRequestsController {
                 )
         );
 
-
         RequestResources responseData = new RequestResources(approvedRequest.getRequest());
-
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(
