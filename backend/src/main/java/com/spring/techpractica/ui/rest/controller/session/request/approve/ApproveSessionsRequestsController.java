@@ -68,11 +68,11 @@ public class ApproveSessionsRequestsController {
                 )
         );
 
-        RequestResources responseData = new RequestResources(approvedRequest.getRequest());
+        ApproveSessionResponse responseData = new ApproveSessionResponse(approvedRequest.getNotification(), approvedRequest.getRequest());
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(
-                        StandardSuccessResponse.<RequestResources>builder()
+                        StandardSuccessResponse.<ApproveSessionResponse>builder()
                                 .data(responseData)
                                 .message("Requests approved successfully")
                                 .status(HttpStatus.OK.value())

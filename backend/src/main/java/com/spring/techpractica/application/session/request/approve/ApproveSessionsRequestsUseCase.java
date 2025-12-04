@@ -71,6 +71,6 @@ public class ApproveSessionsRequestsUseCase {
         sessionRepository.save(session);
         Request approvedRequest = requestRepository.save(request);
 
-        return new ApproveSessionResponse(notification, request);
+        return new ApproveSessionResponse(notification, approvedRequest);
     }
 }
