@@ -61,8 +61,8 @@ public class ApproveSessionsRequestsUseCase {
 
         eventPublisher.publishEvent(new UserAcceptedToSessionEvent(
                 user.getId(),
-                user.getEmail(),
                 user.getName(),
+                user.getEmail(),
                 session.getId(),
                 session.getName()
         ));
