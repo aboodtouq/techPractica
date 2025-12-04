@@ -32,7 +32,7 @@ public class UserSessionResources {
     private Role role;
     private List<MinimalUserResources> users;
 
-    public UserSessionResources(Session session, Role role, UUID userId) {
+    public UserSessionResources(Session session, Role role) {
         this.id = session.getId();
         this.name = session.getName();
         this.description = session.getDescription();
