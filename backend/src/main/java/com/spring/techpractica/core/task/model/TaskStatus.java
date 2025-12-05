@@ -1,7 +1,8 @@
 package com.spring.techpractica.core.task.model;
 
 public enum TaskStatus {
-    RUNNING,
-    ENDED,
-    DELETED,
+    TO_DO,
+    IN_PROGRESS,
+    REVIEWED,
+    DONE,
 }
