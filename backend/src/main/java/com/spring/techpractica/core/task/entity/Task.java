@@ -46,6 +46,7 @@ public class Task extends BaseEntity {
     private LocalDateTime dueDate;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.TO_DO;
 
     @Column(name = "Task_Type")

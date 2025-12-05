@@ -5,4 +5,5 @@ public enum TaskStatus {
     IN_PROGRESS,
     REVIEWED,
     DONE,
+    DELETED
 }

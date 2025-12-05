@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UpdateTaskStateUseCase {
+public class UpdateTaskStatusUseCase {
 
     private final TaskRepository taskRepository;
 
     @Transactional
-    public Task execute(UpdateTaskStateCommand command) {
+    public Task execute(UpdateTaskStatusCommand command) {
 
         Task task = taskRepository.getOrThrowByID(command.taskId());
 

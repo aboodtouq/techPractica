@@ -4,5 +4,5 @@ import com.spring.techpractica.core.task.model.TaskStatus;
 
 import java.util.UUID;
 
-public record UpdateTaskStateCommand(UUID taskId, TaskStatus status) {
+public record UpdateTaskStatusCommand(UUID taskId, TaskStatus status) {
 }
