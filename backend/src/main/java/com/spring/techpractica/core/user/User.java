@@ -124,9 +124,9 @@ public class User extends BaseEntity {
         this.accountStatus = AccountStatus.IS_DELETED;
     }
 
-    public void updateRoles(List<Role> roles) {
+    public void updateRoles(Role roles) {
         this.roles.clear();
-        this.roles.addAll(roles);
+        this.roles.add(roles);
     }
 
 }

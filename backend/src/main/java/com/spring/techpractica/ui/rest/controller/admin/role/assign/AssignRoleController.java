@@ -13,9 +13,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/roles")
@@ -55,7 +58,7 @@ public class AssignRoleController {
             }
     )
     @PutMapping("/assign")
-    public ResponseEntity<?> assignRole(@org.springframework.web.bind.annotation.RequestBody AssignRoleRequest request) {
+    public ResponseEntity<?> assignRole(@RequestBody AssignRoleRequest request) {
         String result = assignRoleUseCase.execute(new AssignRoleCommand(request.id(), request.roleIds()));
 
         return ResponseEntity.ok(StandardSuccessResponse.<String>builder()
