@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,6 +40,6 @@ public class ExploreSessionsUseCase {
             );
         }
         return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size())).stream()
-                .filter( s -> !s.isOwner(userId) ).collect(Collectors.toList());
+                .filter( s -> !s.isOwner(userId) ).sorted(Comparator.comparing(Session::getAtCreated)).collect(Collectors.toList());
     }
 }
