@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -37,6 +38,7 @@ public class ExploreSessionsUseCase {
                     "Session exploration for users with completed profiles is not implemented yet"
             );
         }
-        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size()));
+        return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size())).stream()
+                .filter( s -> !s.isOwner(userId) ).collect(Collectors.toList());
     }
 }
