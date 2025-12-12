@@ -21,21 +21,21 @@ public class AssignRoleUseCase {
     public String execute(AssignRoleCommand command){
         User user = userRepository.getOrThrowByID(command.id());
 
-        UUID roleIds = command.roleId();
+        List<UUID> roleIds = command.roleIds();
 
-        Role roles = roleRepository.getOrThrowByID(roleIds);
+        List<Role> roles = roleRepository.findAllByIds(roleIds);
 
-//        if (roles.size() != roleIds.) {
-//            List<UUID> foundIds = roles.stream()
-//                    .map(Role::getId)
-//                    .toList();
-//
-//            List<UUID> missingIds = roleIds.stream()
-//                    .filter(id -> !foundIds.contains(id))
-//                    .toList();
-//
-//            throw new ResourcesNotFoundException("Roles not found for IDs: " + missingIds);
-//        }
+        if (roles.size() != roleIds.size()) {
+            List<UUID> foundIds = roles.stream()
+                    .map(Role::getId)
+                    .toList();
+
+            List<UUID> missingIds = roleIds.stream()
+                    .filter(id -> !foundIds.contains(id))
+                    .toList();
+
+            throw new ResourcesNotFoundException("Roles not found for IDs: " + missingIds);
+        }
 
         user.updateRoles(roles);
 
