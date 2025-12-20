@@ -131,4 +131,8 @@ public class Session extends BaseEntity {
                 .anyMatch(member -> member.getUser().getId().equals(userId));
     }
 
+    public void removeRequirement(Requirement req) {
+        requirements.remove(req);
+    }
+
 }
