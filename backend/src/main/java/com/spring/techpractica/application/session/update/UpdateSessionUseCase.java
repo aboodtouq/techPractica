@@ -110,9 +110,11 @@ public class UpdateSessionUseCase {
             else {
                 Requirement newReq = createRequirement(session, fieldId);
                 session.addRequirement(newReq);
+
                 technologies.forEach(tech ->
                         newReq.addRequirementTechnology(requirementTechnologyFactory.create(newReq, tech))
                 );
+                requirementRepository.save(newReq);
             }
         });
 
