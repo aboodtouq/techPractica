@@ -37,11 +37,11 @@ public class ExploreSessionsUseCase {
         UUID userId = uuidOptional.get();
         User user = userRepository.getOrThrowByID(userId);
 
-        if (user.isProfileComplete()) {
-            throw new UnsupportedOperationException(
-                    "Session exploration for users with completed profiles is not implemented yet"
-            );
-        }
+//        if (user.isProfileComplete()) {
+//            throw new UnsupportedOperationException(
+//                    "Session exploration for users with completed profiles is not implemented yet"
+//            );
+//        }
         return sessionRepository.exploreSessions(PageRequest.of(command.page(), command.size())).stream()
                 .filter( s -> !s.isOwner(userId) )
                 .collect(Collectors.toList());
