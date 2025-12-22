@@ -1,8 +1,8 @@
 package com.spring.techpractica.infrastructure.security;
 
 
-import com.spring.techpractica.application.user.auth.oauth.CustomOAuth2UserService;
 import com.spring.techpractica.infrastructure.security.filter.JwtFilter;
+import com.spring.techpractica.infrastructure.security.oauth.config.CustomOAuth2UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class SecurityConfig {
 
     private final CorsConfig corsConfig;
 
-    private final CustomOAuth2UserService  customOAuth2UserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {

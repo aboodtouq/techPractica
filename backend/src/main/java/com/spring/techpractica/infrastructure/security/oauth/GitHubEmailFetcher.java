@@ -1,5 +1,4 @@
-package com.spring.techpractica.application.user.auth.oauth;
-
+package com.spring.techpractica.infrastructure.security.oauth;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +12,7 @@ public record GitHubEmailFetcher(RestClient restClient) {
     private static final String EMAILS_URL = "https://api.github.com/user/emails";
     private static final String BEARER_PREFIX = "Bearer ";
 
-    public String fetchPrimaryEmailAddress(String token) {
+    public String fetchPrimaryEmail(String token) {
 
         List<GitHubEmailVm> emailVmList = restClient
                 .get()

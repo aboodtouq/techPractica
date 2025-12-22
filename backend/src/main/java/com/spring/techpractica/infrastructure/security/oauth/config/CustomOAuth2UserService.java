@@ -1,7 +1,8 @@
-package com.spring.techpractica.application.user.auth.oauth;
+package com.spring.techpractica.infrastructure.security.oauth.config;
 
-import com.spring.techpractica.core.user.User;
-import com.spring.techpractica.core.user.UserRepository;
+import com.spring.techpractica.application.user.auth.oauth.HandleOAuth2LoginUseCase;
+import com.spring.techpractica.application.user.auth.oauth.OAuth2Command;
+import com.spring.techpractica.infrastructure.security.oauth.GitHubEmailFetcher;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -13,10 +14,11 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+public class CustomOAuth2UserService
+        extends DefaultOAuth2UserService {
 
-    private final UserRepository userRepository;
     private final GitHubEmailFetcher emailFetcher;
+    private final HandleOAuth2LoginUseCase handleOAuth2LoginUseCase;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest request)
@@ -28,16 +30,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String name = (String) attrs.get("login");
         String email = (String) attrs.get("email");
 
-        // ✅ حل مؤقت واضح
+        if (email == null) {
+            String token = request.getAccessToken().getTokenValue();
+            email = emailFetcher.fetchPrimaryEmail(token);
+        }
+
         if (email == null) {
             email = name + "@github.local";
         }
 
-        if (!userRepository.existsByEmail(email)) {
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
-        }
+        OAuth2Command userInfo = new OAuth2Command(name, email);
+
+        handleOAuth2LoginUseCase.handle(userInfo);
 
         return oAuth2User;
     }
