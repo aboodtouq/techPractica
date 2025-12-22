@@ -1,4 +1,4 @@
-package com.spring.techpractica.application.user.auth;
+package com.spring.techpractica.application.user.auth.oauth;
 
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
@@ -16,6 +16,7 @@ import java.util.Map;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
+    private final GitHubEmailFetcher emailFetcher;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest request)
@@ -25,15 +26,25 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attrs = oAuth2User.getAttributes();
 
         String name = (String) attrs.get("login");
-        String email = (String) attrs.get("email");
-        String avatar = (String) attrs.get("avatar_url");
-        String provider = request.getClientRegistration().getRegistrationId();
 
-        // ✅ حل مؤقت واضح
+        // 1️⃣ الإيميل من GitHub user object (غالبًا null)
+        String email = (String) attrs.get("email");
+
+        // 2️⃣ إذا null → نجيبه من GitHub API
+        if (email == null) {
+            String accessToken = request
+                    .getAccessToken()
+                    .getTokenValue();
+
+            email = emailFetcher.fetchPrimaryEmailAddress(accessToken);
+        }
+
+        // 3️⃣ إذا لسا null (نادر)
         if (email == null) {
             email = name + "@github.local";
         }
 
+        // 4️⃣ حفظ المستخدم
         if (!userRepository.existsByEmail(email)) {
             User user = new User();
             user.setName(name);
@@ -41,7 +52,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             userRepository.save(user);
 
-            System.out.println("✅ USER SAVED: " + email);
+            System.out.println("✅ USER SAVED WITH REAL EMAIL: " + email);
         }
 
         return oAuth2User;
