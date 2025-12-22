@@ -19,4 +19,6 @@ public interface UserRepository extends BaseRepository<User> {
     List<User> findAllBySpecifications(Specification<User> specification, Pageable pageable);
 
     List<User> findAllByIds(Set<UUID> ids);
+
+    User findByGithubAccessToken(String githubAccessToken);
 }

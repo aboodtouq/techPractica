@@ -43,7 +43,7 @@ public class CreateSessionUseCase {
 
         requirementsForSession.addRequirementsForSession(session,command);
 
-        createGithubRepositoryUseCase.createRepository(owner.getT);
+        createGithubRepositoryUseCase.createRepository(owner.getGithubAccessToken(), command.name(), command.isPrivate());
 
         return sessionRepository.save(session);
     }

@@ -14,4 +14,5 @@ public interface JpaUser extends JpaRepository<User, UUID>, JpaSpecificationExec
 
     Optional<User> findByEmail(String email);
 
+    User findByGithubAccessToken(String githubAccessToken);
 }

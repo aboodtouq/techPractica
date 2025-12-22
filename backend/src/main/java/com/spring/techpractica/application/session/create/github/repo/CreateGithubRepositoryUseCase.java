@@ -12,11 +12,11 @@ public class CreateGithubRepositoryUseCase {
     private final GitHubRepositoryGateway gateway;
     private final GitHubTokenValidator  tokenValidator;
 
-    public void createRepository(String accessToken, String repoName, boolean isPublic) {
+    public void createRepository(String accessToken, String repoName, boolean isPrivate) {
 
         if(!tokenValidator.isValid(accessToken)){
             throw new GitHubTokenInvalidException();
         }
-        gateway.createRepository(accessToken, repoName, isPublic);
+        gateway.createRepository(accessToken, repoName, isPrivate);
     }
 }

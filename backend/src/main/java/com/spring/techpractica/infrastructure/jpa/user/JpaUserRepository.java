@@ -63,4 +63,9 @@ public class JpaUserRepository implements UserRepository {
     public List<User> findAllByIds(Set<UUID> ids) {
         return jpaUser.findAllById(ids);
     }
+
+    @Override
+    public User findByGithubAccessToken(String githubAccessToken) {
+        return jpaUser.findByGithubAccessToken(githubAccessToken);
+    }
 }
