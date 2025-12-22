@@ -1,11 +1,13 @@
 package com.spring.techpractica.infrastructure.security;
 
 
+import com.spring.techpractica.application.user.auth.CustomOAuth2UserService;
 import com.spring.techpractica.infrastructure.security.filter.JwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,12 +22,21 @@ public class SecurityConfig {
 
     private final CorsConfig corsConfig;
 
+    private final CustomOAuth2UserService  customOAuth2UserService;
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/",
+                                "/login**",
+                                "/oauth2/**",
+                                "/login/oauth2/**"
+                        ).permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/sessions/").authenticated()
@@ -36,8 +47,12 @@ public class SecurityConfig {
                         .requestMatchers("api/v1/sessions/start/**").authenticated()
                         .requestMatchers("/api/v1/sessions/requests/**").authenticated()
                         .anyRequest().permitAll())
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(userInfo ->
+                                userInfo.userService(customOAuth2UserService)
+                        )
+                )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-    }   
-
+    }
 }
