@@ -29,17 +29,13 @@ public class CustomOAuth2UserService
 
         String name = (String) attrs.get("login");
         String email = (String) attrs.get("email");
+        String githubToken = request.getAccessToken().getTokenValue();
 
         if (email == null) {
-            String token = request.getAccessToken().getTokenValue();
-            email = emailFetcher.fetchPrimaryEmail(token);
+            email = emailFetcher.fetchPrimaryEmail(githubToken);
         }
 
-        if (email == null) {
-            email = name + "@github.local";
-        }
-
-        OAuth2Command userInfo = new OAuth2Command(name, email);
+        OAuth2Command userInfo = new OAuth2Command(name, email, githubToken);
 
         handleOAuth2LoginUseCase.handle(userInfo);
 

@@ -17,10 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
+
     private final JwtFilter jwtFilter;
-
     private final CorsConfig corsConfig;
-
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
