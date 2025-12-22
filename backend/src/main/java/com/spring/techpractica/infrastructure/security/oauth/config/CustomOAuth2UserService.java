@@ -35,10 +35,6 @@ public class CustomOAuth2UserService
             email = emailFetcher.fetchPrimaryEmail(githubToken);
         }
 
-        if (email == null) {
-            email = name + "@github.local";
-        }
-
         OAuth2Command userInfo = new OAuth2Command(name, email, githubToken);
 
         handleOAuth2LoginUseCase.handle(userInfo);
