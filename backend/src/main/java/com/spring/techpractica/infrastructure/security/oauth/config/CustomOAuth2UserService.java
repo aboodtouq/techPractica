@@ -1,7 +1,8 @@
-package com.spring.techpractica.application.user.auth.oauth;
+package com.spring.techpractica.infrastructure.security.oauth.config;
 
-import com.spring.techpractica.core.user.User;
-import com.spring.techpractica.core.user.UserRepository;
+import com.spring.techpractica.application.user.auth.oauth.HandleOAuth2LoginUseCase;
+import com.spring.techpractica.application.user.auth.oauth.OAuth2Command;
+import com.spring.techpractica.infrastructure.security.oauth.GitHubEmailFetcher;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -13,10 +14,11 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+public class CustomOAuth2UserService
+        extends DefaultOAuth2UserService {
 
-    private final UserRepository userRepository;
     private final GitHubEmailFetcher emailFetcher;
+    private final HandleOAuth2LoginUseCase handleOAuth2LoginUseCase;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest request)
@@ -26,34 +28,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attrs = oAuth2User.getAttributes();
 
         String name = (String) attrs.get("login");
-
-        // 1️⃣ الإيميل من GitHub user object (غالبًا null)
         String email = (String) attrs.get("email");
 
-        // 2️⃣ إذا null → نجيبه من GitHub API
         if (email == null) {
-            String accessToken = request
-                    .getAccessToken()
-                    .getTokenValue();
-
-            email = emailFetcher.fetchPrimaryEmailAddress(accessToken);
+            String token = request.getAccessToken().getTokenValue();
+            email = emailFetcher.fetchPrimaryEmail(token);
         }
 
-        // 3️⃣ إذا لسا null (نادر)
         if (email == null) {
             email = name + "@github.local";
         }
 
-        // 4️⃣ حفظ المستخدم
-        if (!userRepository.existsByEmail(email)) {
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
+        OAuth2Command userInfo = new OAuth2Command(name, email);
 
-            userRepository.save(user);
-
-            System.out.println("✅ USER SAVED WITH REAL EMAIL: " + email);
-        }
+        handleOAuth2LoginUseCase.handle(userInfo);
 
         return oAuth2User;
     }
