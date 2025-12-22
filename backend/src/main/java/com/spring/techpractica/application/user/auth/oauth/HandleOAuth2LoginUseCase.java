@@ -18,6 +18,8 @@ public class HandleOAuth2LoginUseCase {
                     User user = new User();
                     user.setName(command.name());
                     user.setEmail(command.email());
+                    user.setGithubAccessToken(command.githubToken());
+                    user.setGithubConnected(true);
                     return userRepository.save(user);
                 });
     }
