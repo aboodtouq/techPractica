@@ -17,7 +17,6 @@ public class GitHubRepositoryService {
 
     private final OAuth2AuthorizedClientService authorizedClientService;
     private final RestClient restClient;
-
     private static final String CREATE_REPO_URL = "https://api.github.com/user/repos";
 
     public void createRepository(Authentication authentication, String repoName) {
