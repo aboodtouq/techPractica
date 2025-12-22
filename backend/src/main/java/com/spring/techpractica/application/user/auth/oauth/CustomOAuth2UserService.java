@@ -26,33 +26,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attrs = oAuth2User.getAttributes();
 
         String name = (String) attrs.get("login");
-
-        // 1️⃣ الإيميل من GitHub user object (غالبًا null)
         String email = (String) attrs.get("email");
 
-        // 2️⃣ إذا null → نجيبه من GitHub API
-        if (email == null) {
-            String accessToken = request
-                    .getAccessToken()
-                    .getTokenValue();
-
-            email = emailFetcher.fetchPrimaryEmailAddress(accessToken);
-        }
-
-        // 3️⃣ إذا لسا null (نادر)
+        // ✅ حل مؤقت واضح
         if (email == null) {
             email = name + "@github.local";
         }
 
-        // 4️⃣ حفظ المستخدم
         if (!userRepository.existsByEmail(email)) {
             User user = new User();
             user.setName(name);
             user.setEmail(email);
-
-            userRepository.save(user);
-
-            System.out.println("✅ USER SAVED WITH REAL EMAIL: " + email);
         }
 
         return oAuth2User;
