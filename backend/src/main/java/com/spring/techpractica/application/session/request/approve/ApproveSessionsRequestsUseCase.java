@@ -1,8 +1,6 @@
 package com.spring.techpractica.application.session.request.approve;
 
 import com.spring.techpractica.application.notification.CreateNotificationUseCase;
-import com.spring.techpractica.application.session.request.RequestSessionResponse;
-import com.spring.techpractica.core.notification.entity.Notification;
 import com.spring.techpractica.core.request.RequestRepository;
 import com.spring.techpractica.core.request.entity.Request;
 import com.spring.techpractica.core.session.SessionRepository;
@@ -32,7 +30,7 @@ public class ApproveSessionsRequestsUseCase {
     private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
-    public RequestSessionResponse execute(ApproveSessionsRequestsCommand command) {
+    public Request execute(ApproveSessionsRequestsCommand command) {
 
         User owner = userRepository.getOrThrowByID(command.ownerId());
         Session session = sessionRepository.getOrThrowByID(command.sessionId());
@@ -46,9 +44,9 @@ public class ApproveSessionsRequestsUseCase {
 
         User user = request.getUser();
 
-        Notification notification;
-        String title = "Session Request Status";
-        String content;
+//        Notification notification;
+//        String title = "Session Request Status";
+//        String content;
 
         if (!request.isApproved()) {
 
@@ -62,23 +60,23 @@ public class ApproveSessionsRequestsUseCase {
             sessionRepository.save(session);
             requestRepository.save(request);
 
-            content = "Congratulations! You have been accepted to the session: " + session.getName();
-        } else {
-            content = "You were already accepted to the session: " + session.getName();
+//            content = "Congratulations! You have been accepted to the session: " + session.getName();
+//        } else {
+//            content = "You were already accepted to the session: " + session.getName();
+//        }
+
+//        notification = createNotificationUseCase.execute(user, title, content);
+
+            if (!request.isApproved()) {
+                eventPublisher.publishEvent(new UserAcceptedToSessionEvent(
+                        user.getId(),
+                        user.getEmail(),
+                        user.getName(),
+                        session.getId(),
+                        session.getName()
+                ));
+            }
         }
-
-        notification = createNotificationUseCase.execute(user, title, content);
-
-        if (!request.isApproved()) {
-            eventPublisher.publishEvent(new UserAcceptedToSessionEvent(
-                    user.getId(),
-                    user.getEmail(),
-                    user.getName(),
-                    session.getId(),
-                    session.getName()
-            ));
-        }
-
-        return new RequestSessionResponse(notification, request);
+        return request;
     }
 }
