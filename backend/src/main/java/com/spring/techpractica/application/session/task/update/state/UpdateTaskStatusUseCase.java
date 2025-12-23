@@ -14,7 +14,6 @@ public class UpdateTaskStatusUseCase {
 
     @Transactional
     public Task execute(UpdateTaskStatusCommand command) {
-
         Task task = taskRepository.getOrThrowByID(command.taskId());
 
         task.updateStatus(command.status());
