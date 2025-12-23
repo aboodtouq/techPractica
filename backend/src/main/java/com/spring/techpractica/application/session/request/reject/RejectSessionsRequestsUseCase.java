@@ -25,7 +25,7 @@ public class RejectSessionsRequestsUseCase {
     private final CreateNotificationUseCase createNotificationUseCase;
 
     @Transactional
-    public RequestSessionResponse execute(RejectSessionsRequestsCommand command) {
+    public Request execute(RejectSessionsRequestsCommand command) {
 
         User owner = userRepository.getOrThrowByID(command.ownerId());
         Session session = sessionRepository.getOrThrowByID(command.sessionId());
@@ -39,21 +39,21 @@ public class RejectSessionsRequestsUseCase {
 
         User user = request.getUser();
 
-        Notification notification;
-        String title = "Session Request Status";
-        String content;
+//        Notification notification;
+//        String title = "Session Request Status";
+//        String content;
 
         if (!request.isRejected()) {
             request.reject();
             requestRepository.save(request);
-
-            content = "Unfortunately, your request to join the session: " + session.getName() + " has been rejected.";
-        } else {
-            content = "Your request to join the session: " + session.getName() + " was already rejected.";
         }
+//            content = "Unfortunately, your request to join the session: " + session.getName() + " has been rejected.";
+//        } else {
+//            content = "Your request to join the session: " + session.getName() + " was already rejected.";
+//        }
 
-        notification = createNotificationUseCase.execute(user, title, content);
+//        notification = createNotificationUseCase.execute(user, title, content);
 
-        return new RequestSessionResponse(notification, request);
+        return request;
     }
 }
