@@ -47,10 +47,7 @@ public class CreateSessionUseCase {
 
         createGithubRepositoryUseCase.createRepository(owner.getGithubAccessToken(), command.name(), command.isPrivate());
 
-        if (session.isPrivate()) {
-            String sessionCode = SessionCodeGenerator.generate();
-            session.generateSessionCode(sessionCode);
-        }
+        session.generateSessionCode(generateSessionCode(session));
 
         return sessionRepository.save(session);
     }
@@ -63,5 +60,16 @@ public class CreateSessionUseCase {
     private void addSystem(Session session, UUID systemId) {
         System system = systemRepository.getOrThrowByID(systemId);
         session.addSystem(system);
+    }
+
+    private String generateSessionCode(Session session) {
+        String sessionCode;
+        if (session.isPrivate()) {
+            sessionCode = SessionCodeGenerator.generate();
+        }
+        else {
+            sessionCode = "PUBLIC";
+        }
+        return sessionCode;
     }
 }
