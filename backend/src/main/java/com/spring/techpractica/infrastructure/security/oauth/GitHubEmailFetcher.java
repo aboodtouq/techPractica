@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public record GitHubEmailFetcher(RestClient restClient) {
+
     private static final String EMAILS_URL = "https://api.github.com/user/emails";
     private static final String BEARER_PREFIX = "Bearer ";
 

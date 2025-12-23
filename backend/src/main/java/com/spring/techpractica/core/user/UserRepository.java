@@ -20,5 +20,5 @@ public interface UserRepository extends BaseRepository<User> {
 
     List<User> findAllByIds(Set<UUID> ids);
 
-    User findByGithubAccessToken(String githubAccessToken);
+    Optional<User> findByProviderAndProviderId(Provider provider, String providerId);
 }

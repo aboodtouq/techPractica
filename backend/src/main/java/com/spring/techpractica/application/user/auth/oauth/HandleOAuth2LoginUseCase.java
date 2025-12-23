@@ -1,5 +1,6 @@
 package com.spring.techpractica.application.user.auth.oauth;
 
+import com.spring.techpractica.core.user.Provider;
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ public class HandleOAuth2LoginUseCase {
                     user.setEmail(command.email());
                     user.setGithubAccessToken(command.githubToken());
                     user.setGithubConnected(true);
+                    user.setProvider(Provider.GITHUB);
+                    user.setProviderId(command.providerId());
                     return userRepository.save(user);
                 });
     }

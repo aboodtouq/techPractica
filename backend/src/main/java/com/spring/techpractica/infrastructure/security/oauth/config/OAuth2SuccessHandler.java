@@ -1,10 +1,12 @@
 package com.spring.techpractica.infrastructure.security.oauth.config;
 
 import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
+import com.spring.techpractica.core.user.Provider;
 import com.spring.techpractica.core.user.User;
 import com.spring.techpractica.core.user.UserRepository;
 import com.spring.techpractica.infrastructure.jwt.JwtGeneration;
 import com.spring.techpractica.infrastructure.security.oauth.GitHubEmailFetcher;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtGeneration jwtGeneration;
     private final UserRepository userRepository;
-    private final GitHubEmailFetcher emailFetcher;
+
 
     @Override
     public void onAuthenticationSuccess(
@@ -33,15 +35,16 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         OAuth2AuthenticationToken token =
                 (OAuth2AuthenticationToken) authentication;
 
-        String email = token.getPrincipal().getAttribute("email");
+        Provider provider = Provider.GITHUB;
 
-        if (email == null) {
-            email = emailFetcher.fetchPrimaryEmail(token.toString());
-        }
+        String providerId =
+                token.getPrincipal().getAttribute("id").toString();
 
-        String finalEmail = email;
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourcesNotFoundException(finalEmail));
+        User user = userRepository
+                .findByProviderAndProviderId(provider, providerId)
+                .orElseThrow(() ->
+                        new ResourcesNotFoundException("User not found after OAuth2 login")
+                );
 
         String jwt = jwtGeneration.generateLoginToken(
                 user.getId(), user.getEmail(), user.getRoles()
@@ -49,9 +52,14 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         System.out.println("jwt: " + jwt);
 
-        response.sendRedirect(
-                "http://localhost:3000/oauth2/success?token=" + jwt
-        );
-    }
+        Cookie cookie = new Cookie("access_token", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 24);
 
+        response.addCookie(cookie);
+
+        response.sendRedirect("http://localhost:3000/");
+    }
 }
