@@ -9,7 +9,7 @@ public final class SessionCodePolicy {
 
     // 16 chars: upper, lower, digits, symbols
     private static final String SESSION_CODE_REGEX =
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+\\[\\]{}<>?]).{16}$";
+            "^[A-Za-z0-9\\-_.~]{16}$";
 
     private static final Pattern PATTERN =
             Pattern.compile(SESSION_CODE_REGEX);

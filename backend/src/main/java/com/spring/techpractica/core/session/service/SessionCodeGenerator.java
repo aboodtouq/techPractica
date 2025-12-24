@@ -15,7 +15,7 @@ public final class SessionCodeGenerator {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +   // A-Z
                     "abcdefghijklmnopqrstuvwxyz" +   // a-z
                     "0123456789" +                   // 0-9
-                    "!@#$%^&*()-_=+[]{}<>?";         // symbols
+                    "-_.~";
 
     private static final int CODE_LENGTH = 16;
 
