@@ -149,5 +149,4 @@ public class Session extends BaseEntity {
             throw new ResourcesNotFoundException(participantId);
         }
     }
-
 }
