@@ -20,6 +20,4 @@ public final class SessionCodePolicy {
                 && !code.isBlank()
                 && PATTERN.matcher(code).matches();
     }
-
-
 }
