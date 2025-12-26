@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,7 +16,7 @@ public class OAuth2LoginController {
             summary = "Login with GitHub",
             description = "Redirects the user to GitHub OAuth2 authorization page to authenticate using GitHub account"
     )
-    @GetMapping("/github")
+    @PostMapping("/github")
     public String loginWithGithub() {
         return "redirect:/oauth2/authorization/github";
     }
