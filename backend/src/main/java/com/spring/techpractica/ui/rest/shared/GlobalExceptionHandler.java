@@ -1,5 +1,6 @@
 package com.spring.techpractica.ui.rest.shared;
 
+import com.spring.techpractica.core.shared.Exception.GitHubTokenInvalidException;
 import com.spring.techpractica.core.shared.Exception.OperationDuplicateException;
 import com.spring.techpractica.core.shared.Exception.ResourcesDuplicateException;
 import com.spring.techpractica.core.shared.Exception.ResourcesNotFoundException;
@@ -81,6 +82,17 @@ public class GlobalExceptionHandler {
                         .timestamp(Instant.now())
                         .status(HttpStatus.CONFLICT.value())
                         .code("OPERATION_DUPLICATE")
+                        .message(ex.getMessage())
+                        .build());
+    }
+
+    @ExceptionHandler(GitHubTokenInvalidException.class)
+    public ResponseEntity<StandardErrorResponse> handleGitHubTokenInvalidException(GitHubTokenInvalidException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(StandardErrorResponse.builder()
+                        .timestamp(Instant.now())
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .code("GITHUB_TOKEN_INVALID")
                         .message(ex.getMessage())
                         .build());
     }

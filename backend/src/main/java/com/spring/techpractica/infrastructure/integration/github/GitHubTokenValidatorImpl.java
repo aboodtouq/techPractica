@@ -4,6 +4,7 @@ import com.spring.techpractica.application.session.create.github.token.GitHubTok
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import org.springframework.util.StringUtils;
 
 @Component
 @AllArgsConstructor
@@ -13,6 +14,9 @@ public class GitHubTokenValidatorImpl implements GitHubTokenValidator {
 
     @Override
     public boolean isValid(String accessToken) {
+        if (!StringUtils.hasText(accessToken)) {
+            return false;
+        }
         try {
             restClient.get()
                     .uri("https://api.github.com/user")

@@ -4,6 +4,7 @@ import com.spring.techpractica.application.session.create.github.token.GitHubTok
 import com.spring.techpractica.core.shared.Exception.GitHubTokenInvalidException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class CreateGithubRepositoryUseCase {
 
     public void createRepository(String accessToken, String repoName, boolean isPrivate) {
 
-        if(!tokenValidator.isValid(accessToken)){
+        if (!StringUtils.hasText(accessToken) || !tokenValidator.isValid(accessToken)) {
             throw new GitHubTokenInvalidException();
         }
         gateway.createRepository(accessToken, repoName, isPrivate);
